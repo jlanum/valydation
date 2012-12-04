@@ -32,7 +32,11 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'pg'
+gem 'rack-push-notification'
+gem 'rails-database-url'

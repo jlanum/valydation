@@ -58,5 +58,11 @@ module HiStrollers
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    require 'rails-database-url'
+    require 'rack/push-notification'
+    puts "db: #{ENV['DATABASE_URL']}"
+    Sequel.connect(ENV['DATABASE_URL'])
+    config.middleware.use(::Rack::PushNotification)
   end
 end

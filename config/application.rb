@@ -61,7 +61,6 @@ module HiStrollers
 
     require 'rails-database-url'
     require 'rack/push-notification'
-    puts "db: #{ENV['DATABASE_URL']}"
     Sequel.connect(ENV['DATABASE_URL'])
     config.middleware.use(::Rack::PushNotification)
   end

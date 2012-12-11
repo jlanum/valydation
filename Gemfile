@@ -38,5 +38,4 @@ gem 'capistrano'
 # gem 'debugger'
 
 gem 'pg'
-gem 'rack-push-notification'
 gem 'rails-database-url'

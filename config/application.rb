@@ -60,8 +60,9 @@ module HiStrollers
     config.assets.version = '1.0'
 
     require 'rails-database-url'
-    require 'rack/push-notification'
-    Sequel.connect(ENV['DATABASE_URL'])
-    config.middleware.use(::Rack::PushNotification)
+    #require 'rack/push-notification'
+    #puts "db url: #{ENV['DATABASE_URL']}"
+    #Sequel.connect(ENV['DATABASE_URL'].sub('postgresql', 'postgres'))
+    #config.middleware.use(::Rack::PushNotification)
   end
 end

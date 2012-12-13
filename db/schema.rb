@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213010108) do
+ActiveRecord::Schema.define(:version => 20121213012538) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -53,6 +53,9 @@ ActiveRecord::Schema.define(:version => 20121213010108) do
     t.boolean  "has_image_1"
     t.boolean  "has_image_2"
     t.boolean  "has_image_0"
+    t.string   "image_0"
+    t.string   "image_1"
+    t.string   "image_2"
   end
 
   create_table "users", :force => true do |t|

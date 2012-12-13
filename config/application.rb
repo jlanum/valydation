@@ -67,10 +67,10 @@ module HiStrollers
     #config.middleware.use(::Rack::PushNotification)
     #
     
-    AWS::S3::Base.establish_connection!(
-      :access_key_id     => 'AKIAJU4IAXMS575N42IA',
-      :secret_access_key => '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'
-    )
+#    AWS::S3::Base.establish_connection!(
+#      :access_key_id     => 'AKIAJU4IAXMS575N42IA',
+#      :secret_access_key => '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'
+#    )
 
   end
 end

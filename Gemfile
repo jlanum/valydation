@@ -41,3 +41,5 @@ gem 'pg'
 gem 'rails-database-url'
 gem 'aws-s3'
 gem 'carrierwave'
+gem "fog", "~> 1.3.1"
+gem "mini_magick"

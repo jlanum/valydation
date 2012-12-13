@@ -24,11 +24,8 @@ class SalesController < ApplicationController
     (0..2).each do |i|
       uploaded_file = params["image_#{i}"]
       next unless uploaded_file
-
-      AWS::S3::S3Object.store(@sale.image_url(i),
-                              uploaded_file,
-                              ApplicationController.s3_bucket,
-                              :access => :public_read)
+      
+      @sale.send("image_#{i}=".to_sym, uploaded_file)
       @sale.send("has_image_#{i}=".to_sym, true)
       @sale.save!
     end

@@ -39,3 +39,5 @@ gem 'capistrano'
 
 gem 'pg'
 gem 'rails-database-url'
+gem 'aws-s3'
+gem 'carrierwave'

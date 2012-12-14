@@ -3,6 +3,7 @@ class Sale < ActiveRecord::Base
                   :brand,
                   :sale_price,
                   :orig_price,
+                  :percent_off,
                   :product,
                   :category_id,
                   :store_name,

@@ -34,7 +34,15 @@ class SalesController < ApplicationController
   end
 
   def index
-    render :json => (0..9).to_a.to_json
+    sale = Sale.new(:brand => "Brand xyz",
+                    :product => "Producto",
+                    :sale_price => 75.00,
+                    :orig_price => 100.00,
+                    :percent_off => 0.25,
+                    :category_id => params[:category],
+                    :store_name => "Store ABC")
+
+    render :json => (0..9).collect { sale }.to_json
   end
 
 end

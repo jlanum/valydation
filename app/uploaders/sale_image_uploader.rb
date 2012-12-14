@@ -26,6 +26,10 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   #storage :file
   storage :fog
 
+  include CarrierWave::MimeTypes
+
+  process :set_content_type
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   #def store_dir
@@ -54,6 +58,7 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   #
   version :feed do
     process :resize_to_fill => [230,240]
+    process :set_content_type
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

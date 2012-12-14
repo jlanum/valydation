@@ -5,6 +5,7 @@ class SalesController < ApplicationController
                      :brand => params[:brand],
                      :sale_price => params[:sale_price],
                      :orig_price => params[:orig_price],
+                     :percent_off => params[:percent_off],
                      :product => params[:product],
                      :category_id => params[:category_id],
                      :store_name => params[:store_name],

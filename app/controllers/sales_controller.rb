@@ -34,15 +34,11 @@ class SalesController < ApplicationController
   end
 
   def index
-    sale = Sale.new(:brand => "Brand xyz",
-                    :product => "Producto",
-                    :sale_price => 75.00,
-                    :orig_price => 100.00,
-                    :percent_off => 0.25,
-                    :category_id => params[:category],
-                    :store_name => "Store ABC")
-
-    render :json => (0..9).collect { sale }.to_json
+    @sales = Sale.where(:category_id => params[:category_id]).
+      order("created_at DESC").
+      limit(10).
+      offset(params[:offset]).all
+    render :json => @sales.to_json
   end
 
 end

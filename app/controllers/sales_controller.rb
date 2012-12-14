@@ -34,7 +34,7 @@ class SalesController < ApplicationController
   end
 
   def index
-    render :json => [].to_json
+    render :json => (0..9).to_a.to_json
   end
 
 end

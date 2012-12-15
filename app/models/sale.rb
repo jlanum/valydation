@@ -6,6 +6,7 @@ class Sale < ActiveRecord::Base
                   :percent_off,
                   :product,
                   :category_id,
+                  :size,
                   :store_name,
                   :store_url,
                   :display_address

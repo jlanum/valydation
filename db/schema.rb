@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215012740) do
+ActiveRecord::Schema.define(:version => 20121215015121) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20121215012740) do
     t.string   "image_2"
     t.float    "percent_off"
     t.text     "display_address"
+    t.string   "size",            :limit => 32
   end
 
   create_table "users", :force => true do |t|

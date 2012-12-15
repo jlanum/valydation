@@ -8,6 +8,7 @@ class SalesController < ApplicationController
                      :percent_off => params[:percent_off],
                      :product => params[:product],
                      :category_id => params[:category_id],
+                     :size => params[:size],
                      :store_name => params[:store_name],
                      :store_url => params[:store_url],
                      :display_address => params[:display_address])

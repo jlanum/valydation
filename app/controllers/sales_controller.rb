@@ -9,7 +9,8 @@ class SalesController < ApplicationController
                      :product => params[:product],
                      :category_id => params[:category_id],
                      :store_name => params[:store_name],
-                     :store_url => params[:store_url])
+                     :store_url => params[:store_url],
+                     :display_address => params[:display_address])
 
     @sale.save!
 

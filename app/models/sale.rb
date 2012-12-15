@@ -7,7 +7,8 @@ class Sale < ActiveRecord::Base
                   :product,
                   :category_id,
                   :store_name,
-                  :store_url
+                  :store_url,
+                  :display_address
 
   mount_uploader :image_0, SaleImageUploader
   mount_uploader :image_1, SaleImageUploader

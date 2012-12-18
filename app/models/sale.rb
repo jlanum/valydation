@@ -9,7 +9,14 @@ class Sale < ActiveRecord::Base
                   :size,
                   :store_name,
                   :store_url,
-                  :display_address
+                  :display_address,
+                  :address,
+                  :city,
+                  :state,
+                  :postal_code,
+                  :country,
+                  :latitude,
+                  :longitude
 
   monetize :orig_price_cents, :allow_nil => true
   monetize :sale_price_cents, :allow_nil => true

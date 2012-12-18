@@ -11,7 +11,14 @@ class SalesController < ApplicationController
                      :size => params[:size],
                      :store_name => params[:store_name],
                      :store_url => params[:store_url],
-                     :display_address => params[:display_address])
+                     :display_address => params[:display_address],
+                     :address => params[:address],
+                     :city => params[:city],
+                     :state => params[:state],
+                     :postal_code => params[:postal_code],
+                     :country => params[:country],
+                     :latitude => params[:latitude],
+                     :longitude => params[:longitude] )
 
     @sale.save!
 

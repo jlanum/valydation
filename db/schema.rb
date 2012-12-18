@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218203256) do
+ActiveRecord::Schema.define(:version => 20121218210810) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(:version => 20121218203256) do
     t.string   "orig_price_currency",                :default => "USD", :null => false
     t.integer  "sale_price_cents",                   :default => 0,     :null => false
     t.string   "sale_price_currency",                :default => "USD", :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
   end
 
   create_table "users", :force => true do |t|

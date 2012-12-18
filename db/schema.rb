@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215015121) do
+ActiveRecord::Schema.define(:version => 20121218203256) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -40,16 +40,14 @@ ActiveRecord::Schema.define(:version => 20121215015121) do
   add_index "devices", ["token"], :name => "devices_token_key", :unique => true
 
   create_table "sales", :force => true do |t|
-    t.integer  "user_id",                                                      :null => false
-    t.string   "store_name",      :limit => 128,                               :null => false
+    t.integer  "user_id",                                               :null => false
+    t.string   "store_name",          :limit => 128,                    :null => false
     t.text     "store_url"
-    t.string   "brand",           :limit => 128,                               :null => false
-    t.decimal  "orig_price",                     :precision => 8, :scale => 2, :null => false
-    t.decimal  "sale_price",                     :precision => 8, :scale => 2, :null => false
-    t.string   "product",         :limit => 128,                               :null => false
-    t.integer  "category_id",                                                  :null => false
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.string   "brand",               :limit => 128,                    :null => false
+    t.string   "product",             :limit => 128,                    :null => false
+    t.integer  "category_id",                                           :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.boolean  "has_image_1"
     t.boolean  "has_image_2"
     t.boolean  "has_image_0"
@@ -58,7 +56,11 @@ ActiveRecord::Schema.define(:version => 20121215015121) do
     t.string   "image_2"
     t.float    "percent_off"
     t.text     "display_address"
-    t.string   "size",            :limit => 32
+    t.string   "size",                :limit => 32
+    t.integer  "orig_price_cents",                   :default => 0,     :null => false
+    t.string   "orig_price_currency",                :default => "USD", :null => false
+    t.integer  "sale_price_cents",                   :default => 0,     :null => false
+    t.string   "sale_price_currency",                :default => "USD", :null => false
   end
 
   create_table "users", :force => true do |t|

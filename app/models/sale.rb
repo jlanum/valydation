@@ -11,6 +11,9 @@ class Sale < ActiveRecord::Base
                   :store_url,
                   :display_address
 
+  monetize :orig_price_cents, :allow_nil => true
+  monetize :sale_price_cents, :allow_nil => true
+
   mount_uploader :image_0, SaleImageUploader
   mount_uploader :image_1, SaleImageUploader
   mount_uploader :image_2, SaleImageUploader

@@ -1,7 +1,9 @@
 class SalesController < ApplicationController
+  before_filter :handle_device
+  before_filter :use_test_user
 
   def create
-    @sale = Sale.new(:user_id => 0,
+    @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],
                      :sale_price => params[:sale_price],
                      :orig_price => params[:orig_price],

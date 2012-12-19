@@ -61,16 +61,6 @@ module HiStrollers
     config.assets.version = '1.0'
 
     require 'rails-database-url'
-    #require 'rack/push-notification'
-    #puts "db url: #{ENV['DATABASE_URL']}"
-    #Sequel.connect(ENV['DATABASE_URL'].sub('postgresql', 'postgres'))
-    #config.middleware.use(::Rack::PushNotification)
-    #
-    
-#    AWS::S3::Base.establish_connection!(
-#      :access_key_id     => 'AKIAJU4IAXMS575N42IA',
-#      :secret_access_key => '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'
-#    )
 
   end
 end

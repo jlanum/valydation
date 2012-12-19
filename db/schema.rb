@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219195454) do
+ActiveRecord::Schema.define(:version => 20121219222024) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -24,22 +24,12 @@ ActiveRecord::Schema.define(:version => 20121219195454) do
   add_index "comments", ["sale_id"], :name => "index_comments_on_sale_id"
 
   create_table "devices", :force => true do |t|
-    t.string  "token",                                        :null => false
-    t.string  "alias"
-    t.integer "badge",                     :default => 0,     :null => false
-    t.string  "locale"
-    t.string  "language"
-    t.string  "timezone",                  :default => "UTC", :null => false
-    t.string  "ip_address", :limit => nil
-    t.float   "lat"
-    t.float   "lng"
-    t.string  "tags",       :limit => nil
+    t.string   "duid",       :null => false
+    t.string   "apns_token"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  add_index "devices", ["alias"], :name => "devices_alias_index"
-  add_index "devices", ["lat", "lng"], :name => "devices_lat_lng_index"
-  add_index "devices", ["token"], :name => "devices_token_index"
-  add_index "devices", ["token"], :name => "devices_token_key", :unique => true
 
   create_table "faves", :force => true do |t|
     t.integer  "user_id",    :null => false

@@ -17,6 +17,7 @@ HiStrollers::Application.routes.draw do
   resources :faves
   resources :users
   resources :comments
+  resources :devices
 
   # Sample resource route with options:
   #   resources :products do

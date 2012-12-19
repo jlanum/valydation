@@ -25,6 +25,10 @@ class Sale < ActiveRecord::Base
   mount_uploader :image_1, SaleImageUploader
   mount_uploader :image_2, SaleImageUploader
 
+  has_many :comments, :dependent => :destroy
+  has_many :faves, :dependent => :destroy
+  belongs_to :user
+  
   def image_url(i)
     "http://s3.amazonaws.com/#{ApplicationController.s3_bucket}/#{self.image_url_slug(i)}"
   end

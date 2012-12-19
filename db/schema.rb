@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218210810) do
+ActiveRecord::Schema.define(:version => 20121219195454) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20121218210810) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "comments", ["sale_id"], :name => "index_comments_on_sale_id"
 
   create_table "devices", :force => true do |t|
     t.string  "token",                                        :null => false
@@ -38,6 +40,16 @@ ActiveRecord::Schema.define(:version => 20121218210810) do
   add_index "devices", ["lat", "lng"], :name => "devices_lat_lng_index"
   add_index "devices", ["token"], :name => "devices_token_index"
   add_index "devices", ["token"], :name => "devices_token_key", :unique => true
+
+  create_table "faves", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "sale_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "faves", ["sale_id"], :name => "index_faves_on_sale_id"
+  add_index "faves", ["user_id"], :name => "index_faves_on_user_id"
 
   create_table "sales", :force => true do |t|
     t.integer  "user_id",                                               :null => false
@@ -68,6 +80,8 @@ ActiveRecord::Schema.define(:version => 20121218210810) do
     t.string   "state"
     t.string   "postal_code"
     t.string   "country"
+    t.integer  "comment_count"
+    t.integer  "fave_count"
   end
 
   create_table "users", :force => true do |t|
@@ -76,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20121218210810) do
     t.string   "passwd_hash", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "photo"
   end
 
 end

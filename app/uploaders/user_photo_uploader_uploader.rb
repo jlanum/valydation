@@ -1,18 +1,6 @@
 # encoding: utf-8
 
-CarrierWave.configure do |config|
-      config.fog_credentials = {
-        :provider               => 'AWS',
-        :aws_access_key_id      => 'AKIAJU4IAXMS575N42IA',
-        :aws_secret_access_key  => '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',
-      }
-
-      config.fog_directory  = ApplicationController.s3_bucket                     # required
-      config.fog_public     = true                                   # optional, defaults to true
-      config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
-end
-
-class SaleImageUploader < CarrierWave::Uploader::Base
+class UserPhotoUploaderUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -23,18 +11,24 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  #storage :file
   storage :fog
 
   include CarrierWave::MimeTypes
 
   process :set_content_type
 
+  version :feed_2x do
+    process :resize_to_fill => [72,72]
+    process :set_content_type
+  end
+
+  version :feed, :from_version => :feed_2x do
+    process :resize_to_fill => [36,36]
+    process :set_content_type
+  end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  #def store_dir
-  #  "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  #end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
@@ -55,16 +49,6 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :scale => [50, 50]
   # end
-  #
-  version :feed_2x do
-    process :resize_to_fill => [460, 460]
-    process :set_content_type
-  end
-
-  version :feed, :from_version => :feed_2x do
-    process :resize_to_fill => [230,230]
-    process :set_content_type
-  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

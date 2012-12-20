@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20121219222024) do
     t.string   "state"
     t.string   "postal_code"
     t.string   "country"
-    t.integer  "comment_count"
-    t.integer  "fave_count"
+    t.integer  "comment_count",                      :default => 0
+    t.integer  "fave_count",                         :default => 0
   end
 
   create_table "users", :force => true do |t|

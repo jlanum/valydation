@@ -50,9 +50,12 @@ class SalesController < ApplicationController
       order("created_at DESC").
       limit(10).
       offset(params[:offset]).all
+    @sales.each { |s| s.current_user = @user }
+
     render :json => @sales.
       to_json(:include => {:user => User.public_json,
-                           :comments => {:user => User.public_json}})
+                           :comments => {:user => User.public_json}},
+              :methods => [:my_fave])
   end
 
 end

@@ -1,4 +1,6 @@
 class Fave < ActiveRecord::Base
+  attr_accessible :user_id, :sale_id
+
   belongs_to :user
   belongs_to :sale
 

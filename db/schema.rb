@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219222024) do
+ActiveRecord::Schema.define(:version => 20121221032440) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20121219222024) do
     t.string   "country"
     t.integer  "comment_count",                      :default => 0
     t.integer  "fave_count",                         :default => 0
+    t.float    "user_lat"
+    t.float    "user_lon"
   end
 
   create_table "users", :force => true do |t|

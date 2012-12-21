@@ -20,7 +20,9 @@ class SalesController < ApplicationController
                      :postal_code => params[:postal_code],
                      :country => params[:country],
                      :latitude => params[:latitude],
-                     :longitude => params[:longitude] )
+                     :longitude => params[:longitude],
+                     :user_lat => params[:user_lat],
+                     :user_lon => params[:user_lon] )
 
     @sale.save!
 

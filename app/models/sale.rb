@@ -16,7 +16,9 @@ class Sale < ActiveRecord::Base
                   :postal_code,
                   :country,
                   :latitude,
-                  :longitude
+                  :longitude,
+                  :user_lat,
+                  :user_lon
 
   attr_accessor :current_user
 

@@ -1,12 +1,19 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :passwd_hash, :fb_id
+  attr_accessible :name, 
+                  :email, 
+                  :passwd_hash, 
+                  :fb_id,
+                  :city_id,
+                  :zip_code
+
   #validates :name, :format => {:with => /\A\w+\Z/}
 
   has_many :faves, :class_name => "Fave", :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :devices
+  belongs_to :city
 
   mount_uploader :photo, UserPhotoUploader
 

@@ -18,7 +18,8 @@ class Sale < ActiveRecord::Base
                   :latitude,
                   :longitude,
                   :user_lat,
-                  :user_lon
+                  :user_lon,
+                  :city_id
 
   attr_accessor :current_user
 
@@ -32,6 +33,7 @@ class Sale < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
   belongs_to :user
+  belongs_to :city
   
   def my_fave
     raise "no user for my fave" unless self.current_user

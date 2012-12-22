@@ -33,7 +33,8 @@ class UsersController < ApplicationController
                       User.find_by_fb_id(params[:fb_id]))
         @user = User.new(:name => params[:name],
                          :email => params[:email],
-                         :passwd_clear => rand(10000000).to_s)
+                         :passwd_clear => rand(10000000).to_s,
+                         :city_id => City.find(:first).id)
       end
       @user.fb_id = params[:fb_id]
     else
@@ -43,7 +44,16 @@ class UsersController < ApplicationController
   
 
   def update
+    [:city_id].each do |attr|
+      value = params[attr]
+      next if value.nil?
 
+      @user.send("#{attr}=",value)
+    end
+    
+    @user.save!
+    
+    render :json => @user.to_json
   end
 
   def render_error

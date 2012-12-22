@@ -18,6 +18,7 @@ HiStrollers::Application.routes.draw do
   resources :users
   resources :comments
   resources :devices
+  resources :cities
 
   # Sample resource route with options:
   #   resources :products do

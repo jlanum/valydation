@@ -22,7 +22,8 @@ class SalesController < ApplicationController
                      :latitude => params[:latitude],
                      :longitude => params[:longitude],
                      :user_lat => params[:user_lat],
-                     :user_lon => params[:user_lon] )
+                     :user_lon => params[:user_lon],
+                     :city_id => @user.city_id )
 
     @sale.save!
 
@@ -48,7 +49,8 @@ class SalesController < ApplicationController
   end
 
   def index
-    @sales = Sale.where(:category_id => params[:category_id]).
+    @sales = Sale.where(:category_id => params[:category_id],
+                        :city_id => @user.city_id).
       order("created_at DESC").
       limit(10).
       offset(params[:offset]).all

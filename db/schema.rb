@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221220149) do
+ActiveRecord::Schema.define(:version => 20121222191716) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -85,5 +85,8 @@ ActiveRecord::Schema.define(:version => 20121221220149) do
     t.string   "photo"
     t.string   "fb_id"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["fb_id"], :name => "index_users_on_fb_id", :unique => true
 
 end

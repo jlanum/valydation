@@ -1,5 +1,5 @@
 class FavesController < ApplicationController
-  before_filter :handle_device
+  before_filter :handle_device, :require_device
   before_filter :use_test_user
 
   def create

@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def use_test_user
-    @user = User.find :first
+    @user ||= User.find :first
   end
 
 end

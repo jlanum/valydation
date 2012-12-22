@@ -77,13 +77,13 @@ ActiveRecord::Schema.define(:version => 20121221220149) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",                     :null => false
-    t.string   "email",                    :null => false
-    t.string   "passwd_hash",              :null => false
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.string   "name",        :null => false
+    t.string   "email",       :null => false
+    t.string   "passwd_hash", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "photo"
-    t.integer  "fb_id",       :limit => 8
+    t.string   "fb_id"
   end
 
 end

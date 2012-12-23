@@ -12,7 +12,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    if params[:fb_id]
+    if params[:log_me_in]
+      create_login
+    elsif params[:fb_id]
       create_fb
     else
       create_email
@@ -24,6 +26,17 @@ class UsersController < ApplicationController
       @device.user = @user
       @device.save!
       render :json => @user.to_json
+    end
+  end
+
+  def create_login
+    if @user = User.find_by_email(params[:email])
+      unless BCrypt::Password.new(@user.passwd_hash) == params[:passwd_clear]
+        @error_message = "Email or password incorrect."
+        @user = nil
+      end
+    else
+      @error_message = "Email or password incorrect"
     end
   end
 
@@ -48,7 +61,6 @@ class UsersController < ApplicationController
   def create_email
     if User.find_by_email(params[:email])
       @error_message = "There is already a user registered with that email address."
-      return
     else
       @user = User.new(:first_name => params[:first_name],
                        :last_name => params[:last_name],
@@ -73,7 +85,8 @@ class UsersController < ApplicationController
   end
 
   def render_error
-    render :json => {'error' => @error_message}
+    render :json => {'error' => @error_message},
+           :status => 403
   end
 
 end

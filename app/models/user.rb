@@ -43,4 +43,27 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(self.passwd_hash)
   end
 
+
+  def detach_devices!(device_to_detach = false)
+    unless device_to_detach
+      raise "Pass a device or a true argument to this method if you really mean it. It will permanently destroy the devices that belong to this user and assign it a fake device."
+    end
+    
+    new_device = Device.new
+    new_device.randomize_duid
+    new_device.save!
+    
+    if device_to_detach.kind_of?(Device)
+      device_to_detach.destroy
+    else
+      self.devices.destroy_all
+    end
+    
+    new_device.user = self
+    new_device.save
+    
+    self.devices.reload
+  end
+
+
 end

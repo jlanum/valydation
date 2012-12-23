@@ -80,7 +80,11 @@ class UsersController < ApplicationController
     end
     
     @user.save!
-    
+   
+    if params[:detach_device]
+      @user.detach_devices!(true)
+    end 
+
     render :json => @user.to_json
   end
 

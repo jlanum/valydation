@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def create_login
-    if @user = User.find_by_email(params[:email])
+    if @user = User.find_by_email(params[:email].downcase)
       unless BCrypt::Password.new(@user.passwd_hash) == params[:passwd_clear]
         @error_message = "Email or password incorrect."
         @user = nil
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
                       User.find_by_fb_id(params[:fb_id]))
         @user = User.new(:first_name => params[:first_name],
                          :last_name => params[:last_name],
-                         :email => params[:email],
+                         :email => params[:email].downcase,
                          :passwd_clear => rand(10000000).to_s,
                          :city_id => City.find(:first).id)
       end
@@ -59,12 +59,12 @@ class UsersController < ApplicationController
   end
 
   def create_email
-    if User.find_by_email(params[:email])
+    if User.find_by_email(params[:email].downcase)
       @error_message = "There is already a user registered with that email address."
     else
       @user = User.new(:first_name => params[:first_name],
                        :last_name => params[:last_name],
-                       :email => params[:email],
+                       :email => params[:email].downcase,
                        :passwd_clear => params[:passwd_clear],
                        :city_id => City.find(:first).id)
     end

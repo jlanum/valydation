@@ -31,7 +31,8 @@ class UsersController < ApplicationController
     if (fb_response['id'] == params[:fb_id])
       unless @user = (User.find_by_email(params[:email]) ||
                       User.find_by_fb_id(params[:fb_id]))
-        @user = User.new(:name => params[:name],
+        @user = User.new(:first_name => params[:first_name],
+                         :last_name => params[:last_name],
                          :email => params[:email],
                          :passwd_clear => rand(10000000).to_s,
                          :city_id => City.find(:first).id)

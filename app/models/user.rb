@@ -1,7 +1,8 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  attr_accessible :name, 
+  attr_accessible :first_name,
+                  :last_name,
                   :email, 
                   :passwd_hash, 
                   :fb_id,

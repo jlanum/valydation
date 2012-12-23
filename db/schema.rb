@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222201130) do
+ActiveRecord::Schema.define(:version => 20121223010752) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(:version => 20121222201130) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",        :null => false
     t.string   "email",       :null => false
     t.string   "passwd_hash", :null => false
     t.datetime "created_at",  :null => false
@@ -93,6 +92,8 @@ ActiveRecord::Schema.define(:version => 20121222201130) do
     t.string   "fb_id"
     t.string   "zip_code"
     t.integer  "city_id"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

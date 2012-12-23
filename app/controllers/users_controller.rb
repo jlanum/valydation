@@ -18,7 +18,9 @@ class UsersController < ApplicationController
       create_email
     end
 
-    if @user.save
+    if @error_message
+      render_error
+    elsif @user.save
       @device.user = @user
       @device.save!
       render :json => @user.to_json
@@ -40,6 +42,19 @@ class UsersController < ApplicationController
       @user.fb_id = params[:fb_id]
     else
       raise "FB token hacker!!"
+    end
+  end
+
+  def create_email
+    if User.find_by_email(params[:email])
+      @error_message = "There is already a user registered with that email address."
+      return
+    else
+      @user = User.new(:first_name => params[:first_name],
+                       :last_name => params[:last_name],
+                       :email => params[:email],
+                       :passwd_clear => params[:passwd_clear],
+                       :city_id => City.find(:first).id)
     end
   end
   

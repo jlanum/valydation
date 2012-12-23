@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   attr_accessible :first_name,
                   :last_name,
                   :email, 
-                  :passwd_hash, 
+                  :passwd_hash,
+                  :passwd_clear, 
                   :fb_id,
                   :city_id,
                   :zip_code

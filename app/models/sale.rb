@@ -35,9 +35,14 @@ class Sale < ActiveRecord::Base
   belongs_to :user
   belongs_to :city
   
-  def my_fave
+  def my_fave_old
     raise "no user for my fave" unless self.current_user
     Fave.where(sale_id: self.id, user_id: self.current_user.id).first
+  end
+
+  def my_fave
+    return nil unless self.my_fave_id
+    {:id => self.my_fave_id.to_i}
   end
 
   def image_url(i)

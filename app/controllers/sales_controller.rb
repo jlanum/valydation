@@ -50,15 +50,18 @@ class SalesController < ApplicationController
   def index
     @sales = Sale.where(:category_id => params[:category_id],
                         :city_id => @user.city_id).
-      order("created_at DESC").
+      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
       limit(10).
       offset(params[:offset]).all
-    @sales.each { |s| s.current_user = @user }
 
     render :json => @sales.
-      to_json(:include => {:user => User.public_json,
-                           :comments => {:user => User.public_json}},
+      to_json(:include => {:user => User.public_json},
               :methods => [:my_fave])
+
   end
 
 end

@@ -19,6 +19,7 @@ HiStrollers::Application.routes.draw do
   resources :comments
   resources :devices
   resources :cities
+  resources :profile_photos
 
   # Sample resource route with options:
   #   resources :products do

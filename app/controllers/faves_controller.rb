@@ -1,6 +1,7 @@
 class FavesController < ApplicationController
-  before_filter :handle_device, :require_device
-  before_filter :use_test_user
+  before_filter :handle_device
+  before_filter :require_user
+  #before_filter :use_test_user
 
   def create
     unless @fave = Fave.where(user_id: @user.id, sale_id: params[:sale_id]).first

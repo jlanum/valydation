@@ -76,6 +76,11 @@ class UsersController < ApplicationController
   
 
   def update
+    if params[:passwd_new]
+      change_passwd
+      return
+    end
+
     [:city_id, 
      :bio, 
      :notify_faved, 
@@ -89,12 +94,23 @@ class UsersController < ApplicationController
     end
     
     @user.save!
-   
+     
     if params[:detach_device]
       @user.detach_devices!(true)
     end 
 
     render :json => @user.to_json
+  end
+
+  def change_passwd
+    if BCrypt::Password.new(@user.passwd_hash) == params[:passwd_clear]
+      @user.passwd_clear = params[:passwd_new]
+      @user.save!
+      render :json => @user.to_json
+    else
+      @error_message = "Password incorrect."
+      render_error
+    end
   end
 
   def render_error

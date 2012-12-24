@@ -48,6 +48,28 @@ class SalesController < ApplicationController
   end
 
   def index
+    if params[:my_feed]
+      index_mine
+    else
+      index_all
+    end
+
+    render :json => @sales.
+      to_json(:include => {:user => User.public_json},
+              :methods => [:my_fave])
+  end
+  
+  def index_mine
+    @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{INNER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      limit(10).
+      offset(params[:offset]).all
+  end
+
+  def index_all
     @sales = Sale.where(:category_id => params[:category_id],
                         :city_id => @user.city_id).
       select(%Q{"sales".*, "faves"."id" as my_fave_id}).
@@ -57,11 +79,6 @@ class SalesController < ApplicationController
       order(%Q{"sales"."created_at" DESC}).
       limit(10).
       offset(params[:offset]).all
-
-    render :json => @sales.
-      to_json(:include => {:user => User.public_json},
-              :methods => [:my_fave])
-
   end
 
 end

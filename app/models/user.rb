@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
                   :passwd_clear, 
                   :fb_id,
                   :city_id,
-                  :zip_code
+                  :zip_code,
+                  :bio,
+                  :notify_starred,
+                  :notify_faved,
+                  :notify_posted
 
   #validates :name, :format => {:with => /\A\w+\Z/}
 

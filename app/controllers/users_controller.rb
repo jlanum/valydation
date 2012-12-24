@@ -72,7 +72,12 @@ class UsersController < ApplicationController
   
 
   def update
-    [:city_id].each do |attr|
+    [:city_id, 
+     :bio, 
+     :notify_starred, 
+     :notify_saved, 
+     :notify_posted].each do |attr|
+
       value = params[attr]
       next if value.nil?
 

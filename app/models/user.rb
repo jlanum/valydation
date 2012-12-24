@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :devices
   belongs_to :city
+  has_many :following, :class_name => "Follower", :foreign_key => "follower_id"
+  has_many :followed_users, :through => :following, :class_name => "User"
+  has_many :followed, :class_name => "Follower", :foreign_key => "following_id"
+  has_many :following_users, :through => :followed, :class_name => "User"
 
   mount_uploader :photo, UserPhotoUploader
 

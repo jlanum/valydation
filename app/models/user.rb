@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   mount_uploader :photo, UserPhotoUploader
 
   def self.public_json
-    {:only => [:id, :name],
+    {:only => [:id, :first_name, :last_name],
      :methods => [:photo_fb]}
   end
 

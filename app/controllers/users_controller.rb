@@ -6,9 +6,13 @@ class UsersController < ApplicationController
   def show
     if params[:id] == "self"
       @show_user = @user
+      render :json => @show_user.to_json(:methods => [:photo_fb])      
+    else
+      @show_user = User.find(params[:id])
+      render :json => @show_user.
+        to_json({:only => [:id, :first_name, :last_name, :bio],
+                 :methods => [:photo_fb]})
     end
-
-    render :json => @show_user.to_json(:methods => [:photo_fb])
   end
 
   def create

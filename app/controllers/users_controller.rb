@@ -19,6 +19,10 @@ class UsersController < ApplicationController
     else
       create_email
     end
+    
+    @user.notify_posted = true
+    @user.notify_followed = true
+    @user.notify_faved = true
 
     if @error_message
       render_error
@@ -74,8 +78,8 @@ class UsersController < ApplicationController
   def update
     [:city_id, 
      :bio, 
-     :notify_starred, 
-     :notify_saved, 
+     :notify_faved, 
+     :notify_followed, 
      :notify_posted].each do |attr|
 
       value = params[attr]

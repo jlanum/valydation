@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
                   :city_id,
                   :zip_code,
                   :bio,
-                  :notify_starred,
                   :notify_faved,
+                  :notify_followed,
                   :notify_posted
 
   #validates :name, :format => {:with => /\A\w+\Z/}

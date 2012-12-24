@@ -83,19 +83,19 @@ ActiveRecord::Schema.define(:version => 20121224043051) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",          :null => false
-    t.string   "passwd_hash",    :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string   "email",           :null => false
+    t.string   "passwd_hash",     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "photo"
     t.string   "fb_id"
     t.string   "zip_code"
     t.integer  "city_id"
-    t.string   "first_name",     :null => false
-    t.string   "last_name",      :null => false
+    t.string   "first_name",      :null => false
+    t.string   "last_name",       :null => false
     t.text     "bio"
-    t.boolean  "notify_starred"
     t.boolean  "notify_faved"
+    t.boolean  "notify_followed"
     t.boolean  "notify_posted"
   end
 

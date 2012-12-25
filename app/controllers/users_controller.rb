@@ -9,9 +9,10 @@ class UsersController < ApplicationController
       render :json => @show_user.to_json(:methods => [:photo_fb])      
     else
       @show_user = User.find(params[:id])
+      @show_user.other_user = @user
       render :json => @show_user.
         to_json({:only => [:id, :first_name, :last_name, :bio],
-                 :methods => [:photo_fb]})
+                 :methods => [:photo_fb, :is_followed]})
     end
   end
 

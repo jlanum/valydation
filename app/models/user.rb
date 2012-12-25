@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
                   :notify_followed,
                   :notify_posted
 
+  attr_accessor :other_user
+
   #validates :name, :format => {:with => /\A\w+\Z/}
 
   has_many :faves, :class_name => "Fave", :dependent => :destroy
@@ -41,6 +43,12 @@ class User < ActiveRecord::Base
     else
       JSON.parse(self.photo.to_json)["photo"]
     end
+  end
+
+  def is_followed
+    raise "no other user!" unless self.other_user
+    return nil if self.other_user.id == self.id
+    self.followed.where("follower_id" => self.other_user.id).first
   end
 
   def passwd_clear=(passwd_clear)
@@ -72,6 +80,5 @@ class User < ActiveRecord::Base
     
     self.devices.reload
   end
-
 
 end

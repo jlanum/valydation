@@ -61,9 +61,15 @@ class SalesController < ApplicationController
   end
   
   def index_mine
-    @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-      joins(%Q{INNER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
+    @sales = Sale.select(%Q{"sales".*, 
+                            "faves"."id" as my_fave_id, 
+                            "followers"."id" as follow_id}).
+      where(%Q{(("faves"."id" IS NOT NULL) OR ("followers"."id" IS NOT NULL))}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON 
+               "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id} 
+               LEFT OUTER JOIN "followers" ON 
+               ("followers"."follower_id"=#{@user.id} AND 
+                "followers"."following_id"="sales"."user_id")}).
       includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       limit(10).

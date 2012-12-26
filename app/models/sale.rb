@@ -11,7 +11,6 @@ class Sale < ActiveRecord::Base
                   :store_url,
                   :display_address,
                   :address,
-                  :city,
                   :state,
                   :postal_code,
                   :country,
@@ -19,7 +18,9 @@ class Sale < ActiveRecord::Base
                   :longitude,
                   :user_lat,
                   :user_lon,
-                  :city_id
+                  :city_id,
+                  :store_id,
+                  :brand_id
 
   attr_accessor :current_user
 
@@ -34,7 +35,26 @@ class Sale < ActiveRecord::Base
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
   belongs_to :user
   belongs_to :city
+
+  before_create :set_store
+  before_create :set_brand
+
+
+  def set_store
+    unless @store = Store.find_by_url(self.store_url)
+      @store = Store.create!(:url => self.store_url,
+                             :name => self.store_name)
+    end
+    self.store_id = @store.id
+  end
   
+  def set_brand
+    unless @brand = Brand.find_by_name(self.brand.upcase)
+      @brand = Brand.create!(:name => self.brand.upcase)
+    end
+    self.brand_id = @brand.id
+  end
+
   def my_fave_old
     raise "no user for my fave" unless self.current_user
     Fave.where(sale_id: self.id, user_id: self.current_user.id).first

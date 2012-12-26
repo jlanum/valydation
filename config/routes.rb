@@ -21,6 +21,7 @@ HiStrollers::Application.routes.draw do
   resources :cities
   resources :profile_photos
   resources :followers
+  resources :search_results
 
   # Sample resource route with options:
   #   resources :products do

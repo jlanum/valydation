@@ -1,9 +1,16 @@
+require "Levenshtein"
+
 class SearchResultsController < ApplicationController
   before_filter :handle_device
-  #before_filter :require_user
-  before_filter :use_search_results
+  before_filter :require_user
+  #before_filter :use_search_results
 
   def index
+    if params[:q].nil? or params[:q].empty?
+      render :json => [].to_json
+      return
+    end
+
     @brands = Brand.select(%Q{DISTINCT brands.id,brands.name}).
       where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
       joins(%Q{INNER JOIN "sales" on "sales"."brand_id"="brands"."id"}).

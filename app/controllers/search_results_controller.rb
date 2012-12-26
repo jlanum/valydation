@@ -1,5 +1,3 @@
-require "Levenshtein"
-
 class SearchResultsController < ApplicationController
   before_filter :handle_device
   before_filter :require_user
@@ -21,7 +19,9 @@ class SearchResultsController < ApplicationController
       joins(%Q{INNER JOIN "sales" on "sales"."store_id"="stores"."id"}).
       limit(20)
 
-    @results = (@brands + @stores).sort_by { |x| Levenshtein.distance(x.name,params[:q]) }
+    @results = (@brands + @stores).sort_by do |x| 
+      1.0 - x.name.downcase.levenshtein_similar(params[:q].downcase)
+    end
 
     @results_hashed = @results.collect do |result|
       if result.kind_of?(Brand)

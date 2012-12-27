@@ -21,7 +21,7 @@ class SearchResultsController < ApplicationController
 
     @results = (@brands + @stores).sort_by do |x| 
       1.0 - x.name.downcase.levenshtein_similar(params[:q].downcase)
-    end
+    end[0..19]
 
     @results_hashed = @results.collect do |result|
       if result.kind_of?(Brand)

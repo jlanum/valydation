@@ -39,7 +39,10 @@ class User < ActiveRecord::Base
       base_url = "http://graph.facebook.com/#{self.fb_id}/picture"
       {"url"=>base_url,
        "feed_2x"=>{"url"=>"#{base_url}?type=normal"},
-       "feed"=>{"url"=>"#{base_url}?type=small"}}
+       "feed"=>{"url"=>"#{base_url}?type=small"},
+       "profile_2x"=>{"url"=>"#{base_url}?type=large"},
+       "profile"=>{"url"=>"#{base_url}?type=large"}
+      }
     else
       JSON.parse(self.photo.to_json)["photo"]
     end

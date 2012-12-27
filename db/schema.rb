@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226200239) do
+ActiveRecord::Schema.define(:version => 20121227023008) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20121226200239) do
     t.integer  "city_id"
     t.integer  "store_id"
     t.integer  "brand_id"
+    t.string   "city"
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

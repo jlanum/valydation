@@ -11,6 +11,7 @@ class Sale < ActiveRecord::Base
                   :store_url,
                   :display_address,
                   :address,
+                  :city,
                   :state,
                   :postal_code,
                   :country,
@@ -34,7 +35,6 @@ class Sale < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
   belongs_to :user
-  belongs_to :city
 
   before_create :set_store
   before_create :set_brand

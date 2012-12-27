@@ -16,6 +16,7 @@ class SalesController < ApplicationController
                      :store_url => params[:store_url],
                      :display_address => params[:display_address],
                      :address => params[:address],
+                     :city => params[:city],
                      :state => params[:state],
                      :postal_code => params[:postal_code],
                      :country => params[:country],

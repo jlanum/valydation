@@ -8,7 +8,8 @@ class CreateNotifications < ActiveRecord::Migration
       t.integer :expiry
       t.integer :badge
       t.text :custom
-      t.boolean :sent
+      t.integer :retries, :default => 0
+      t.boolean :sent, :default => false
       t.datetime :sent_at
       t.timestamps
     end

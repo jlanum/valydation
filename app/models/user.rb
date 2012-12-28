@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
      :methods => [:photo_fb]}
   end
 
+  def unregister_push!
+    self.notify_faved = false
+    self.notify_followed = false
+    self.notify_posted = false
+    self.save
+    self
+  end
+
   def photo_fb
     if self.fb_id
       base_url = "http://graph.facebook.com/#{self.fb_id}/picture"

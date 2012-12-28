@@ -63,17 +63,18 @@ ActiveRecord::Schema.define(:version => 20121227035159) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "device_id",  :null => false
-    t.string   "alert",      :null => false
+    t.integer  "user_id",                       :null => false
+    t.integer  "device_id",                     :null => false
+    t.string   "alert",                         :null => false
     t.string   "sound"
     t.integer  "expiry"
     t.integer  "badge"
     t.text     "custom"
-    t.boolean  "sent"
+    t.integer  "retries",    :default => 0
+    t.boolean  "sent",       :default => false
     t.datetime "sent_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "notifications", ["sent"], :name => "index_notifications_on_sent"

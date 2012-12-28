@@ -20,6 +20,7 @@ class Fave < ActiveRecord::Base
     notifications = []
     
     alert_message = "#{self.user.display_name} faved your sale."
+    alert_custom = {"user_id" => self.user_id}
 
     if self.sale.user.notify_faved
       self.sale.user.devices.each do |device|
@@ -27,7 +28,8 @@ class Fave < ActiveRecord::Base
                              :device_id => device.id,
                              :source_type => "Fave",
                              :source_id => self.sale.id,
-                             :alert => alert_message)
+                             :alert => alert_message,
+                             :custom => alert_custom.to_json)
         n.save
         notifications << n
       end

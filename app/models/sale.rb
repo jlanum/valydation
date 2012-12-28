@@ -47,6 +47,7 @@ class Sale < ActiveRecord::Base
 
     notifications = []
     alert_message = "#{self.user.display_name} posted a sale in your area."
+    alert_custom = {"sale_id" => self.id}
 
     User.where(:city_id => self.city_id,
                :notify_posted => true).each do |user|
@@ -57,7 +58,8 @@ class Sale < ActiveRecord::Base
                              :device_id => device.id,
                              :source_type => "Sale",
                              :source_id => self.id,
-                             :alert => alert_message)
+                             :alert => alert_message,
+                             :custom => alert_custom.to_json)
         n.save
         notifications << n
       end

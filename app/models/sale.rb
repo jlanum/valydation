@@ -40,6 +40,33 @@ class Sale < ActiveRecord::Base
   before_create :set_brand
 
 
+  def create_notifications!(recreate = false)
+    if self.created_notifications and not recreate
+      return false
+    end
+
+    notifications = []
+
+    User.where(:city_id => self.city_id,
+               :notify_posted => true).each do |user|
+      user.devices.each do |device|
+        n = Notification.new(:user_id => user.id,
+                             :device_id => device.id,
+                             :source_type => "Sale",
+                             :source_id => self.id,
+                             :alert => "A new sale has been posted in your area.")
+        n.save
+        notifications << n
+      end
+    end
+
+    self.created_notifications = true
+    self.created_notifications_at = Time.now
+    self.save
+
+    notifications
+  end
+
   def set_store
     unless @store = Store.find_by_url(self.store_url)
       @store = Store.create!(:url => self.store_url,

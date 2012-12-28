@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227035159) do
+ActiveRecord::Schema.define(:version => 20121228014326) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -46,48 +46,57 @@ ActiveRecord::Schema.define(:version => 20121227035159) do
   end
 
   create_table "faves", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "sale_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "user_id",                                     :null => false
+    t.integer  "sale_id",                                     :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "created_notifications",    :default => false
+    t.datetime "created_notifications_at"
   end
 
+  add_index "faves", ["created_notifications"], :name => "index_faves_on_created_notifications"
   add_index "faves", ["sale_id"], :name => "index_faves_on_sale_id"
   add_index "faves", ["user_id"], :name => "index_faves_on_user_id"
 
   create_table "followers", :force => true do |t|
-    t.integer  "follower_id",  :null => false
-    t.integer  "following_id", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "follower_id",                                 :null => false
+    t.integer  "following_id",                                :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "created_notifications",    :default => false
+    t.datetime "created_notifications_at"
   end
 
+  add_index "followers", ["created_notifications"], :name => "index_followers_on_created_notifications"
+
   create_table "notifications", :force => true do |t|
-    t.integer  "user_id",                       :null => false
-    t.integer  "device_id",                     :null => false
-    t.string   "alert",                         :null => false
+    t.integer  "user_id",                        :null => false
+    t.integer  "device_id",                      :null => false
+    t.string   "alert",                          :null => false
     t.string   "sound"
     t.integer  "expiry"
     t.integer  "badge"
     t.text     "custom"
-    t.integer  "retries",    :default => 0
-    t.boolean  "sent",       :default => false
+    t.integer  "retries",     :default => 0
+    t.boolean  "sent",        :default => false
     t.datetime "sent_at"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "source_type"
+    t.integer  "source_id"
   end
 
   add_index "notifications", ["sent"], :name => "index_notifications_on_sent"
 
   create_table "sales", :force => true do |t|
-    t.integer  "user_id",                                               :null => false
-    t.string   "store_name",          :limit => 128,                    :null => false
+    t.integer  "user_id",                                                    :null => false
+    t.string   "store_name",               :limit => 128,                    :null => false
     t.text     "store_url"
-    t.string   "brand",               :limit => 128,                    :null => false
-    t.string   "product",             :limit => 128,                    :null => false
-    t.integer  "category_id",                                           :null => false
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.string   "brand",                    :limit => 128,                    :null => false
+    t.string   "product",                  :limit => 128,                    :null => false
+    t.integer  "category_id",                                                :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
     t.boolean  "has_image_1"
     t.boolean  "has_image_2"
     t.boolean  "has_image_0"
@@ -96,28 +105,31 @@ ActiveRecord::Schema.define(:version => 20121227035159) do
     t.string   "image_2"
     t.float    "percent_off"
     t.text     "display_address"
-    t.string   "size",                :limit => 32
-    t.integer  "orig_price_cents",                   :default => 0,     :null => false
-    t.string   "orig_price_currency",                :default => "USD", :null => false
-    t.integer  "sale_price_cents",                   :default => 0,     :null => false
-    t.string   "sale_price_currency",                :default => "USD", :null => false
+    t.string   "size",                     :limit => 32
+    t.integer  "orig_price_cents",                        :default => 0,     :null => false
+    t.string   "orig_price_currency",                     :default => "USD", :null => false
+    t.integer  "sale_price_cents",                        :default => 0,     :null => false
+    t.string   "sale_price_currency",                     :default => "USD", :null => false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.string   "state"
     t.string   "postal_code"
     t.string   "country"
-    t.integer  "comment_count",                      :default => 0
-    t.integer  "fave_count",                         :default => 0
+    t.integer  "comment_count",                           :default => 0
+    t.integer  "fave_count",                              :default => 0
     t.float    "user_lat"
     t.float    "user_lon"
     t.integer  "city_id"
     t.integer  "store_id"
     t.integer  "brand_id"
     t.string   "city"
+    t.boolean  "created_notifications",                   :default => false
+    t.datetime "created_notifications_at"
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"
+  add_index "sales", ["created_notifications"], :name => "index_sales_on_created_notifications"
   add_index "sales", ["store_id"], :name => "index_sales_on_store_id"
 
   create_table "stores", :force => true do |t|

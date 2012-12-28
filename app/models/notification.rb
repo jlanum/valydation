@@ -7,7 +7,9 @@ class Notification < ActiveRecord::Base
                   :badge,
                   :custom,
                   :sent,
-                  :sent_at
+                  :sent_at,
+                  :source_type,
+                  :source_id
 
   belongs_to :user
   belongs_to :device
@@ -21,7 +23,7 @@ class Notification < ActiveRecord::Base
       if self.custom
         notif.custom = JSON.parse(self.custom)
       end
-      pusher.push(notif)
+      pusher.push(notif) unless self.device.apns_token.match(/31337000/)
       self.sent = true
       self.sent_at = Time.now
       self.save

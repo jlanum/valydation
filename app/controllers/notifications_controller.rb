@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   
   def push
     limit = params[:limit].to_i
-    if limit > 20 or limit < 1
+    if limit > 100 or limit < 1
       limit = 10
     end
 

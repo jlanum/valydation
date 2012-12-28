@@ -17,13 +17,15 @@ class Follower < ActiveRecord::Base
     end
 
     notifications = []
+    alert_message = "#{self.following_user.display_name} is now following you."
+
     if self.followed_user.notify_followed
       self.followed_user.devices.each do |device|
         n = Notification.new(:user_id => self.followed_user.id,
                              :device_id => device.id,
                              :source_type => "Follower",
                              :source_id => self.following_user.id,
-                             :alert => "You have a new follower.")
+                             :alert => alert_message)
         n.save
         notifications << n
       end

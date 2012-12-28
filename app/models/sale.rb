@@ -46,15 +46,18 @@ class Sale < ActiveRecord::Base
     end
 
     notifications = []
+    alert_message = "#{self.user.display_name} posted a sale in your area."
 
     User.where(:city_id => self.city_id,
                :notify_posted => true).each do |user|
+      next if user.id == self.user.id
+
       user.devices.each do |device|
         n = Notification.new(:user_id => user.id,
                              :device_id => device.id,
                              :source_type => "Sale",
                              :source_id => self.id,
-                             :alert => "A new sale has been posted in your area.")
+                             :alert => alert_message)
         n.save
         notifications << n
       end

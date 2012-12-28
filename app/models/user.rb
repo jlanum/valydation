@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
      :methods => [:photo_fb]}
   end
 
+  def display_name
+    "#{self.first_name} #{self.last_name[0..0]}."
+  end
+
   def unregister_push!
     self.notify_faved = false
     self.notify_followed = false

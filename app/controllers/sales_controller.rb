@@ -29,7 +29,7 @@ class SalesController < ApplicationController
     @sale.save!
 
     if params[:comment] and params[:comment].size > 0
-      @comment = Comment.new(:user_id => 0,
+      @comment = Comment.new(:user_id => @user.id,
                              :sale_id => @sale.id,
                              :text => params[:comment])
       @comment.save!

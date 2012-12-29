@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
   def self.public_json
     {:only => [:id, :first_name, :last_name],
-     :methods => [:photo_fb]}
+     :methods => [:photo_fb, :display_name]}
   end
 
   def display_name

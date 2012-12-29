@@ -25,16 +25,21 @@ class UsersController < ApplicationController
       create_email
     end
     
-    @user.notify_posted = true
-    @user.notify_followed = true
-    @user.notify_faved = true
-
     if @error_message
       render_error
-    elsif @user.save
-      @device.user = @user
-      @device.save!
-      render :json => @user.to_json
+      return
+    end
+
+    if @user
+      @user.notify_posted = true
+      @user.notify_followed = true
+      @user.notify_faved = true
+
+      if @user.save
+        @device.user = @user
+        @device.save!
+        render :json => @user.to_json
+      end
     end
   end
 

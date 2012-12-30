@@ -19,7 +19,7 @@ class Fave < ActiveRecord::Base
 
     notifications = []
     
-    alert_message = "#{self.user.display_name} faved your sale."
+    alert_message = "#{self.user.display_name} liked your sale."
     alert_custom = {"user_id" => self.user_id}
 
     if self.sale.user.notify_faved

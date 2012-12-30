@@ -46,7 +46,8 @@ class Sale < ActiveRecord::Base
     end
 
     notifications = []
-    alert_message = "#{self.user.display_name} posted a sale in your area."
+    sale_city = City.find(self.city_id)
+    alert_message = "#{self.user.display_name} posted a sale in #{sale_city.name}."
     alert_custom = {"sale_id" => self.id}
 
     User.where(:city_id => self.city_id,

@@ -17,7 +17,7 @@ class Follower < ActiveRecord::Base
     end
 
     notifications = []
-    alert_message = "#{self.following_user.display_name} is now following you."
+    alert_message = "#{self.following_user.display_name} is now following your sales."
     alert_custom = {"user_id" => self.following_user.id}
 
     if self.followed_user.notify_followed

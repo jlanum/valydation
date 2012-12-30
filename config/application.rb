@@ -62,5 +62,7 @@ module HiStrollers
 
     require 'rails-database-url'
 
+    config.logger = Logger.new(STDOUT)
+
   end
 end

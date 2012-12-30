@@ -23,7 +23,10 @@ class Notification < ActiveRecord::Base
       if self.custom
         notif.custom = JSON.parse(self.custom)
       end
-      pusher.push(notif) unless self.device.apns_token.match(/31337000/)
+      unless self.device.apns_token.nil? or 
+             self.device.apns_token.match(/31337000/)
+        pusher.push(notif) 
+      end
       self.sent = true
       self.sent_at = Time.now
       self.save

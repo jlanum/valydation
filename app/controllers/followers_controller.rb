@@ -2,6 +2,31 @@ class FollowersController < ApplicationController
   before_filter :handle_device
   before_filter :require_user  
 
+
+  def index
+    if params[:following_me]
+      index_following_me
+    elsif index[:im_following]
+      index_im_following
+    end
+  end
+
+  def index_following_me
+    @followers = Follower.where(:following_id => @user.id).
+      includes(:following_user).
+      order("created_at DESC")
+
+    render :json => @followers.to_json(:include => {:following_user => User.public_json})
+  end
+
+  def index_im_following
+    @followers = Follower.where(:follower_id => @user.id).
+      includes(:followed_user).
+      order("created_at DESC")
+
+    render :json => @followers.to_json(:include => {:followed_user => User.public_json})
+  end
+
   def create
     unless @follower = Follower.where(:follower_id => @user.id,
                                       :following_id => params[:following_id]).first

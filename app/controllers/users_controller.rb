@@ -3,10 +3,13 @@ class UsersController < ApplicationController
   #before_filter :use_test_user
   before_filter :require_device
    
+
   def show
     if params[:id] == "self"
       @show_user = @user
-      render :json => @show_user.to_json(:methods => [:photo_fb])      
+      render :json => @show_user.to_json(:methods => [:photo_fb, 
+                                                      :follower_count, 
+                                                      :following_count])
     else
       @show_user = User.find(params[:id])
       @show_user.other_user = @user

@@ -22,8 +22,12 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :devices
   belongs_to :city
+
+  #following/followed_users are the users who this user is following
   has_many :following, :class_name => "Follower", :foreign_key => "follower_id"
   has_many :followed_users, :through => :following, :class_name => "User"
+
+  #followed/following_users are the users following this user
   has_many :followed, :class_name => "Follower", :foreign_key => "following_id"
   has_many :following_users, :through => :followed, :class_name => "User"
 
@@ -32,6 +36,14 @@ class User < ActiveRecord::Base
   def self.public_json
     {:only => [:id, :first_name, :last_name],
      :methods => [:photo_fb, :display_name]}
+  end
+
+  def follower_count
+    self.followed.count
+  end
+
+  def following_count
+    self.following.count
   end
 
   def display_name

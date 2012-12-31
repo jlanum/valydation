@@ -27,6 +27,16 @@ class UserPhotoUploader < CarrierWave::Uploader::Base
     process :set_content_type
   end
 
+  version :follower_2x do
+    process :resize_to_fill => [88,88]
+    process :set_content_type
+  end
+
+  version :follower do 
+    process :resize_to_fill => [44,44]
+    process :set_content_type
+  end
+
   version :feed_2x do
     process :resize_to_fill => [72,72]
     process :set_content_type

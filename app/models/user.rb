@@ -34,8 +34,14 @@ class User < ActiveRecord::Base
   mount_uploader :photo, UserPhotoUploader
 
   def self.public_json
-    {:only => [:id, :first_name, :last_name],
+    {:only => [:id, :first_name, :last_name, :city_id],
      :methods => [:photo_fb, :display_name]}
+  end
+
+  def self.public_json_follow
+    opts = self.public_json
+    opts[:methods] << :is_followed
+    opts
   end
 
   def follower_count
@@ -64,6 +70,8 @@ class User < ActiveRecord::Base
       {"url"=>base_url,
        "feed_2x"=>{"url"=>"#{base_url}?type=normal"},
        "feed"=>{"url"=>"#{base_url}?type=small"},
+       "follower_2x"=>{"url"=>"#{base_url}?type=normal"},
+       "follower"=>{"url"=>"#{base_url}?type=normal"},
        "profile_2x"=>{"url"=>"#{base_url}?type=large"},
        "profile"=>{"url"=>"#{base_url}?type=large"}
       }

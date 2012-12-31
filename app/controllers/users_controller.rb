@@ -37,6 +37,7 @@ class UsersController < ApplicationController
       @user.notify_posted = true
       @user.notify_followed = true
       @user.notify_faved = true
+      @user.notify_comment = true
 
       if @user.save
         @device.user = @user
@@ -98,7 +99,8 @@ class UsersController < ApplicationController
      :bio, 
      :notify_faved, 
      :notify_followed, 
-     :notify_posted].each do |attr|
+     :notify_posted,
+     :notify_comment].each do |attr|
 
       value = params[attr]
       next if value.nil?

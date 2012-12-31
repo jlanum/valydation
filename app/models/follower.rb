@@ -8,11 +8,15 @@ class Follower < ActiveRecord::Base
   belongs_to :following_user, :class_name => "User", :foreign_key => "follower_id"
   #following_user is the one who initiated 
   
+  def notification_source_key
+    "#{self.following_id} #{self.follower_id}"
+  end
+
   def create_notifications!(recreate = false)
     if self.created_notifications and not recreate
       return false
     elsif Notification.where(:source_type => "Follower",
-                             :source_id => self.following_user.id).first and not recreate
+                             :source_key => self.notification_source_key).first and not recreate
       return false
     end
 
@@ -25,7 +29,7 @@ class Follower < ActiveRecord::Base
         n = Notification.new(:user_id => self.followed_user.id,
                              :device_id => device.id,
                              :source_type => "Follower",
-                             :source_id => self.following_user.id,
+                             :source_key => self.notification_source_key,
                              :alert => alert_message,
                              :custom => alert_custom.to_json)
         n.save

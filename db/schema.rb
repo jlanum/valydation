@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231042725) do
+ActiveRecord::Schema.define(:version => 20121231201545) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -28,11 +28,13 @@ ActiveRecord::Schema.define(:version => 20121231042725) do
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "sale_id",    :null => false
+    t.integer  "user_id",                                     :null => false
+    t.integer  "sale_id",                                     :null => false
     t.text     "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "created_notifications",    :default => false
+    t.datetime "created_notifications_at"
   end
 
   add_index "comments", ["sale_id"], :name => "index_comments_on_sale_id"
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20121231042725) do
     t.datetime "updated_at",                     :null => false
     t.string   "source_type"
     t.integer  "source_id"
+    t.string   "source_key"
   end
 
   add_index "notifications", ["sent"], :name => "index_notifications_on_sent"
@@ -143,20 +146,21 @@ ActiveRecord::Schema.define(:version => 20121231042725) do
   add_index "stores", ["url"], :name => "index_stores_on_url"
 
   create_table "users", :force => true do |t|
-    t.string   "email",           :null => false
-    t.string   "passwd_hash",     :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "email",                             :null => false
+    t.string   "passwd_hash",                       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "photo"
     t.string   "fb_id"
     t.string   "zip_code"
     t.integer  "city_id"
-    t.string   "first_name",      :null => false
-    t.string   "last_name",       :null => false
+    t.string   "first_name",                        :null => false
+    t.string   "last_name",                         :null => false
     t.text     "bio"
     t.boolean  "notify_faved"
     t.boolean  "notify_followed"
     t.boolean  "notify_posted"
+    t.boolean  "notify_comment",  :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

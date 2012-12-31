@@ -9,7 +9,8 @@ class Notification < ActiveRecord::Base
                   :sent,
                   :sent_at,
                   :source_type,
-                  :source_id
+                  :source_id,
+                  :source_key
 
   belongs_to :user
   belongs_to :device

@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
                   :bio,
                   :notify_faved,
                   :notify_followed,
-                  :notify_posted
+                  :notify_posted,
+                  :notify_comment
 
   attr_accessor :other_user
 
@@ -60,6 +61,7 @@ class User < ActiveRecord::Base
     self.notify_faved = false
     self.notify_followed = false
     self.notify_posted = false
+    self.notify_comment = false
     self.save
     self
   end

@@ -4,6 +4,7 @@ def create_notifications
   create_notifications_sales
   create_notifications_faves
   create_notifications_followers
+  create_notifications_comments
 end
 
 def create_notifications_sales
@@ -24,6 +25,13 @@ def create_notifications_followers
   Follower.where(:created_notifications => false).each do |follower|
     ns = follower.create_notifications!
     puts "Created #{ns.count} notifications for follower #{follower.id}" if ns
+  end
+end
+
+def create_notifications_comments
+  Comment.where(:created_notifications => false).each do |comment|
+    ns = comment.create_notifications!
+    puts "Created #{ns.count} notifications for comment #{comment.id}" if ns
   end
 end
 

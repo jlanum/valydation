@@ -7,11 +7,15 @@ class Fave < ActiveRecord::Base
   after_create :count_faves_for_sale
   after_destroy :count_faves_for_sale
 
+  def notification_source_key
+    "#{self.sale_id} #{self.user_id}"
+  end
+
   def create_notifications!(recreate = false)
     if self.created_notifications and not recreate
       return false
     elsif Notification.where(:source_type => "Fave",
-                             :source_id => self.sale.id).first and not recreate
+                             :source_key => self.notification_source_key).first and not recreate
       return false
     elsif not self.sale or not self.sale.user
       return false
@@ -27,7 +31,7 @@ class Fave < ActiveRecord::Base
         n = Notification.new(:user_id => self.sale.user_id,
                              :device_id => device.id,
                              :source_type => "Fave",
-                             :source_id => self.sale.id,
+                             :source_key => self.notification_source_key,
                              :alert => alert_message,
                              :custom => alert_custom.to_json)
         n.save

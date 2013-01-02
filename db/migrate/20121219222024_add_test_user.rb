@@ -1,8 +1,10 @@
 class AddTestUser < ActiveRecord::Migration
   def up
-    u = User.create(:name => "JoJoMcGee",
-                    :email => "max@empire.mn",
-                    :passwd_hash => "xyz")
+    u = User.new
+    u.first_name = "Jojo"
+    u.last_name = "McGee"
+    u.email = "max@empire.mn"
+    u.passwd_hash = "xyz"
 
     img = File.open("#{Rails.root}/public/test_images/gorilla.jpg")
     u.photo = img
@@ -15,6 +17,6 @@ class AddTestUser < ActiveRecord::Migration
   end
 
   def down
-    User.find_by_name("JoJoMcGee").delete
+    User.where(:first_name => "Jojo", :last_name => "McGee").first.delete
   end
 end

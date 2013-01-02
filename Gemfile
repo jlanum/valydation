@@ -48,3 +48,5 @@ gem "bcrypt-ruby"
 #gem "levenshtein"
 gem "amatch"
 gem "grocer"
+
+gem "honeybadger"

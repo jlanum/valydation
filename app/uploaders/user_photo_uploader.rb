@@ -18,12 +18,12 @@ class UserPhotoUploader < CarrierWave::Uploader::Base
   process :set_content_type
 
   version :profile_2x do
-    process :resize_to_fill => [400,400]
+    process :resize_to_fill => [280,280]
     process :set_content_type
   end
 
   version :profile do
-    process :resize_to_fill => [200,200]
+    process :resize_to_fill => [140,140]
     process :set_content_type
   end
 

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       @show_user.other_user = @user
       render :json => @show_user.
         to_json({:only => [:id, :first_name, :last_name, :bio],
-                 :methods => [:photo_fb, :is_followed]})
+                 :methods => [:photo_fb, :is_followed, :follower_count, :following_count]})
     end
   end
 

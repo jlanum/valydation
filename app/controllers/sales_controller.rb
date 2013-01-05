@@ -30,16 +30,6 @@ class SalesController < ApplicationController
                      :user_lon => params[:user_lon],
                      :city_id => @user.city_id )
 
-    @sale.save!
-
-    if params[:comment] and params[:comment].size > 0
-      @comment = Comment.new(:user_id => @user.id,
-                             :sale_id => @sale.id,
-                             :text => params[:comment])
-      @comment.save!
-    end
-
-    #handle images
 
     (0..2).each do |i|
       uploaded_file = params["image_#{i}"]
@@ -47,8 +37,16 @@ class SalesController < ApplicationController
       
       @sale.send("image_#{i}=".to_sym, uploaded_file)
       @sale.send("has_image_#{i}=".to_sym, true)
-      @sale.save!
     end
+
+    if params[:comment] and params[:comment].size > 0
+      comment = Comment.new(:user_id => @user.id,
+                            :text => params[:comment])
+      @sale.comments << comment
+    end
+
+    @sale.save!
+
 
     render :json => @sale.to_json
   end

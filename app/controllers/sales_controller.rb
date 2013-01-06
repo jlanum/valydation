@@ -69,7 +69,7 @@ class SalesController < ApplicationController
               :methods => [:my_fave])
   end
   
-  def index_mine(user_id)
+  def index_mine
     @sales = Sale.select(%Q{"sales".*, 
                             "faves"."id" as my_fave_id, 
                             "followers"."id" as follow_id}).

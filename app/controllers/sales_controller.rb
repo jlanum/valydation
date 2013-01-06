@@ -54,6 +54,8 @@ class SalesController < ApplicationController
   def index
     if params[:my_feed]
       index_mine
+    elsif params[:user_id]
+      index_user
     elsif params[:store_id]
       index_store
     elsif params[:brand_id]
@@ -67,7 +69,7 @@ class SalesController < ApplicationController
               :methods => [:my_fave])
   end
   
-  def index_mine
+  def index_mine(user_id)
     @sales = Sale.select(%Q{"sales".*, 
                             "faves"."id" as my_fave_id, 
                             "followers"."id" as follow_id}).
@@ -82,6 +84,18 @@ class SalesController < ApplicationController
       limit(10).
       offset(params[:offset]).all
   end
+
+  def index_user
+    @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      where(:user_id => params[:user_id]).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+                           AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      limit(10).
+      offset(params[:offset]).all
+  end
+
 
   def index_store
     @sales = Sale.where(:store_id => params[:store_id],

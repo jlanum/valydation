@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   
   def index
     @comments = Comment.where(:sale_id => params[:sale_id]).
-      order("created_at DESC").all
+      order("created_at ASC").all
 
     render :json => @comments.to_json(:include => {:user => User.public_json})
   end

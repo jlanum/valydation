@@ -31,7 +31,7 @@ class SalesController < ApplicationController
                      :city_id => @user.city_id )
 
     if params[:comment] and params[:comment].size > 0
-      comment = comment.new(:user_id => @user.id,
+      comment = Comment.new(:user_id => @user.id,
                             :text => params[:comment])
       @sale.comments << comment
     end

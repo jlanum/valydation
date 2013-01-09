@@ -49,23 +49,14 @@ class Sale < ActiveRecord::Base
     (0..2).each do |image_index|
       if image_key = self.send("temp_image_url_#{image_index}")
         puts "processing #{image_key}"
-
         s3_obj = bucket.objects[image_key]
-
         temp_filename = "#{Rails.root}/tmp/#{image_key}"
+
         File.open(temp_filename,"wb") do |f|
-          s3_obj.read do |chunk|
-            f.write(chunk)
-          end
+          s3_obj.read { |chunk| f.write(chunk) }
         end
 
         self.send("image_#{image_index}=",File.open(temp_filename))
-
-        #puts "s3 acl before #{s3_obj.acl}"
-        #s3_obj.acl = :public_read
-        #puts "s3 acl after #{s3_obj.acl}"
-
-        #self.send("remote_image_#{image_index}_url=", s3_obj..gsub(/^https/i, 'http'))
       end
     end
 

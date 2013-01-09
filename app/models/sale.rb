@@ -24,6 +24,7 @@ class Sale < ActiveRecord::Base
                   :brand_id
 
   attr_accessor :current_user
+  attr_accessor :image_upload_urls
 
   monetize :orig_price_cents, :allow_nil => true
   monetize :sale_price_cents, :allow_nil => true
@@ -39,6 +40,15 @@ class Sale < ActiveRecord::Base
   before_create :set_store
   before_create :set_brand
 
+
+  def create_s3_image_upload(sts_session)
+    s3 = AWS::S3.new(sts_session.credentials)
+    image_key = "image_#{Time.now.strftime("%Y_%m_%d_%H%M%S")}_#{self.id}_#{rand(10000000000)}.jpg"
+    bucket = s3.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
+    s3_obj = bucket.objects.create(image_key, "")
+    url = s3_obj.url_for(:write)
+    {:key => image_key, :url => url}
+  end
 
   def create_notifications!(recreate = false)
     if self.created_notifications and not recreate

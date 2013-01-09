@@ -4,9 +4,9 @@ class SalesController < ApplicationController
  # before_filter :use_test_user
 
   def create
-    unless params[:image_0]
-      raise "No uploaded image_0!"
-    end
+    #unless params[:image_0]
+    #  raise "no uploaded image_0!"
+    #end
 
     @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],
@@ -30,26 +30,26 @@ class SalesController < ApplicationController
                      :user_lon => params[:user_lon],
                      :city_id => @user.city_id )
 
-
-    (0..2).each do |i|
-      uploaded_file = params["image_#{i}"]
-      next unless uploaded_file
-      
-      @sale.send("image_#{i}=".to_sym, uploaded_file)
-      @sale.send("has_image_#{i}=".to_sym, true)
-    end
-
     if params[:comment] and params[:comment].size > 0
-      comment = Comment.new(:user_id => @user.id,
+      comment = comment.new(:user_id => @user.id,
                             :text => params[:comment])
       @sale.comments << comment
     end
 
+    
     @sale.save!
 
+    @sale.image_upload_urls = []
+    sts_session = ApplicationController.new_sts_session("mst_user_#{@user.id}")
+    params[:num_images].to_i.times do 
+      puts "creating image upload url"
+      @sale.image_upload_urls << @sale.create_s3_image_upload(sts_session)
+    end
 
-    render :json => @sale.to_json
+
+    render :json => @sale.to_json(:methods => [:image_upload_urls])
   end
+
 
   def index
     if params[:my_feed]

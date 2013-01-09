@@ -5,6 +5,26 @@ class ApplicationController < ActionController::Base
     "mst-images-#{Rails.env}"
   end
 
+  def self.aws_access_key
+    "AKIAJU4IAXMS575N42IA"
+  end
+
+  def self.aws_secret_access_key
+    "BatRhFb0WhLfRV4kN7yt3Gxcm75qARENyW7LZt7B"
+  end
+
+  def self.new_sts_session(federated_user_key)
+    sts = AWS::STS.new(:access_key_id => aws_access_key,
+                       :secret_access_key => aws_secret_access_key)
+    #sts_session  = sts.new_session(:duration => 60*20)
+
+    policy = AWS::STS::Policy.new
+    policy.allow(:actions => ["s3:PutObject"],
+                 :resources => :any)
+
+    sts.new_federated_session(federated_user_key, :policy => policy)
+  end
+
   private
 
   def handle_device

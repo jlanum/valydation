@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130105055142) do
+ActiveRecord::Schema.define(:version => 20130109031616) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -129,6 +129,12 @@ ActiveRecord::Schema.define(:version => 20130105055142) do
     t.string   "city"
     t.boolean  "created_notifications",                   :default => false
     t.datetime "created_notifications_at"
+    t.string   "temp_image_url_0"
+    t.string   "temp_image_url_1"
+    t.string   "temp_image_url_2"
+    t.boolean  "visible",                                 :default => false
+    t.boolean  "uploaded_images",                         :default => false
+    t.boolean  "processed_images",                        :default => false
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

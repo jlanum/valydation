@@ -41,13 +41,44 @@ class Sale < ActiveRecord::Base
   before_create :set_brand
 
 
+  def process_images!
+    full_session = ApplicationController.new_sts_session
+    s3_full = AWS::S3.new(full_session.credentials)
+    bucket = s3_full.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
+
+    (0..2).each do |image_index|
+      if image_key = self.send("temp_image_url_#{image_index}")
+        puts "processing #{image_key}"
+
+        s3_obj = bucket.objects[image_key]
+
+        temp_filename = "#{Rails.root}/tmp/#{image_key}"
+        File.open(temp_filename,"wb") do |f|
+          s3_obj.read do |chunk|
+            f.write(chunk)
+          end
+        end
+
+        self.send("image_#{image_index}=",File.open(temp_filename))
+
+        #puts "s3 acl before #{s3_obj.acl}"
+        #s3_obj.acl = :public_read
+        #puts "s3 acl after #{s3_obj.acl}"
+
+        #self.send("remote_image_#{image_index}_url=", s3_obj..gsub(/^https/i, 'http'))
+      end
+    end
+
+    self.processed_images = true
+    self.save!
+  end
+
   def create_s3_image_upload(federated_session)
     s3 = AWS::S3.new(federated_session.credentials)
     image_key = "image_#{Time.now.strftime("%Y_%m_%d_%H%M%S")}_#{self.id}_#{rand(10000000000)}.jpg"
     bucket = s3.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
     s3_obj = bucket.objects[image_key]
     s3_obj.write("")
-    #s3_obj.acl = :public_read
     url = s3_obj.url_for(:write)
     
     {:key => image_key, :url => url}

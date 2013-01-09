@@ -57,17 +57,23 @@ class SalesController < ApplicationController
     s3_full = AWS::S3.new(full_session.credentials)
     bucket = s3_full.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
 
+    uploaded_images = false
+
     (0..2).each do |image_index|
       if image_key = params[:image_uploaded_keys][image_index.to_s]
-        s3_obj = bucket.objects[image_key]
+        #s3_obj = bucket.objects[image_key]
+        #puts "s3 acl before #{s3_obj.acl}"
+        #s3_obj.acl = :public_read
+        #puts "s3 acl after #{s3_obj.acl}"
 
-        puts "s3 acl before #{s3_obj.acl}"
-        s3_obj.acl = :public_read
-        puts "s3 acl after #{s3_obj.acl}"
-
+        
+        @sale.send("temp_image_url_#{image_index}=",image_key)
+        uploaded_images = true
       end
     end
 
+    @sale.uploaded_images = uploaded_images    
+    @sale.save!
 
     render :json => @sale.to_json
   end
@@ -95,7 +101,8 @@ class SalesController < ApplicationController
     @sales = Sale.select(%Q{"sales".*, 
                             "faves"."id" as my_fave_id, 
                             "followers"."id" as follow_id}).
-      where(%Q{(("faves"."id" IS NOT NULL) OR ("followers"."id" IS NOT NULL))}).
+      where(%Q{"sales"."visible"=true AND 
+               (("faves"."id" IS NOT NULL) OR ("followers"."id" IS NOT NULL))}).
       joins(%Q{LEFT OUTER JOIN "faves" ON 
                "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id} 
                LEFT OUTER JOIN "followers" ON 
@@ -109,7 +116,8 @@ class SalesController < ApplicationController
 
   def index_user
     @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-      where(:user_id => params[:user_id]).
+      where(:user_id => params[:user_id],
+            :visible => true).
       joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                            AND "faves"."user_id"=#{@user.id}}).
       includes(:user).
@@ -121,7 +129,8 @@ class SalesController < ApplicationController
 
   def index_store
     @sales = Sale.where(:store_id => params[:store_id],
-                        :city_id => @user.city_id).
+                        :city_id => @user.city_id,
+                        :visible => true).
                   select(%Q{"sales".*, "faves"."id" as my_fave_id}).
                   joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                            AND "faves"."user_id"=#{@user.id}}).
@@ -133,7 +142,8 @@ class SalesController < ApplicationController
   
   def index_brand
     @sales = Sale.where(:brand_id => params[:brand_id],
-                        :city_id => @user.city_id).
+                        :city_id => @user.city_id,
+                        :visible => true).
                   select(%Q{"sales".*, "faves"."id" as my_fave_id}).
                   joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                            AND "faves"."user_id"=#{@user.id}}).
@@ -145,7 +155,8 @@ class SalesController < ApplicationController
 
   def index_all
     @sales = Sale.where(:category_id => params[:category_id],
-                        :city_id => @user.city_id).
+                        :city_id => @user.city_id,
+                        :visible => true).
       select(%Q{"sales".*, "faves"."id" as my_fave_id}).
       joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                AND "faves"."user_id"=#{@user.id}}).

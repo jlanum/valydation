@@ -1,4 +1,4 @@
-NOTIFY_SLEEP = 30
+
 
 def create_notifications
   create_notifications_sales
@@ -8,7 +8,7 @@ def create_notifications
 end
 
 def create_notifications_sales
-  Sale.where(:created_notifications => false).each do |sale|
+  Sale.where(:created_notifications => false, :visible => true).each do |sale|
     ns = sale.create_notifications!
     puts "Created #{ns.count} notifications for sale #{sale.id}" if ns
   end
@@ -81,21 +81,4 @@ def feedback
   return @attempts
 end
 
-def do_errthing
-    puts "creating notifications" 
-    create_notifications
-    puts "sending notifications"
-    push
-    puts "feedback"
-    feedback
-    puts "Sleeping #{NOTIFY_SLEEP}."  
-end
 
-if ARGV.include?("--loop")
-  loop do 
-    do_errthing
-    sleep NOTIFY_SLEEP
-  end
-else
-  do_errthing
-end

@@ -13,10 +13,18 @@ class ApplicationController < ActionController::Base
     "BatRhFb0WhLfRV4kN7yt3Gxcm75qARENyW7LZt7B"
   end
 
-  def self.new_sts_session(federated_user_key)
-    sts = AWS::STS.new(:access_key_id => aws_access_key,
-                       :secret_access_key => aws_secret_access_key)
-    #sts_session  = sts.new_session(:duration => 60*20)
+  def self.sts
+   AWS::STS.new(:access_key_id => aws_access_key,
+                :secret_access_key => aws_secret_access_key)  
+  end
+
+  def self.new_sts_session
+    sts = self.sts
+    sts.new_session(:duration => 60*60)
+  end
+
+  def self.new_sts_federated_session(federated_user_key)
+    sts = self.sts
 
     policy = AWS::STS::Policy.new
     policy.allow(:actions => ["s3:PutObject"],

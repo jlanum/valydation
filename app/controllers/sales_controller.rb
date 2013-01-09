@@ -40,14 +40,36 @@ class SalesController < ApplicationController
     @sale.save!
 
     @sale.image_upload_urls = []
-    sts_session = ApplicationController.new_sts_session("mst_user_#{@user.id}")
+    federated_session = ApplicationController.new_sts_federated_session("mst_user_#{@user.id}")
     params[:num_images].to_i.times do 
       puts "creating image upload url"
-      @sale.image_upload_urls << @sale.create_s3_image_upload(sts_session)
+      @sale.image_upload_urls << @sale.create_s3_image_upload(federated_session)
     end
 
 
     render :json => @sale.to_json(:methods => [:image_upload_urls])
+  end
+
+  def update
+    @sale = Sale.where(:id => params[:id], :user_id => @user.id).first
+    
+    full_session = ApplicationController.new_sts_session
+    s3_full = AWS::S3.new(full_session.credentials)
+    bucket = s3_full.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
+
+    (0..2).each do |image_index|
+      if image_key = params[:image_uploaded_keys][image_index.to_s]
+        s3_obj = bucket.objects[image_key]
+
+        puts "s3 acl before #{s3_obj.acl}"
+        s3_obj.acl = :public_read
+        puts "s3 acl after #{s3_obj.acl}"
+
+      end
+    end
+
+
+    render :json => @sale.to_json
   end
 
 

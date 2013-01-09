@@ -41,12 +41,15 @@ class Sale < ActiveRecord::Base
   before_create :set_brand
 
 
-  def create_s3_image_upload(sts_session)
-    s3 = AWS::S3.new(sts_session.credentials)
+  def create_s3_image_upload(federated_session)
+    s3 = AWS::S3.new(federated_session.credentials)
     image_key = "image_#{Time.now.strftime("%Y_%m_%d_%H%M%S")}_#{self.id}_#{rand(10000000000)}.jpg"
     bucket = s3.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
-    s3_obj = bucket.objects.create(image_key, "")
+    s3_obj = bucket.objects[image_key]
+    s3_obj.write("")
+    #s3_obj.acl = :public_read
     url = s3_obj.url_for(:write)
+    
     {:key => image_key, :url => url}
   end
 

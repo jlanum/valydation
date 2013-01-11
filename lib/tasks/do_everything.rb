@@ -4,17 +4,17 @@ load "#{File.dirname(__FILE__)}/process_images.rb"
 NOTIFY_SLEEP = 10
 
 def do_errthing
-    puts "processing sales"
+    #puts "processing sales"
     process_sales
 
-    puts "creating notifications" 
+    #puts "creating notifications" 
     create_notifications
-    puts "sending notifications"
+    #puts "sending notifications"
     push
-    puts "feedback"
+    #puts "feedback"
     feedback
 
-    puts "Sleeping #{NOTIFY_SLEEP}."  
+    #puts "Sleeping #{NOTIFY_SLEEP}."  
 end
 
 if ARGV.include?("--loop")

@@ -6,10 +6,14 @@ class UsersController < ApplicationController
 
   def show
     if params[:id] == "self"
-      @show_user = @user
-      render :json => @show_user.to_json(:methods => [:photo_fb, 
-                                                      :follower_count, 
-                                                      :following_count])
+      if @user
+        render :json => @user.to_json(:methods => [:photo_fb, 
+                                      :follower_count, 
+                                      :following_count])
+      else
+        render :json => {'error' => "No such user"},
+               :status => 404
+      end
     else
       @show_user = User.find(params[:id])
       @show_user.other_user = @user

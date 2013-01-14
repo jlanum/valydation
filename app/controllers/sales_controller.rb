@@ -52,20 +52,11 @@ class SalesController < ApplicationController
 
   def update
     @sale = Sale.where(:id => params[:id], :user_id => @user.id).first
-    
-    full_session = ApplicationController.new_sts_session
-    s3_full = AWS::S3.new(full_session.credentials)
-    bucket = s3_full.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
 
     uploaded_images = false
 
     (0..2).each do |image_index|
       if image_key = params[:image_uploaded_keys][image_index.to_s]
-        #s3_obj = bucket.objects[image_key]
-        #puts "s3 acl before #{s3_obj.acl}"
-        #s3_obj.acl = :public_read
-        #puts "s3 acl after #{s3_obj.acl}"
-
         
         @sale.send("temp_image_url_#{image_index}=",image_key)
         uploaded_images = true
@@ -99,15 +90,11 @@ class SalesController < ApplicationController
   
   def index_mine
     @sales = Sale.select(%Q{"sales".*, 
-                            "faves"."id" as my_fave_id, 
-                            "followers"."id" as follow_id}).
+                            "faves"."id" as my_fave_id}).
       where(%Q{"sales"."visible"=true AND 
-               (("faves"."id" IS NOT NULL) OR ("followers"."id" IS NOT NULL))}).
+               "faves"."id" IS NOT NULL}).
       joins(%Q{LEFT OUTER JOIN "faves" ON 
-               "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id} 
-               LEFT OUTER JOIN "followers" ON 
-               ("followers"."follower_id"=#{@user.id} AND 
-                "followers"."following_id"="sales"."user_id")}).
+               "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id}}).
       includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       limit(10).

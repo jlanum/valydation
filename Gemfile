@@ -51,3 +51,5 @@ gem "amatch"
 gem "grocer"
 
 gem "honeybadger"
+
+gem 'newrelic_rpm'

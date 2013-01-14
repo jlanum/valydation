@@ -1,8 +1,12 @@
 class AddTestUser < ActiveRecord::Migration
   def up
     u = User.new
-    u.first_name = "Jojo"
-    u.last_name = "McGee"
+    begin
+      u.first_name = "Jojo"
+      u.last_name = "McGee"
+    rescue
+      u.name = "JojoMcGee"
+    end
     u.email = "max@empire.mn"
     u.passwd_hash = "xyz"
 
@@ -17,6 +21,10 @@ class AddTestUser < ActiveRecord::Migration
   end
 
   def down
-    User.where(:first_name => "Jojo", :last_name => "McGee").first.delete
+    begin
+      User.where(:first_name => "Jojo", :last_name => "McGee").first.delete
+    rescue
+      User.where(:name => "JojoMcGee").first.delete
+    end
   end
 end

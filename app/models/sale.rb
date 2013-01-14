@@ -81,14 +81,10 @@ class Sale < ActiveRecord::Base
     end
 
     notifications = []
-    sale_city = City.find(self.city_id)
-    alert_message = "#{self.user.display_name} posted a sale in #{sale_city.name}."
+    alert_message = "#{self.user.first_name} #{self.user.last_name} posted a sale."
     alert_custom = {"sale_id" => self.id}
 
-    User.where(:city_id => self.city_id,
-               :notify_posted => true).each do |user|
-      next if user.id == self.user.id
-
+    self.user.following_users.where(:notify_posted => true).each do |user|
       user.devices.each do |device|
         n = Notification.new(:user_id => user.id,
                              :device_id => device.id,

@@ -4,10 +4,6 @@ class SalesController < ApplicationController
  # before_filter :use_test_user
 
   def create
-    #unless params[:image_0]
-    #  raise "no uploaded image_0!"
-    #end
-
     @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],
                      :sale_price => params[:sale_price],

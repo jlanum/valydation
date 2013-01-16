@@ -1,9 +1,9 @@
 push_configs = {
   'development' => {
-    'certificate' => Rails.root.to_s + "/certs/MSTDevCert.pem"
+    'certificate' => Rails.root.to_s + "/certs/MySaleTableDev.pem"
   },
   'production' => {
-    'certificate' => Rails.root.to_s + "/certs/MSTProdCert.pem"
+    'certificate' => Rails.root.to_s + "/certs/MySaleTableProd.pem"
   }
 }
 

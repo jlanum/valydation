@@ -67,7 +67,7 @@ module HiStrollers
     config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
       #r301 %r{.*}, 'http://www.mysaletable.com$&',
       #  :if => Proc.new { |rack_env| rack_env['SERVER_NAME'] != 'www.mysaletable.com' }
-      r301 '/', '/static/landing2.html'
+      r301 '/', '/s/landing2.html'
     end
 
   end

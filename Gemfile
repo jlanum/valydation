@@ -46,10 +46,9 @@ gem "fog", "~> 1.3.1"
 gem "mini_magick"
 gem "money-rails"
 gem "bcrypt-ruby"
-#gem "levenshtein"
 gem "amatch"
 gem "grocer"
+gem "rack-rewrite"
 
 gem "honeybadger"
-
 gem 'newrelic_rpm'

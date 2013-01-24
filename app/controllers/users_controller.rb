@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :handle_device
   #before_filter :use_test_user
-  before_filter :require_device
+  #before_filter :require_device
    
 
   def show

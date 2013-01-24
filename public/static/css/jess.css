@@ -1,0 +1,448 @@
+/*!
+ *Use for image styling
+ */
+
+.btn-price {
+	padding-left: -1px;
+	padding-right: 2px;
+	
+	
+}
+
+
+
+
+.size {
+	float: right;
+	
+	
+}
+
+.percent {
+	position: absolute;
+	margin-top: 30px;
+	
+	
+	
+}
+.sale-price {
+	
+	text-indent: 80px;
+	margin-top: 30px;
+	
+	
+}
+.orig-price {
+	postion: absolute;
+	border-bottom: 40px;
+	
+	
+}
+
+.landing-signin {
+	border: 1px solid #dddddd;
+	  border-collapse: separate;
+	  *border-collapse: collapse;
+	  border-left: 0;
+	  -webkit-border-radius: 4px;
+	  -moz-border-radius: 4px;
+	  border-radius: 4px;
+	border-left: 1px solid #dddddd;
+}
+
+.category-feed {
+	margin-bottom: 16px;
+	    margin-top: 24px;
+	font-size: 14px !important;
+	font-weight: lighter !important;
+	color: #592A84 !important;
+	
+}
+
+.category-feed-align {
+	text-align: center;
+	padding-left: 220px;
+}
+
+.purchase {
+	padding-bottom: -10px;
+}
+
+.product-image {
+	padding-bottom: 5px;
+}
+
+.hover-group .image-wrapper {
+  /* We need this to make the .hover-toggle div relative to .image-wrapper */
+  position: relative;
+}
+
+.hover-group .image-wrapper .hover-toggle {
+  /* set it at the bottom of .image-wrapper */
+  position: absolute;      
+  top: 0px;
+  left: 0px;
+  /* and don't display it */
+  display: none;
+  background-color: rgba(102, 102, 102, .8);
+  height: 38px;
+  width: 100%;
+  text-align:justify;
+
+}
+
+.hover-group:hover .image-wrapper .hover-toggle {
+  display: block;
+}
+
+
+.frame {
+	background-color: #F5F5F5;
+	padding: 10px;
+}
+
+.product-pic:hover {
+	outline:#592A84 dotted 2px;
+	
+}
+
+
+.modal-image {
+	height: 400px;
+	width: 299px;
+}
+
+.invite {
+	margin-top: 4px;
+	float: right;
+}
+
+.faq-nav {
+	padding-top: 40px;
+}
+
+.marketing-mine {
+	padding-top: 40px;
+}
+
+.contact {
+	color: #7d7d7d;
+	font-weight:lighter !important;
+}
+
+.Badges {
+	border: dotted !important;
+}
+
+
+
+.city {
+	
+	font-weight: lighter !important;
+	float: right;
+}
+
+.signup-unit {
+  padding: 60px;
+  padding-top: -10px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: dotted;
+  width: 700px;
+  margin-left: 130px;
+}
+
+
+.bio {
+	vertical-align: top;
+	
+}
+
+.profile-upload {
+	float: left;
+	font-weight: lighter !important;
+}
+
+.zip {
+	position: relative !important;
+	bottom: 70px !important;
+	padding-left: 725px !important;
+}
+
+.photo-tips {
+	border: 1px solid;
+}
+
+.price-info {
+	
+}
+
+.store-info {
+	
+}
+
+/* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+        margin-bottom: -20px;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+
+.landing-unit {
+	
+	  padding: 40px;
+	  padding-top: -10px;
+	  margin-bottom: 30px;
+	  font-size: 18px;
+	  font-weight: 200;
+	  line-height: 30px;
+	  color: inherit;
+	  background-image: url('../img/az_subtle.png') !important;
+	  -webkit-border-radius: 6px;
+	  -moz-border-radius: 6px;
+	  border-radius: 6px;
+	  border: transparent;
+	
+}
+
+span.stretch {
+    display:inline-block;
+    transform:scale(2,1); /* W3C */
+    -webkit-transform:scale(2,1); /* Safari and Chrome */
+    -moz-transform:scale(2,1); /* Firefox */
+    -ms-transform:scale(2,1); /* IE 9 */
+    -o-transform:scale(2,1); /* Opera */
+}
+
+.thisInfo {
+	text-align: center;
+	line-height: 10px !important;
+}
+
+.lanvin {
+	font-weight: bold;
+	line-height: 20px !important;
+	margin-top: 5px;
+}
+
+.percentoff {
+	color: white;
+    vertical-align: sub;
+    padding-top: 10px;
+    line-height: 40px !important;
+   
+}
+
+.our-story {
+	font-weight: lighter !important;
+}
+
+.photo-tips {
+	vertical-align: top;
+}
+
+.hey {
+	vertical-align: bottom;
+}
+
+.facebook {
+	background: #415EA3;
+	background: -webkit-gradient(linear, left top, left bottom, from(#415EA3), to(#2E4A88));
+	background: -moz-linear-gradient(top, #415EA3, #2E4A88);
+	background: -o-linear-gradient(top, #415EA3, #2E4A88);
+	background: -webkit-linear-gradient(top, #415EA3, #2E4A88);
+	background: linear-gradient(top, #415EA3, #2E4A88);
+	border: 1px solid #09164A;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#415ea3', endColorstr='#2f4a89');
+	text-shadow: 0 -1px #28417A;
+	
+}
+
+
+
+.logo-fb {
+background-color: #5F75A9;
+background-color: rgba(255, 255, 255, .2);
+background-image: url('../img/logo_fb.png');
+}
+
+.facebook .logo-fb {
+background-position: center center;
+background-repeat: no-repeat;
+bottom: 0;
+left: 0;
+position: absolute;
+top: 0;
+width: 62px;
+}
+
+#signup .facebook {
+text-shadow: 0 -1px #28417A;
+}
+
+.twitter {
+background: #41C0F3;
+background: -webkit-gradient(linear, left top, left bottom, from(#41C0F3), to(#3FBAEC));
+background: -moz-linear-gradient(top, #41C0F3, #3FBAEC);
+background: -o-linear-gradient(top, #41C0F3, #3FBAEC);
+background: -webkit-linear-gradient(top, #41C0F3, #3FBAEC);
+background: linear-gradient(top, #41C0F3, #3FBAEC);
+border: 1px solid #2982A8;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#41c0f3', endColorstr='#3fbaec');
+text-shadow: 0 -1px #2982A8;
+}
+
+.BigButton {
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border-radius: 8px;
+box-shadow: inset 0 1px rgba(255, 255, 255, .5), 0 2px white;
+color: white;
+display: inline-block;
+font-size: 30px;
+font-weight: bold;
+line-height: 1;
+min-width: 160px;
+padding: 20px 10px 20px 87px;
+position: relative;
+text-align: left;
+}
+
+.logo-twitter {
+background-color: #66CAF2;
+background-color: rgba(255, 255, 255, .2);
+background-image: url('../img/logo_twitter.png');
+}
+
+.BigButton .logo-twitter {
+background-position: center center;
+background-repeat: no-repeat;
+bottom: 0;
+left: 0;
+position: absolute;
+top: 0;
+width: 62px;
+}
+
+.modal-social {
+	padding-right: 84px;
+}
+
+.photo-upload {
+	padding-left: 100px;
+}
+
+.size-chart {
+	margin-left: 365px !important;
+}
+
+.size-btn {
+	margin-left: 452px !important;
+}
+
+.modal-brand {
+	margin-bottom: -40px;
+}
+
+.time {
+	margin-bottom: 0px !important;
+}
+
+.follow {
+	margin-right: -10px;
+	margin-left: 0px;
+}
+
+.time-banner .image-banner {
+  /* We need this to make the .hover-toggle div relative to .image-wrapper */
+  position: relative;
+}
+
+.time-banner .image-banner .banner-toggle {
+  /* set it at the bottom of .image-wrapper */
+  position: absolute;      
+  top: -130px;
+  left: 0px;
+  /* and don't display it */
+  display: block;
+  background-color: rgba(102, 102, 102, .8);
+  height: 38px;
+  width: 100%;
+  text-align:justify;
+
+}
+
+.time-banner:hover .image-banner .banner-toggle {
+  display: block;
+}
+
+.retail-type {
+	width: 220px !important;
+}
+
+
+.member-login {
+	position: absolute;
+	margin-left: 1000px;
+	padding-top: 30px;
+	
+	
+}
+
+.fourzerofour {
+	font-size: 88px !important;
+	text-align: center;
+	color: #592A84 !important;
+}
+
+.contact-info {
+	padding-right: 120px;
+}
+
+#logo-wrapper {
+	position:fixed; 
+	top:-50%; 
+	left:-50%; 
+	width:200%; 
+	height:200%;
+}
+#logo-wrapper img {
+	position:absolute; 
+	top:0; 
+	left:0; 
+	right:0; 
+	bottom:0; 
+	margin:auto; 
+	min-width:50%;
+	min-height:50%;
+}
+
+.landing-logo {
+	position:absolute;
+	
+	padding-top: 60px;
+	padding-left:40px;
+}

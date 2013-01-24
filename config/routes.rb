@@ -23,12 +23,7 @@ HiStrollers::Application.routes.draw do
   resources :followers
   resources :search_results
 
-  resources :notifications do
-    collection do 
-      get 'push'
-      get 'feedback'
-    end
-  end
+
 
   # Sample resource route with options:
   #   resources :products do

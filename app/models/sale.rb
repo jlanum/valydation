@@ -21,7 +21,9 @@ class Sale < ActiveRecord::Base
                   :user_lon,
                   :city_id,
                   :store_id,
-                  :brand_id
+                  :brand_id,
+                  :visible,
+                  :percent_off_int
 
   attr_accessor :current_user
   attr_accessor :image_upload_urls
@@ -148,6 +150,14 @@ class Sale < ActiveRecord::Base
   
   def image_2_url
     self.image_url(2) if self.has_image_2
+  end
+
+  def percent_off_int
+    (self.percent_off * 100).round
+  end
+
+  def percent_off_int=(int_value)
+    self.percent_off = int_value.to_f / 100
   end
 
 end

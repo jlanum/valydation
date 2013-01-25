@@ -8,4 +8,24 @@ class Admin::SalesController < ApplicationController
 
   end
 
+  def edit
+    @sale = Sale.find(params[:id])
+    @cities = City.order("name ASC").all
+  end
+
+  def show
+    redirect_to edit_admin_sale_url(params[:id])
+  end
+
+  def update
+    @sale = Sale.find(params[:id])
+
+    @sale.update_attributes(params[:sale])
+    @sale.save!
+
+    @cities = City.order("name ASC").all
+    @message = "The sale has been updated."
+  
+    render :template => "admin/sales/edit"
+  end
 end

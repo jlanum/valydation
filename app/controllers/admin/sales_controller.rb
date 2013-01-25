@@ -5,8 +5,9 @@ class Admin::SalesController < ApplicationController
 
   def index
     @sales = Sale.page(params[:page]).
-      per(10).
-      order("created_at DESC")
+      per(50).
+      order("created_at DESC").
+      includes([:metro, :user])
 
   end
 

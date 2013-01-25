@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   def index
     @users = User.page(params[:page]).
       order("created_at DESC").
-      per(10).
+      per(50).
       includes([:city, :sales])
   end
 

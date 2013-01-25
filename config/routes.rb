@@ -23,7 +23,10 @@ HiStrollers::Application.routes.draw do
   resources :followers
   resources :search_results
 
-
+  namespace :admin do
+    resources :sales
+    resources :users
+  end
 
   # Sample resource route with options:
   #   resources :products do

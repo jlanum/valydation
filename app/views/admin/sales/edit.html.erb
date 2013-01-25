@@ -1,5 +1,5 @@
 <div class="page-header">
-<h2>Edit Sale</h2>
+  <h2>Edit Sale</h2>
 </div>
 
 <% if @message %>
@@ -7,6 +7,19 @@
  <%= @message %>.
 </div>
 <% end %>
+
+<div style="float:right; padding: 24px;">
+  <div style="padding:8px;">
+    <img src="<%= @sale.image_0.versions[:feed] %>">
+  </div>
+  <div style="padding:8px;">
+    <img src="<%= @sale.image_1.versions[:feed] %>">
+  </div>
+  <div style="padding:8px;">
+    <img src="<%= @sale.image_2.versions[:feed] %>">
+  </div>
+</div>
+
 
 <%= form_for(@sale, 
              :html => {:class => "form-horizontal well"},
@@ -96,3 +109,4 @@
       </form>
 
 <% end %>
+

@@ -1,3 +1,9 @@
+<% if flash[:message] %>
+<div class="alert alert-success">
+ <%= flash[:message] %>.
+</div>
+<% end %>
+
 <div class="page-header">
 <h2>All Sales</h2>
 </div>
@@ -42,7 +48,10 @@
 
       <td>
         <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_path(sale) %>">Edit</a>
-        <a class="btn btn-danger btn-small" href="#">Delete</a>
+        <%= link_to 'Delete', admin_sale_path(sale),
+          :confirm => 'Are you 100% positive that you want to delete this sale?', 
+          :method => :delete,
+          :class => "btn btn-danger btn-small" %>
       </td>
     </tr>
   <% end %>

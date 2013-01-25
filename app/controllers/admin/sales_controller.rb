@@ -28,4 +28,13 @@ class Admin::SalesController < ApplicationController
   
     render :template => "admin/sales/edit"
   end
+
+  def destroy
+    @sale = Sale.find(params[:id])
+    @sale.destroy
+
+    flash[:message] = "The sale has been deleted"
+    redirect_to admin_sales_url
+  end
+
 end

@@ -36,6 +36,7 @@ class Sale < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
   belongs_to :user
+  belongs_to :metro, :class_name => "City", :foreign_key => "city_id"
 
   before_create :set_store
   before_create :set_brand

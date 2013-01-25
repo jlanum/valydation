@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :devices
   belongs_to :city
+  has_many :sales
 
   #following/followed_users are the users who this user is following
   has_many :following, :class_name => "Follower", :foreign_key => "follower_id"

@@ -49,6 +49,7 @@ gem "bcrypt-ruby"
 gem "amatch"
 gem "grocer"
 gem "rack-rewrite"
+gem 'kaminari'
 
 gem "honeybadger"
 gem 'newrelic_rpm'

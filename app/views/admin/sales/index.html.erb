@@ -1,0 +1,51 @@
+<h2>Sales</h2>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Store</th>
+      <th>City</th>
+      <th>Brand</th>
+      <th>Product</th>
+      <th>Posted</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @sales.each do |sale| %>
+    <tr>
+      <td>
+        <% if sale.user %>
+        <%= sale.user.first_name %> <%= sale.user.last_name %>
+        <% end %>
+      </td>
+      <td>
+        <%= sale.store_name %>
+      </td>
+      <td>
+        <% if sale.metro %>
+        <%= sale.metro.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= sale.brand %>
+      </td>
+      <td>
+        <%= sale.product %>
+      </td>
+      <td>
+        <%= sale.created_at.strftime("%d %b %Y") %>
+      </td>
+
+      <td>
+        <a class="btn btn-warning btn-small" href="#">Edit</a>
+        <a class="btn btn-danger btn-small" href="#">Delete</a>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= paginate @sales %>

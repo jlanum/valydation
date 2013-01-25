@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MST Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/admin/admin-bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/admin-bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/admin/admin-bootswatch.css" rel="stylesheet">
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+  <!-- Navbar
+    ================================================== -->
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       <a class="brand" href="../">MySaleTable Admin</a>
+       <div class="nav-collapse" id="main-menu">
+        <ul class="nav" id="main-menu-left">
+          <li><a href="/admin/users">Users</a></li>
+          <li><a id="" href="/admin/sales">Sales</a></li>
+        </ul>
+       </div>
+     </div>
+   </div>
+ </div>
+
+  <div class="container">
+
+    <%= yield %>
+
+  </div>
+
+  </body>
+</html>
+

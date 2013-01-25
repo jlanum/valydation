@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Edit Sale</h2>
+  <h1>Edit Sale</h1>
 </div>
 
 <% if @message %>
@@ -7,6 +7,13 @@
  <%= @message %>.
 </div>
 <% end %>
+
+<h3>
+Posted by 
+<%= link_to "#{@sale.user.first_name} #{@sale.user.last_name}",
+            admin_user_url(@sale.user) %>
+on <%= @sale.created_at.strftime("%b %d, %Y") %>.
+</h3>
 
 <div style="float:right; padding: 24px;">
   <div style="padding:8px;">
@@ -26,8 +33,6 @@
              :url => admin_sale_path(@sale))  do |f| %>
 
         <fieldset>
-          <%#<legend>Controls Bootstrap supports</legend>%>
-          <legend>Posted by <%= @sale.user.first_name %> <%= @sale.user.last_name %> on <%= @sale.created_at.strftime("%b %d, %Y") %>.</legend>
 
           <div class="control-group">
             <label class="control-label" for="sale_store_name">Store</label>

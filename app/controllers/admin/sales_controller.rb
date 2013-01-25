@@ -1,4 +1,6 @@
 class Admin::SalesController < ApplicationController
+  http_basic_authenticate_with :name => "admin", :password => "Green1994"
+
   layout "admin"
 
   def index

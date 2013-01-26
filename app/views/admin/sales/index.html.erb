@@ -25,7 +25,8 @@
     <tr>
       <td>
         <% if sale.user %>
-        <%= sale.user.first_name %> <%= sale.user.last_name %>
+        <%= link_to "#{sale.user.first_name} #{sale.user.last_name}",
+                    admin_user_url(sale.user) %>
         <% end %>
       </td>
       <td>

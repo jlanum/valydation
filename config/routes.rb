@@ -23,13 +23,16 @@ HiStrollers::Application.routes.draw do
   resources :followers
   resources :search_results
 
+  match 'admin' => 'admin/sales#index'
   namespace :admin do
     resources :sales
     resources :users
+    resources :leads
   end
 
-  match 'admin' => 'admin/sales#index'
+  match 'register_lead' => 'admin/leads#create'
 
+  
   # Sample resource route with options:
   #   resources :products do
   #     member do

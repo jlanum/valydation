@@ -4502,7 +4502,7 @@ a.thumbnail:hover {
 }
 .modal-backdrop,
 .modal-backdrop.fade.in {
-  opacity: 0.6;
+  opacity: 0.2;
   filter: alpha(opacity=80);
 }
 .modal {

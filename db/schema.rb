@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115035453) do
+ActiveRecord::Schema.define(:version => 20130126003904) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(:version => 20130115035453) do
   end
 
   add_index "followers", ["created_notifications"], :name => "index_followers_on_created_notifications"
+
+  create_table "leads", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id",                        :null => false

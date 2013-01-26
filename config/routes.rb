@@ -28,6 +28,8 @@ HiStrollers::Application.routes.draw do
     resources :users
   end
 
+  match 'admin' => 'admin/sales#index'
+
   # Sample resource route with options:
   #   resources :products do
   #     member do

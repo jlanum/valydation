@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :devices
   belongs_to :city
-  has_many :sales
+  has_many :sales, :order => "created_at DESC"
 
   #following/followed_users are the users who this user is following
   has_many :following, :class_name => "Follower", :foreign_key => "follower_id"
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    "#{self.first_name} #{self.last_name[0..0]}."
+    "#{self.first_name} #{self.last_name}"
   end
 
   def unregister_push!

@@ -18,6 +18,22 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
 </p>
 
 
+<% unless @user.bio.nil? or @user.bio.empty? %>
+
+<div class="row">
+  <div class="span4">
+    <blockquote>
+<p>
+<%= @user.bio %>
+</p>
+</blockquote>
+</div>
+</div>
+<% end %>
+
+
+
+
 <div class="page-header">
   <h3>Posts</h3>
 </div>

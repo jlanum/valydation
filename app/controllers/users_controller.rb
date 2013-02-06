@@ -3,6 +3,11 @@ class UsersController < ApplicationController
   #before_filter :use_test_user
   #before_filter :require_device
    
+  def new
+    render :layout => "prelogin"
+
+  end
+
 
   def show
     if params[:id] == "self"

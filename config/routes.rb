@@ -22,6 +22,7 @@ HiStrollers::Application.routes.draw do
   resources :profile_photos
   resources :followers
   resources :search_results
+  resources :sessions
 
   match 'admin' => 'admin/sales#index'
   namespace :admin do

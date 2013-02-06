@@ -25,7 +25,12 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  hostname: localhost
+  host: localhost
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  database: histrollers
   pool: 5
-  timeout: 5000
+  username: histrollers
+  password: histrollers

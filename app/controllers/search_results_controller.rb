@@ -10,12 +10,14 @@ class SearchResultsController < ApplicationController
     end
 
     @brands = Brand.select(%Q{DISTINCT brands.id,brands.name}).
-      where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      #where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      where(["name ILIKE ?","#{params[:q]}%"]).
       joins(%Q{INNER JOIN "sales" on "sales"."brand_id"="brands"."id"}).
       limit(20)
 
     @stores = Store.select(%Q{DISTINCT stores.id,stores.name,stores.url}).
-      where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      #where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      where(["name ILIKE ?","#{params[:q]}%"]).
       joins(%Q{INNER JOIN "sales" on "sales"."store_id"="stores"."id"}).
       limit(20)
 

@@ -112,7 +112,7 @@ class SalesController < ApplicationController
 
   def index_store
     @sales = Sale.where(:store_id => params[:store_id],
-                        :city_id => @user.city_id,
+                       # :city_id => @user.city_id,
                         :visible => true).
                   select(%Q{"sales".*, "faves"."id" as my_fave_id}).
                   joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
@@ -125,7 +125,7 @@ class SalesController < ApplicationController
   
   def index_brand
     @sales = Sale.where(:brand_id => params[:brand_id],
-                        :city_id => @user.city_id,
+                        #:city_id => @user.city_id,
                         :visible => true).
                   select(%Q{"sales".*, "faves"."id" as my_fave_id}).
                   joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
@@ -138,7 +138,7 @@ class SalesController < ApplicationController
 
   def index_all
     @sales = Sale.where(:category_id => params[:category_id],
-                        :city_id => @user.city_id,
+                        #:city_id => @user.city_id,
                         :visible => true).
       select(%Q{"sales".*, "faves"."id" as my_fave_id}).
       joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 

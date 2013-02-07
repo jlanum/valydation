@@ -112,6 +112,10 @@
 	width: 299px;
 }
 
+.modal-thumbnails {
+  padding-right: 8px;
+}
+
 .invite {
 	margin-top: 4px;
 	float: right;
@@ -384,7 +388,7 @@ width: 62px;
 .time-banner .image-banner .banner-toggle {
   /* set it at the bottom of .image-wrapper */
   position: absolute;      
-  top: -130px;
+  top: -94px;
   left: 0px;
   /* and don't display it */
   display: block;

@@ -47,7 +47,9 @@
         <li class="span3">
           <div class="hover-group">
             <div class="image-wrapper">
-				      <a href="#myModal" data-toggle="modal"><img class="product-pic" src="img/Saks_Gucci.jpg" alt=""></a>
+              <a href="#sale_modal_<%= sale.id %>" data-toggle="modal">
+                <img class="product-pic" src="<%= sale.image_0.versions[:web_index] %>" alt="">
+              </a>
               <span class="thisInfo">
                 <p class="lanvin"><%= sale.brand %></p>
                 <p class="flats">Size <%= sale.size %><p>
@@ -56,7 +58,8 @@
 				    <div class="hover-toggle">
               <center><span class="percentoff"><%= (sale.percent_off * 100).round %>% Off</span></center>
 				    </div>
-				  </div>
+          </div>
+        </div>
        </li>
 
       <% end %>
@@ -66,9 +69,102 @@
       </div>
     <% end %>
 
+
+    <% @sales.each do |sale| %>
+
+		<!-- Modal -->
+    <div id="sale_modal_<%= sale.id %>" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+		    <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button><center><a href="/sales"><img src="/assets/Logo_Icon_Small.png" class="modal-brand" height="34" width="180" /></a></center><br>
+		    <p id="myModalLabel"></p>
+		  </div>
+		  <div class="modal-body">
+		   	<div class="row-fluid">
+          <div class="span2 modal-thumbnails">
+            <% [:image_0, :image_1, :image_2].each do |image_sym|
+              if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty?  %>
+          <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" />
+            <%   end
+               end %>
+            <br>
+					</div>
+          <div class="span6">	
+            <span class="time-banner">
+              <span class="image-banner">
+                <img src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+                <span class="banner-toggle">
+                  <span class="percentoff">
+                    <center>
+                      <i class="icon-time icon-white"> </i>
+                      <font size="2">&#160;
+                        <%= time_ago_in_words(sale.created_at) %>
+                      </font>
+                    </center>
+                  </span>
+              </span>
+            </span>
+            <br>
+            <table class="table table-bordered">  
+              <td><%= (sale.percent_off * 100).round %>% Off</td>
+              <td>
+                <font size="1">
+                <%= humanized_money_with_symbol sale.orig_price %>
+                </font>
+              </td>
+
+            <td><strike><font size="1"> 
+              <%= humanized_money_with_symbol sale.sale_price %>
+            </font> </strike></td>
+							
+            </table>
+            <span class="modal-social">
+              <i class="icon-heart"> </i>&#160;&#160;
+              <i class="icon-comment"></i>&#160;&#160;
+              <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+              <img src="/assets/T_logo.png" height="16px" width="16px">
+            </span>
+          </div>
+				
+          <div class="span4 pull-right">
+            <a href="#">
+              <img class="img-polaroid" src="<%= sale.user.photo.versions[:feed_2x] %>" height="60" width="60px">
+            </a>
+            <br>
+            <a href="#"><b><%= sale.user.display_name %></b></a>
+            <br>
+            <p class="muted time"><%= sale.user.city.name %></p>
+					  <span class="btn pull-right span12">Follow</span><br><br><br>
+					  <table class="table table-bordered table-striped">
+						  <tr>  
+                <td><font size="1" class="muted">
+                    Store
+                </font> &#160;
+                <%= sale.store_name %>
+                </td>
+					    </tr>
+					    <tr> 
+                <td><font size="1" class="muted">Brand</font> &#160;<%= sale.brand %></td>
+						  </tr>
+						  <tr>  
+                <td><font size="1" class="muted">Product</font> &#160;<%= sale.product %></td></tr><tr>  
+                <td><font size="1" class="muted">Size</font> &#160; <%= sale.size %></td></tr>
+					  </table>
+				  </div>
+				</div>
+			</div>
+
+      <div class="modal-footer">
+        <span class="row-fluid">
+		    <a href="purchase.html" class="btn btn-success span4 pull-right">Buy</a>
+      </span>
+		  </div>
+		</div>
+
+  <% end %>
     
 
-    
-
+    <center>
+      <%= paginate @sales %> 
+    </center>
         
 

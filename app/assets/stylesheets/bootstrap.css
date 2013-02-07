@@ -154,7 +154,7 @@ body {
   color: #333333;
   background-color: #FFFFFF;
   font-weight:lighter;
-  background-image: url('../img/frenchstucco.png');
+  background-image: url('/assets/frenchstucco.png');
   
 }
 a {
@@ -2309,7 +2309,7 @@ input[type="submit"].btn.btn-mini {
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"] {
-  background-image: url("../img/glyphicons-halflings-white.png");
+  background-image: url("/assets/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -4555,7 +4555,7 @@ a.thumbnail:hover {
   overflow-y: auto;
   max-height: 400px;
   padding: 15px;
-  background-image: url('../img/az_subtle.png');
+  background-image: url('/assets/az_subtle.png');
 }
 .modal-form {
   margin-bottom: 0;

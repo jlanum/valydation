@@ -77,6 +77,21 @@ class SaleImageUploader < CarrierWave::Uploader::Base
     process :set_content_type
   end
 
+  version :web_index, :from_version => :feed_2x do
+    process :resize_to_fill => [240,240]
+    process :set_content_type
+  end
+
+  version :web_modal, :from_version => :web_index do
+    process :resize_to_fill => [209,209]
+    process :set_content_type
+  end
+
+  version :web_thumbnail, :from_version => :web_index do
+    process :resize_to_fill => [72,72]
+    process :set_content_type
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list

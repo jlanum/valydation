@@ -77,7 +77,16 @@ class SalesController < ApplicationController
     @cities = City.order("name ASC").all
     params[:category_id] ||= 0
 
-    index_all
+    @sales = Sale.where(:category_id => params[:category_id],
+                        #:city_id => @user.city_id,
+                        :visible => true).
+      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      page(params[:page]).
+      per(8)
   end
 
   def index_json
@@ -123,7 +132,6 @@ class SalesController < ApplicationController
       offset(params[:offset]).all
   end
 
-
   def index_store
     @sales = Sale.where(:store_id => params[:store_id],
                        # :city_id => @user.city_id,
@@ -150,7 +158,7 @@ class SalesController < ApplicationController
                   offset(params[:offset]).all
   end
 
-  def index_all
+  def index_all(limit = 10)
     @sales = Sale.where(:category_id => params[:category_id],
                         #:city_id => @user.city_id,
                         :visible => true).
@@ -159,7 +167,7 @@ class SalesController < ApplicationController
                AND "faves"."user_id"=#{@user.id}}).
       includes(:user).
       order(%Q{"sales"."created_at" DESC}).
-      limit(10).
+      limit(limit).
       offset(params[:offset]).all
   end
 

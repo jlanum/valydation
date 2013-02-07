@@ -67,6 +67,17 @@ class SalesController < ApplicationController
 
 
   def index
+    respond_to do |wants|
+      wants.json { index_json }
+      wants.html { index_html }
+    end
+  end
+
+  def index_html
+    index_all
+  end
+
+  def index_json
     if params[:my_feed]
       index_mine
     elsif params[:user_id]

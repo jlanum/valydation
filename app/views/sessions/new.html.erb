@@ -38,17 +38,26 @@
     
     <div class="container ">
       <ul class="nav">
-          <%= form_tag({:controller => "sessions", :action => "create"},
-                       {:class => "form-signin"}) do %>
+        <%= form_tag({:controller => "sessions", :action => "create"},
+                     {:class => "form-signin"}) do %>
         
         <center><p><font size="5">Log In</font></p></center>
-		<hr>
-        <center><input type="text" class="input-block-level" placeholder="Email"><br>
-        <input type="password" class="input-block-level" placeholder="Password"><br>
-        
-        <button class="btn btn-large" type="submit">Login</button><br><br>
-	  <% end %>
+        <hr>
 
+        <% if @error_message %>
+        <div class="alert alert-error">  
+        <%= @error_message %>
+        </div>
+        <% end %>
+
+        <center>
+          <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Email"><br>
+          <input type="password" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
+          <button class="btn btn-large" type="submit">Login</button><br><br>
+
+        </center>
+
+        <% end %>
 		 </ul>
        
     </div> <!-- /container -->

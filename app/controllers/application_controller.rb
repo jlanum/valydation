@@ -50,6 +50,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+    end
+
     unless @user
       render :json => {"error" => "User not registered."},
              :status => 403

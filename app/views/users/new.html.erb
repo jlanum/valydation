@@ -75,20 +75,28 @@
       <ul class="nav">
     <%= form_tag({:controller => "users", :action => "create"},
                  {:class => "form-signin"}) do %>
-        
+
+
         <center><p><font size="5">Join</font></p></center>
 		<hr>
-    <center>
-      <input type="text" id="email" name="email" class="input-block-level" placeholder="Email"><br>
-        <input type="password" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
-        <input type="password" id="passwd_confirm" name="passwd_confirm" class="input-block-level" placeholder="Confirm Password"><br>
-        <input type="text" id="first_name" name="first_name" class="input-block-level" placeholder="First Name"><br>
-        <input type="text" id="last_name" name="last_name" class="input-block-level" placeholder="Last Name"><br>
-        <input type="text" id="zip" name="zip" class="input-block-level" placeholder="Zip Code"><br>
+    <% if @error_message %>
+    <div class="alert alert-error">  
+      <%= @error_message %>
+    </div>
+    <% end %>
+
+      <center>
+
+      <input type="text" value="<%= params[:email] %>" id="email" name="email" class="input-block-level" placeholder="Email"><br>
+        <input type="password" value="<%= params[:passwd_clear] %>" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
+        <input type="password" value="<%= params[:passwd_confirm] %>" id="passwd_confirm" name="passwd_confirm" class="input-block-level" placeholder="Confirm Password"><br>
+        <input type="text" value="<%= params[:first_name] %>" id="first_name" name="first_name" class="input-block-level" placeholder="First Name"><br>
+        <input type="text" value="<%= params[:last_name] %>" id="last_name" name="last_name" class="input-block-level" placeholder="Last Name"><br>
+        <input type="text" value="<%= params[:zip] %>" id="zip" name="zip" class="input-block-level" placeholder="Zip Code"><br>
         
 
         <a href="#" onclick="return validateAndSubmit()">
-          <button class="btn btn-large" type="submit">Login</button>
+          <button class="btn btn-large" type="submit">Join</button>
         </a>
         
         <br><br>

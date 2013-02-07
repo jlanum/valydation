@@ -29,6 +29,28 @@ class UsersController < ApplicationController
   end
 
   def create
+    respond_to do |wants|
+      wants.html { create_html }
+      wants.json { create_json }
+    end
+  end
+
+  def create_html
+    create_email
+
+    if @error_message
+      render :layout => "prelogin", :action => "new"
+      return
+    end
+
+    @user.save!
+
+    session[:user_id] = @user.id
+
+    redirect_to sales_url
+  end
+
+  def create_json
     if params[:log_me_in]
       create_login
     elsif params[:fb_id]

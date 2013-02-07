@@ -49,10 +49,14 @@ class ApplicationController < ActionController::Base
     @device or raise "WTF, no device for you."
   end
 
-  def require_user
+  def handle_user
     if session[:user_id]
       @user = User.find(session[:user_id])
     end
+  end
+
+  def require_user
+    handle_user
 
     unless @user
       render :json => {"error" => "User not registered."},

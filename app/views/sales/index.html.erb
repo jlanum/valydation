@@ -6,10 +6,17 @@
 
     <div class="container">
       <div class="category-feed well">
-        <span class="pull-left">	
-          <select>
+        <span class="pull-left">
+          <script>
+  function submitCityForm() {
+    $('#city_form')[0].submit()
+  }
+          </script>
+          <%= form_for @user, :html => {:id => "city_form"} do |f| %>
+          <select id="city_id" name="city_id" onchange="submitCityForm()">
         <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
           </select>
+          <% end %>
 
         </span>
 
@@ -83,7 +90,7 @@
           <div class="span2 modal-thumbnails">
             <% [:image_0, :image_1, :image_2].each do |image_sym|
               if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty?  %>
-          <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" />
+            <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[:web_modal] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[:web_modal] %>'" />
             <%   end
                end %>
             <br>
@@ -91,7 +98,7 @@
           <div class="span6">	
             <span class="time-banner">
               <span class="image-banner">
-                <img src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+                <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
                 <span class="banner-toggle">
                   <span class="percentoff">
                     <center>
@@ -126,11 +133,11 @@
           </div>
 				
           <div class="span4 pull-right">
-            <a href="#">
+            <a href="<%= user_url(sale.user.id) %>">
               <img class="img-polaroid" src="<%= sale.user.photo.versions[:feed_2x] %>" height="60" width="60px">
             </a>
             <br>
-            <a href="#"><b><%= sale.user.display_name %></b></a>
+            <a href="<%= user_url(sale.user.id) %>"><b><%= sale.user.display_name %></b></a>
             <br>
             <p class="muted time"><%= sale.user.city.name %></p>
 					  <span class="btn pull-right span12">Follow</span><br><br><br>

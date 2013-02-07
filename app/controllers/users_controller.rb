@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :handle_device
   #before_filter :use_test_user
   #before_filter :require_device
+  before_filter :require_user, :only => :update
    
   def new
     render :layout => "prelogin"
@@ -145,7 +146,11 @@ class UsersController < ApplicationController
       @user.detach_devices!(true)
     end 
 
-    render :json => @user.to_json
+    respond_to do |wants|
+      wants.json { render :json => @user.to_json }
+      wants.html { redirect_to sales_url }
+    end
+
   end
 
   def change_passwd

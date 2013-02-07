@@ -49,12 +49,12 @@
             <div class="image-wrapper">
 				      <a href="#myModal" data-toggle="modal"><img class="product-pic" src="img/Saks_Gucci.jpg" alt=""></a>
               <span class="thisInfo">
-                <p class="lanvin">Lanvin</p>
-							  <p class="flats">Size 9.5<p>
-                <p><i>San Francisco</i></p>
+                <p class="lanvin"><%= sale.brand %></p>
+                <p class="flats">Size <%= sale.size %><p>
+                <p><i><%= sale.metro.name %></i></p>
               </span>
 				    <div class="hover-toggle">
-				      <center><span class="percentoff">30% Off</span></center>
+              <center><span class="percentoff"><%= (sale.percent_off * 100).round %>% Off</span></center>
 				    </div>
 				  </div>
        </li>
@@ -63,8 +63,10 @@
 
           </ul>
         </div>
+      </div>
     <% end %>
 
+    
 
     
 

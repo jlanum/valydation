@@ -74,6 +74,9 @@ class SalesController < ApplicationController
   end
 
   def index_html
+    @cities = City.order("name ASC").all
+    params[:category_id] ||= 0
+
     index_all
   end
 

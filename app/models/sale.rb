@@ -44,6 +44,14 @@ class Sale < ActiveRecord::Base
   before_create :set_brand
 
 
+  def self.categories
+    ["Women",
+     "Men",
+     "Kids",
+     "Home",
+     "Pet"]
+  end
+
   def process_images!
     full_session = ApplicationController.new_sts_session
     s3_full = AWS::S3.new(full_session.credentials)

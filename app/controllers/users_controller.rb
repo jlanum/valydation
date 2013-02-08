@@ -6,7 +6,10 @@ class UsersController < ApplicationController
    
   def new
     render :layout => "prelogin"
+  end
 
+  def register
+    render :layout => "prelogin"
   end
 
 

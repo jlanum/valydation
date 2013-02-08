@@ -43,6 +43,13 @@
         
         <center><p><font size="5">Log In</font></p></center>
         <hr>
+        <center>Sign in with</center><br/>
+        <ul class="buttons">
+				<li style="list-style-type: none;" >
+				<a class="facebook BigButton" href="#"><span class="logo-fb"></span>Facebook</a></li><br>
+      </ul>
+
+      <hr>
 
         <% if @error_message %>
         <div class="alert alert-error">  
@@ -51,9 +58,11 @@
         <% end %>
 
         <center>
+          Sign in with your email<br/><br/>
           <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Email"><br>
           <input type="password" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
           <button class="btn btn-large" type="submit">Login</button><br><br>
+
 
         </center>
 

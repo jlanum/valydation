@@ -1,0 +1,12 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+
+<div class="row-fluid">
+  <div class="container">
+    <%= render :partial => "sale_detail", :locals => {:sale => @sale, :detail => true} %>
+  </div>
+</div>

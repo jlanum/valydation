@@ -1,3 +1,5 @@
+<% detail ||= false %>
+
 <div class="row-fluid">
   <div class="span2 modal-thumbnails">
     <% [:image_0, :image_1, :image_2].each do |image_sym|
@@ -7,22 +9,37 @@
     end %>
   <br>
   </div> <!-- thumbnails -->
-  <div class="span6">	
+  <div class="span6">
+    <% if !detail %>  
     <span class="time-banner">
+    <% end %>
       <span class="image-banner">
+        <img class="img-polaroid" src="/assets/Aigle.jpg">
+        <!--
         <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+-->
         <span class="banner-toggle">
+
+          <% if !detail %>
           <span class="percentoff">
+          <% end %>
+
             <center>
               <i class="icon-time icon-white"> </i>
               <font size="2">&#160;
                 <%= time_ago_in_words(sale.created_at) %>
               </font>
             </center>
+
+          <% if !detail %>
           </span>
+          <% end %>
+
         </span>
       </span>
+    <% if !detail %>
     </span>
+  <% end %>
     <br>
     <table class="table table-bordered">  
       <td><%= (sale.percent_off * 100).round %>% Off</td>
@@ -47,6 +64,7 @@
 
   <div class="span4 pull-right">
     <a href="<%= user_url(sale.user.id) %>">
+      
       <img class="img-polaroid" src="<%= sale.user.photo.versions[:feed_2x] %>" height="60" width="60px">
     </a>
     <br>

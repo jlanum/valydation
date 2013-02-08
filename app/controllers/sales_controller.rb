@@ -3,6 +3,11 @@ class SalesController < ApplicationController
   before_filter :require_user
  # before_filter :use_test_user
 
+  def show
+    @sale = Sale.find(params[:id])
+
+  end
+
   def create
     @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],

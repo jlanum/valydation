@@ -24,4 +24,8 @@ class SessionsController < ApplicationController
     end
   end
 
+  def login_choice
+
+  end
+
 end

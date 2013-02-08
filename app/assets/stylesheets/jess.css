@@ -224,7 +224,7 @@
 	  font-weight: 200;
 	  line-height: 30px;
 	  color: inherit;
-	  background-image: url('../img/az_subtle.png') !important;
+	  background-image: url('/assets/az_subtle.png') !important;
 	  -webkit-border-radius: 6px;
 	  -moz-border-radius: 6px;
 	  border-radius: 6px;
@@ -288,9 +288,9 @@ span.stretch {
 
 
 .logo-fb {
-background-color: #5F75A9;
+/*background-color: #5F75A9;*/
 background-color: rgba(255, 255, 255, .2);
-background-image: url('../img/logo_fb.png');
+background-image: url('/assets/logo_fb.png');
 }
 
 .facebook .logo-fb {

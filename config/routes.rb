@@ -31,6 +31,7 @@ HiStrollers::Application.routes.draw do
     resources :leads
   end
 
+  match 'login' => 'sessions#login_choice'
   match 'register_lead' => 'admin/leads#create'
 
   

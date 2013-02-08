@@ -38,9 +38,15 @@ class UsersController < ApplicationController
     else
       @show_user = User.find(params[:id])
       @show_user.other_user = @user
-      render :json => @show_user.
+
+      respond_to do |wants|
+        wants.json do
+          render :json => @show_user.
         to_json({:only => [:id, :first_name, :last_name, :bio],
                  :methods => [:photo_fb, :is_followed, :follower_count, :following_count]})
+        end
+        wants.html { render }
+      end
     end
   end
 

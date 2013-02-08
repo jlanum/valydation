@@ -1,0 +1,34 @@
+<style>
+  body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+  }
+</style>
+
+<div class="container">
+  <div class="category-feed well">
+    <center>
+      <font size="6" color="#432060">Profile</font>
+    </center>
+  </div>
+</div>
+	 
+<div class="container">
+  <div class="signup-unit">
+		<span class="span4 pull-left">
+      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo.versions[:profile_2x] %>" ><br><br>
+      <a href="#"class="btn span2"><%= @show_user.follower_count %> Followers</a><br>
+      <a href="#"class="btn span2"><%= @show_user.following_count %> Following</a>
+    </span>
+				
+    <font size="5"><%= @show_user.display_name %></font><br>
+    <p class="muted time"><%= @show_user.city.name %></p>
+    <div style="min-height:180px;">
+    <blockquote><%= @show_user.bio %></blockquote><br><br>
+    </div>
+    <a href="#" class="btn-large btn-success span2 profile-name"><center>Follow</center></a><br>
+			
+  </div>
+</div>
+
+<hr>
+

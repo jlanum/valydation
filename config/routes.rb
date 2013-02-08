@@ -23,6 +23,7 @@ HiStrollers::Application.routes.draw do
   resources :followers
   resources :search_results
   resources :sessions
+  resources :merchants
 
   match 'admin' => 'admin/sales#index'
   namespace :admin do
@@ -36,6 +37,7 @@ HiStrollers::Application.routes.draw do
   match 'register' => 'users#register'
   match 'register_lead' => 'admin/leads#create'
 
+  match 'merchants_intro' => 'merchants#intro'
   match '/' => 'users#landing'
   
   # Sample resource route with options:

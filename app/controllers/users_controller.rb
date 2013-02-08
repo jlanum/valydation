@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     render :layout => "prelogin"
   end
 
-
   def show
     if params[:id] == "self"
       if @user

@@ -1,8 +1,13 @@
 class SessionsController < ApplicationController
   layout "prelogin"
+  before_filter :handle_user, :only => [:new]
 
   def new
-
+    if @user
+      redirect_to sales_url
+    else
+      render
+    end
   end
 
   def create
@@ -22,6 +27,11 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to sales_url
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to '/'
   end
 
   def login_choice

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   #before_filter :use_test_user
   #before_filter :require_device
   before_filter :require_user, :only => :update
-  before_filter :handle_user, :only => :landing
+  before_filter :handle_user, :only => [:landing, :new]
 
   def landing
     if @user
@@ -14,7 +14,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    render :layout => "prelogin"
+    if @user
+      redirect_to sales_url
+    else
+      render :layout => "prelogin"
+    end
   end
 
   def register
@@ -49,7 +53,11 @@ class UsersController < ApplicationController
   end
 
   def create_html
-    create_email
+    if params[:fb_id]
+      create_fb
+    else
+      create_email
+    end
 
     if @error_message
       render :layout => "prelogin", :action => "new"
@@ -103,14 +111,14 @@ class UsersController < ApplicationController
   end
 
   def create_fb
-    fb_graph_id_url = "https://graph.facebook.com/me?fields=id&access_token=#{params[:fb_access_token]}"
+    fb_graph_id_url = "https://graph.facebook.com/me?fields=id,email,first_name,last_name&access_token=#{params[:fb_access_token]}"
     fb_response = JSON.parse(open(fb_graph_id_url).read)
     if (fb_response['id'] == params[:fb_id])
-      unless @user = (User.find_by_email(params[:email]) ||
+      unless @user = (User.find_by_email(fb_response['email']) ||
                       User.find_by_fb_id(params[:fb_id]))
-        @user = User.new(:first_name => params[:first_name],
-                         :last_name => params[:last_name],
-                         :email => params[:email].downcase,
+        @user = User.new(:first_name => fb_response['first_name'],
+                         :last_name => fb_response['last_name'],
+                         :email => fb_response['email'].downcase,
                          :passwd_clear => rand(10000000).to_s,
                          :city_id => City.find(:first).id)
       end

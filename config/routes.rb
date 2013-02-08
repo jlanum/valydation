@@ -34,6 +34,7 @@ HiStrollers::Application.routes.draw do
   match 'register' => 'users#register'
   match 'register_lead' => 'admin/leads#create'
 
+  match '/' => 'users#landing'
   
   # Sample resource route with options:
   #   resources :products do

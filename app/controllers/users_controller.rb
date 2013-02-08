@@ -3,7 +3,16 @@ class UsersController < ApplicationController
   #before_filter :use_test_user
   #before_filter :require_device
   before_filter :require_user, :only => :update
-   
+  before_filter :handle_user, :only => :landing
+
+  def landing
+    if @user
+      redirect_to sales_url
+      return
+    end
+    render :layout => nil
+  end
+
   def new
     render :layout => "prelogin"
   end

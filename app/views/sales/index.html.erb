@@ -34,48 +34,7 @@
       </div>
     </div>
 
-    <% 
-        @sale_rows = [[]]
-        @sales.each_with_index do |sale, i|
-          if i>0 && i%4 == 0
-            @sale_rows << []
-          end
-          @sale_rows.last << sale
-        end
-    %>
-
-    <% @sale_rows.each do |row| %>
-      <div class="row-fluid">
-		    <div class="container">
-          <ul class="thumbnails">
-
-      <% row.each do |sale| %>
-
-        <li class="span3">
-          <div class="hover-group">
-            <div class="image-wrapper">
-              <a href="#sale_modal_<%= sale.id %>" data-toggle="modal">
-                <img class="product-pic" src="<%= sale.image_0.versions[:web_index] %>" alt="">
-              </a>
-              <span class="thisInfo">
-                <p class="lanvin"><%= sale.brand %></p>
-                <p class="flats">Size <%= sale.size %><p>
-                <p><i><%= sale.metro.name %></i></p>
-              </span>
-				    <div class="hover-toggle">
-              <center><span class="percentoff"><%= (sale.percent_off * 100).round %>% Off</span></center>
-				    </div>
-          </div>
-        </div>
-       </li>
-
-      <% end %>
-
-          </ul>
-        </div>
-      </div>
-    <% end %>
-
+    <%= render "sales" %>
 
     <% @sales.each do |sale| %>
 

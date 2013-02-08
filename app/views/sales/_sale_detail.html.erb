@@ -1,0 +1,73 @@
+<div class="row-fluid">
+  <div class="span2 modal-thumbnails">
+    <% [:image_0, :image_1, :image_2].each do |image_sym|
+      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty?  %>
+    <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[:web_modal] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[:web_modal] %>'" />
+    <%   end
+    end %>
+  <br>
+  </div> <!-- thumbnails -->
+  <div class="span6">	
+    <span class="time-banner">
+      <span class="image-banner">
+        <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+        <span class="banner-toggle">
+          <span class="percentoff">
+            <center>
+              <i class="icon-time icon-white"> </i>
+              <font size="2">&#160;
+                <%= time_ago_in_words(sale.created_at) %>
+              </font>
+            </center>
+          </span>
+        </span>
+      </span>
+    </span>
+    <br>
+    <table class="table table-bordered">  
+      <td><%= (sale.percent_off * 100).round %>% Off</td>
+      <td>
+        <font size="1">
+          <%= humanized_money_with_symbol sale.orig_price %>
+        </font>
+      </td>
+
+      <td><strike><font size="1"> 
+          <%= humanized_money_with_symbol sale.sale_price %>
+      </font> </strike></td>
+
+    </table>
+    <span class="modal-social">
+      <i class="icon-heart"> </i>&#160;&#160;
+      <i class="icon-comment"></i>&#160;&#160;
+      <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+      <img src="/assets/T_logo.png" height="16px" width="16px">
+    </span>
+  </div>
+
+  <div class="span4 pull-right">
+    <a href="<%= user_url(sale.user.id) %>">
+      <img class="img-polaroid" src="<%= sale.user.photo.versions[:feed_2x] %>" height="60" width="60px">
+    </a>
+    <br>
+    <a href="<%= user_url(sale.user.id) %>"><b><%= sale.user.display_name %></b></a>
+    <br>
+    <p class="muted time"><%= sale.user.city.name %></p>
+    <span class="btn pull-right span12">Follow</span><br><br><br>
+    <table class="table table-bordered table-striped">
+      <tr>  
+        <td><font size="1" class="muted">
+            Store
+          </font> &#160;
+          <%= sale.store_name %>
+        </td>
+      </tr>
+      <tr> 
+        <td><font size="1" class="muted">Brand</font> &#160;<%= sale.brand %></td>
+      </tr>
+      <tr>  
+        <td><font size="1" class="muted">Product</font> &#160;<%= sale.product %></td></tr><tr>  
+        <td><font size="1" class="muted">Size</font> &#160; <%= sale.size %></td></tr>
+    </table>
+  </div>
+</div>

@@ -14,10 +14,13 @@
     <span class="time-banner">
     <% end %>
       <span class="image-banner">
-        <img class="img-polaroid" src="/assets/Aigle.jpg">
-        <!--
+
+        <% if detail %>
+        <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
+        <% else %>
         <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
--->
+        <% end %>
+
         <span class="banner-toggle">
 
           <% if !detail %>
@@ -25,7 +28,7 @@
           <% end %>
 
             <center>
-              <i class="icon-time icon-white"> </i>
+              <i class="icon-time <%= "icon-white" unless detail %> "> </i>
               <font size="2">&#160;
                 <%= time_ago_in_words(sale.created_at) %>
               </font>
@@ -54,12 +57,14 @@
       </font> </strike></td>
 
     </table>
+    <% unless detail %>
     <span class="modal-social">
       <i class="icon-heart"> </i>&#160;&#160;
       <i class="icon-comment"></i>&#160;&#160;
       <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
       <img src="/assets/T_logo.png" height="16px" width="16px">
     </span>
+    <% end %>
   </div>
 
   <div class="span4 pull-right">
@@ -87,5 +92,13 @@
         <td><font size="1" class="muted">Product</font> &#160;<%= sale.product %></td></tr><tr>  
         <td><font size="1" class="muted">Size</font> &#160; <%= sale.size %></td></tr>
     </table>
+
+    <% if detail %>
+      <br>
+    <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+    <img src="/assets/T_logo.png" height="16px" width="16px">
+    <% end %>
+
+
   </div>
 </div>

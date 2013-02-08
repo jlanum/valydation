@@ -13,7 +13,12 @@ class User < ActiveRecord::Base
                   :notify_faved,
                   :notify_followed,
                   :notify_posted,
-                  :notify_comment
+                  :notify_comment,
+                  :business_name,
+                  :custom_slug,
+                  :bio,
+                  :website_url,
+                  :is_merchant
 
   attr_accessor :other_user
 

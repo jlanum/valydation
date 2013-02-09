@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :handle_device
   #before_filter :use_test_user
   #before_filter :require_device
-  before_filter :require_user, :only => [:update, :show]
+  before_filter :require_user, :only => [:update, :show, :edit]
   before_filter :handle_user, :only => [:landing, :new]
 
   def landing
@@ -166,7 +166,10 @@ class UsersController < ApplicationController
                        :city_id => City.find(:first).id)
     end
   end
-  
+
+  def edit
+    
+  end
 
   def update
     if params[:passwd_new]
@@ -174,12 +177,31 @@ class UsersController < ApplicationController
       return
     end
 
+    if params[:email] and params[:email] != @user.email
+      if User.where(:email => params[:email]).first
+        @error_message = "There is already a user registered with that email address."
+        render :action => "edit"
+        return
+      end
+    end
+
+    if params[:custom_slug] and params[:custom_slug] != @user.custom_slug
+      if User.where(:custom_slug => params[:custom_slug]).first
+        @error_message = "That custom URL is already in use. Please try antoher."
+        render :action => "edit"
+        return
+      end
+    end
+
     [:city_id, 
      :bio, 
      :notify_faved, 
      :notify_followed, 
      :notify_posted,
-     :notify_comment].each do |attr|
+     :notify_comment,
+     :email,
+     :custom_slug
+    ].each do |attr|
 
       value = params[attr]
       next if value.nil?
@@ -195,7 +217,10 @@ class UsersController < ApplicationController
 
     respond_to do |wants|
       wants.json { render :json => @user.to_json }
-      wants.html { redirect_to sales_url }
+      wants.html { 
+        flash[:message] = "Your profile has been updated."
+        redirect_to sales_url
+      }
     end
 
   end

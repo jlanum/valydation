@@ -24,7 +24,7 @@
     </span>
 				
     <font size="5"><%= @show_user.display_name %></font><br>
-    <p class="muted time"><%= @show_user.city.name %></p>
+    <p class="muted time"><%= @show_user.city.name if @show_user.city %></p>
     <div style="min-height:180px;">
     <blockquote><%= @show_user.bio %></blockquote><br><br>
     </div>

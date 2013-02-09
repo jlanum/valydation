@@ -1,0 +1,113 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+<% if @error_message %>
+  <div class="alert alert-error"> 
+    <center>
+      <%= @error_message %>
+    </center>
+  </div>
+<% end %>
+
+
+	<div class="container">
+		<div class="marketing">
+			<div class="signup-unit">
+				<form class="horizontal">
+				  <fieldset>
+				    <legend>Edit Account Settings <select class="pull-right">
+						  <option>San Francisco</option>
+						  <option>New York</option>
+						  <option>Dallas</option>
+						  <option>Brooklyn</option>
+						  <option>Atlanta</option>
+						  <option>Chicago</option>
+						  <option>Los Angeles</option>
+						  <option>Orange County</option>
+						</select></legend>
+				    <div class="input-append">
+					  <input class="span2" id="appendedInputButton" type="text" placeholder="jesse.lanum@gmail.com">
+					  <button class="btn" type="button">Change Email</button>
+					</div>
+				  </fieldset>
+				</form><hr>
+        
+        <input type="text" class="span2 pwd"> 
+        <input type="text" class="span2 pwd">
+        <a class="btn" href="">Change Password</a> 
+
+        <hr>
+			<div class="input-prepend">
+				<input class="span2" id="appendedInputButton" type="text" placeholder="94107">
+				  <button class="btn" type="button">Change Zip Code</button>
+			</div>
+			<hr>
+			<img src="img/jesse_profile.jpg" height="100px" width="100px"><br><br>
+			<a class="btn" href="">Upload Image</a><br>
+			<label class="radio inline">
+			  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+			  Female
+			</label>
+			<label class="radio inline">
+			  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+			  Male
+			</label>
+			<label class="radio inline">
+			  <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+			  Pass 
+			</label>
+			<br><br>
+			<form class="horizontal">
+			  <fieldset>
+			    <legend>Profile (shown publicly)</legend>
+			</fieldset>
+			</form>
+			    <div class="input-prepend">
+				  <span class="add-on">First Name</span>
+				  <input class="span2" id="prependedInput" type="text" placeholder="Jesse">
+				</div>
+			<div class="input-prepend">
+			  <span class="add-on">Last Name</span>
+			  <input class="span2" id="prependedInput" type="text" placeholder="Lanum">
+			</div><button class="btn" type="button">Save</button>
+				<br><br>
+				Enter Username for Custom URL
+        <div class="input-prepend">
+          <%
+              custom_slug = "YourNameHere"
+              if @user.custom_slug and @user.custom_slug.size > 0
+                custom_slug = @user.custom_slug
+              end
+          %>
+        <span class="add-on">http://www.mysaletable.com/<%= custom_slug %></span>
+				</div>
+
+        <%= form_for(@user, :html => {:id => "custom_slug_form"}) do |f| %>
+          <%= text_field_tag "custom_slug", @user.custom_slug,
+            :class => "span2", :placeholder => custom_slug %>
+				  <button class="btn url" type="button" onclick="$('#custom_slug_form')[0].submit();">Save</button><br>
+				<% end %>
+			   <hr>
+			
+			<span class="bio">Bio</span>
+		<textarea data-provide="limit" data-counter="#counter" placeholder="Enter text (150 character limit)"rows="3"></textarea>&#160;<button class="btn" type="button">Save</button><br>
+		<hr>
+		
+
+	
+	
+	
+	  
+	  
+	
+
+	
+	 </div><!--end marketing -->		
+	</div><!--end container -->
+	</div><!--end row-fluid -->
+	</div>
+	</div>
+

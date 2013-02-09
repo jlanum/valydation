@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20130208192622) do
     t.text     "website_url"
   end
 
-  add_index "users", ["custom_slug"], :name => "index_users_on_custom_slug"
+  add_index "users", ["custom_slug"], :name => "index_users_on_custom_slug", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id", :unique => true
 

@@ -80,11 +80,46 @@ function changePassword() {
 				  <button class="btn url" type="button" onclick="$('#zip_form')[0].submit();">Change Zip Code</button><br>
         <% end %>
 			</div>
-			<hr>
-			<img src="img/jesse_profile.jpg" height="100px" width="100px"><br><br>
-      <a class="btn" href="">Upload Image</a><br>
+      <hr>
 
-      <br>
+      <script type="text/javascript">
+
+function uploadPhoto() {
+  if (checkSize(1024*1024)) {
+    $('#photo_form')[0].submit();
+  } else {
+
+  }
+}
+
+function checkSize(max_img_size)
+{
+    var input = document.getElementById("photo_file_field");
+    // check for browser support (may need to be modified)
+    if(input.files && input.files.length == 1)
+    {           
+        if (input.files[0].size > max_img_size) 
+        {
+            alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
+            return false;
+        }
+    }
+
+    return true;
+}
+      </script>
+
+      <img src="<%= @user.photo.versions[:profile] %>"><br><br>
+
+      <%= form_for(@user, :html => {:id => "photo_form", :multipart => true}) do |f| %>
+
+        <%= file_field_tag("photo", :id => "photo_file_field") %><br>
+
+        <button class="btn url" type="button" onclick="uploadPhoto()">Upload Image</button><br>
+        
+      <% end %> 
+
+      
 
       <script>
 function submitGender() {

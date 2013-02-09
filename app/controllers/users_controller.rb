@@ -217,7 +217,8 @@ class UsersController < ApplicationController
      :zip_code,
      :first_name,
      :last_name,
-     :gender
+     :gender,
+     :photo
     ].each do |attr|
 
       value = params[attr]

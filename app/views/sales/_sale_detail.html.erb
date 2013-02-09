@@ -3,8 +3,10 @@
 <div class="row-fluid">
   <div class="span2 modal-thumbnails">
     <% [:image_0, :image_1, :image_2].each do |image_sym|
-      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty?  %>
-    <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[:web_modal] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[:web_modal] %>'" />
+      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
+        img_version = (detail ? :feed_large_2x : :web_modal)
+    %>
+    <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
     <%   end
     end %>
   <br>
@@ -17,8 +19,10 @@
 
         <% if detail %>
         <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
-        <% else %>
-        <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+      <% else %>
+        <a href="<%= sale_url(sale.id) %>">
+          <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+        </a>
         <% end %>
 
         <span class="banner-toggle">
@@ -60,7 +64,9 @@
     <% unless detail %>
     <span class="modal-social">
       <i class="icon-heart"> </i>&#160;&#160;
-      <i class="icon-comment"></i>&#160;&#160;
+      <a href="<%= sale_url(sale.id) %>">
+        <i class="icon-comment">&#160;</i>&#160;
+      </a>
       <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
       <img src="/assets/T_logo.png" height="16px" width="16px">
     </span>

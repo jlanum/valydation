@@ -68,6 +68,10 @@
   </div>
 
   <div class="span4 pull-right">
+    <% if detail %>
+    <a href="purchase.html" class="btn btn-success btn-large span4 pull-right">Buy</a>
+    <% end %>
+
     <a href="<%= user_url(sale.user.id) %>">
       
       <img class="img-polaroid" src="<%= sale.user.photo.versions[:feed_2x] %>" height="60" width="60px">
@@ -97,6 +101,33 @@
       <br>
     <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
     <img src="/assets/T_logo.png" height="16px" width="16px">
+
+    <span class="comments form">
+      <h3>Comments</h3>
+      <% sale.comments.each do |comment| %>
+        <img src="<%= comment.user.photo.versions[:feed] %>" >&#160;<%= comment.text %><br><br>
+      <% end %>
+
+      <script>
+        function submitComment(e) {
+          e = e || event;
+          if (e.keyCode === 13) {
+            $('#comment_form').submit();
+            return false;
+          }
+           return true;
+        }
+      </script>
+      
+      <%= form_tag({:controller => "comments", 
+                    :action => "create",
+                    :sale_id => sale.id}, 
+                    :id => "comment_form") do |f| %>
+        <img src="<%= @user.photo.versions[:feed] %>">&#160;
+        <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
+      <% end %>
+    </span>
+
     <% end %>
 
 

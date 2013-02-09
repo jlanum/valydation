@@ -25,13 +25,17 @@ HiStrollers::Application.routes.draw do
   resources :sessions
   resources :merchants
 
+  match '/users/:user_id/following' => 'followers#index',
+          :defaults => {:im_following => true}
+  match '/users/:user_id/followers' => 'followers#index',
+          :defaults => {:following_me => true}
+
   match 'admin' => 'admin/sales#index'
   namespace :admin do
     resources :sales
     resources :users
     resources :leads
   end
-
 
   match 'logout' => 'sessions#destroy'
   match 'register' => 'users#register'

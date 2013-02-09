@@ -50,6 +50,9 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_user
+    puts "session:"
+    puts session.to_json
+
     if session[:user_id]
       @user = User.find(session[:user_id])
     end
@@ -59,8 +62,15 @@ class ApplicationController < ActionController::Base
     handle_user
 
     unless @user
-      render :json => {"error" => "User not registered."},
-             :status => 403
+      respond_to do |wants|
+        wants.json do 
+          render :json => {"error" => "User not registered."},
+                 :status => 403
+        end
+        wants.html do
+          redirect_to root_url
+        end
+      end
       return false
     end
   end

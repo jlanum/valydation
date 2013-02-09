@@ -1,0 +1,48 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+<div class="container">
+
+  <div class="category-feed well">
+    <center>
+      <font size="6" color="#432060">Following</font>
+    </center>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="marketing">
+    <font size="4" class="muted">People <%= @index_user.display_name %> follows</font><br><br><br>
+
+
+    <% @followers.each do |follower| %>
+
+      <div class="row-fluid">
+      <span class="pull-left span1">
+        <a href="<%= user_custom_slug_url(follower.followed_user) %>">
+          <img class="img-polaroid" src="<%= follower.followed_user.photo.versions[:feed_2x] %>" >
+        </a>
+        <br><br>
+      </span>
+      <span class="hey muted">
+        <font size="3"><%= follower.followed_user.display_name %></font></span><br><span class="hey muted"><%= follower.followed_user.city.name if follower.followed_user.city %></span>
+      <span class="pull-right follow-page">
+        <% if follower.followed_user.is_followed %>
+          <%= link_to("Unfollow", follower_path(:authenticity_token => form_authenticity_token, :id => follower.followed_user.is_followed), :remote => true, :method => :delete, :class => "btn") %>
+        <% else %>
+          <%= link_to("Follow", followers_path(:authenticity_token => form_authenticity_token, :following_id => follower.followed_user.id), :remote => true, :method => :post, :class => "btn") %>
+        <% end %>
+      </span>
+      <br><br>
+      <hr>
+    </div>
+
+  <% end %>
+
+  </div>
+</div>
+

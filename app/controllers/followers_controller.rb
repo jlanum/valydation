@@ -22,7 +22,7 @@ class FollowersController < ApplicationController
       includes(:following_user).
       order("created_at DESC")
     @followers.each do |f|
-      f.following_user.other_user = @index_user
+      f.following_user.other_user = @user
     end
 
     render :json => @followers.to_json(:include => {:following_user => User.public_json_follow})
@@ -33,10 +33,18 @@ class FollowersController < ApplicationController
       includes(:followed_user).
       order("created_at DESC")
     @followers.each do |f|
-      f.followed_user.other_user = @index_user
+      f.followed_user.other_user = @user
     end
 
-    render :json => @followers.to_json(:include => {:followed_user => User.public_json_follow})
+    respond_to do |wants|
+      wants.json do
+        render :json => @followers.to_json(:include => {:followed_user => User.public_json_follow})
+      end
+      wants.html do
+        render :template => 'followers/following'
+      end
+    end
+    
   end
 
   def create

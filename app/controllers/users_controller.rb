@@ -36,6 +36,15 @@ class UsersController < ApplicationController
                :status => 404
       end
     else
+      if params[:custom_slug]
+        if show_user = User.where(:custom_slug => params[:custom_slug]).first
+          params[:id] = show_user.id
+        else
+          raise ActionController::RoutingError.new('Not Found')
+          return
+        end
+      end
+
       @show_user = User.find(params[:id])
       @show_user.other_user = @user
 
@@ -55,7 +64,7 @@ class UsersController < ApplicationController
             includes(:user).
             order(%Q{"sales"."created_at" DESC}).
             page(params[:page]).
-            per(4)
+            per(8)
           render 
         end
       end

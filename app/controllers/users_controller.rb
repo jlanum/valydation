@@ -180,17 +180,25 @@ class UsersController < ApplicationController
     if params[:email] and params[:email] != @user.email
       if User.where(:email => params[:email]).first
         @error_message = "There is already a user registered with that email address."
-        render :action => "edit"
-        return
+        return render_error
       end
     end
 
     if params[:custom_slug] and params[:custom_slug] != @user.custom_slug
       if User.where(:custom_slug => params[:custom_slug]).first
         @error_message = "That custom URL is already in use. Please try antoher."
-        render :action => "edit"
-        return
+        return render_error
       end
+    end
+
+    if params[:first_name] and params[:first_name].empty?
+      @error_message = "Please provide your first name."
+      return render_error
+    end
+
+    if params[:last_name] and params[:last_name].empty?
+      @error_message = "Please provide your last name."
+      return render_error
     end
 
     [:city_id, 
@@ -201,7 +209,9 @@ class UsersController < ApplicationController
      :notify_comment,
      :email,
      :custom_slug,
-     :zip_code
+     :zip_code,
+     :first_name,
+     :last_name
     ].each do |attr|
 
       value = params[attr]

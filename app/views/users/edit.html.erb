@@ -101,14 +101,21 @@ function changePassword() {
 			    <legend>Profile (shown publicly)</legend>
 			</fieldset>
 			</form>
+
+        <%= form_for(@user, :html => {:id => "name_form"}) do |f| %>
+      
 			    <div class="input-prepend">
 				  <span class="add-on">First Name</span>
-				  <input class="span2" id="prependedInput" type="text" placeholder="Jesse">
+          <%= text_field_tag "first_name", @user.first_name, :class => "span2", :placeholder => "First Name" %>
 				</div>
 			<div class="input-prepend">
-			  <span class="add-on">Last Name</span>
-			  <input class="span2" id="prependedInput" type="text" placeholder="Lanum">
-			</div><button class="btn" type="button">Save</button>
+        <span class="add-on">Last Name</span>
+          <%= text_field_tag "last_name", @user.last_name, :class => "span2", :placeholder => "Last Name" %>
+        </div>
+        <button class="btn url" type="button" onclick="$('#name_form')[0].submit();">Save</button><br>
+
+        <% end %>
+        
 				<br><br>
 				Enter Username for Custom URL
         <div class="input-prepend">

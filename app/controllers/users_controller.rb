@@ -200,7 +200,8 @@ class UsersController < ApplicationController
      :notify_posted,
      :notify_comment,
      :email,
-     :custom_slug
+     :custom_slug,
+     :zip_code
     ].each do |attr|
 
       value = params[attr]

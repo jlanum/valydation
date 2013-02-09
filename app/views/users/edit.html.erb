@@ -74,9 +74,11 @@ function changePassword() {
         <% end %>
 
         <hr>
-			<div class="input-prepend">
-				<input class="span2" id="appendedInputButton" type="text" placeholder="94107">
-				  <button class="btn" type="button">Change Zip Code</button>
+          <div class="input-prepend">
+        <%= form_for(@user, :html => {:id => "zip_form"}) do |f| %>
+          <%= text_field_tag "zip_code", "", :class => "span1", :placeholder => @user.zip_code, :maxlength => 5 %>
+				  <button class="btn url" type="button" onclick="$('#zip_form')[0].submit();">Change Zip Code</button><br>
+        <% end %>
 			</div>
 			<hr>
 			<img src="img/jesse_profile.jpg" height="100px" width="100px"><br><br>

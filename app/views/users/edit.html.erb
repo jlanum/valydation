@@ -16,24 +16,38 @@ body {
 	<div class="container">
 		<div class="marketing">
 			<div class="signup-unit">
-				<form class="horizontal">
-				  <fieldset>
-				    <legend>Edit Account Settings <select class="pull-right">
-						  <option>San Francisco</option>
-						  <option>New York</option>
-						  <option>Dallas</option>
-						  <option>Brooklyn</option>
-						  <option>Atlanta</option>
-						  <option>Chicago</option>
-						  <option>Los Angeles</option>
-						  <option>Orange County</option>
-						</select></legend>
-				    <div class="input-append">
-					  <input class="span2" id="appendedInputButton" type="text" placeholder="jesse.lanum@gmail.com">
-					  <button class="btn" type="button">Change Email</button>
+        <fieldset>
+
+
+            <legend>Edit Account Settings 
+        
+        </legend>
+
+        
+        <%= form_for @user, :html => {:id => "city_form"} do |f| %>
+
+          <div class="input-prepend">
+
+          <span class="add-on">Current City</span>
+
+          <select id="city_id" name="city_id" class="" onchange="$('#city_form')[0].submit()">
+        <%= options_for_select(City.order("name ASC").all.collect { |c| [c.name, c.id] }, @user.city_id) %>
+          </select>
+        <% end %>
+
+        </div>
+        
+            <div class="input-append">
+
+        <%= form_for(@user, :html => {:id => "email_form"}) do |f| %>
+          <%= text_field_tag "email", '',
+            :class => "span2", :placeholder => @user.email %>
+				  <button class="btn url" type="button" onclick="$('#email_form')[0].submit();">Change Email</button><br>
+				<% end %>
+
 					</div>
 				  </fieldset>
-				</form><hr>
+				<hr>
         
         <input type="text" class="span2 pwd"> 
         <input type="text" class="span2 pwd">

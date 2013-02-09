@@ -201,6 +201,11 @@ class UsersController < ApplicationController
       return render_error
     end
 
+    if params[:bio] and params[:bio].length > 150
+      @error_message = "Your bio must be 150 characters or shorter."
+      return render_error
+    end
+
     [:city_id, 
      :bio, 
      :notify_faved, 

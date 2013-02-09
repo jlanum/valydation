@@ -136,7 +136,12 @@ function changePassword() {
 			   <hr>
 			
 			<span class="bio">Bio</span>
-		<textarea data-provide="limit" data-counter="#counter" placeholder="Enter text (150 character limit)"rows="3"></textarea>&#160;<button class="btn" type="button">Save</button><br>
+
+        <%= form_for(@user, :html => {:id => "bio_form"}) do |f| %>
+          <%= text_area_tag "bio", @user.bio, :rows => 3, :placeholder => "Enter text (150 character limit)" %>
+        &#160;
+        <button class="btn url" type="button" onclick="$('#bio_form')[0].submit();">Save</button><br>
+      <% end %>
 		<hr>
 		
 

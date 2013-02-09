@@ -815,7 +815,7 @@ a.badge:hover {
 }
 .label-success,
 .badge-success {
-  background-color: #592A84;
+  background-color: #432060;
 }
 .label-success[href],
 .badge-success[href] {
@@ -1131,7 +1131,7 @@ input[type="color"],
   display: inline-block;
   height: 20px;
   padding: 4px 6px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-size: 14px;
   line-height: 20px;
   color: #555555;
@@ -1143,7 +1143,7 @@ input[type="color"],
 input,
 textarea,
 .uneditable-input {
-  width: 206px;
+  width: 190px;
 }
 textarea {
   height: auto;
@@ -2956,7 +2956,7 @@ input[type="submit"].btn.btn-mini {
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #592A84;
+  background-color: #432060;
 }
 .nav > .pull-right {
   float: right;

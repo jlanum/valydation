@@ -26,9 +26,9 @@ HiStrollers::Application.routes.draw do
   resources :merchants
 
   match '/users/:user_id/following' => 'followers#index',
-          :defaults => {:im_following => true}
+          :defaults => {:im_following => true}, :as => "users_im_following"
   match '/users/:user_id/followers' => 'followers#index',
-          :defaults => {:following_me => true}
+          :defaults => {:following_me => true}, :as => "users_following_me"
 
   match 'admin' => 'admin/sales#index'
   namespace :admin do

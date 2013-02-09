@@ -82,20 +82,35 @@ function changePassword() {
 			</div>
 			<hr>
 			<img src="img/jesse_profile.jpg" height="100px" width="100px"><br><br>
-			<a class="btn" href="">Upload Image</a><br>
+      <a class="btn" href="">Upload Image</a><br>
+
+      <br>
+
+      <script>
+function submitGender() {
+  $.post($('#gender_form')[0].action, $('#gender_form').serialize())
+}
+      </script>
+
+      <%= form_for(@user, :html => {:id => "gender_form"}) do |f| %>
+      
 			<label class="radio inline">
-			  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        <%= radio_button_tag "gender", "f", (@user.gender == "f"),
+              :onchange => "submitGender()" %>
 			  Female
 			</label>
 			<label class="radio inline">
-			  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+        <%= radio_button_tag "gender", "m", (@user.gender == "m"), 
+     :onchange => "submitGender()" %>
 			  Male
 			</label>
 			<label class="radio inline">
-			  <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+        <%= radio_button_tag "gender", "p", (@user.gender == "p"),
+     :onchange => "submitGender()" %>
 			  Pass 
 			</label>
-			<br><br>
+      <% end %>
+
 			<form class="horizontal">
 			  <fieldset>
 			    <legend>Profile (shown publicly)</legend>

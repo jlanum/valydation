@@ -26,16 +26,16 @@ body {
         
         <%= form_for @user, :html => {:id => "city_form"} do |f| %>
 
-          <div class="input-prepend">
 
-          <span class="add-on">Current City</span>
+          Current City <br/>
 
           <select id="city_id" name="city_id" class="" onchange="$('#city_form')[0].submit()">
         <%= options_for_select(City.order("name ASC").all.collect { |c| [c.name, c.id] }, @user.city_id) %>
           </select>
         <% end %>
+        <hr>
 
-        </div>
+
         
             <div class="input-append">
 
@@ -48,10 +48,30 @@ body {
 					</div>
 				  </fieldset>
 				<hr>
-        
-        <input type="text" class="span2 pwd"> 
-        <input type="text" class="span2 pwd">
-        <a class="btn" href="">Change Password</a> 
+
+        <script>
+function changePassword() {
+
+  if ($('#passwd_new').val().length < 4) {
+    alert ("Your password must be at least 4 characters");
+    return false; 
+  }
+            if ($('#passwd_new').val() != $('#passwd_confirm').val()) {
+              alert("Your passwords don't match.");
+              return false;
+            } else {
+              $('#passwd_form')[0].submit();
+            }
+          }
+        </script>
+
+        <%= form_for(@user, :html => {:id => "passwd_form"}) do |f| %>
+          <%= password_field_tag "passwd_clear", "", :class => "span2 pwd", :placeholder => "Current Password" %> 
+          <br>
+          <%= password_field_tag "passwd_new", "", :class => "span2 pwd", :placeholder => "New Password" %>
+          <%= password_field_tag "passwd_confirm", "", :class => "span2 pwd", :placeholder => "Confirm Password" %>
+				  <button class="btn url" type="button" onclick="return changePassword();">Change Password</button><br>
+        <% end %>
 
         <hr>
 			<div class="input-prepend">

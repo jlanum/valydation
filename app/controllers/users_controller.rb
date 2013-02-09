@@ -229,7 +229,13 @@ class UsersController < ApplicationController
     if BCrypt::Password.new(@user.passwd_hash) == params[:passwd_clear]
       @user.passwd_clear = params[:passwd_new]
       @user.save!
-      render :json => @user.to_json
+      respond_to do |wants|
+        wants.json { render :json => @user.to_json }
+        wants.html do
+          flash[:message] = "Your password has been changed."
+          redirect_to sales_url
+        end
+      end
     else
       @error_message = "Password incorrect."
       render_error
@@ -237,8 +243,15 @@ class UsersController < ApplicationController
   end
 
   def render_error
-    render :json => {'error' => @error_message},
-           :status => 403
+    respond_to do |wants|
+      wants.json do 
+        render :json => {'error' => @error_message},
+               :status => 403
+      end
+      wants.html do
+        render :action => "edit"
+      end
+    end
   end
 
 end

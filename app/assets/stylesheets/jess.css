@@ -55,7 +55,7 @@
 	    margin-top: 24px;
 	font-size: 14px !important;
 	font-weight: lighter !important;
-	color: #432060 !important;
+	color: #592A84 !important;
 	
 }
 
@@ -102,7 +102,7 @@
 }
 
 .product-pic:hover {
-	outline:#432060 dotted 2px;
+	outline:#592A84 dotted 2px;
 	
 }
 
@@ -110,6 +110,10 @@
 .modal-image {
 	height: 400px;
 	width: 299px;
+}
+
+.modal-thumbnails {
+  padding-right: 8px;
 }
 
 .invite {
@@ -220,7 +224,7 @@
 	  font-weight: 200;
 	  line-height: 30px;
 	  color: inherit;
-	  background-image: url('../img/az_subtle.png') !important;
+	  background-image: url('/assets/az_subtle.png') !important;
 	  -webkit-border-radius: 6px;
 	  -moz-border-radius: 6px;
 	  border-radius: 6px;
@@ -284,9 +288,9 @@ span.stretch {
 
 
 .logo-fb {
-background-color: #5F75A9;
+/*background-color: #5F75A9;*/
 background-color: rgba(255, 255, 255, .2);
-background-image: url('../img/logo_fb.png');
+background-image: url('/assets/logo_fb.png');
 }
 
 .facebook .logo-fb {
@@ -349,7 +353,6 @@ width: 62px;
 
 .modal-social {
 	padding-left: 64px;
-	padding-bottom: 5px;
 }
 
 .photo-upload {
@@ -385,7 +388,7 @@ width: 62px;
 .time-banner .image-banner .banner-toggle {
   /* set it at the bottom of .image-wrapper */
   position: absolute;      
-  top: -125px;
+  top: -94px;
   left: 0px;
   /* and don't display it */
   display: block;
@@ -416,7 +419,7 @@ width: 62px;
 .fourzerofour {
 	font-size: 88px !important;
 	text-align: center;
-	color: #432060 !important;
+	color: #592A84 !important;
 }
 
 .contact-info {
@@ -450,40 +453,4 @@ width: 62px;
 
 .landing-text {
 	text-shadow: black 0.1em 0.1em 0.2em;
-}
-
-.follow-page {
-	padding-right: 600px;
-
-}
-
-.hey {
-	padding-left: 80px;
-	vertical-align: -10px;
-}
-
-.postbtn {
-	margin-left: 430px;
-}
-
-.fave {
-	vertical-align: 10px;
-}
-
-.comment-box {
-	padding-bottom: -10px;
-	margin-top: 5px;
-}
-
-.pwd {
-	vertical-align:-.5px;
-}
-
-.url {
-	vertical-align: 1px;
-}
-
-.storedec {
-	text-decoration: none !important;
-	padding-left: 440px;
 }

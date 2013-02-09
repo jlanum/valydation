@@ -154,7 +154,7 @@ body {
   color: #333333;
   background-color: #FFFFFF;
   font-weight:lighter;
-  background-image: url('../img/frenchstucco.png');
+  background-image: url('/assets/frenchstucco.png');
   
 }
 a {
@@ -815,7 +815,7 @@ a.badge:hover {
 }
 .label-success,
 .badge-success {
-  background-color: #432060;
+  background-color: #592A84;
 }
 .label-success[href],
 .badge-success[href] {
@@ -1131,7 +1131,7 @@ input[type="color"],
   display: inline-block;
   height: 20px;
   padding: 4px 6px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 14px;
   line-height: 20px;
   color: #555555;
@@ -1143,7 +1143,7 @@ input[type="color"],
 input,
 textarea,
 .uneditable-input {
-  width: 190px;
+  width: 206px;
 }
 textarea {
   height: auto;
@@ -2290,7 +2290,7 @@ input[type="submit"].btn.btn-mini {
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/glyphicons-halflings.png");
+  background-image: url("/assets/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -2309,7 +2309,7 @@ input[type="submit"].btn.btn-mini {
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"] {
-  background-image: url("../img/glyphicons-halflings-white.png");
+  background-image: url("/assets/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -2956,7 +2956,7 @@ input[type="submit"].btn.btn-mini {
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #432060;
+  background-color: #592A84;
 }
 .nav > .pull-right {
   float: right;
@@ -4555,7 +4555,7 @@ a.thumbnail:hover {
   overflow-y: auto;
   max-height: 400px;
   padding: 15px;
-  background-image: url('../img/az_subtle.png');
+  background-image: url('/assets/az_subtle.png');
 }
 .modal-form {
   margin-bottom: 0;

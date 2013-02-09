@@ -25,7 +25,14 @@ class FollowersController < ApplicationController
       f.following_user.other_user = @user
     end
 
-    render :json => @followers.to_json(:include => {:following_user => User.public_json_follow})
+    respond_to do |wants|
+      wants.json do
+        render :json => @followers.to_json(:include => {:following_user => User.public_json_follow})
+      end
+      wants.html do
+        render :template => "followers/followers"
+      end
+    end
   end
 
   def index_im_following

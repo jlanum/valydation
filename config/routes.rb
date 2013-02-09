@@ -40,7 +40,7 @@ HiStrollers::Application.routes.draw do
   match 'merchants_intro' => 'merchants#intro'
   root :to => 'users#landing'
 
-  match '/:custom_slug' => 'users#show'
+  match '/:custom_slug' => 'users#show', :as => :custom_slug
   
   # Sample resource route with options:
   #   resources :products do

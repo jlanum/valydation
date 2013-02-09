@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :handle_device
   #before_filter :use_test_user
   #before_filter :require_device
-  before_filter :require_user, :only => :update
+  before_filter :require_user, :only => [:update, :show]
   before_filter :handle_user, :only => [:landing, :new]
 
   def landing
@@ -45,8 +45,21 @@ class UsersController < ApplicationController
         to_json({:only => [:id, :first_name, :last_name, :bio],
                  :methods => [:photo_fb, :is_followed, :follower_count, :following_count]})
         end
-        wants.html { render }
+
+        wants.html do
+          @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+            where(:user_id => params[:id],
+                  :visible => true).
+            joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+                                 AND "faves"."user_id"=#{@user.id}}).
+            includes(:user).
+            order(%Q{"sales"."created_at" DESC}).
+            page(params[:page]).
+            per(4)
+          render 
+        end
       end
+
     end
   end
 

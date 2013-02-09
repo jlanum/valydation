@@ -4,6 +4,7 @@
   }
 </style>
 
+
 <div class="container">
   <div class="category-feed well">
     <center>
@@ -11,7 +12,9 @@
     </center>
   </div>
 </div>
-	 
+
+<% if params[:page].to_i == 0 %>
+
 <div class="container">
   <div class="signup-unit">
 		<span class="span4 pull-left">
@@ -32,3 +35,10 @@
 
 <hr>
 
+<% end %>
+
+<%= render :partial => "sales/sales" %>
+
+<center>
+  <%= paginate @sales %> 
+</center>

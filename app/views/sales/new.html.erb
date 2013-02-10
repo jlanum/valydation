@@ -1,0 +1,154 @@
+<style>
+body {
+  padding-top: 100px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+
+<% 
+
+    @sizes = [
+      ["N/A","PETITE","XS","S","M"],
+      ["L","XL","XXL","00","0"],
+      ["1","2","3","4","4.5"],
+      ["5","5.5","6","6.5","7"],
+      ["7.5","8","8.5","9","9.5"],
+      ["10","10.5","11","11.5","12"],
+      ["12.5","13","13.5","14","14.5"],
+      ["15","15.5","16","16.5","17"],
+      ["17.5","18","18.5","19","19.5"],
+      ["20","21","22","23","24"],
+      ["25","26","27","28","29"],
+      ["30","31","32","33","34"],
+      ["35","36","37","38","39"],
+      ["40","41","42","43","44"]
+]
+
+%>
+
+<div class="container">
+
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  <div align="center" class="media-heading">     
+    <p class="our-story"><font size="8">Upload a Sale</font></p></div><br><br><hr>
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="hero-unit">
+        <center><h3>Drag and Drop</h3></center>
+
+      </div><!-- End of hero -->
+    </div>
+
+    <div class="span6">
+      <div class="hero-unit">
+        <center> <h3>Upload File</h3></center>
+
+      </div><!-- End of hero -->
+    </div>
+
+
+
+  </div><!-- End of row -->
+  <div class="photo-upload">
+    <ul class="thumbnails">
+      <li>
+      <a href="#" class="thumbnail">
+        <img data-src="holder.js/260x180" alt="" style="width: 260px; height: 180px;" >
+      </a>
+      </li>
+      <li>
+      <a href="#" class="thumbnail">
+        <img data-src="holder.js/260x180" alt="" style="width: 260px; height: 180px;" >
+      </a>
+      </li>
+      <li>
+      <a href="#" class="thumbnail">
+        <img data-src="holder.js/260x180" alt="" style="width: 260px; height: 180px;" >
+      </a>
+      </li>
+  </ul></div>
+  <div align="center">
+    <div class="row">
+      <select>
+        <option>Select Category</option>
+        <option>Women's</option>
+        <option>Men's</option>
+        <option>Home</option>
+        <option>Baby</option>
+        <option>Pet</option>
+      </select><br><br>
+      <div class="input-prepend">
+        <a href="store.html"><button class="btn" type="button">Store</button></a>
+        <input class="span2" id="prependedInput" type="text"><br><br>
+        <span class="add-on">Brand</span>
+        <input class="span2" id="prependedInput" type="text" placeholder="E.G., John Varvatos"><br><br>
+        <span class="add-on">Orig $</span>
+        <input class="span2" id="prependedInput" type="text"> <br><br>
+        <span class="add-on">Sale $</span>
+        <input class="span2" id="prependedInput" type="text"><br><br>
+        <span class="add-on">% Off</span>
+        <input class="span2" id="prependedInput" type="text"><br><br>
+        <span class="add-on">Product</span>
+        <input class="span2" id="prependedInput" type="text" placeholder="E.G., Wool Sweater"><br><br>		
+      </div>
+      <div id="hear">
+        Select Sizes<br>
+        <div class="" id="" style="width: 400px;">
+          <style>
+table#sizechart td {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  text-align: center;
+  cursor: pointer;
+}
+td.selectedSize {
+  color: white;
+  background-color: rgb(67, 17, 96);
+}
+          </style>
+
+          <script>
+selectedSizes = []
+
+function selectSize(size_id) {
+  var sizeTd = $('#'+size_id)[0];
+  if (sizeTd.className == "selectedSize") {
+    sizeTd.className = "";
+  } else {
+    sizeTd.className = "selectedSize";
+  }
+
+  selectedSizes = $('td.selectedSize').map(function(i,td) { return td.attributes['thesize'].value })
+  $('input#size')[0].value = selectedSizes.toArray().join(',');
+}
+          </script>
+
+          <table class="table table-bordered table-condensed" id="sizechart">            
+            <% @sizes.each_with_index do |size_row, row| %>
+              <tr>
+              <% size_row.each_with_index do |size, col|
+                size_id = "size_#{row}_#{col}" %>
+              <td theSize="<%= size %>" id="<%= size_id %>" onclick="selectSize('<%= size_id %>')">
+                  <%= size %>
+                </td>
+              <% end %>
+              </tr>
+            <% end %>          
+            </table>
+
+          </div>
+
+          <br>
+
+          <%= hidden_field_tag "size", params[:size], :id => "size" %>
+
+          <div class="postbtn">
+            <center>
+              <button class="btn btn-large btn-success submit span2">Post</button>
+            </center>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br><br>

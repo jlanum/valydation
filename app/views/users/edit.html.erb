@@ -109,7 +109,7 @@ function checkSize(max_img_size)
 }
       </script>
 
-      <img src="<%= @user.photo.versions[:profile] %>"><br><br>
+      <img src="<%= @user.photo_version_url(:profile) %>"><br><br>
 
       <%= form_for(@user, :html => {:id => "photo_form", :multipart => true}) do |f| %>
 

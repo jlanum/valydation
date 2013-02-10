@@ -18,7 +18,7 @@ body {
   <div class="container">
   <div class="signup-unit">
     <span class="span4 pull-left">
-      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo.versions[:profile_2x] %>" ><br><br>
+      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo_version_url(:profile_2x) %>" ><br><br>
       <a href="<%= users_following_me_url(:user_id => @show_user.id) %>"class="btn span2"><%= @show_user.follower_count %> Followers</a><br>
       <a href="<%= users_im_following_url(:user_id => @show_user.id) %>"class="btn span2"><%= @show_user.following_count %> Following</a>
     </span>

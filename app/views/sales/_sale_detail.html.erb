@@ -80,7 +80,7 @@
 
     <a href="<%= user_custom_slug_url(sale.user) %>">
 
-      <img class="img-polaroid" src="<%= sale.user.photo.versions[:feed_2x] %>" height="60" width="60px">
+      <img class="img-polaroid" src="<%= sale.user.photo_version_url(:feed_2x) %>" height="60" width="60px">
     </a>
     <br>
     <a href="<%= user_custom_slug_url(sale.user) %>"><b><%= sale.user.display_name %></b></a>
@@ -145,7 +145,7 @@ jQuery(function($) {
     <span class="comments form">
       <h3>Comments</h3>
       <% sale.comments.each do |comment| %>
-        <img src="<%= comment.user.photo.versions[:feed] %>" >&#160;<%= comment.text %><br><br>
+        <img height="36" width="36" src="<%= comment.user.photo_version_url(:feed) %>" >&#160;<%= comment.text %><br><br>
     <% end %>
 
       <script>
@@ -163,7 +163,7 @@ function submitComment(e) {
                     :action => "create",
                     :sale_id => sale.id}, 
                     :id => "comment_form") do |f| %>
-                    <img src="<%= @user.photo.versions[:feed] %>">&#160;
+                    <img height="36" width="36" src="<%= @user.photo_version_url(:feed) %>">&#160;
                     <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
                   <% end %>
                   </span>

@@ -88,6 +88,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def default_avatar
+    {
+     "feed" => "/assets/default_avatar_36.png",
+     "feed_2x" => "/assets/default_avatar_36@2x.png",
+     "follower" => "/assets/default_avatar_44.png",
+     "follower_2x" => "/assets/default_avatar_44@2x.png",
+     "profile" => "/assets/default_avatar_140.png",
+     "profile_2x" => "/assets/default_avatar_140@2x.png"
+    }
+  end
+  
+  def photo_version_url(version)
+    url = self.photo_fb[version.to_s]["url"]
+    url || self.default_avatar[version.to_s]
+  end
+
   def is_followed
     raise "no other user!" unless self.other_user
     return nil if self.other_user.id == self.id

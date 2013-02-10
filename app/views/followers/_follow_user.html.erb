@@ -24,7 +24,7 @@ jQuery(function($) {
 <div class="row-fluid">
   <span class="pull-left span1">
     <a href="<%= user_custom_slug_url(display_user) %>">
-      <img class="img-polaroid" src="<%= display_user.photo.versions[:feed_2x] %>" >
+      <img class="img-polaroid" src="<%= display_user.photo_version_url(:feed_2x) %>" >
     </a>
     <br><br>
   </span>

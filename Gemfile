@@ -50,12 +50,9 @@ gem "amatch"
 gem "grocer"
 gem "rack-rewrite"
 gem 'kaminari'
-
 gem "honeybadger"
 gem 'newrelic_rpm'
-
-#gem 's3_direct_upload', :git => "git://github.com/waynehoover/s3_direct_upload.git"
-
 gem 'carrierwave_direct'
+gem 'jquery-ui-rails'
 
 

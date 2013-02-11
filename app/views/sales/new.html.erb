@@ -284,6 +284,38 @@ ul.thumbnails div.thumbnail img {
       </li>
   </ul></div>
 
+
+  <script>
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+
+    $('#store').autocomplete({
+      source: availableTags
+    });
+
+  </script>
   <%= form_tag({:controller => "sales", :action => "create"},
                {:id => "sale_form"}) do |f| %>
 
@@ -301,7 +333,8 @@ ul.thumbnails div.thumbnail img {
                    <br><br>
                    <div class="input-prepend">
                      <span class="add-on">Store</span>
-                     <input class="span2" id="prependedInput" type="text"><br><br>
+                     <%= text_field_tag "store", params[:store], :class => "span2" %>
+                     <br><br>
 
                      <span class="add-on">Brand</span>
                      <%= text_field_tag "brand", params[:brand], :class => "span2",
@@ -355,6 +388,7 @@ function selectSize(size_id) {
   selectedSizes = $('td.selectedSize').map(function(i,td) { return td.attributes['thesize'].value })
   $('input#size')[0].value = selectedSizes.toArray().join(',');
 }
+
                        </script>
 
                        <table class="table table-bordered table-condensed" id="sizechart">            

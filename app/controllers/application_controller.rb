@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     "BatRhFb0WhLfRV4kN7yt3Gxcm75qARENyW7LZt7B"
   end
 
+  def self.google_places_key
+    "AIzaSyDoWmAsJFjA4IZxd4IlBpAd_OfZGh15p8k"
+  end
+
   def self.sts
    AWS::STS.new(:access_key_id => aws_access_key,
                 :secret_access_key => aws_secret_access_key)  

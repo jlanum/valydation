@@ -1,9 +1,55 @@
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+
 
 <style>
 body {
   padding-top: 100px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+
+#dropzone input {
+  /*Important*/
+  position: absolute;
+  /*Important*/
+  cursor: pointer;
+  left: 0px;
+  top: 0px;
+  opacity:0; 
+}
+
+/*Important*/
+#dropzone.mouse-over {
+  border: 2px dashed rgba(0,0,0,.5);
+  color: rgba(0,0,0,.5);
+}
+
+.photoOr {
+  margin-top:-16px;
+  margin-bottom: 8px;
+  font-style: italic;  
+}
+
+ul.thumbnails div.thumbnail {
+  width:200px;
+  height:200px;
+  overflow: hidden;
+  padding:2px;
+}
+ul.thumbnails div.thumbnail img {
+  min-height: 100%;
+  width: auto;
+}
+
+table#sizechart td {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  text-align: center;
+  cursor: pointer;
+}
+td.selectedSize {
+  color: white;
+  background-color: rgb(67, 17, 96);
+}
+
 </style>
 
 
@@ -188,23 +234,6 @@ function previewFile(fileIndex) {
 </script>
 
 
-<style>
-#dropzone input {
-  /*Important*/
-  position: absolute;
-  /*Important*/
-  cursor: pointer;
-  left: 0px;
-  top: 0px;
-  opacity:0; 
-}
-
-/*Important*/
-#dropzone.mouse-over {
-  border: 2px dashed rgba(0,0,0,.5);
-  color: rgba(0,0,0,.5);
-}
-</style>
 
 <iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
 <iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
@@ -228,8 +257,15 @@ function previewFile(fileIndex) {
       <center>
         <div id="dropzone" class="hero-unit">
           <div id="clickHere">
+
+          <center><h3>Drag and drop here</h3></center>
+            
+            <div class="photoOr">
+            or 
+            </div>
+
             <button class="btn btn-large btn-success submit" id="selectFiles">Select Photos</button>
-            <br> or 
+            
 
             <%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
               <%= f.file_field :image_0, :onchange => "previewFile(0)" %>
@@ -245,7 +281,6 @@ function previewFile(fileIndex) {
 
           </div>
 
-          <center><h3>Drag and Drop</h3></center>
 
         </div><!-- End of hero -->
       </center>
@@ -254,18 +289,6 @@ function previewFile(fileIndex) {
 
   </div><!-- End of row -->
 
-  <style>
-ul.thumbnails div.thumbnail {
-  width:200px;
-  height:200px;
-  overflow: hidden;
-  padding:2px;
-}
-ul.thumbnails div.thumbnail img {
-  min-width:100%;
-  min-height: 100%;
-}
-  </style>
 
   <div class="photo-upload">
     <ul class="thumbnails" style="margin-left:40px;">
@@ -288,6 +311,9 @@ ul.thumbnails div.thumbnail img {
 
 
   <script>
+
+  $(function() {
+
     var availableTags = [
       "ActionScript",
       "AppleScript",
@@ -313,11 +339,31 @@ ul.thumbnails div.thumbnail img {
       "Scheme"
     ];
 
+    storeRefs = {}
+    yayo = {}
+
     $('#store').autocomplete({
-      source: availableTags
+      minLength: 1,
+      source: function(request, response) {
+        $.getJSON('/store_lookup?' + $('#store').serialize(), null, function(data){
+          $.each(data['predictions'], function(i,pred) { 
+            storeRefs[pred['description']] = pred['reference'] 
+          });
+          var storeNames = data['predictions'].map(function(pred,i) { 
+            return pred['description'] 
+          });
+          response(storeNames);
+        });
+      },
+      select: function(event, ui) {
+        $('#store_reference')[0].value = storeRefs[ui.item.value];
+      }
     });
 
+  });
+
   </script>
+
   <%= form_tag({:controller => "sales", :action => "create"},
                {:id => "sale_form"}) do |f| %>
 
@@ -336,6 +382,7 @@ ul.thumbnails div.thumbnail img {
                    <div class="input-prepend">
                      <span class="add-on">Store</span>
                      <%= text_field_tag "store", params[:store], :class => "span2" %>
+                     <%= hidden_field_tag "store_reference", params[:store_reference] %>
                      <br><br>
 
                      <span class="add-on">Brand</span>
@@ -364,17 +411,6 @@ ul.thumbnails div.thumbnail img {
                    <div id="hear">
                      Select Sizes<br>
                      <div class="" id="" style="max-width: 400px;">
-                       <style>
-table#sizechart td {
-  border-bottom: 1px solid rgb(221, 221, 221);
-  text-align: center;
-  cursor: pointer;
-}
-td.selectedSize {
-  color: white;
-  background-color: rgb(67, 17, 96);
-}
-                       </style>
 
                        <script>
 selectedSizes = []
@@ -412,9 +448,10 @@ function selectSize(size_id) {
 
                        <%= hidden_field_tag "size", params[:size], :id => "size" %>
 
+                       <br>
                        <div class="postbtn">
                          <center>
-                           <button id="uploady" class="btn btn-large btn-success submit span2">Post</button></center>
+                           <button id="uploady" class="btn btn-large btn-success submit span2" onclick="return false;">Post</button></center>
 
                        </center>
 

@@ -26,6 +26,12 @@ class SalesController < ApplicationController
     render :json => {"bucket" => params[:bucket], "key" => params[:key]}
   end
 
+  def store_lookup
+    autocomplete_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=#{CGI.escape(params[:store])}&types=establishment&location=#{@user.city.lat},#{@user.city.lon}&radius=10000&sensor=false&key=#{ApplicationController.google_places_key}"
+    json_response = JSON.parse(open(autocomplete_url).read)
+    render :json => json_response
+  end
+
   def create
     @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],

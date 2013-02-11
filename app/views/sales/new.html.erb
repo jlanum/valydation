@@ -35,6 +35,23 @@ body {
 
 <script>
 
+function ignoreDrag(e) {
+  e.originalEvent.stopPropagation();
+  e.originalEvent.preventDefault();
+}
+
+function drop(e) {
+  ignoreDrag(e);
+  var dt = e.originalEvent.dataTransfer;
+  var files = dt.files;
+
+  if(dt.files.length > 0){
+    var file = dt.files[0];
+    alert(file.name);
+  }
+}
+
+
 $(document).ready(function () {
   $('#_image_0_iframe').load(function() {
     var jsonResponse = JSON.parse($("#_image_0_iframe")[0].contentWindow.document.body.innerText);
@@ -82,22 +99,100 @@ $(document).ready(function () {
   $('#uploady').click(function() {
     $('#image_0_form').submit();
   });
+
+
+
 });
 
+function nextEmptyFileInput() {
+  var fileInput;
+
+    $.each([0,1,2],function(i) {
+      fileInput = $('#sale_image_uploader_image_' + i);
+
+      if (fileInput.val().length == 0) {
+        return false;
+      }
+    });
+    return fileInput;
+}
+
+$(function () {
+    var dropZoneId = "dropzone";
+    var buttonId = "clickHere";
+    var mouseOverClass = "mouse-over";
+
+    var dropZone = $("#" + dropZoneId);
+    var ooleft = dropZone.offset().left;
+    var ooright = dropZone.outerWidth() + ooleft;
+    var ootop = dropZone.offset().top;
+    var oobottom = dropZone.outerHeight() + ootop;
+
+    document.getElementById(dropZoneId).addEventListener("dragover", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.addClass(mouseOverClass);
+        var x = e.pageX;
+        var y = e.pageY;
+
+      var inputFile = nextEmptyFileInput();        
+
+        if (!(x < ooleft || x > ooright || y < ootop || y > oobottom)) {
+            inputFile.offset({ top: y - 15, left: x - 100 });
+        } else {
+            inputFile.offset({ top: -400, left: -400 });
+        }
+
+    }, true);
+
+    if (buttonId != "") {
+        var clickZone = $("#" + buttonId);
+
+        var oleft = clickZone.offset().left;
+        var oright = clickZone.outerWidth() + oleft;
+        var otop = clickZone.offset().top;
+        var obottom = clickZone.outerHeight() + otop;
+
+        $("#" + buttonId).mousemove(function (e) {
+
+            var inputFile = nextEmptyFileInput();        
+          
+            var x = e.pageX;
+            var y = e.pageY;
+            if (!(x < oleft || x > oright || y < otop || y > obottom)) {
+                inputFile.offset({ top: y - 15, left: x - 160 });
+            } else {
+                inputFile.offset({ top: -400, left: -400 });
+            }
+        });
+    }
+
+    document.getElementById(dropZoneId).addEventListener("drop", function (e) {
+        $("#" + dropZoneId).removeClass(mouseOverClass);
+    }, true);
+
+})
 
 </script>
 
-<%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
-  <%= f.file_field :image_0 %>
-<% end %>
-  
-<%= direct_upload_form_for @uploader_1, :html => { :target => "_image_1_iframe", :id => "image_1_form" } do |f| %>
-  <%= f.file_field :image_1 %>
-<% end %>
 
-<%= direct_upload_form_for @uploader_2, :html => { :target => "_image_2_iframe", :id => "image_2_form" } do |f| %>
-  <%= f.file_field :image_2 %>
-<% end %>
+<style>
+    #dropzone input {
+        /*Important*/
+        position: absolute;
+        /*Important*/
+        cursor: pointer;
+        left: 0px;
+        top: 0px;
+        opacity:0; 
+    }
+
+    /*Important*/
+    #dropzone.mouse-over {
+        border: 2px dashed rgba(0,0,0,.5);
+        color: rgba(0,0,0,.5);
+    }
+</style>
 
 <button id="uploady" class="btn btn-large btn-success submit">Upload</button>
 
@@ -118,7 +213,26 @@ $(document).ready(function () {
 
     <div class="span6">
       <center>
-      <div class="hero-unit">
+        <div id="dropzone" class="hero-unit">
+          <div id="clickHere">
+            or click here..
+
+<%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
+  <%= f.file_field :image_0 %>
+<% end %>
+
+<%= direct_upload_form_for @uploader_1, :html => { :target => "_image_1_iframe", :id => "image_1_form" } do |f| %>
+  <%= f.file_field :image_1 %>
+<% end %>
+
+<%= direct_upload_form_for @uploader_2, :html => { :target => "_image_2_iframe", :id => "image_2_form" } do |f| %>
+  <%= f.file_field :image_2 %>
+<% end %>
+
+
+
+          </div>
+
         <center><h3>Drag and Drop</h3></center>
 
       </div><!-- End of hero -->

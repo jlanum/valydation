@@ -258,16 +258,17 @@ function previewFile(fileIndex) {
     ul.thumbnails div.thumbnail {
       width:200px;
       height:200px;
-      vertical-align: center;
+      overflow: hidden;
+      padding:2px;
     }
     ul.thumbnails div.thumbnail img {
       min-width:100%;
-      height: auto;
+      min-height: 100%;
     }
   </style>
 
   <div class="photo-upload">
-    <ul class="thumbnails" style="">
+    <ul class="thumbnails" style="margin-left:40px;">
       <li>
         <div class="thumbnail">
           <img id="img_preview_0" data-src="holder.js/260x180">

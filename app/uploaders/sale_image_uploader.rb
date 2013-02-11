@@ -26,6 +26,9 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   #storage :file
   storage :fog
 
+  include CarrierWaveDirect::Uploader
+  
+
   include CarrierWave::MimeTypes
 
   process :set_content_type

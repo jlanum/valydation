@@ -8,7 +8,22 @@ class SalesController < ApplicationController
   end
 
   def new
+    if params[:bucket] and params[:key]
+      handle_s3_upload
+    end
 
+    @uploader_0 = Sale.new.image_0
+    @uploader_0.success_action_redirect = new_sale_url
+
+    @uploader_1 = Sale.new.image_1
+    @uploader_1.success_action_redirect = new_sale_url
+
+    @uploader_2 = Sale.new.image_2
+    @uploader_2.success_action_redirect = new_sale_url
+  end
+
+  def handle_s3_upload
+    render :json => {"bucket" => params[:bucket], "key" => params[:key]}
   end
 
   def create

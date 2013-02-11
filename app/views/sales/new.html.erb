@@ -31,19 +31,108 @@ body {
   <!-- Main hero unit for a primary marketing message or call to action -->
   <div align="center" class="media-heading">     
     <p class="our-story"><font size="8">Upload a Sale</font></p></div><br><br><hr>
+
+
+<script>
+
+$(document).ready(function () {
+  $('#_image_0_iframe').load(function() {
+    var jsonResponse = JSON.parse($("#_image_0_iframe")[0].contentWindow.document.body.innerText);
+    $('#image_0_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_1').val().length > 0) {
+      $('#image_1_form').submit();
+    } else {
+      //submit sale form
+    }
+  });
+
+  $('#_image_1_iframe').load(function() {
+    var jsonResponse = JSON.parse($("#_image_1_iframe")[0].contentWindow.document.body.innerText);
+    $('#image_1_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_2').val().length > 0) {
+      $('#image_2_form').submit();
+    } else {
+      //submit sale form
+    }
+  });
+  
+  $('#_image_2_iframe').load(function() {
+    var jsonResponse = JSON.parse($("#_image_2_iframe")[0].contentWindow.document.body.innerText);
+    $('#image_2_key')[0].value = jsonResponse['key'];
+
+    //submit sale form
+  });
+
+
+  $('#selectFiles').click(function() {
+    $.each([0,1,2],function(i) {
+      var fileElly = $('#sale_image_uploader_image_' + i);
+
+      if (fileElly.val().length == 0) {
+        fileElly.click();
+        return false;
+      }
+
+      if (i==2) {
+        fileElly.click();
+      }
+    });
+  });
+  
+  $('#uploady').click(function() {
+    $('#image_0_form').submit();
+  });
+});
+
+
+</script>
+
+<%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
+  <%= f.file_field :image_0 %>
+<% end %>
+  
+<%= direct_upload_form_for @uploader_1, :html => { :target => "_image_1_iframe", :id => "image_1_form" } do |f| %>
+  <%= f.file_field :image_1 %>
+<% end %>
+
+<%= direct_upload_form_for @uploader_2, :html => { :target => "_image_2_iframe", :id => "image_2_form" } do |f| %>
+  <%= f.file_field :image_2 %>
+<% end %>
+
+<button id="uploady" class="btn btn-large btn-success submit">Upload</button>
+
+
+<iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_2_iframe" id="_image_2_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+
+
+<%= hidden_field_tag "image_0_key" %>
+<%= hidden_field_tag "image_1_key" %>
+<%= hidden_field_tag "image_2_key" %>
+
+
   <div class="row-fluid">
+
+    <div class="span2"></div>
+
     <div class="span6">
+      <center>
       <div class="hero-unit">
         <center><h3>Drag and Drop</h3></center>
 
       </div><!-- End of hero -->
+    </center>
     </div>
 
-    <div class="span6">
-      <div class="hero-unit">
-        <center> <h3>Upload File</h3></center>
 
-      </div><!-- End of hero -->
+    <div class="span2">
+      <br>
+      <br>
+
+      <center>
+        <button class="btn btn-large btn-success submit" id="selectFiles">Select Files</button>
+      </center>
     </div>
 
 

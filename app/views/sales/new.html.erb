@@ -26,12 +26,6 @@ body {
 
 %>
 
-<div class="container">
-
-  <!-- Main hero unit for a primary marketing message or call to action -->
-  <div align="center" class="media-heading">     
-    <p class="our-story"><font size="8">Upload a Sale</font></p></div><br><br><hr>
-
 
   <script>
 
@@ -189,10 +183,10 @@ function previewFile(fileIndex) {
 }
 
 
-  </script>
+</script>
 
 
-  <style>
+<style>
 #dropzone input {
   /*Important*/
   position: absolute;
@@ -208,16 +202,20 @@ function previewFile(fileIndex) {
   border: 2px dashed rgba(0,0,0,.5);
   color: rgba(0,0,0,.5);
 }
-  </style>
+</style>
 
-  <iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
-  <iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
-  <iframe name="_image_2_iframe" id="_image_2_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_2_iframe" id="_image_2_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
 
 
-  <%= hidden_field_tag "image_0_key" %>
-  <%= hidden_field_tag "image_1_key" %>
-  <%= hidden_field_tag "image_2_key" %>
+
+<div class="container">
+
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  <div align="center" class="media-heading">     
+    <p class="our-story"><font size="8">Upload a Sale</font></p></div><hr>
+
 
 
   <div class="row-fluid">
@@ -228,8 +226,8 @@ function previewFile(fileIndex) {
       <center>
         <div id="dropzone" class="hero-unit">
           <div id="clickHere">
-        <button class="btn btn-large btn-success submit" id="selectFiles">Select Files</button>
-        <br> or 
+            <button class="btn btn-large btn-success submit" id="selectFiles">Select Photos</button>
+            <br> or 
 
             <%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
               <%= f.file_field :image_0, :onchange => "previewFile(0)" %>
@@ -255,66 +253,83 @@ function previewFile(fileIndex) {
   </div><!-- End of row -->
 
   <style>
-    ul.thumbnails div.thumbnail {
-      width:200px;
-      height:200px;
-      overflow: hidden;
-      padding:2px;
-    }
-    ul.thumbnails div.thumbnail img {
-      min-width:100%;
-      min-height: 100%;
-    }
+ul.thumbnails div.thumbnail {
+  width:200px;
+  height:200px;
+  overflow: hidden;
+  padding:2px;
+}
+ul.thumbnails div.thumbnail img {
+  min-width:100%;
+  min-height: 100%;
+}
   </style>
 
   <div class="photo-upload">
     <ul class="thumbnails" style="margin-left:40px;">
       <li>
-        <div class="thumbnail">
-          <img id="img_preview_0" data-src="holder.js/260x180">
-        </div>
+      <div class="thumbnail">
+        <img id="img_preview_0" data-src="holder.js/260x180">
+      </div>
       </li>
       <li>
-        <div class="thumbnail">
-          <img id="img_preview_1" data-src="holder.js/260x180">
-        </div>
+      <div class="thumbnail">
+        <img id="img_preview_1" data-src="holder.js/260x180">
+      </div>
       </li>
       <li>
-        <div class="thumbnail">
-          <img id="img_preview_2" data-src="holder.js/260x180">
-        </div>
+      <div class="thumbnail">
+        <img id="img_preview_2" data-src="holder.js/260x180">
+      </div>
       </li>
   </ul></div>
 
+  <%= form_tag({:controller => "sales", :action => "create"},
+               {:id => "sale_form"}) do |f| %>
 
-  <div align="center">
-    <div class="row">
-      <select>
-        <option>Select Category</option>
-        <option>Women's</option>
-        <option>Men's</option>
-        <option>Home</option>
-        <option>Baby</option>
-        <option>Pet</option>
-      </select><br><br>
-      <div class="input-prepend">
-        <a href="store.html"><button class="btn" type="button">Store</button></a>
-        <input class="span2" id="prependedInput" type="text"><br><br>
-        <span class="add-on">Brand</span>
-        <input class="span2" id="prependedInput" type="text" placeholder="E.G., John Varvatos"><br><br>
-        <span class="add-on">Orig $</span>
-        <input class="span2" id="prependedInput" type="text"> <br><br>
-        <span class="add-on">Sale $</span>
-        <input class="span2" id="prependedInput" type="text"><br><br>
-        <span class="add-on">% Off</span>
-        <input class="span2" id="prependedInput" type="text"><br><br>
-        <span class="add-on">Product</span>
-        <input class="span2" id="prependedInput" type="text" placeholder="E.G., Wool Sweater"><br><br>		
-      </div>
-      <div id="hear">
-        Select Sizes<br>
-        <div class="" id="" style="width: 400px;">
-          <style>
+               <%= hidden_field_tag "image_0_key" %>
+               <%= hidden_field_tag "image_1_key" %>
+               <%= hidden_field_tag "image_2_key" %>
+
+
+               <div align="center">
+                 <div class="row">
+                   <%  categories = [["Select Category",-1]]
+                       Sale.categories.each_with_index { |c,i| categories << [c,i] }  %>
+                     <%= select_tag "category_id",
+                       options_for_select(categories, params[:category_id]) %>
+                   <br><br>
+                   <div class="input-prepend">
+                     <span class="add-on">Store</span>
+                     <input class="span2" id="prependedInput" type="text"><br><br>
+
+                     <span class="add-on">Brand</span>
+                     <%= text_field_tag "brand", params[:brand], :class => "span2",
+                          :placeholder => "E.G., John Varvatos" %>
+                        <br><br>
+
+                     <span class="add-on">Orig $</span>
+                     <%= text_field_tag "orig_price", params[:orig_price], :class => "span2" %>
+                     <br><br>
+
+                     <span class="add-on">Sale $</span>
+                     <%= text_field_tag "sale_price", params[:sale_price], :class => "span2" %>
+                     <br><br>
+
+                     <span class="add-on">% Off</span>
+                     <%= text_field_tag "percent_off", params[:percent_off], :class => "span2" %>
+                     <br><br>
+
+                     <span class="add-on">Product</span>
+                     <%= text_field_tag "product", params[:product], :class => "span2",
+                       :placeholder => "E.G., Woll Sweater" %>
+                     <br><br>
+                   </div>
+
+                   <div id="hear">
+                     Select Sizes<br>
+                     <div class="" id="" style="max-width: 400px;">
+                       <style>
 table#sizechart td {
   border-bottom: 1px solid rgb(221, 221, 221);
   text-align: center;
@@ -324,9 +339,9 @@ td.selectedSize {
   color: white;
   background-color: rgb(67, 17, 96);
 }
-          </style>
+                       </style>
 
-          <script>
+                       <script>
 selectedSizes = []
 
 function selectSize(size_id) {
@@ -340,35 +355,39 @@ function selectSize(size_id) {
   selectedSizes = $('td.selectedSize').map(function(i,td) { return td.attributes['thesize'].value })
   $('input#size')[0].value = selectedSizes.toArray().join(',');
 }
-          </script>
+                       </script>
 
-          <table class="table table-bordered table-condensed" id="sizechart">            
-            <% @sizes.each_with_index do |size_row, row| %>
-              <tr>
-              <% size_row.each_with_index do |size, col|
-                size_id = "size_#{row}_#{col}" %>
-              <td theSize="<%= size %>" id="<%= size_id %>" onclick="selectSize('<%= size_id %>')">
-                  <%= size %>
-                </td>
-              <% end %>
-              </tr>
-            <% end %>          
-            </table>
+                       <table class="table table-bordered table-condensed" id="sizechart">            
+                         <% @sizes.each_with_index do |size_row, row| %>
+                           <tr>
+                           <% size_row.each_with_index do |size, col|
+                             size_id = "size_#{row}_#{col}" %>
+                           <td theSize="<%= size %>" id="<%= size_id %>" onclick="selectSize('<%= size_id %>')">
+                               <%= size %>
+                             </td>
+                           <% end %>
+                           </tr>
+                         <% end %>          
+                         </table>
 
-          </div>
+                       </div>
 
-          <br>
+                       <br>
 
-          <%= hidden_field_tag "size", params[:size], :id => "size" %>
+                       <%= hidden_field_tag "size", params[:size], :id => "size" %>
 
-          <div class="postbtn">
-            <center>
-              <button id="uploady" class="btn btn-large btn-success submit">Post</button>
-            </center>
+                       <div class="postbtn">
+                         <center>
+                           <button id="uploady" class="btn btn-large btn-success submit span2">Post</button></center>
 
-          </div>
-        </div>
-      </div>
-    </div>
+                       </center>
 
-    <br><br>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
+
+             <% end %>
+
+               <br><br>

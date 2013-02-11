@@ -33,7 +33,7 @@ body {
     <p class="our-story"><font size="8">Upload a Sale</font></p></div><br><br><hr>
 
 
-<script>
+  <script>
 
 function ignoreDrag(e) {
   e.originalEvent.stopPropagation();
@@ -72,7 +72,7 @@ $(document).ready(function () {
       //submit sale form
     }
   });
-  
+
   $('#_image_2_iframe').load(function() {
     var jsonResponse = JSON.parse($("#_image_2_iframe")[0].contentWindow.document.body.innerText);
     $('#image_2_key')[0].value = jsonResponse['key'];
@@ -95,7 +95,7 @@ $(document).ready(function () {
       }
     });
   });
-  
+
   $('#uploady').click(function() {
     $('#image_0_form').submit();
   });
@@ -107,169 +107,185 @@ $(document).ready(function () {
 function nextEmptyFileInput() {
   var fileInput;
 
-    $.each([0,1,2],function(i) {
-      fileInput = $('#sale_image_uploader_image_' + i);
+  $.each([0,1,2],function(i) {
+    fileInput = $('#sale_image_uploader_image_' + i);
 
-      if (fileInput.val().length == 0) {
-        return false;
-      }
-    });
-    return fileInput;
+    if (fileInput.val().length == 0) {
+      return false;
+    }
+  });
+  return fileInput;
 }
 
 $(function () {
-    var dropZoneId = "dropzone";
-    var buttonId = "clickHere";
-    var mouseOverClass = "mouse-over";
+  var dropZoneId = "dropzone";
+  var buttonId = "clickHere";
+  var mouseOverClass = "mouse-over";
 
-    var dropZone = $("#" + dropZoneId);
-    var ooleft = dropZone.offset().left;
-    var ooright = dropZone.outerWidth() + ooleft;
-    var ootop = dropZone.offset().top;
-    var oobottom = dropZone.outerHeight() + ootop;
+  var dropZone = $("#" + dropZoneId);
+  var ooleft = dropZone.offset().left;
+  var ooright = dropZone.outerWidth() + ooleft;
+  var ootop = dropZone.offset().top;
+  var oobottom = dropZone.outerHeight() + ootop;
 
-    document.getElementById(dropZoneId).addEventListener("dragover", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        dropZone.addClass(mouseOverClass);
-        var x = e.pageX;
-        var y = e.pageY;
+  document.getElementById(dropZoneId).addEventListener("dragover", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dropZone.addClass(mouseOverClass);
+    var x = e.pageX;
+    var y = e.pageY;
+
+    var inputFile = nextEmptyFileInput();        
+
+    if (!(x < ooleft || x > ooright || y < ootop || y > oobottom)) {
+      inputFile.offset({ top: y - 15, left: x - 100 });
+    } else {
+      inputFile.offset({ top: -400, left: -400 });
+    }
+
+  }, true);
+
+  if (buttonId != "") {
+    var clickZone = $("#" + buttonId);
+
+    var oleft = clickZone.offset().left;
+    var oright = clickZone.outerWidth() + oleft;
+    var otop = clickZone.offset().top;
+    var obottom = clickZone.outerHeight() + otop;
+
+    $("#" + buttonId).mousemove(function (e) {
 
       var inputFile = nextEmptyFileInput();        
 
-        if (!(x < ooleft || x > ooright || y < ootop || y > oobottom)) {
-            inputFile.offset({ top: y - 15, left: x - 100 });
-        } else {
-            inputFile.offset({ top: -400, left: -400 });
-        }
+      var x = e.pageX;
+      var y = e.pageY;
+      if (!(x < oleft || x > oright || y < otop || y > obottom)) {
+        inputFile.offset({ top: y - 15, left: x - 160 });
+      } else {
+        inputFile.offset({ top: -400, left: -400 });
+      }
+    });
+  }
 
-    }, true);
-
-    if (buttonId != "") {
-        var clickZone = $("#" + buttonId);
-
-        var oleft = clickZone.offset().left;
-        var oright = clickZone.outerWidth() + oleft;
-        var otop = clickZone.offset().top;
-        var obottom = clickZone.outerHeight() + otop;
-
-        $("#" + buttonId).mousemove(function (e) {
-
-            var inputFile = nextEmptyFileInput();        
-          
-            var x = e.pageX;
-            var y = e.pageY;
-            if (!(x < oleft || x > oright || y < otop || y > obottom)) {
-                inputFile.offset({ top: y - 15, left: x - 160 });
-            } else {
-                inputFile.offset({ top: -400, left: -400 });
-            }
-        });
-    }
-
-    document.getElementById(dropZoneId).addEventListener("drop", function (e) {
-        $("#" + dropZoneId).removeClass(mouseOverClass);
-    }, true);
+  document.getElementById(dropZoneId).addEventListener("drop", function (e) {
+    $("#" + dropZoneId).removeClass(mouseOverClass);
+  }, true);
 
 })
 
-</script>
+function previewFile(fileIndex) {
+  var input = $('#sale_image_uploader_image_' + fileIndex)[0];
 
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
-<style>
-    #dropzone input {
-        /*Important*/
-        position: absolute;
-        /*Important*/
-        cursor: pointer;
-        left: 0px;
-        top: 0px;
-        opacity:0; 
+    reader.onload = function (e) {
+      var previewImg = $('#img_preview_' + fileIndex);
+      previewImg.attr('src', e.target.result);
     }
 
-    /*Important*/
-    #dropzone.mouse-over {
-        border: 2px dashed rgba(0,0,0,.5);
-        color: rgba(0,0,0,.5);
-    }
-</style>
-
-<button id="uploady" class="btn btn-large btn-success submit">Upload</button>
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
 
-<iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
-<iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
-<iframe name="_image_2_iframe" id="_image_2_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+  </script>
 
 
-<%= hidden_field_tag "image_0_key" %>
-<%= hidden_field_tag "image_1_key" %>
-<%= hidden_field_tag "image_2_key" %>
+  <style>
+#dropzone input {
+  /*Important*/
+  position: absolute;
+  /*Important*/
+  cursor: pointer;
+  left: 0px;
+  top: 0px;
+  opacity:0; 
+}
+
+/*Important*/
+#dropzone.mouse-over {
+  border: 2px dashed rgba(0,0,0,.5);
+  color: rgba(0,0,0,.5);
+}
+  </style>
+
+  <iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+  <iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+  <iframe name="_image_2_iframe" id="_image_2_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+
+
+  <%= hidden_field_tag "image_0_key" %>
+  <%= hidden_field_tag "image_1_key" %>
+  <%= hidden_field_tag "image_2_key" %>
 
 
   <div class="row-fluid">
 
-    <div class="span2"></div>
+    <div class="span3"></div>
 
     <div class="span6">
       <center>
         <div id="dropzone" class="hero-unit">
           <div id="clickHere">
-            or click here..
+        <button class="btn btn-large btn-success submit" id="selectFiles">Select Files</button>
+        <br> or 
 
-<%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
-  <%= f.file_field :image_0 %>
-<% end %>
+            <%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
+              <%= f.file_field :image_0, :onchange => "previewFile(0)" %>
+          <% end %>
 
-<%= direct_upload_form_for @uploader_1, :html => { :target => "_image_1_iframe", :id => "image_1_form" } do |f| %>
-  <%= f.file_field :image_1 %>
-<% end %>
+            <%= direct_upload_form_for @uploader_1, :html => { :target => "_image_1_iframe", :id => "image_1_form" } do |f| %>
+              <%= f.file_field :image_1, :onchange => "previewFile(1)" %>
+          <% end %>
 
-<%= direct_upload_form_for @uploader_2, :html => { :target => "_image_2_iframe", :id => "image_2_form" } do |f| %>
-  <%= f.file_field :image_2 %>
-<% end %>
-
-
+            <%= direct_upload_form_for @uploader_2, :html => { :target => "_image_2_iframe", :id => "image_2_form" } do |f| %>
+              <%= f.file_field :image_2, :onchange => "previewFile(2)" %>
+          <% end %>
 
           </div>
 
-        <center><h3>Drag and Drop</h3></center>
+          <center><h3>Drag and Drop</h3></center>
 
-      </div><!-- End of hero -->
-    </center>
-    </div>
-
-
-    <div class="span2">
-      <br>
-      <br>
-
-      <center>
-        <button class="btn btn-large btn-success submit" id="selectFiles">Select Files</button>
+        </div><!-- End of hero -->
       </center>
     </div>
 
 
-
   </div><!-- End of row -->
+
+  <style>
+    ul.thumbnails div.thumbnail {
+      width:200px;
+      height:200px;
+      vertical-align: center;
+    }
+    ul.thumbnails div.thumbnail img {
+      min-width:100%;
+      height: auto;
+    }
+  </style>
+
   <div class="photo-upload">
-    <ul class="thumbnails">
+    <ul class="thumbnails" style="">
       <li>
-      <a href="#" class="thumbnail">
-        <img data-src="holder.js/260x180" alt="" style="width: 260px; height: 180px;" >
-      </a>
+        <div class="thumbnail">
+          <img id="img_preview_0" data-src="holder.js/260x180">
+        </div>
       </li>
       <li>
-      <a href="#" class="thumbnail">
-        <img data-src="holder.js/260x180" alt="" style="width: 260px; height: 180px;" >
-      </a>
+        <div class="thumbnail">
+          <img id="img_preview_1" data-src="holder.js/260x180">
+        </div>
       </li>
       <li>
-      <a href="#" class="thumbnail">
-        <img data-src="holder.js/260x180" alt="" style="width: 260px; height: 180px;" >
-      </a>
+        <div class="thumbnail">
+          <img id="img_preview_2" data-src="holder.js/260x180">
+        </div>
       </li>
   </ul></div>
+
+
   <div align="center">
     <div class="row">
       <select>
@@ -346,7 +362,7 @@ function selectSize(size_id) {
 
           <div class="postbtn">
             <center>
-              <button class="btn btn-large btn-success submit span2">Post</button>
+              <button id="uploady" class="btn btn-large btn-success submit">Post</button>
             </center>
 
           </div>

@@ -93,6 +93,10 @@ function drop(e) {
   }
 }
 
+function submitSaleForm() {
+  $('#sale_form').submit()
+}
+
 
 $(document).ready(function () {
   $('#_image_0_iframe').load(function() {
@@ -101,7 +105,7 @@ $(document).ready(function () {
     if ($('#sale_image_uploader_image_1').val().length > 0) {
       $('#image_1_form').submit();
     } else {
-      //submit sale form
+      submitSaleForm();
     }
   });
 
@@ -111,15 +115,14 @@ $(document).ready(function () {
     if ($('#sale_image_uploader_image_2').val().length > 0) {
       $('#image_2_form').submit();
     } else {
-      //submit sale form
+      submitSaleForm();
     }
   });
 
   $('#_image_2_iframe').load(function() {
     var jsonResponse = JSON.parse($("#_image_2_iframe")[0].contentWindow.document.body.innerText);
     $('#image_2_key')[0].value = jsonResponse['key'];
-
-    //submit sale form
+    submitSaleForm();
   });
 
 
@@ -139,7 +142,11 @@ $(document).ready(function () {
   });
 
   $('#uploady').click(function() {
-    $('#image_0_form').submit();
+    if (validateForm()) {
+      $('#uploady')[0].disabled = true      
+      $('#uploady')[0].innerText = "Uploading..."
+      $('#image_0_form').submit();
+    }
   });
 
 
@@ -213,7 +220,32 @@ $(function () {
     $("#" + dropZoneId).removeClass(mouseOverClass);
   }, true);
 
-})
+});
+
+$(function() {
+
+    storeRefs = {}
+
+    $('#store').autocomplete({
+      minLength: 1,
+      source: function(request, response) {
+        $.getJSON('/store_lookup?' + $('#store').serialize(), null, function(data){
+          $.each(data['predictions'], function(i,pred) { 
+            storeRefs[pred['description']] = pred['reference'] 
+          });
+          var storeNames = data['predictions'].map(function(pred,i) { 
+            return pred['description'] 
+          });
+          response(storeNames);
+        });
+      },
+      select: function(event, ui) {
+        $('#store_reference')[0].value = storeRefs[ui.item.value];
+      }
+    });
+
+  });
+
 
 function previewFile(fileIndex) {
   var input = $('#sale_image_uploader_image_' + fileIndex)[0];
@@ -230,6 +262,113 @@ function previewFile(fileIndex) {
   }
 }
 
+function validateForm() {
+
+  if ($('#category_id').val() == -1) {
+    alert('Please select a category.');
+    return false;
+  }
+
+  if ($('#store_reference').val().length == 0) {
+    alert('Please enter a store name and select one of the results from the dropdown.');
+    return false;
+  }
+
+  if ($('#brand').val().length == 0) {
+    alert('Please enter the brand.');
+    return false;
+  }
+
+  if (!parseFloat($('#orig_price').val()) > 0) {
+    alert('Please enter the original price.');
+    return false;
+  }
+
+  if (!parseFloat($('#sale_price').val()) > 0) {
+    alert('Please enter the sale price.');
+    return false;
+  }
+
+  if (!parseFloat($('#percent_off').val()) > 0) {
+    alert('Please enter the percent off.');
+    return false;
+  }
+
+  if (parseFloat($('#orig_price').val()) < parseFloat($('#sale_price').val())) {
+    alert('The sale price must be lower than the original price.');
+    return false;
+  }
+
+  if ($('#product').val().length == 0) {
+    alert('Please enter the product name.');
+    return false;
+  }
+
+  if ($('#size').val().length == 0) {
+    alert('Please select available sizes.');
+    return false;
+  }
+  
+
+  return true;
+}
+
+function origPriceChanged() {
+  var salePrice = parseFloat($('#sale_price').val());
+  var origPrice = parseFloat($('#orig_price').val());
+  var percentOffBig = parseFloat($('#percent_off').val());
+  var percentOff = percentOffBig / 100;
+
+  if (salePrice > 0) {
+    $('#percent_off')[0].value = Math.round((1.0 - (salePrice / origPrice)) * 100);
+  } 
+  else if (percentOff > 0) {
+    $('#sale_price')[0].value = (origPrice * percentOff).toFixed(2);
+  }
+}
+
+function salePriceChanged() {
+  var salePrice = parseFloat($('#sale_price').val());
+  var origPrice = parseFloat($('#orig_price').val());
+  var percentOffBig = parseFloat($('#percent_off').val());
+  var percentOff = percentOffBig / 100;  
+  
+  if (origPrice > 0) {
+    $('#percent_off')[0].value = Math.round((1.0 - (salePrice / origPrice)) * 100);    
+  }
+  else if (percentOff > 0) {
+    $('#orig_price')[0].value = (salePrice / (1.0 - percentOff)).toFixed(2);
+  }
+}
+
+function percentOffChanged() {
+  var salePrice = parseFloat($('#sale_price').val());
+  var origPrice = parseFloat($('#orig_price').val());
+  var percentOffBig = parseFloat($('#percent_off').val());
+  var percentOff = percentOffBig / 100;  
+
+  if (origPrice > 0) {
+    $('#sale_price')[0].value = (origPrice * (1.0 - percentOff)).toFixed(2);
+  }
+  else if (salePrice > 0) {
+    $('#orig_price')[0].value = (salePrice / (1.0 - percentOff)).toFixed(2);
+  }
+}
+
+
+selectedSizes = []
+
+function selectSize(size_id) {
+  var sizeTd = $('#'+size_id)[0];
+  if (sizeTd.className == "selectedSize") {
+    sizeTd.className = "";
+  } else {
+    sizeTd.className = "selectedSize";
+  }
+
+  selectedSizes = $('td.selectedSize').map(function(i,td) { return td.attributes['thesize'].value })
+  $('input#size')[0].value = selectedSizes.toArray().join(', ');
+}
 
 </script>
 
@@ -310,60 +449,6 @@ function previewFile(fileIndex) {
   </ul></div>
 
 
-  <script>
-
-  $(function() {
-
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-
-    storeRefs = {}
-    yayo = {}
-
-    $('#store').autocomplete({
-      minLength: 1,
-      source: function(request, response) {
-        $.getJSON('/store_lookup?' + $('#store').serialize(), null, function(data){
-          $.each(data['predictions'], function(i,pred) { 
-            storeRefs[pred['description']] = pred['reference'] 
-          });
-          var storeNames = data['predictions'].map(function(pred,i) { 
-            return pred['description'] 
-          });
-          response(storeNames);
-        });
-      },
-      select: function(event, ui) {
-        $('#store_reference')[0].value = storeRefs[ui.item.value];
-      }
-    });
-
-  });
-
-  </script>
-
   <%= form_tag({:controller => "sales", :action => "create"},
                {:id => "sale_form"}) do |f| %>
 
@@ -391,15 +476,18 @@ function previewFile(fileIndex) {
                         <br><br>
 
                      <span class="add-on">Orig $</span>
-                     <%= text_field_tag "orig_price", params[:orig_price], :class => "span2" %>
+                     <%= text_field_tag "orig_price", params[:orig_price], :class => "span2",
+                          :onchange => "origPriceChanged()" %>
                      <br><br>
 
                      <span class="add-on">Sale $</span>
-                     <%= text_field_tag "sale_price", params[:sale_price], :class => "span2" %>
+                     <%= text_field_tag "sale_price", params[:sale_price], :class => "span2",
+                          :onchange => "salePriceChanged()" %>
                      <br><br>
 
                      <span class="add-on">% Off</span>
-                     <%= text_field_tag "percent_off", params[:percent_off], :class => "span2" %>
+                     <%= text_field_tag "percent_off", params[:percent_off], :class => "span2",
+                          :onchange => "percentOffChanged()" %>
                      <br><br>
 
                      <span class="add-on">Product</span>
@@ -411,23 +499,6 @@ function previewFile(fileIndex) {
                    <div id="hear">
                      Select Sizes<br>
                      <div class="" id="" style="max-width: 400px;">
-
-                       <script>
-selectedSizes = []
-
-function selectSize(size_id) {
-  var sizeTd = $('#'+size_id)[0];
-  if (sizeTd.className == "selectedSize") {
-    sizeTd.className = "";
-  } else {
-    sizeTd.className = "selectedSize";
-  }
-
-  selectedSizes = $('td.selectedSize').map(function(i,td) { return td.attributes['thesize'].value })
-  $('input#size')[0].value = selectedSizes.toArray().join(',');
-}
-
-                       </script>
 
                        <table class="table table-bordered table-condensed" id="sizechart">            
                          <% @sizes.each_with_index do |size_row, row| %>

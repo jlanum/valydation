@@ -55,13 +55,13 @@ class Sale < ActiveRecord::Base
   def process_images!
     full_session = ApplicationController.new_sts_session
     s3_full = AWS::S3.new(full_session.credentials)
-    bucket = s3_full.buckets["#{ApplicationController.s3_bucket}/raw_uploads"]
+    bucket = s3_full.buckets["#{ApplicationController.s3_bucket}"]
 
     (0..2).each do |image_index|
       if image_key = self.send("temp_image_url_#{image_index}")
         puts "processing #{image_key}"
         s3_obj = bucket.objects[image_key]
-        temp_filename = "#{Rails.root}/tmp/#{image_key}"
+        temp_filename = "#{Rails.root}/tmp/#{CGI.escape(image_key)}"
 
         File.open(temp_filename,"wb") do |f|
           s3_obj.read { |chunk| f.write(chunk) }

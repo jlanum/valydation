@@ -32,7 +32,42 @@ class SalesController < ApplicationController
     render :json => json_response
   end
 
+  def handle_store_reference
+    if params[:store_reference]
+      place_url = "https://maps.googleapis.com/maps/api/place/details/json?key=#{ApplicationController.google_places_key}&reference=#{params[:store_reference]}&sensor=false"
+      json_response = JSON.parse(open(place_url).read)
+
+      params[:display_address] = json_response["result"]["formatted_address"]
+      params[:store_name] = json_response["result"]["name"]
+      params[:store_url] = params[:store_reference]
+      params[:latitude] = json_response["result"]["geometry"]["location"]["lat"]
+      params[:longitude] = json_response["result"]["geometry"]["location"]["lng"]
+
+      params[:percent_off] = params[:percent_off].to_f / 100
+    end
+  end
+
+  def handle_direct_uploaded_images
+    (0..2).each do |image_index|
+      if image_key = params["image_#{image_index}_key"] and not image_key.empty?
+        @sale.send("temp_image_url_#{image_index}=",image_key)
+        @sale.uploaded_images = true
+      end
+    end    
+  end
+
+  def create_s3_uploads
+    @sale.image_upload_urls = []
+    federated_session = ApplicationController.new_sts_federated_session("mst_user_#{@user.id}")
+    params[:num_images].to_i.times do 
+      puts "creating image upload url"
+      @sale.image_upload_urls << @sale.create_s3_image_upload(federated_session)
+    end    
+  end
+
   def create
+    handle_store_reference
+
     @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],
                      :sale_price => params[:sale_price],
@@ -61,18 +96,20 @@ class SalesController < ApplicationController
       @sale.comments << comment
     end
 
+    handle_direct_uploaded_images
     
     @sale.save!
 
-    @sale.image_upload_urls = []
-    federated_session = ApplicationController.new_sts_federated_session("mst_user_#{@user.id}")
-    params[:num_images].to_i.times do 
-      puts "creating image upload url"
-      @sale.image_upload_urls << @sale.create_s3_image_upload(federated_session)
+    create_s3_uploads
+
+    respond_to do |wants|
+      wants.json do
+        render :json => @sale.to_json(:methods => [:image_upload_urls])        
+      end
+      wants.html do
+        redirect_to sales_url
+      end
     end
-
-
-    render :json => @sale.to_json(:methods => [:image_upload_urls])
   end
 
   def update
@@ -83,7 +120,7 @@ class SalesController < ApplicationController
     (0..2).each do |image_index|
       if image_key = params[:image_uploaded_keys][image_index.to_s]
         
-        @sale.send("temp_image_url_#{image_index}=",image_key)
+        @sale.send("temp_image_url_#{image_index}=","raw_uploads/#{image_key}")
         uploaded_images = true
       end
     end

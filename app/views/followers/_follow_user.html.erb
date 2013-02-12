@@ -1,0 +1,43 @@
+<script>
+
+jQuery(function($) {
+  $("a#follow_<%= follower.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    follow_link = $('a#follow_<%= follower.id %>')[0];
+    follow_link.style.display = "none";
+
+    unfollow_link = $('a#unfollow_<%= follower.id %>')[0];
+    unfollow_link.style.display = "";
+    unfollow_link.href = "/followers/" + data['id'];
+  });
+
+  $("a#unfollow_<%= follower.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    follow_link = $('a#follow_<%= follower.id %>')[0];
+    follow_link.style.display = "";
+
+    unfollow_link = $('a#unfollow_<%= follower.id %>')[0];
+    unfollow_link.style.display = "none";
+  });
+});
+
+</script>
+
+<div class="row-fluid">
+  <span class="pull-left span1">
+    <a href="<%= user_custom_slug_url(display_user) %>">
+      <img class="img-polaroid" src="<%= display_user.photo_version_url(:feed_2x) %>" >
+    </a>
+    <br><br>
+  </span>
+  <span class="hey muted">
+    <font size="3"><%= display_user.display_name %></font></span><br><span class="hey muted"><%= display_user.city.name if display_user.city %></span>
+  <span class="pull-right follow-page">
+
+    <%= link_to("Unfollow", follower_path(:id => (display_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn", :id=> "unfollow_#{follower.id}", :style => ("display:none;" unless display_user.is_followed)) %>
+
+    <%= link_to("Follow", followers_path(:following_id => display_user.id), :remote => true, :method => :post, :class => "btn", :id=> "follow_#{follower.id}", :style => ("display:none;" if display_user.is_followed)) %>
+
+  </span>
+  <br><br>
+  <hr>
+</div>
+

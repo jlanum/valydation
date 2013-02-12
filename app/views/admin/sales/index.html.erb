@@ -1,0 +1,63 @@
+<% if flash[:message] %>
+<div class="alert alert-success">
+ <%= flash[:message] %>.
+</div>
+<% end %>
+
+<div class="page-header">
+<h1>All Sales</h1>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Store</th>
+      <th>City</th>
+      <th>Brand</th>
+      <th>Product</th>
+      <th>Posted</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @sales.each do |sale| %>
+    <tr>
+      <td>
+        <% if sale.user %>
+        <%= link_to "#{sale.user.first_name} #{sale.user.last_name}",
+                    admin_user_url(sale.user) %>
+        <% end %>
+      </td>
+      <td>
+        <%= sale.store_name %>
+      </td>
+      <td>
+        <% if sale.metro %>
+        <%= sale.metro.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= sale.brand %>
+      </td>
+      <td>
+        <%= sale.product %>
+      </td>
+      <td>
+        <%= sale.created_at.strftime("%d %b %Y") %>
+      </td>
+
+      <td>
+        <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_path(sale) %>">Edit</a>
+        <%= link_to 'Delete', admin_sale_path(sale),
+          :confirm => 'Are you 100% positive that you want to delete this sale?', 
+          :method => :delete,
+          :class => "btn btn-danger btn-small" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= paginate @sales %>

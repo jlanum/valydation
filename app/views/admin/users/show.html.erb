@@ -1,0 +1,89 @@
+<div class="page-header">
+  <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+</div>
+
+<p>
+  <img src="<%= @user.photo.versions[:profile] %>">
+<p>
+
+<p>
+<%= @user.city.name %>
+</p>
+<p>
+Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
+</p>
+
+<p>
+  <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
+</p>
+
+
+<% unless @user.bio.nil? or @user.bio.empty? %>
+
+<div class="row">
+  <div class="span4">
+    <blockquote>
+<p>
+<%= @user.bio %>
+</p>
+</blockquote>
+</div>
+</div>
+<% end %>
+
+
+
+
+<div class="page-header">
+  <h3>Posts</h3>
+</div>
+
+<% if @user.sales.empty? %>
+  <p> No posts.</p>
+<% else %>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Store</th>
+      <th>City</th>
+      <th>Brand</th>
+      <th>Product</th>
+      <th>Posted</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.sales.each do |sale| %>
+    <tr>
+      <td>
+        <%= sale.store_name %>
+      </td>
+      <td>
+        <% if sale.metro %>
+        <%= sale.metro.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= sale.brand %>
+      </td>
+      <td>
+        <%= sale.product %>
+      </td>
+      <td>
+        <%= sale.created_at.strftime("%d %b %Y") %>
+      </td>
+      <td>
+        <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_path(sale) %>">Edit</a>
+        <%= link_to 'Delete', admin_sale_path(sale),
+          :confirm => 'Are you 100% positive that you want to delete this sale?', 
+          :method => :delete,
+          :class => "btn btn-danger btn-small" %>
+      </td>
+    </tr> 
+  <% end %>
+  </tbody>
+</table>
+
+<% end %>
+

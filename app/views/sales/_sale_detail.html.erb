@@ -1,0 +1,180 @@
+<% detail ||= false %>
+
+<div class="row-fluid">
+  <div class="span2 modal-thumbnails">
+    <% [:image_0, :image_1, :image_2].each do |image_sym|
+      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
+        img_version = (detail ? :feed_large_2x : :web_modal)
+      %>
+      <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
+      <%   end
+    end %>
+  <br>
+  </div> <!-- thumbnails -->
+  <div class="span6">
+    <% if !detail %>  
+      <span class="time-banner">
+    <% end %>
+      <span class="image-banner">
+
+        <% if detail %>
+          <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
+      <% else %>
+          <a href="<%= sale_url(sale.id) %>">
+          <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
+        </a>
+      <% end %>
+
+        <span class="banner-toggle">
+
+          <% if !detail %>
+            <span class="percentoff">
+          <% end %>
+
+            <center>
+              <i class="icon-time <%= "icon-white" unless detail %> "> </i>
+              <font size="2">&#160;
+                <%= time_ago_in_words(sale.created_at) %>
+              </font>
+            </center>
+
+            <% if !detail %>
+            </span>
+        <% end %>
+
+        </span>
+      </span>
+      <% if !detail %>
+      </span>
+  <% end %>
+    <br>
+    <table class="table table-bordered">  
+      <td><%= (sale.percent_off * 100).round %>% Off</td>
+      <td>
+        <font size="1">
+          <%= humanized_money_with_symbol sale.orig_price %>
+        </font>
+      </td>
+
+      <td><strike><font size="1"> 
+          <%= humanized_money_with_symbol sale.sale_price %>
+      </font> </strike></td>
+
+    </table>
+
+    <%= hidden_field_tag "sale_fave_#{sale.id}", sale.my_fave_id %>
+  
+    <% unless detail %>
+      <span class="modal-social">
+        <a href="#" onclick="fave(<%= sale.id %>); return false">
+        <i class="icon-heart"> </i>&#160;&#160;
+        </a>
+      <a href="<%= sale_url(sale.id) %>">
+        <i class="icon-comment">&#160;</i>&#160;
+      </a>
+      <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+      <img src="/assets/T_logo.png" height="16px" width="16px">
+    </span>
+  <% end %>
+  </div>
+
+  <div class="span4 pull-right">
+    <% if detail %>
+      <a href="purchase.html" class="btn btn-success btn-large span4 pull-right">Buy</a>
+  <% end %>
+
+    <a href="<%= user_custom_slug_url(sale.user) %>">
+
+      <img class="img-polaroid" src="<%= sale.user.photo_version_url(:feed_2x) if sale.user %>" height="60" width="60px">
+    </a>
+    <br>
+    <a href="<%= user_custom_slug_url(sale.user) %>"><b><%= sale.user.display_name if sale.user %></b></a>
+    <br>
+    <p class="muted time"><%= sale.user.city.name if sale.user %></p>
+
+    <% if detail and sale.user.id != @user.id %>
+
+      <script>
+
+jQuery(function($) {
+  $("a#follow").bind("ajax:success", function(event, data, status, xhr) {
+    follow_link = $('a#follow')[0];
+    follow_link.style.display = "none";
+
+    unfollow_link = $('a#unfollow')[0];
+    unfollow_link.style.display = "";
+    unfollow_link.href = "/followers/" + data['id'];
+  });
+
+  $("a#unfollow").bind("ajax:success", function(event, data, status, xhr) {
+    follow_link = $('a#follow')[0];
+    follow_link.style.display = "";
+
+    unfollow_link = $('a#unfollow')[0];
+    unfollow_link.style.display = "none";
+  });
+});
+
+    </script>
+
+    <% sale.user.other_user = @user %>
+
+    <%= link_to("Unfollow", follower_path(:id => (sale.user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn pull-right span12", :id=> "unfollow", :style => ("display:none;" unless sale.user.is_followed)) %>
+
+    <%= link_to("Follow", followers_path(:following_id => sale.user.id), :remote => true, :method => :post, :class => "btn pull-right span12", :id=> "follow", :style => ("display:none;" if sale.user.is_followed)) %>
+
+  <% end %>
+
+    <br><br><br>
+    <table class="table table-bordered table-striped">
+      <tr>  
+        <td><font size="1" class="muted">
+            Store
+          </font> &#160;
+          <%= sale.store_name %>
+        </td>
+      </tr>
+      <tr> 
+        <td><font size="1" class="muted">Brand</font> &#160;<%= sale.brand %></td>
+      </tr>
+      <tr>  
+        <td><font size="1" class="muted">Product</font> &#160;<%= sale.product %></td></tr><tr>  
+        <td><font size="1" class="muted">Size</font> &#160; <%= sale.size %></td></tr>
+    </table>
+
+    <% if detail %>
+      <br>
+    <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+    <img src="/assets/T_logo.png" height="16px" width="16px">
+
+    <span class="comments form">
+      <h3>Comments</h3>
+      <% sale.comments.each do |comment| %>
+        <img height="36" width="36" src="<%= comment.user.photo_version_url(:feed) %>" >&#160;<%= comment.text %><br><br>
+    <% end %>
+
+      <script>
+function submitComment(e) {
+  e = e || event;
+  if (e.keyCode === 13) {
+    $('#comment_form').submit();
+    return false;
+  }
+  return true;
+}
+      </script>
+
+      <%= form_tag({:controller => "comments", 
+                    :action => "create",
+                    :sale_id => sale.id}, 
+                    :id => "comment_form") do |f| %>
+                    <img height="36" width="36" src="<%= @user.photo_version_url(:feed) %>">&#160;
+                    <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
+                  <% end %>
+                  </span>
+
+                <% end %>
+
+
+                </div>
+              </div>

@@ -1,0 +1,211 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+<% if @error_message %>
+  <div class="alert alert-error"> 
+    <center>
+      <%= @error_message %>
+    </center>
+  </div>
+<% end %>
+
+
+	<div class="container">
+		<div class="marketing">
+			<div class="signup-unit">
+        <fieldset>
+
+
+            <legend>Edit Account Settings 
+        
+        </legend>
+
+        
+        <%= form_for @user, :html => {:id => "city_form"} do |f| %>
+
+
+          Current City <br/>
+
+          <select id="city_id" name="city_id" class="" onchange="$('#city_form')[0].submit()">
+        <%= options_for_select(City.order("name ASC").all.collect { |c| [c.name, c.id] }, @user.city_id) %>
+          </select>
+        <% end %>
+        <hr>
+
+
+        
+            <div class="input-append">
+
+        <%= form_for(@user, :html => {:id => "email_form"}) do |f| %>
+          <%= text_field_tag "email", '',
+            :class => "span2", :placeholder => @user.email %>
+				  <button class="btn url" type="button" onclick="$('#email_form')[0].submit();">Change Email</button><br>
+				<% end %>
+
+					</div>
+				  </fieldset>
+				<hr>
+
+        <script>
+function changePassword() {
+
+  if ($('#passwd_new').val().length < 4) {
+    alert ("Your password must be at least 4 characters");
+    return false; 
+  }
+            if ($('#passwd_new').val() != $('#passwd_confirm').val()) {
+              alert("Your passwords don't match.");
+              return false;
+            } else {
+              $('#passwd_form')[0].submit();
+            }
+          }
+        </script>
+
+        <%= form_for(@user, :html => {:id => "passwd_form"}) do |f| %>
+          <%= password_field_tag "passwd_clear", "", :class => "span2 pwd", :placeholder => "Current Password" %> 
+          <br>
+          <%= password_field_tag "passwd_new", "", :class => "span2 pwd", :placeholder => "New Password" %>
+          <%= password_field_tag "passwd_confirm", "", :class => "span2 pwd", :placeholder => "Confirm Password" %>
+				  <button class="btn url" type="button" onclick="return changePassword();">Change Password</button><br>
+        <% end %>
+
+        <hr>
+          <div class="input-prepend">
+        <%= form_for(@user, :html => {:id => "zip_form"}) do |f| %>
+          <%= text_field_tag "zip_code", "", :class => "span1", :placeholder => @user.zip_code, :maxlength => 5 %>
+				  <button class="btn url" type="button" onclick="$('#zip_form')[0].submit();">Change Zip Code</button><br>
+        <% end %>
+			</div>
+      <hr>
+
+      <script type="text/javascript">
+
+function uploadPhoto() {
+  if (checkSize(1024*1024)) {
+    $('#photo_form')[0].submit();
+  } else {
+
+  }
+}
+
+function checkSize(max_img_size)
+{
+    var input = document.getElementById("photo_file_field");
+    // check for browser support (may need to be modified)
+    if(input.files && input.files.length == 1)
+    {           
+        if (input.files[0].size > max_img_size) 
+        {
+            alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
+            return false;
+        }
+    }
+
+    return true;
+}
+      </script>
+
+      <img src="<%= @user.photo_version_url(:profile) %>"><br><br>
+
+      <%= form_for(@user, :html => {:id => "photo_form", :multipart => true}) do |f| %>
+
+        <%= file_field_tag("photo", :id => "photo_file_field") %><br>
+
+        <button class="btn url" type="button" onclick="uploadPhoto()">Upload Image</button><br>
+        
+      <% end %> 
+
+      
+
+      <script>
+function submitGender() {
+  $.post($('#gender_form')[0].action, $('#gender_form').serialize())
+}
+      </script>
+
+      <%= form_for(@user, :html => {:id => "gender_form"}) do |f| %>
+      
+			<label class="radio inline">
+        <%= radio_button_tag "gender", "f", (@user.gender == "f"),
+              :onchange => "submitGender()" %>
+			  Female
+			</label>
+			<label class="radio inline">
+        <%= radio_button_tag "gender", "m", (@user.gender == "m"), 
+     :onchange => "submitGender()" %>
+			  Male
+			</label>
+			<label class="radio inline">
+        <%= radio_button_tag "gender", "p", (@user.gender == "p"),
+     :onchange => "submitGender()" %>
+			  Pass 
+			</label>
+      <% end %>
+
+			<form class="horizontal">
+			  <fieldset>
+			    <legend>Profile (shown publicly)</legend>
+			</fieldset>
+			</form>
+
+        <%= form_for(@user, :html => {:id => "name_form"}) do |f| %>
+      
+			    <div class="input-prepend">
+				  <span class="add-on">First Name</span>
+          <%= text_field_tag "first_name", @user.first_name, :class => "span2", :placeholder => "First Name" %>
+				</div>
+			<div class="input-prepend">
+        <span class="add-on">Last Name</span>
+          <%= text_field_tag "last_name", @user.last_name, :class => "span2", :placeholder => "Last Name" %>
+        </div>
+        <button class="btn url" type="button" onclick="$('#name_form')[0].submit();">Save</button><br>
+
+        <% end %>
+        
+				<br><br>
+				Enter Username for Custom URL
+        <div class="input-prepend">
+          <%
+              custom_slug = "YourNameHere"
+              if @user.custom_slug and @user.custom_slug.size > 0
+                custom_slug = @user.custom_slug
+              end
+          %>
+        <span class="add-on">http://www.mysaletable.com/<%= custom_slug %></span>
+				</div>
+
+        <%= form_for(@user, :html => {:id => "custom_slug_form"}) do |f| %>
+          <%= text_field_tag "custom_slug", @user.custom_slug,
+            :class => "span2", :placeholder => custom_slug %>
+				  <button class="btn url" type="button" onclick="$('#custom_slug_form')[0].submit();">Save</button><br>
+				<% end %>
+			   <hr>
+			
+			<span class="bio">Bio</span>
+
+        <%= form_for(@user, :html => {:id => "bio_form"}) do |f| %>
+          <%= text_area_tag "bio", @user.bio, :rows => 3, :placeholder => "Enter text (150 character limit)" %>
+        &#160;
+        <button class="btn url" type="button" onclick="$('#bio_form')[0].submit();">Save</button><br>
+      <% end %>
+		<hr>
+		
+
+	
+	
+	
+	  
+	  
+	
+
+	
+	 </div><!--end marketing -->		
+	</div><!--end container -->
+	</div><!--end row-fluid -->
+	</div>
+	</div>
+

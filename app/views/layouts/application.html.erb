@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MY SALE TABLE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content=""> 
+    <!--
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   
+    -->
+    <%= javascript_include_tag 'application' %>
+
+
+    <script src="/assets/bootstrap.min.js"></script>  
+	  <script src="/assets/bootstrap-editable.min.js"></script>
+
+    <link href="/assets/bootstrap.css" rel="stylesheet">
+    <link href="/assets/jess.css" rel="stylesheet">
+    <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/assets/MST_Favicon.png" type="image/png">
+    <link rel="icon" href="/assets/MST_Favicon.png" type="image/png">
+
+  <%= csrf_meta_tag %>
+    
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <div class="nav-collapse collapse">
+            <form class="form-search" action="/search_results">
+              <input type="text" name="q" value="<%= params[:q] %>" data-provide="typeahead" class="input-medium search-query" placeholder="Search">
+            </form>
+          </div>
+
+
+          <a class="brand" href="/"><img src="/assets/Logo_Icon_Small.png" height="34" width="180" /></a>
+		
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="<%= new_sale_url %>"><i class="icon-upload"></i>&#160;Upload</a></li>
+              <li><a href="about.html"><i class="icon-globe"></i>&#160;About</a></li>
+              <li><a href="press.html"><i class="icon-comment"></i>&#160;Badges</a></li>
+              <li><a href="<%= edit_user_url("self") %>"><i class="icon-picture"></i>&#160;Profile</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+
+        </div>
+      </div>
+    </div>
+
+    
+    <%= yield %>
+
+    <div id="footer">
+	    <div class="container">
+		    <div align="center">
+	        <a href="FAQ.html">FAQ</a> | <a href="tos.html">Terms of Service</a> | <a href="privacy.html">Privacy</a></p>
+	      </div>
+	    </div>
+	  </div>
+
+
+  </body>
+</html>
+
+

@@ -1,0 +1,81 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+
+<div class="container">
+  <div class="category-feed well">
+    <center>
+      <font size="6" color="#432060">Profile</font>
+    </center>
+  </div>
+</div>
+
+<% if params[:page].to_i == 0 %>
+
+  <div class="container">
+  <div class="signup-unit">
+    <span class="span4 pull-left">
+      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo_version_url(:profile_2x) %>" ><br><br>
+      <a href="<%= users_following_me_url(:user_id => @show_user.id) %>"class="btn span2"><%= @show_user.follower_count %> Followers</a><br>
+      <a href="<%= users_im_following_url(:user_id => @show_user.id) %>"class="btn span2"><%= @show_user.following_count %> Following</a>
+    </span>
+
+    <font size="5"><%= @show_user.display_name %></font><br>
+    <p class="muted time"><%= @show_user.city.name if @show_user.city %></p>
+    <div style="min-height:180px;">
+      <blockquote><%= @show_user.bio %></blockquote><br><br>
+    </div>
+
+    <style>
+a#follow { text-align: center; }
+a#unfollow { text-align: center; }
+    </style>
+
+    <script>
+
+jQuery(function($) {
+  $("a#follow").bind("ajax:success", function(event, data, status, xhr) {
+    follow_link = $('a#follow')[0];
+    follow_link.style.display = "none";
+
+    unfollow_link = $('a#unfollow')[0];
+    unfollow_link.style.display = "";
+    unfollow_link.href = "/followers/" + data['id'];
+  });
+
+  $("a#unfollow").bind("ajax:success", function(event, data, status, xhr) {
+    follow_link = $('a#follow')[0];
+    follow_link.style.display = "";
+
+    unfollow_link = $('a#unfollow')[0];
+    unfollow_link.style.display = "none";
+  });
+});
+
+    </script>
+
+    <% if @show_user.id != @user.id %>
+
+    <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success span2 profile-name", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
+
+    <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success span2 profile-name", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
+
+  <% end %>
+
+    <br>
+
+  </div>
+</div>
+
+<hr>
+
+<% end %>
+
+<%= render :partial => "sales/sales" %>
+
+<center>
+  <%= paginate @sales %> 
+</center>

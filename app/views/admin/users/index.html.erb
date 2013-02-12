@@ -1,0 +1,37 @@
+<div class="page-header">
+<h1>All Users</h1>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>City</th>
+      <th>Joined</th>
+      <th>Posts</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= link_to "#{user.display_name}",
+                    admin_user_url(user) %>
+      </td>
+      <td><%= user.email %></td>
+      <td><%= user.city.name if user.city %></td>
+      <td><%= user.created_at.strftime("%d %b %Y") %>
+      <td><%= user.sales.size %></td>
+      <td>
+        <%= link_to 'View', admin_user_path(user),
+          :class => "btn btn-info btn-small" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>
+

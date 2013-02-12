@@ -1,0 +1,56 @@
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    
+    
+    <% if flash[:message] %>
+    
+    <div class="alert alert-info"> 
+      <center>
+      <%= flash[:message] %>
+      </center>
+    </div>
+    <% end %>
+
+    <div class="container">
+      <div class="category-feed well">
+        <span class="pull-left">
+          <script>
+  function submitCityForm() {
+    $('#city_form')[0].submit()
+  }
+          </script>
+          <%= form_for @user, :html => {:id => "city_form"} do |f| %>
+          <select id="city_id" name="city_id" onchange="submitCityForm()">
+        <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
+          </select>
+          <% end %>
+
+        </span>
+
+        <span class="category-feed-align">
+
+          <% Sale.categories.each_with_index do |category, category_id| %>
+            <% if category_id == params[:category_id].to_i %><strong><% end %>
+              <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
+              <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
+            <% if category_id == params[:category_id].to_i %></strong><% end %>
+          <% end %>
+
+        </span>
+
+        <a href="<%= my_faves_url %>"><img src="/assets/favescript3.png" width="73px" height="22px" class="pull-right"></a>
+
+
+      </div>
+    </div>
+
+    <%= render "sales" %>
+
+    <center>
+      <%= paginate @sales %> 
+    </center>
+        
+

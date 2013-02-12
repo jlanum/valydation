@@ -1,0 +1,85 @@
+<div id="fb-root"></div>
+<script>
+  yayo = null;
+
+  // Additional JS functions here
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '327217574049864', // App ID
+      channelUrl : '//www.mysaletable.com/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    // Additional init code here
+
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+  }(document));
+
+
+  function fbLogin() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+          yayo = response;
+          $('#fb_id')[0].value = response.authResponse.userID;
+          $('#fb_access_token')[0].value = response.authResponse.accessToken;
+          $('#fb_login').submit();
+        } else {
+          alert('cancel');
+        }
+    }, {scope: 'email'});
+  }
+
+</script>
+
+
+<style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+ </style>
+
+
+ <%= form_tag({:controller => "users", :action => "create"}, :id => "fb_login") do %>
+  <input type="hidden" id="fb_id" name="fb_id">
+  <input type="hidden" id="fb_access_token" name="fb_access_token">
+<% end %>
+
+
+<div class="container">
+	
+	<div class="landing-unit marketing">
+		<ul class="media-list">
+		  
+		    <div class="media-body">
+		      <center><p><font size="6">Create an account to use MySaleTable</font></p><br>
+			<p class="muted">Sign in with</p></center>
+			<br>
+      <center>
+        <ul class="buttons">
+				<li style="list-style-type: none;" >
+				<a class="facebook BigButton" href="#" onclick="fbLogin()"><span class="logo-fb"></span>Facebook</a></li><br>
+        </ul>
+      </center>
+
+			<br><br>
+      <center><p>Sign in with <a href="<%= new_user_url %>"><u>your email</u></a>.</center>
+		     
+		     </div>
+		    </div>
+		  
+			<div>
+			</div>
+    </div>
+
+
+		    </div> <!-- /container -->

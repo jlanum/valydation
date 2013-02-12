@@ -141,6 +141,14 @@ class SalesController < ApplicationController
 
   def index_html
     @cities = City.order("name ASC").all
+    if params[:my_feed]
+      index_html_mine
+    else
+      index_html_all
+    end    
+  end
+
+  def index_html_all
     params[:category_id] ||= 0
 
     @sales = Sale.where(:category_id => params[:category_id],
@@ -153,6 +161,21 @@ class SalesController < ApplicationController
       order(%Q{"sales"."created_at" DESC}).
       page(params[:page]).
       per(8)
+  end
+
+  def index_html_mine
+    @sales = Sale.select(%Q{"sales".*, 
+                            "faves"."id" as my_fave_id}).
+      where(%Q{"sales"."visible"=true AND 
+               "faves"."id" IS NOT NULL}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON 
+               "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      page(params[:page]).
+      per(8)    
+
+      render :template => "sales/mine"
   end
 
   def index_json

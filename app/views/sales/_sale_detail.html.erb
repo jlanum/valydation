@@ -61,9 +61,14 @@
       </font> </strike></td>
 
     </table>
+
+    <%= hidden_field_tag "sale_fave_#{sale.id}", sale.my_fave_id %>
+  
     <% unless detail %>
       <span class="modal-social">
-      <i class="icon-heart"> </i>&#160;&#160;
+        <a href="#" onclick="fave(<%= sale.id %>); return false">
+        <i class="icon-heart"> </i>&#160;&#160;
+        </a>
       <a href="<%= sale_url(sale.id) %>">
         <i class="icon-comment">&#160;</i>&#160;
       </a>
@@ -87,7 +92,7 @@
     <br>
     <p class="muted time"><%= sale.user.city.name %></p>
 
-    <% if detail %>
+    <% if detail and sale.user.id != @user.id %>
 
       <script>
 

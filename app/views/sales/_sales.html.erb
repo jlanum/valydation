@@ -1,4 +1,22 @@
-<% 
+<script>
+function fave(sale_id) {
+  var faveField = $('#sale_fave_' + sale_id)[0];
+  var faveID = parseInt(faveField.value);
+  if (faveID > 0) {
+    $.post(('/faves/' + faveID), 
+    {_method:'delete'}, 
+    function(data) { 
+      faveField.value = "";
+    });
+  } else {
+    $.post('/faves', {'sale_id': sale_id}, function(data) { 
+      faveField.value = data['id'];
+    });
+  }
+}
+</script>
+
+  <% 
         @sale_rows = [[]]
         @sales.each_with_index do |sale, i|
           if i>0 && i%4 == 0

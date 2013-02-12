@@ -25,6 +25,9 @@ HiStrollers::Application.routes.draw do
   resources :sessions
   resources :merchants
 
+  match '/mine' => 'sales#index',
+    :defaults => {:my_feed => true}, :as => "my_faves"
+
   match '/users/:user_id/following' => 'followers#index',
           :defaults => {:im_following => true}, :as => "users_im_following"
   match '/users/:user_id/followers' => 'followers#index',

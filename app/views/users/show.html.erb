@@ -57,9 +57,13 @@ jQuery(function($) {
 
     </script>
 
+    <% if @show_user.id != @user.id %>
+
     <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success span2 profile-name", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
 
     <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success span2 profile-name", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
+
+  <% end %>
 
     <br>
 

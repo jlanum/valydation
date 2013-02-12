@@ -33,6 +33,8 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
   process :set_content_type
+  process :auto_orient  
+  
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -95,6 +97,13 @@ class SaleImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [72,72]
     process :set_content_type
   end
+
+  def auto_orient
+    manipulate! do |img|
+      img.auto_orient
+      img
+    end 
+  end 
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

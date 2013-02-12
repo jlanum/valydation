@@ -17,6 +17,7 @@ class UserPhotoUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MimeTypes
 
+  process :auto_orient  
   process :set_content_type
 
   version :profile_2x do
@@ -48,6 +49,12 @@ class UserPhotoUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [36,36]
     process :set_content_type
   end
+
+  def auto_orient
+    manipulate! do |img|
+      img = img.auto_orient
+    end 
+  end 
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

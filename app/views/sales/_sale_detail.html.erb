@@ -52,12 +52,12 @@
       <td><%= (sale.percent_off * 100).round %>% Off</td>
       <td>
         <font size="1">
-          <%= humanized_money_with_symbol sale.orig_price %>
+          <%= humanized_money_with_symbol sale.sale_price %>          
         </font>
       </td>
 
       <td><strike><font size="1"> 
-          <%= humanized_money_with_symbol sale.sale_price %>
+          <%= humanized_money_with_symbol sale.orig_price %>
       </font> </strike></td>
 
     </table>

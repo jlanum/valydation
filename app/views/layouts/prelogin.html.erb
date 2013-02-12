@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content=""> 
+    <!--
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	  <script src="/assets/bootstrap-editable.min.js"></script>
+    -->
 	
-    <link href="/assets/bootstrap.css" rel="stylesheet">
-    <link href="/assets/jess.css" rel="stylesheet">
-    <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'bootstrap.min.js' %>
+    <%= javascript_include_tag 'boostrap-editable.min.js' %>
+
+    <%= stylesheet_link_tag 'bootstrap.css' %>
+    <%= stylesheet_link_tag 'jess.css' %>
+    <%= stylesheet_link_tag 'bootstrap-responsive.css' %>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -56,9 +61,6 @@
 	      </div>
 	    </div>
 	  </div>
-
-    <script src="/assets/jquery.js"></script>
-    <script src="/assets/bootstrap.min.js"></script>
 
   </body>
 </html>

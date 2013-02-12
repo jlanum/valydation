@@ -4,7 +4,12 @@ class SalesController < ApplicationController
  # before_filter :use_test_user
 
   def show
-    @sale = Sale.find(params[:id])
+    @sale = Sale.where(:id => params[:id], :visible => true).
+      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      first
   end
 
   def new

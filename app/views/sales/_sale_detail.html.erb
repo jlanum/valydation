@@ -85,12 +85,12 @@
 
     <a href="<%= user_custom_slug_url(sale.user) %>">
 
-      <img class="img-polaroid" src="<%= sale.user.photo_version_url(:feed_2x) %>" height="60" width="60px">
+      <img class="img-polaroid" src="<%= sale.user.photo_version_url(:feed_2x) if sale.user %>" height="60" width="60px">
     </a>
     <br>
-    <a href="<%= user_custom_slug_url(sale.user) %>"><b><%= sale.user.display_name %></b></a>
+    <a href="<%= user_custom_slug_url(sale.user) %>"><b><%= sale.user.display_name if sale.user %></b></a>
     <br>
-    <p class="muted time"><%= sale.user.city.name %></p>
+    <p class="muted time"><%= sale.user.city.name if sale.user %></p>
 
     <% if detail and sale.user.id != @user.id %>
 

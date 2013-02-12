@@ -45,8 +45,8 @@
           </a>
 
           <div class="nav-collapse collapse">
-            <form class="form-search">
-            <input type="text" data-provide="typeahead" class="input-medium search-query" placeholder="Search">
+            <form class="form-search" action="/search_results">
+              <input type="text" name="q" value="<%= params[:q] %>" data-provide="typeahead" class="input-medium search-query" placeholder="Search">
             </form>
           </div>
 

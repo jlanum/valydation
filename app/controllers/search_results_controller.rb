@@ -21,6 +21,27 @@ class SearchResultsController < ApplicationController
       joins(%Q{INNER JOIN "sales" on "sales"."store_id"="stores"."id"}).
       limit(20)
 
+    respond_to do |wants|
+      wants.json { index_json }
+      wants.html { index_html }
+    end
+  end
+
+  def index_html
+    @sales = Sale.where(["(brand_id IN (?)) OR (store_id IN (?))",
+      @brands.collect(&:id),
+      @stores.collect(&:id)]).
+      where(:visible => true).
+      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      page(params[:page]).
+      per(8)
+  end
+
+  def index_json
     @results = (@brands + @stores).sort_by do |x| 
       1.0 - x.name.downcase.levenshtein_similar(params[:q].downcase)
     end[0..19]
@@ -36,6 +57,8 @@ class SearchResultsController < ApplicationController
       end
     end
 
-    render :json => @results_hashed.to_json
+    render :json => @results_hashed.to_json    
   end
+
+
 end

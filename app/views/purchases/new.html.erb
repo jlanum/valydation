@@ -9,32 +9,28 @@ body {
     <div class="row-fluid">
       <div class="span4">
         <div class="signup-unit">
-          <form class="horizontal">
-            <fieldset>
+          <fieldset>
+            <form id='payment-form' action='<%= Braintree::TransparentRedirect.url %>' method='POST'>              
+              <input type="hidden" name="tr_data" value="<%= @tr_data %>" />
+
               <legend>Preferred Payment <button type="submit" class="btn btn-success pull-right">Submit Payment</button></legend>
 
-              <form class="form-inline">
-                <input type="text" class="input-small" placeholder="First Name">
-                <input type="password" class="input-small" placeholder="Last Name">
-              </form><br>
-              <input type="text" class="span4" placeholder="Card Number">
-              <input type="text" class="span3" placeholder="Security Code">
+              <input name="transaction[customer][first_name]" type="text" class="input-small" placeholder="First Name">
+              <input name="transaction[customer][last_name]" type="text" class="input-small" placeholder="Last Name">
+              <br>
+              <input name="transaction[credit_card][number]" type="text" class="span4" placeholder="Card Number">
+              <input name="transaction[credit_card][cvv]" type="text" class="span3" placeholder="Security Code">
               <hr>
+              <div class="span6" style="margin-left:0px;">
               <p>Expiration Date</p>
-              <select>
+              <select name="transaction[credit_card][expiration_month]">
                 <option>Month</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <%= options_for_select((1..12).to_a) %>
               </select>
-              <select>
-                <option>Year</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <select name="transaction[credit_card][expiration_year]">
+                <%= options_for_select(["Year"] + (Time.now.year..Time.now.year+10).to_a) %>
               </select>
+            </div>
               <div class="pull-right">
                 <table class="table table-bordered">  
                   <tr>
@@ -61,15 +57,15 @@ body {
                       <%= humanized_money_with_symbol @total_amount %>
                     </td>
                   </tr>
-
                 </table>
               </div>
-              
-            </div><!--end marketing -->		
-          </div><!--end container -->
-        </div><!--end row-fluid -->
-      </div>
+            </form>
+
+          </div><!--end marketing -->		
+        </div><!--end container -->
+      </div><!--end row-fluid -->
     </div>
   </div>
+</div>
 </div>
 <br><br>

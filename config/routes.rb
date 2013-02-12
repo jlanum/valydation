@@ -13,7 +13,10 @@ HiStrollers::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :sales
+  resources :sales do 
+    resources :purchases
+  end
+
   resources :faves
   resources :users
   resources :comments

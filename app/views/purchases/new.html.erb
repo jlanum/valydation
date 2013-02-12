@@ -1,0 +1,75 @@
+<style>
+body {
+  padding-top: 100px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+<div class="container">
+  <div class="marketing">
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="signup-unit">
+          <form class="horizontal">
+            <fieldset>
+              <legend>Preferred Payment <button type="submit" class="btn btn-success pull-right">Submit Payment</button></legend>
+
+              <form class="form-inline">
+                <input type="text" class="input-small" placeholder="First Name">
+                <input type="password" class="input-small" placeholder="Last Name">
+              </form><br>
+              <input type="text" class="span4" placeholder="Card Number">
+              <input type="text" class="span3" placeholder="Security Code">
+              <hr>
+              <p>Expiration Date</p>
+              <select>
+                <option>Month</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <select>
+                <option>Year</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <div class="pull-right">
+                <table class="table table-bordered">  
+                  <tr>
+                    <td>
+                      <font size="3" class="muted">Sale Price</font>
+                    </td>
+                    <td>
+                      <%= humanized_money_with_symbol @sale.sale_price %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <font size="3" class="muted">Sales Tax</font>
+                    </td>
+                    <td>
+                      <%= humanized_money_with_symbol @tax_amount %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <font size="3" class="muted">Total</font>
+                    </td>
+                    <td>
+                      <%= humanized_money_with_symbol @total_amount %>
+                    </td>
+                  </tr>
+
+                </table>
+              </div>
+              
+            </div><!--end marketing -->		
+          </div><!--end container -->
+        </div><!--end row-fluid -->
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>

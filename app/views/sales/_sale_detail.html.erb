@@ -80,7 +80,9 @@
 
   <div class="span4 pull-right">
     <% if detail %>
-      <a href="purchase.html" class="btn btn-success btn-large span4 pull-right">Buy</a>
+      <% if sale.user and sale.user.is_merchant %>      
+      <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large span4 pull-right">Buy</a>
+      <% end %>
   <% end %>
 
     <a href="<%= user_custom_slug_url(sale.user) %>">

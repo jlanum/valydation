@@ -1,4 +1,4 @@
-braintree_env = :sandbox
+braintree_env = ((Rails.env=="production") ? :production : :sandbox)
 
 if braintree_env == :sandbox
   #max's sandbox account

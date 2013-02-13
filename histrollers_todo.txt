@@ -1,0 +1,524 @@
+TIMESHEET
+  -12/4 - 5 hr 
+    -12:30 start
+    -repo setup on github
+    -xcode, rails project setup
+    -postgres db setup
+    -add push device registration to server
+    -2:30 break
+    -6:45 resume
+    -networking code setup
+    -client push registration
+    -local config file serialization/deserialization
+    -storyboarding tab controller
+    -9:45 stop
+
+  -12/5 - 8 hr
+    -10:00 start
+    -camera view basics
+    -3:00 break
+    -5:00 resume
+    -camera view thumbnail management
+    -8:00 quit
+
+  -12/6 - 9 hr
+    -10:00 start
+    -camera-post view transition
+    -rest model setup
+    -1:00 break
+    -4:00 start
+    -8:00 pause
+    -9:00 resume
+    -11:00 stop
+    -all day post view
+
+  -12/7 - 1 hr
+    -8:00 start
+    -core location setup
+    -yelp api setup
+     9:00 stop
+
+  -12/9 - 4 hr
+    -11:30 start
+    -post view formatting and calculations
+    -yelp integration
+    -store selection view
+    3:30 stop
+
+  -12/10  - 6 hr
+    -11:00 start
+    -post category stuff
+    1:00 pause
+    3:00 resume
+    -post form cleanup
+    -postgres db setup
+    7:00 stop 
+
+  -12/11 - 1 hr
+    -5:30 start
+    -image upload on client
+    -6:30 pause
+
+  -12/12 - 8 hr
+    -12:00 start
+    -handle sale price missing fields and auto calculations
+    -create done button for numeric keypad
+    -3:00 pause
+    -4:00 resume
+    -image resizing
+    -image s3 upload and management
+    -progress indicator
+    -7:30 pause
+    -8:30 resume
+    -heroku setup, initial deploy
+    -10:00 stop
+
+  -12/13  - 6 hr
+    -3:00 start
+    -testflight setup
+    -feed view
+    -7:00 pause
+    -8:30 start
+    -feed loading, infinite scrolling
+    -testflight client setup
+    -10:30 stop
+
+  -12/14 - 6 hr
+    -11:00 start
+    -feed view
+    -3:00 pause
+    -5:00 resume
+    -7:00 pause
+
+  -12/17 - 6 hr
+    -10:30 start
+    -multi image scroll view in feed
+    -2:30 pause
+    -8:00 start
+    -10:00 stop
+    -feed detail view stuff
+
+  -12/18 - 7 hr
+    -12:00 start
+    -address, maps stuff
+    -better money value handling
+    -yelp api tweaks
+    -images in business listing
+    -3:30 pause
+    -4:30 resume
+    -image handling, image quality, image file size stuff
+    -7:00 pause
+    -8:00 resume
+    -robustify yelp loading
+    -detail view tweaks
+    -9:00 stop
+
+  -12/19 - 6 hr
+    -12:00 start
+    -groundwork for faves, comments
+    -mucking with device registration, user association
+    -3:00 stop
+    -5:00 start
+    -user photo
+    -start adding comments, faves to feed view
+    -new error messages
+    -8:00 stop
+
+  -12/20 - 5 hr
+    -11:00 start
+    -faving, client and server
+    -yelp api tweaks
+    -4:00 pause
+
+  -12/21 - 6 hr
+    -11:00 start
+    -fb sdk setup, app registration
+    -3:00 pause
+    -4:00 resume
+    -fb user registration
+    -6:00 stop
+
+  -12/22 - 8 hr
+    -11:00 start
+    -fb authentication validation
+    -cities
+    -select city post fb registration
+    -2:00 pause
+    -4:30 resume
+    -email signup view, validation
+    -email registration
+    -hud status on registration views
+    -8:00 stop
+    -9:00 start
+    -existing user login
+    -detach device function for testing
+    -10:30 stop
+
+  -12/23 - 6 hr
+    -10:00 start
+    -wrap up user registration
+    -11:00 pause
+    -4:00 resume
+    -faves view
+    -6:30 stop
+    -8:00 start
+    -me view
+    -bio
+    -notif settings
+    -me city change
+    -password change
+    -10:30 stop
+
+  -12/24 5 hr
+    -12:00 start
+    -user profile photo upload/change
+    -view other user profile
+    -5:00 stop
+
+  -12/26 - 6 hr
+    -11:00 start
+    -search view
+    -search server
+    -3:00 stop
+    -4:30 resume
+    -misc touchups, testing
+    -started on push
+    -7:00 stop
+
+  -12/27 4 hr
+    -10:00 start
+    -push stuff
+    -11:30 paush
+    -4:00 resume
+    -more push
+    -6:30 stop
+
+  -12/28 5.5 hr
+    -10:00 start
+    -search results display stuff
+    -12:00 stop
+    -1:00 start
+    -search results
+    -push alert messages
+    -2:30 stop
+    -4:30 start
+    -login/facebook issues
+    -testflight logging
+    -6:30 stop
+
+  -12/29 10 hr
+    -10:00 start
+    -comments view, add comments
+    -edits feedback
+    -3:00 pause
+    -4:00 resume
+    -yelp manual search
+    -login screens edited
+    -applying pretty buttons
+    -bio screen prettification
+    -notification edits, custom switches to handle longer text
+    -add new cities, improve city select screen
+    -pretty buttons on various screens
+    -deploy and test notifications
+    -unicorn (high performance server) setup
+    -9:00 stop 
+
+    -12/30 9.5 hr
+    -9:30 start
+    -camera view overhaul
+    -default avatar
+    -new notif messages
+    -1:00
+    -4:30 start
+    -follower/following list server support
+    -me view overhaul
+    -followers view
+    -following view
+    -crash reporting
+    -10:30    
+
+    -12/31 2.5 hr
+    -11:00 start
+    -hook up webviews for content pages
+    -notification on commenting
+    -post: no default category, "select" instead
+    -post: validate sale price < orig price
+    -1:30 pause
+
+    -1/2 - 8 hr
+    -10:00 start
+    -honeybadger (server error reporting) setup and install
+    -11:00 pause
+    -1:30 start
+    -tab bar customization
+    -3:30 pause
+    -4:30 resume
+    -nav bar customization
+    -6:00 pause
+    -6:30 resume
+    -camera view
+    -post detail view
+    -10:00 stop
+
+    -1/3 10 hr
+    -10:30 start
+    -modal type nav bar customizations
+    -size chart
+    -2:00 pause
+    -5:30 start
+    -feed view styling
+    -faves view styling
+    -me view fixes
+    -circle image indicators
+    -cities fixes
+    -tab bar improvements
+    -faves buttons
+    -feed/fave infinite scrolling efficiency improvements
+    -make detail view flip just image
+    -reposition map button automatically
+    -12:00 stop
+
+  -1/4  - 10 hr
+  -11:00 start
+  -fb feed post
+  -tweet post
+  -2:00 pause
+  -4:00 start
+  -Feed image fullscreen view
+  -Pull to refresh in feed
+  -Welcome screen design
+  -Login design
+  -Create acct design
+  -User profile design
+  -Me design
+  -User photo design
+  -Notification design
+  -Followers design
+  -Following design
+  -Change password design
+  -11:00 stop
+
+
+  -1/5 11 hr
+  -12 start
+  -bug fixing - posting
+  -fb friend request
+  -4 stop
+  -5 start
+  -comments redesign
+  -user profile redesign
+  -hook up user profile to following
+  -hook up following to user profile
+  -bug fixing
+  -12:0 stop
+
+
+  -1/6 3.5 hr
+  -5 start
+  -feed redesign
+  -optimize image loading order on feed
+  -prettify "loading more" footer in feed
+  -welcome screen redesign
+  -user photo redesign
+  -bio redesign
+  -8:30 stop
+
+  -1/7 2 hr
+  -2 start
+  -camera flexible layout (iphone 5)
+  -4 stop
+
+  -1/8 9 hr
+  -12 start
+  -upload overhaul
+  -9 stop
+
+  -1/10 3.5 hr
+  -4:30 start
+  -feed view tweaks
+  -empty feed message
+  -beta test release
+  -add a fave message
+  -post-posting improvements
+  -improved server logging
+  -8:00
+
+  -1/11 0.5 hr
+  -7:30 start
+  -add new users to provisioning profile, cut new release
+  -8:00
+
+  -1/13 7.5 hr
+  -1:00 start
+  -addressing latest feedback doc
+  -handle network connectivity issues at launch
+  -add app icons
+  -user profile tweaks
+  -size chart tweaks
+  -heroku prod setup
+  -7:00
+  -8:00
+  -camera view tweaks
+  -launch screen, login screen tweaks
+  -better error messages at app startup when network issues arise
+  -9:30
+
+  1/14 7 hr
+  -11:00 start
+  -added 'following posted' notifications, remove 'city posted'
+notifications
+  -fix 'kids' in category tab bar
+  -hard char limit on all feed text fields
+  -new cities
+  -4
+  -5 start
+  -hook up tos, pp, and contactus pages
+  -comments resize widescreen
+  -timestamp in feed
+  -7:00
+
+  1/15 3.5 hr
+  -3:30 start
+  -change timestamp font
+  -yelp api to prod
+  -fb sdk to prod
+  -apple dev certificates
+  -setup ssl on heroku
+  -submit to app store
+  -7:00 stop 
+
+ 
+  -1/23 5.5
+  -12:00 start
+  -google places API swap in
+  -lengthen brand/product
+  -5:00 pause
+  -7:00 start
+  -google logo
+  -7:30
+
+  -1/24 3.5
+  -9:00 start
+  -setup static site on heroku
+  -cut and submit new release to app store
+  -reenable detach device, cut another release
+  -12:30 pause
+
+  -1/25 7.5
+  -10:00 start
+  -admin user page
+  -admin sale page
+  -capture email form
+  -export leads
+  -5:30
+
+  -1/27 0.5
+  -10:00 start
+  -add app store link to landing page, deploy
+  -10:30 stop
+
+
+  -2/5 6.5
+  -2:00 start
+  -cost estimate for web
+  -pre-login html layout
+  -login screen
+  -join screen
+  -disable city filter
+  -8:30 stop
+
+  -2/6
+  -5:00
+  -finish login
+  -finish join
+  -7:30 pause
+  -8:00 resume
+  -sale index
+  -9:30 pause
+
+  -2/7 - 8
+  -9:30 start
+  -sale index
+  -sale detail
+  -2:00 pause
+  -4:30 resume
+  -landing page, login/signup page flows
+  -5:30 pause
+  -6:00 resume
+  -fb login
+  -merchant landing page
+  -merchant signup form
+  -8:30
+
+  -2/8
+  -11 start
+  -merchant registration
+  -sale detail view
+  -user profile
+  -custom url
+  -merge latest CSS changes
+  -edit user form
+  -upload profile photo
+  -8:00
+
+  -2/9
+  -12 start
+  -followers
+  -following
+  -follow on user page
+  -follow on detail page
+  -fb/default avatar fixes
+  -3:30
+
+  -2/10
+  -2 start
+  -upload
+  -9 stop
+
+  -2/11
+  -12 start
+  -upload
+  -image processing
+  -5:30 pause
+  -7:00 resume
+  -faves list
+  -faving
+  -web search
+  -staging deploy
+  -10:00
+
+  -2/12
+  -12 start
+  -purchase form
+  -purchase confirmation
+  -braintree integration
+  -4:30 pause
+  -5:30 resume
+  -failed transactions
+  -6:30 
+
+
+contact
+
+purchase
+  purchase-confirmation
+
+  
+ -sale index
+    -modal details
+      -fb share
+      -twitter share
+      -buy
+
+static
+  about
+  404
+  faq-merch
+  faq-shop
+  faq
+  phototips
+  press
+  privacy
+  team
+  tos
+

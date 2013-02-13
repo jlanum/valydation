@@ -54,4 +54,5 @@ gem "honeybadger"
 gem 'newrelic_rpm'
 gem 'carrierwave_direct'
 gem 'braintree'
+gem 'debugger'
 

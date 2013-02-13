@@ -1,0 +1,73 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MySaleTable</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="/assets/jquery.js"></script>
+    <script src="/assets/bootstrap.min.js"></script>
+	
+	<!-- Le styles -->
+    <link href="/assets/bootstrap.css" rel="stylesheet">
+    
+    <link href="/assets/jess.css" rel="stylesheet">
+    <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+ <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/assets/MST_Favicon.png" type="image/png">
+    <link rel="icon" href="/assets/MST_Favicon.png" type="image/png">
+
+	<script type="text/javascript">
+	//The array which is going to hold the image information. 
+	var imageArray = new Array();
+
+	imageArray[0] = "/assets/Landing_Scotch_Dark_Corner.jpg"; //You can replace these image file names with your own image names.
+	imageArray[1] = "/assets/Landing_Marc.jpg";
+	imageArray[2] = "/assets/Landing_Sale_Sign3.jpg";
+	imageArray[3] = "/assets/landing_edited_PEC1.jpg";
+	imageArray[4] = "/assets/Landing_Kate_Spade_edited.jpg";
+	function doIt()
+	{
+	var rand = Math.floor(Math.random()*5); //Generating a random number between 0 and 3 here in your case you can replace 4 with 11 if you have 10 images
+
+	var imgPath = "<img src='"+imageArray[rand]+"' alt='heder' border='0' align='absmiddle' />";
+
+	document.getElementById("image").innerHTML = imgPath;
+
+	}
+	</script>
+  </head>
+  <body>
+    <div id="logo-wrapper">
+		<div id="image"></div>
+		<script type="text/javascript">
+		doIt();
+		</script></div>
+		<div class="landing-logo">
+			<img src="/assets/Logo_Small_White.png" width="400px" height="77px">
+			<p><font size="4" color="white">SHARE PHOTOS OF A SALE IN STORE <br>YOUR FRIENDS SEE IT LIVE<BR>DOWNLOAD THE APP NOW</font></p
+			<br><br><br>
+      <a href="<%= register_url %>" class="button btn-success btn-large"><font color="white">Join Now</font></a>
+			<br><br>
+      <a href="<%= new_session_url %>"><p><font size="3" color="white">Already a Member? Log in</font></p></a><br><br>
+			<a href="https://itunes.apple.com/us/app/mysaletable/id594076994?ls=1&mt=8"><img src="/assets/Apple_Icon_PNG.png" width="180px" height="56px"></a>
+			</div>
+			
+		
+		
+		</body>
+		 <!-- Le javascript
+		    ================================================== -->
+		    <!-- Placed at the end of the document so the pages load faster -->
+		    <script src="/assets/jquery.js"></script>
+		    <script src="/assets/bootstrap.min.js"></script>
+
+		  </body>
+		</html>
+

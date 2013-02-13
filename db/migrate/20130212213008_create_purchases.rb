@@ -4,6 +4,7 @@ class CreatePurchases < ActiveRecord::Migration
       t.integer :user_id, :null => false
       t.integer :sale_id, :null => false
       t.string :status, :null => false
+      t.string :card_last_4, :limit => 4
       t.string :external_id
       t.string :external_status
       t.text :external_message

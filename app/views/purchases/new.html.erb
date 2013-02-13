@@ -13,12 +13,13 @@ body {
             <form id='payment-form' action='<%= Braintree::TransparentRedirect.url %>' method='POST'>              
               <input type="hidden" name="tr_data" value="<%= @tr_data %>" />
 
-              <legend>Preferred Payment <button type="submit" class="btn btn-success pull-right">Submit Payment</button></legend>
+              <legend>Preferred Payment
+              <button id="submitButton" onclick="$('#submitButton')[0].innerText='Processing...'; $('#submitButton')[0].disabled = true; $('#payment-form').submit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button></legend>
 
               <input name="transaction[customer][first_name]" type="text" class="input-small" placeholder="First Name">
               <input name="transaction[customer][last_name]" type="text" class="input-small" placeholder="Last Name">
               <br>
-              <input name="transaction[credit_card][number]" type="text" class="span4" placeholder="Card Number">
+              <input name="transaction[credit_card][number]"  autocomplete="off" type="text" class="span4" placeholder="Card Number">
               <input name="transaction[credit_card][cvv]" type="text" class="span3" placeholder="Security Code">
               <hr>
               <div class="span6" style="margin-left:0px;">

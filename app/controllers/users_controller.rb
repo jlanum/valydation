@@ -10,7 +10,12 @@ class UsersController < ApplicationController
       redirect_to sales_url
       return
     end
-    render :layout => nil
+    @page = Page.where(:slug => "landing").first
+    if @page
+      render :layout => nil, :text => @page.content
+    else
+      render :layout => nil
+    end
   end
 
   def new

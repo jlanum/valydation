@@ -499,7 +499,7 @@ notifications
   -8:00
   -static pages
   -static pages admin
-  -9:30
+  -10:00
 
 
 contact

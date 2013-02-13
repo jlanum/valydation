@@ -1,0 +1,44 @@
+<% if @message %>
+<div class="alert alert-success">
+ <%= @message %>
+</div>
+<% end %>
+
+
+<div class="page-header">
+  <h1>Edit Page</h1>
+</div>
+
+<h3>
+  /<%= @page.slug %>
+</h3>
+
+<%= form_for(@page, 
+             :html => {:class => "form-horizontal well"},
+             :url => admin_page_path(@page))  do |f| %>
+
+        <fieldset>
+
+          <div class="control-group">
+            <label class="control-label" for="sale_store_name">Title</label>
+            <div class="controls">
+              <%= text_field(:page, :title, :class => "input-xlarge") %>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label" for="page_content">Content (HTML)</label>
+            <div class="controls">
+              <%= text_area(:page, :content, :class => "span8", :rows => 30) %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn">Reset</button>
+          </div>
+        </fieldset>
+      </form>
+
+<% end %>
+

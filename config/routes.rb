@@ -44,6 +44,7 @@ HiStrollers::Application.routes.draw do
     resources :sales
     resources :users
     resources :leads
+    resources :pages
   end
 
   match 'store_lookup' => 'sales#store_lookup'
@@ -55,6 +56,7 @@ HiStrollers::Application.routes.draw do
   match 'merchants_intro' => 'merchants#intro'
   root :to => 'users#landing'
 
+  match '/page/:slug' => 'pages#show', :as => :page
   match '/:custom_slug' => 'users#show', :as => :custom_slug
   
   # Sample resource route with options:

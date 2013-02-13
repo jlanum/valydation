@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212213008) do
+ActiveRecord::Schema.define(:version => 20130213043545) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(:version => 20130212213008) do
   end
 
   add_index "notifications", ["sent"], :name => "index_notifications_on_sent"
+
+  create_table "pages", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "purchases", :force => true do |t|
     t.integer  "user_id",                       :null => false

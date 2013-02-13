@@ -16,7 +16,8 @@ class CreatePagesFromStatic < ActiveRecord::Migration
   def down
     Dir[Rails.root.to_s + "/lib/static_pages/*.html"].each do |page_filename|
       slug = File.basename(page_filename, ".html")
-      Page.find_by_slug(slug).destroy
+      page = Page.find_by_slug(slug)
+      page.destroy if page
     end
   end
 end

@@ -496,28 +496,17 @@ notifications
   -5:30 resume
   -failed transactions
   -6:30 
+  -8:00
+  -static pages
+  -static pages admin
+  -9:30
 
 
 contact
 
-purchase
-  purchase-confirmation
-
-  
  -sale index
     -modal details
       -fb share
       -twitter share
 
-static
-  about
-  404
-  faq-merch
-  faq-shop
-  faq
-  phototips
-  press
-  privacy
-  team
-  tos
 

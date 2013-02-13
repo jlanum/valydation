@@ -13,11 +13,27 @@
   /<%= @page.slug %>
 </h3>
 
+<%
+  if @page.id
+    form_url = admin_page_url(@page)
+  else
+    form_url = url_for(:action => "create")
+  end
+%>
 <%= form_for(@page, 
              :html => {:class => "form-horizontal well"},
-             :url => admin_page_path(@page))  do |f| %>
+             :url => form_url)  do |f| %>
 
         <fieldset>
+
+          <% unless @page.id %>
+          <div class="control-group">
+            <label class="control-label" for="sale_store_name">Slug</label>
+            <div class="controls">
+              <%= text_field(:page, :slug, :class => "input-xlarge") %>
+            </div>
+          </div>
+        <% end %>
 
           <div class="control-group">
             <label class="control-label" for="sale_store_name">Title</label>

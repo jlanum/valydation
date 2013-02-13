@@ -508,7 +508,6 @@ purchase
     -modal details
       -fb share
       -twitter share
-      -buy
 
 static
   about

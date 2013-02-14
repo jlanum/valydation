@@ -504,6 +504,9 @@ notifications
 
 contact
 
+upload page pretty button
+profile link to personal url if ther eis one
+
  -sale index
     -modal details
       -fb share

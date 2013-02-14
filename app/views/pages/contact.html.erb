@@ -1,0 +1,40 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+<div class="container">
+  <div class="span9">
+<div class="marketing contact">
+  <p class="pull-right contact-info">
+  3450 Sacramento Street #231<br>
+  San Francisco, CA 94118<br>
+  Call Toll Free 888-383-7586<br>
+  <a href="mailto:hi@mysaletable.com">hi@mysaletable.com</a></p>
+  <p><font size="8">Contact</font></p>
+  <h4>Send us a message</h4>
+  <%= form_tag(contact_url, :method => "post") do |f| %>
+  <fieldset>
+
+    <label>Your Name *</label>
+    <input name="name" type="text" placeholder="Type here…">
+  </fieldset>
+  <fieldset>
+
+    <label>Email *</label>
+    <input name="email" type="text" placeholder="Type something…">
+  </fieldset>
+  <fieldset>
+
+    <label>Subject *</label>
+    <input name="subject" type="text" placeholder="Type something…">
+  </fieldset>
+  <label>Message *</label>
+  <textarea name="message" rows="10" class="span9"></textarea><br>
+  <button type="submit" class="btn btn-large">Submit</button>
+<% end %>
+</div>
+</div>
+</div>
+<br><br><br>
+

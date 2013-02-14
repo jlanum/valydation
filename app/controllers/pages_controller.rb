@@ -12,4 +12,11 @@ class PagesController < ApplicationController
     end
   end
 
+  def contact
+    if params[:email]
+      #send email here
+      flash[:message] = "Your message has been sent, and we'll get back to you soon."
+      redirect_to sales_url
+    end
+  end
 end

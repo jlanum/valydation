@@ -501,15 +501,19 @@ notifications
   -static pages admin
   -10:00
 
+  -2/23
+  -5 start
+  -twitter share
+  -fb share
+  -emails
+  -6 stop
+
 
 contact
+email on purchase
 
 upload page pretty button
 profile link to personal url if ther eis one
 
- -sale index
-    -modal details
-      -fb share
-      -twitter share
 
 

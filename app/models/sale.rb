@@ -52,6 +52,10 @@ class Sale < ActiveRecord::Base
      "Pet"]
   end
 
+  def share_message
+    "#{self.user.display_name} posted on MySaleTable! #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off at #{self.store_name}" if self.user
+  end
+
   def process_images!
     full_session = ApplicationController.new_sts_session
     s3_full = AWS::S3.new(full_session.credentials)

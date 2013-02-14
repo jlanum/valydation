@@ -72,8 +72,12 @@
       <a href="<%= sale_url(sale.id) %>">
         <i class="icon-comment">&#160;</i>&#160;
       </a>
-      <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
-      <img src="/assets/T_logo.png" height="16px" width="16px">
+      <a href="<%= fb_share_url(sale) %>">
+        <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+      </a>
+      <a href="<%= twitter_share_url(sale) %>">
+        <img src="/assets/T_logo.png" height="16px" width="16px">
+      </a>
     </span>
   <% end %>
   </div>
@@ -146,8 +150,12 @@ jQuery(function($) {
 
     <% if detail %>
       <br>
-    <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
-    <img src="/assets/T_logo.png" height="16px" width="16px">
+    <a href="<%= fb_share_url(sale) %>">
+      <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;
+    </a>
+    <a href="<%= twitter_share_url(sale) %>"
+      <img src="/assets/T_logo.png" height="16px" width="16px">
+    </a>
 
     <span class="comments form">
       <h3>Comments</h3>

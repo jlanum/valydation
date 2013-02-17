@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
       respond_to do |wants|
         wants.json do 
           render :json => {"error" => "User not registered."},
-                 :status => 403
+                 :status => 404
         end
         wants.html do
           redirect_to root_url

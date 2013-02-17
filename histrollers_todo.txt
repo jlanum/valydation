@@ -506,6 +506,7 @@ notifications
   -twitter share
   -fb share
   -emails
+  -contact form
   -6 stop
 
 

@@ -79,8 +79,8 @@ class UsersController < ApplicationController
 
   def create
     respond_to do |wants|
+      wants.json { create_json }      
       wants.html { create_html }
-      wants.json { create_json }
     end
   end
 

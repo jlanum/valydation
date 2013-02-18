@@ -509,12 +509,20 @@ notifications
   -contact form
   -6 stop
 
+  -2/24
+  -5 start
+  -emails
+  -6 stop
 
 contact
 email on purchase
+fave button
+new logo
+css merge
 
-upload page pretty button
-profile link to personal url if ther eis one
+
+
+
 
 
 

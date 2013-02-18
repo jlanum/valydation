@@ -1,5 +1,6 @@
 load "#{File.dirname(__FILE__)}/create_notifications.rb"
 load "#{File.dirname(__FILE__)}/process_images.rb"
+load "#{File.dirname(__FILE__)}/send_emails.rb"
 
 NOTIFY_SLEEP = 10
 
@@ -13,6 +14,8 @@ def do_errthing
     push
     #puts "feedback"
     feedback
+  
+    send_emails
 
     #puts "Sleeping #{NOTIFY_SLEEP}."  
 end

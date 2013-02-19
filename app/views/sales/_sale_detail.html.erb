@@ -67,10 +67,11 @@
     <% unless detail %>
       <span class="modal-social">
         <a href="#" onclick="fave(<%= sale.id %>); return false">
-        <i class="icon-heart"> </i>&#160;&#160;
+        <img src="/assets/heart_16_16.png" height="16px" width="16px">&#160;&#160;
         </a>
       <a href="<%= sale_url(sale.id) %>">
-        <i class="icon-comment">&#160;</i>&#160;
+        <img src="/assets/comments_web.png" height="16px" width="16px">
+        &#160;&#160;
       </a>
       <a href="<%= fb_share_url(sale) %>">
         <img src="/assets/f_logo.png" height="16px" width="16px">&#160;&#160;

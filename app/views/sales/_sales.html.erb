@@ -1,14 +1,20 @@
 <script>
+faved_src = "/assets/heart_16_16.png";
+unfaved_src = "http://s3.amazonaws.com/mst-images-shared/heart_outline.png";
+
 function fave(sale_id) {
   var faveField = $('#sale_fave_' + sale_id)[0];
+  var faveIcon = $('#fave_icon_' + sale_id)[0];
   var faveID = parseInt(faveField.value);
   if (faveID > 0) {
+    faveIcon.src = unfaved_src;
     $.post(('/faves/' + faveID), 
     {_method:'delete'}, 
     function(data) { 
       faveField.value = "";
     });
   } else {
+    faveIcon.src = faved_src;
     $.post('/faves', {'sale_id': sale_id}, function(data) { 
       faveField.value = data['id'];
     });

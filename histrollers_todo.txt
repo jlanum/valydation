@@ -501,7 +501,7 @@ notifications
   -static pages admin
   -10:00
 
-  -2/23
+  -2/13
   -5 start
   -twitter share
   -fb share
@@ -509,10 +509,17 @@ notifications
   -contact form
   -6 stop
 
-  -2/24
+  -2/17
   -5 start
   -email sending
   -6 stop
+
+  -2/19
+  -10 start
+  -new logo
+  -new comment, faves buttons
+  -10:30 stop
+
 
 email on purchase
 fave button

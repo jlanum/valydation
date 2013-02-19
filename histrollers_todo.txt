@@ -517,7 +517,8 @@ notifications
   -2/19
   -10 start
   -new logo
-  -new comment, faves buttons
+  -new comment button 
+  -new outline faves buttons
   -10:30 stop
 
 

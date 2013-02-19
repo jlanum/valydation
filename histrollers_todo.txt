@@ -505,16 +505,15 @@ notifications
   -5 start
   -twitter share
   -fb share
-  -emails
+  -email sending
   -contact form
   -6 stop
 
   -2/24
   -5 start
-  -emails
+  -email sending
   -6 stop
 
-contact
 email on purchase
 fave button
 new logo

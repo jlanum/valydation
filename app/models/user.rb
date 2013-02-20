@@ -23,19 +23,19 @@ class User < ActiveRecord::Base
   attr_accessor :other_user
 
   #validates :name, :format => {:with => /\A\w+\Z/}
-
+  belongs_to :city
+  has_many :devices  
+  
   has_many :faves, :class_name => "Fave", :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  has_many :devices
-  belongs_to :city
-  has_many :sales, :order => "created_at DESC"
+  has_many :sales, :order => "created_at DESC", :dependent => :destroy
 
   #following/followed_users are the users who this user is following
-  has_many :following, :class_name => "Follower", :foreign_key => "follower_id"
+  has_many :following, :class_name => "Follower", :foreign_key => "follower_id", :dependent => :destroy
   has_many :followed_users, :through => :following, :class_name => "User"
 
   #followed/following_users are the users following this user
-  has_many :followed, :class_name => "Follower", :foreign_key => "following_id"
+  has_many :followed, :class_name => "Follower", :foreign_key => "following_id", :dependent => :destroy
   has_many :following_users, :through => :followed, :class_name => "User"
 
   mount_uploader :photo, UserPhotoUploader

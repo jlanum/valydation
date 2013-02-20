@@ -529,7 +529,8 @@ notifications
   -disable buy button when non-merchant
   -delete user in admin interface
   -twitter button fix
-  -1:00
+  -"infinite" scroll on sales, faves, profile-sales
+  -3:30
 
 
 Endless Scroll (Not sure if this helps but their have been a lot of great reviews of infinity.js, a plugin built by Airbnb)

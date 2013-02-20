@@ -56,24 +56,38 @@ class UsersController < ApplicationController
       respond_to do |wants|
         wants.json do
           render :json => @show_user.
-        to_json({:only => [:id, :first_name, :last_name, :bio],
+            to_json({:only => [:id, :first_name, :last_name, :bio],
                  :methods => [:photo_fb, :is_followed, :follower_count, :following_count]})
         end
-
         wants.html do
-          @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-            where(:user_id => params[:id],
-                  :visible => true).
-            joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-                                 AND "faves"."user_id"=#{@user.id}}).
-            includes(:user).
-            order(%Q{"sales"."created_at" DESC}).
-            page(params[:page]).
-            per(8)
-          render 
+          show_html
         end
       end
 
+    end
+  end
+
+  def show_html
+    @sales = Sale.select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      where(:user_id => params[:id],
+            :visible => true).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+                           AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      page(params[:page]).
+      per(8)
+
+    if request.xhr?
+      render_lazy_rows
+    end
+  end
+
+  def render_lazy_rows
+    if @sales.empty?
+      render :text => ""
+    else
+      render :layout => false, :partial => "sales/sale_rows"
     end
   end
 

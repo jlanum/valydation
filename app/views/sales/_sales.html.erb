@@ -28,8 +28,8 @@ function fave(sale_id) {
   var currentPage = 1;
   var lastPage = false;
 
-  var more_base_url = "/sales.html";
-  var more_base_data = {category_id: <%= params[:category_id] %>};
+  var more_base_url = "<%= request.path  %>.html";
+  var more_base_data = {category_id: <%= params[:category_id].to_i %>};
 
   function addPage() {
     $.get(more_base_url, 

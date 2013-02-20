@@ -166,6 +166,10 @@ class SalesController < ApplicationController
       order(%Q{"sales"."created_at" DESC}).
       page(params[:page]).
       per(8)
+
+    if request.xhr?
+      render_lazy_rows
+    end
   end
 
   def index_html_mine
@@ -181,6 +185,14 @@ class SalesController < ApplicationController
       per(8)    
 
       render :template => "sales/mine"
+  end
+
+  def render_lazy_rows
+    if @sales.empty?
+      render :text => ""
+    else
+      render :layout => false, :partial => "sales/sale_rows"
+    end
   end
 
   def index_json

@@ -1,0 +1,26 @@
+<% 
+@sale_rows = [[]]
+@sales.each_with_index do |sale, i|
+  if i>0 && i%4 == 0
+    @sale_rows << []
+  end
+  @sale_rows.last << sale
+end
+%>
+
+<% @sale_rows.each do |row| %>
+  <div class="row-fluid">
+    <div class="container">
+      <ul class="thumbnails">
+        <% row.each do |sale| %>
+            <%= render :partial => "sales/sale_li", :locals => {:sale => sale} %>        
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+
+<% @sales.each do |sale| %>
+  <%= render :partial => "sales/sale_modal", :locals => {:sale => sale} %>
+<% end %>

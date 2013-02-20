@@ -521,11 +521,19 @@ notifications
   -new outline faves buttons
   -10:30 stop
 
+  -2/20
+  -12 start
+  -css changes
+  -footer changes
+  -city change doesn't produce message
+  -disable buy button when non-merchant
+  -delete user in admin interface
+  -twitter button fix
+  -1:00
 
-email on purchase
-fave button
-new logo
-css merge
+
+Endless Scroll (Not sure if this helps but their have been a lot of great reviews of infinity.js, a plugin built by Airbnb)
+Mandrill integration - working on this now
 
 
 

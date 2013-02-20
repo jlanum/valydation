@@ -88,7 +88,9 @@
   <div class="span4 pull-right">
     <% if detail %>
       <% if sale.user and sale.user.is_merchant %>      
-      <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large span4 pull-right">Buy</a>
+        <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large span4 pull-right">Buy</a>
+      <% else %>
+        <a href="#" class="btn btn-success btn-large span4 pull-right disabled">Buy</a>
       <% end %>
   <% end %>
 

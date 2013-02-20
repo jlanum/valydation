@@ -241,8 +241,12 @@ class UsersController < ApplicationController
     respond_to do |wants|
       wants.json { render :json => @user.to_json }
       wants.html { 
-        flash[:message] = "Your profile has been updated."
-        redirect_to sales_url
+        if params[:source] == 'sales'
+          redirect_to sales_url
+        else
+          flash[:message] = "Your profile has been updated."
+          redirect_to edit_user_url(@user)
+        end
       }
     end
 
@@ -256,7 +260,7 @@ class UsersController < ApplicationController
         wants.json { render :json => @user.to_json }
         wants.html do
           flash[:message] = "Your password has been changed."
-          redirect_to sales_url
+          redirect_to edit_user_url(@user)
         end
       end
     else

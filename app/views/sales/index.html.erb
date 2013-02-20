@@ -6,7 +6,6 @@
     
     
     <% if flash[:message] %>
-    
     <div class="alert alert-info"> 
       <center>
       <%= flash[:message] %>
@@ -23,9 +22,10 @@
   }
           </script>
           <%= form_for @user, :html => {:id => "city_form"} do |f| %>
-          <select id="city_id" name="city_id" onchange="submitCityForm()">
-        <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
-          </select>
+            <%= hidden_field_tag :source, "sales" %>
+            <select id="city_id" name="city_id" onchange="submitCityForm()">
+              <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
+            </select>
           <% end %>
 
         </span>

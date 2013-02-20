@@ -165,7 +165,7 @@ class SalesController < ApplicationController
       includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       page(params[:page]).
-      per(8)
+      per(16)
 
     if request.xhr?
       render_lazy_rows
@@ -182,9 +182,13 @@ class SalesController < ApplicationController
       includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       page(params[:page]).
-      per(8)    
+      per(16)    
 
+    if request.xhr?
+      render_lazy_rows
+    else
       render :template => "sales/mine"
+    end
   end
 
   def render_lazy_rows

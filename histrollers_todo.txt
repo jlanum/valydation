@@ -535,7 +535,10 @@ notifications
 
 Mandrill integration - working on this now
 
--ssl checkout
+Shopper Purchase Page - Check Box "Add $5 for Shipping within the Continental U.S.?"
+Address Form
+Add $5 to total
+Email to Merchant includes address of buyer as variable
 
 
 

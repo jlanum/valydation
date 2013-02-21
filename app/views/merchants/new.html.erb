@@ -1,6 +1,8 @@
   <script>
 function validateAndSubmit() {
 
+  return true;
+
       if ($('#retail_category').val() == "Choose a category") {
         alert("Please select a retail category.");
         return false;
@@ -42,6 +44,12 @@ function validateAndSubmit() {
         alert("Please provide a custom MySaleTable URL.");
         return false;
       }
+
+      if (!$('#tos')[0].checked) {
+        alert("Please agree to the Terms of Service.");
+        return false;        
+      }
+
     }
     </script>
 
@@ -121,7 +129,24 @@ function validateAndSubmit() {
 	<span class="inline-help">&#160;Website</span> <br>
 
   <%= text_field_tag "website_url", params[:website_url], :class => "input-large", :placeholder => "ex: yourwebsite.com" %>
-	<button type="submit" class="btn btn-success pull-right" onclick="return validateAndSubmit();">Create Account</button>
+
+  <hr>
+
+<%= check_box_tag 'shipping', params[:shipping] %>
+  
+  <span class="">&#160;Provide Shipping</span> 
+  
+  <br><br>
+
+<%= check_box_tag 'tos', params[:tos] %>
+  
+  <span class="">&#160;Agree to <%= link_to 'Terms of Service' , '/page/tos' %></span> 
+  
+  <br>
+  
+  <br>
+
+	<button type="submit" class="btn btn-success" onclick="return validateAndSubmit();">Create Account</button>
 	<br>
 	
 	

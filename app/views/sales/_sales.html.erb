@@ -31,7 +31,7 @@ function fave(sale_id) {
   var more_base_url = "<%= request.path  %>.html";
   var more_base_data = {category_id: <%= params[:category_id].to_i %>};
 
-  function addPage() {
+  function addPage(goToPage) {
     $.get(more_base_url, 
       $.extend(more_base_data, {page: currentPage+1}), 
       function(d){
@@ -42,6 +42,15 @@ function fave(sale_id) {
           $('#sales-container').append(d);
           currentPage++;        
           loading = false;
+          if (goToPage > 1) {
+            console.log("gotoPage: " + goToPage);
+            var pos = $('#sales_page_' + currentPage).offset();
+            scroll(0,pos.top);
+            addPage(goToPage-1);
+          }
+          else {
+            history.pushState({page: currentPage});
+          }
         }
       });
   };
@@ -62,6 +71,16 @@ function fave(sale_id) {
     }
 
   });
+
+/*
+$(document).ready(function() {
+  if (history.state.page > 0) {
+    var scrollToPage = history.state.page;
+    history.pushState({page: 0})
+    addPage(scrollToPage);
+  }
+});  
+*/
 
 </script>
 

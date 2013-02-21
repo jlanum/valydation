@@ -8,6 +8,7 @@
 end
 %>
 
+<div id="sales_page_<%= params[:page].to_i %>">
 <% @sale_rows.each do |row| %>
   <div class="row-fluid">
     <div class="container">
@@ -19,6 +20,7 @@ end
     </div>
   </div>
 <% end %>
+</div>
 
 
 <% @sales.each do |sale| %>

@@ -1,6 +1,7 @@
 class PurchasesController < ApplicationController
   before_filter :handle_device
   before_filter :require_user
+  before_filter :require_ssl
 
   def new
     @sale = Sale.find(params[:sale_id])
@@ -40,6 +41,8 @@ class PurchasesController < ApplicationController
                                         :last_name => last_name)
     end
   end
+
+  private
 
   def calculate_total
     puts "http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{@sale.user.zip_code}"

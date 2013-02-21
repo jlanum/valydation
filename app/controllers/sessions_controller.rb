@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   layout "prelogin"
   before_filter :handle_user, :only => [:new]
+  before_filter :require_ssl, :only => [:new, :create]
 
   def new
     if @user

@@ -530,11 +530,12 @@ notifications
   -delete user in admin interface
   -twitter button fix
   -"infinite" scroll on sales, faves, profile-sales
-  -3
+  -3:30
 
 
-Endless Scroll (Not sure if this helps but their have been a lot of great reviews of infinity.js, a plugin built by Airbnb)
 Mandrill integration - working on this now
+
+-ssl checkout
 
 
 

@@ -39,6 +39,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def require_ssl
+    if request.ssl? or Rails.env == 'development' 
+      true
+    else
+      redirect_to({:protocol => 'https://'}.merge(params), :flash => flash)
+      false
+    end
+  end
+
   def handle_device
     @duid = request.headers['X-HS-DUID']
     if @duid

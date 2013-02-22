@@ -5,7 +5,11 @@ class PagesController < ApplicationController
     @page = Page.where(:slug => params[:slug]).first
     @title = @page.title unless @page.title.to_s.empty?
     if @page
-      use_layout = (@user ? "application" : "prelogin")
+      if @page.content.match(/<html/)
+        use_layout = false
+      else
+        use_layout = (@user ? "application" : "prelogin")
+      end
       render :layout => use_layout
     else
       raise ActionController::RoutingError.new('Not Found')

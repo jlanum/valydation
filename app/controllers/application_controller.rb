@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :detect_iphone
+
   def self.s3_bucket
     "mst-images-#{Rails.env}"
   end
@@ -38,6 +40,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def detect_iphone
+    if request.env['HTTP_USER_AGENT'].match(/iPhone/) and not 
+       session[:iphone_redirected_from]
+      session[:iphone_redirected_from] = request.url
+      redirect_to page_url(:slug => "iphone")
+      false
+    end
+  end
 
   def require_ssl
     if request.ssl? or Rails.env == 'development' 

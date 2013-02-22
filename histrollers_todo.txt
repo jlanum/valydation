@@ -536,6 +536,11 @@ notifications
   -'offer shipping' field in merch signup
   -9:30
 
+  -2/22
+  -12:30 start
+  -misc web tweaks
+  -1:30
+
 
 Mandrill integration - working on this now
 
@@ -547,13 +552,6 @@ Email to Merchant includes address of buyer as variable
 iphone redirect page
 
 
-1. Moved product hover bar off of the image
-2. Commented out City underneath image(will bring back)
-3. Commented out time stamp in modal and detail page (we will bring it back)
-4. Removed icons from nav bar
-4. Swapped Badges page with Merchant page
-5. Added break tags to the product info (I was trying to get the words to line up but couldn't figure it out, so I just put them on separate lines)
-6. Added #mysaletable to the detail page.
 
 
 

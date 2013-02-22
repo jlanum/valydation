@@ -80,7 +80,7 @@
 .hover-group .image-wrapper .hover-toggle {
   /* set it at the bottom of .image-wrapper */
   position: absolute;      
-  top: 0px;
+  bottom: 0px;
   left: 0px;
   /* and don't display it */
   display: none;
@@ -392,7 +392,7 @@ width: 62px;
   top: -94px;
   left: 0px;
   /* and don't display it */
-  display: block;
+  display: none;
   background-color: rgba(102, 102, 102, .8);
   height: 38px;
   width: 100%;
@@ -490,4 +490,8 @@ width: 62px;
 .storedec {
 	text-decoration: none !important;
 	padding-left: 440px;
+}
+
+.expiration {
+  width: 80px !important;
 }

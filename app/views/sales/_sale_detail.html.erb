@@ -25,6 +25,7 @@
         </a>
       <% end %>
 
+      <!--
         <span class="banner-toggle">
 
           <% if !detail %>
@@ -42,11 +43,14 @@
             </span>
         <% end %>
 
+          </span>
         </span>
-      </span>
-      <% if !detail %>
-      </span>
-  <% end %>
+        <% if !detail %>
+        </span>
+        <% end %>
+
+     -->
+
     <br>
     <table class="table table-bordered">  
       <td><%= (sale.percent_off * 100).round %>% Off</td>
@@ -139,18 +143,32 @@ jQuery(function($) {
     <br><br><br>
     <table class="table table-bordered table-striped">
       <tr>  
-        <td><font size="1" class="muted">
-            Store
-          </font> &#160;
+        <td>
+          <font size="1" class="muted">Store</font>
+          <br>
           <%= sale.store_name %>
         </td>
       </tr>
       <tr> 
-        <td><font size="1" class="muted">Brand</font> &#160;<%= sale.brand %></td>
+        <td>
+          <font size="1" class="muted">Brand</font>
+          <br>
+          <%= sale.brand %>
+      </td>
       </tr>
       <tr>  
-        <td><font size="1" class="muted">Product</font> &#160;<%= sale.product %></td></tr><tr>  
-        <td><font size="1" class="muted">Size</font> &#160; <%= sale.size %></td></tr>
+        <td>
+          <font size="1" class="muted">Product</font>
+          <br><%= sale.product %>
+        </td>
+      </tr>
+      <tr>  
+        <td>
+          <font size="1" class="muted">Size</font>
+          <br>
+          <%= sale.size %>
+        </td>
+      </tr>
     </table>
 
     <% if detail %>

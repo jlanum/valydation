@@ -30,8 +30,9 @@ body {
               <br>
               <input name="transaction[credit_card][number]"  autocomplete="off" type="text" class="span4" placeholder="Card Number">
               <input name="transaction[credit_card][cvv]" type="text" class="span3" placeholder="Security Code">
-              <hr>
-              <div class="span6" style="margin-left:0px;">
+
+
+              <div class="" style="">
                 <p>Expiration Date</p>
                 <select name="transaction[credit_card][expiration_month]">
                   <option>Month</option>
@@ -40,7 +41,40 @@ body {
                 <select name="transaction[credit_card][expiration_year]">
                   <%= options_for_select((["Year"] + (Time.now.year..Time.now.year+10).to_a), params[:exp_year].to_i) %>
                 </select>
+
               </div>
+
+              <script>
+function toggleAddress() {
+  $('#address-container')[0].hidden = !$('#ship')[0].checked
+}
+
+$(document).ready(function() {
+  toggleAddress();
+});
+              </script>
+                
+              <div class="" style="">
+                <hr>
+                <p>
+                <%= check_box_tag "ship", '1', params[:ship], :onchange => "toggleAddress()" %>
+                Add shipping within the continental U.S. for a flat rate of $5
+                </p>
+                  
+                <div id="address-container">
+                  <input type="text" class="span4" name="address" placeholder="Street Address" value="<%= params[:address] %>">
+                  <input type="text" class="span4" name="address_2" placeholder="Apt." value="<%= params[:address_2] %>"><br>
+                  <input type="text" class="input-small" name="city" placeholder="City" value="<%= params[:city] %>">
+                  <select class="expiration" name="state">
+                    <% state_codes = Carmen::Country.named("United States").subregions.collect(&:code) %>
+                    <%= options_for_select(state_codes, params[:state]) %>
+                  </select>
+
+                  <input type="text" class="input-small" name="zip" placeholder="Zip Code" value="<%= params[:zip] %>">
+                </div>
+              </div>
+
+
               <div class="pull-right">
                 <table class="table table-bordered">  
                   <tr>
@@ -69,8 +103,10 @@ body {
                   </tr>
                 </table>
               </div>
-            </form>
 
+            </fieldset>
+            
+              </form>
           </div><!--end marketing -->		
         </div><!--end container -->
       </div><!--end row-fluid -->

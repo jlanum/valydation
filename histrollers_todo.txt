@@ -539,7 +539,8 @@ notifications
   -2/22
   -12:30 start
   -misc web tweaks
-  -1:30
+  -iphone redirect page
+  -2:00
 
 
 Mandrill integration - working on this now
@@ -549,7 +550,6 @@ Address Form
 Add $5 to total
 Email to Merchant includes address of buyer as variable
 
-iphone redirect page
 
 
 

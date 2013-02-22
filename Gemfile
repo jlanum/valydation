@@ -55,4 +55,5 @@ gem 'newrelic_rpm'
 gem 'carrierwave_direct'
 gem 'braintree'
 gem 'debugger'
+gem 'carmen', :git => 'git://github.com/jim/carmen.git'
 

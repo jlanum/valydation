@@ -13,6 +13,10 @@ class PurchasesController < ApplicationController
         :custom_fields => {"sale_id" => @sale.id},
         :type => "sale",
         :amount => @total_amount})
+
+    if request.xhr?
+      render :partial => "purchases/form"
+    end
   end
 
 
@@ -45,12 +49,17 @@ class PurchasesController < ApplicationController
   private
 
   def calculate_total
-    puts "http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{@sale.user.zip_code}"
+    if params[:ship].to_i == 1
+      @ship_amount = 5.0
+    else
+      @ship_amount = 0.0
+    end
+
     tax_results = JSON.parse(open("http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{@sale.user.zip_code}").read)
 
     sales_tax_rate = tax_results["results"].first["taxSales"]
     @tax_amount = @sale.sale_price * sales_tax_rate
-    @total_amount = @sale.sale_price + @tax_amount
+    @total_amount = @sale.sale_price.to_f + @tax_amount.to_f + @ship_amount.to_f
   end
 
 end

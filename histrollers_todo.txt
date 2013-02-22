@@ -540,16 +540,14 @@ notifications
   -12:30 start
   -misc web tweaks
   -iphone redirect page
-  -2:00
+  -addy form on purchase page
+  -3:00
 
 
 Mandrill integration - working on this now
 
-Shopper Purchase Page - Check Box "Add $5 for Shipping within the Continental U.S.?"
-Address Form
-Add $5 to total
-Email to Merchant includes address of buyer as variable
-
+-returns (merchant page)
+-return message on purhcase
 
 
 

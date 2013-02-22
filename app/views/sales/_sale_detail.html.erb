@@ -138,34 +138,36 @@ jQuery(function($) {
 
     <%= link_to("Follow", followers_path(:following_id => sale.user.id), :remote => true, :method => :post, :class => "btn pull-right span12", :id=> "follow", :style => ("display:none;" if sale.user.is_followed)) %>
 
+    <br><br>
   <% end %>
 
     <br>
     <table class="table table-bordered table-striped">
       <tr>  
         <td>
-          <font size="1" class="muted">Store</font>
-          <br>
+          <font size="1" class="muted">Store</font>&nbsp;
+          <% unless detail %><br><% end %>
           <%= sale.store_name %>
         </td>
       </tr>
       <tr> 
         <td>
-          <font size="1" class="muted">Brand</font>
-          <br>
+          <font size="1" class="muted">Brand</font>&nbsp;
+          <% unless detail %><br><% end %>
           <%= sale.brand %>
       </td>
       </tr>
       <tr>  
         <td>
-          <font size="1" class="muted">Product</font>
-          <br><%= sale.product %>
+          <font size="1" class="muted">Product</font>&nbsp;
+          <% unless detail %><br><% end %>
+          <%= sale.product %>
         </td>
       </tr>
       <tr>  
         <td>
-          <font size="1" class="muted">Size</font>
-          <br>
+          <font size="1" class="muted">Size</font>&nbsp;
+          <% unless detail %><br><% end %>
           <%= sale.size %>
         </td>
       </tr>

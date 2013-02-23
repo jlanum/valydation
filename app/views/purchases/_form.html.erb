@@ -8,8 +8,8 @@
     <input name="transaction[customer][first_name]" type="text" class="input-small" placeholder="First Name" value="<%= params[:first_name] %>">
     <input name="transaction[customer][last_name]" type="text" class="input-small" placeholder="Last Name" value="<%= params[:last_name] %>">
     <br>
-    <input name="transaction[credit_card][number]"  autocomplete="off" type="text" class="span4" placeholder="Card Number">
-    <input name="transaction[credit_card][cvv]" type="text" class="span3" placeholder="Security Code">
+    <input name="transaction[credit_card][number]"  autocomplete="off" type="text" class="span4" placeholder="Card Number" value="<%= params[:cc_number] %>">
+    <input name="transaction[credit_card][cvv]" type="text" class="span3" placeholder="Security Code" value="<%= params[:cvv] %>">
 
 
     <div class="" style="">
@@ -28,7 +28,7 @@
 function toggleAddress() {
 
 $.get('<%= new_sale_purchase_url(@sale) %>',
-  {ship: ($('#ship')[0].checked ? '1' : '0')},
+  $('#payment-form').serialize(),
   function(responseHTML) {
     $('#payment-fieldset').replaceWith(responseHTML);
   });
@@ -44,16 +44,20 @@ $.get('<%= new_sale_purchase_url(@sale) %>',
       </p>
 
       <% if params[:ship].to_i == 1 %>
-      <div id="address-container">
-        <input type="text" class="span4" name="address" placeholder="Street Address" value="<%= params[:address] %>">
-        <input type="text" class="span4" name="address_2" placeholder="Apt." value="<%= params[:address_2] %>"><br>
-        <input type="text" class="input-small" name="city" placeholder="City" value="<%= params[:city] %>">
-        <select class="expiration" name="state">
+        <div id="address-container">
+          <%= hidden_field_tag "transaction[shipping][first_name]", @user.first_name %>
+          <%= hidden_field_tag "transaction[shipping][last_name]", @user.last_name %>
+          <%= hidden_field_tag "transaction[options][store_shipping_address_in_vault]", 'true' %>
+
+        <input type="text" class="span4" name="transaction[shipping][street_address]" placeholder="Street Address" value="<%= params[:address] %>">
+        <input type="text" class="span4" name="transaction[shipping][extended_address]" placeholder="Apt." value="<%= params[:address_2] %>"><br>
+        <input type="text" class="input-small" name="transaction[shipping][locality]" placeholder="City" value="<%= params[:city] %>">
+        <select class="expiration" name="transaction[shipping][region]">
           <% state_codes = Carmen::Country.named("United States").subregions.collect(&:code) %>
           <%= options_for_select(state_codes, params[:state]) %>
         </select>
 
-        <input type="text" class="input-small" name="zip" placeholder="Zip Code" value="<%= params[:zip] %>">
+        <input type="text" class="input-small" name="transaction[shipping][postal_code]" placeholder="Zip Code" value="<%= params[:zip] %>">
       </div>
       <% end %>
 

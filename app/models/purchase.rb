@@ -5,5 +5,10 @@ class Purchase < ActiveRecord::Base
                   :card_last_4,
                   :external_id,
                   :external_status,
-                  :external_message
+                  :external_message,
+                  :address, 
+                  :address_2, 
+                  :city, 
+                  :state, 
+                  :zip
 end

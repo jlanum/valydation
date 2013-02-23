@@ -541,7 +541,8 @@ notifications
   -misc web tweaks
   -iphone redirect page
   -addy form on purchase page
-  -3:00
+  -store addy on braintree
+  -4:30
 
 
 Mandrill integration - working on this now

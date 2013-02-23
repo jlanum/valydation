@@ -1,7 +1,6 @@
   <script>
 function validateAndSubmit() {
 
-  return true;
 
       if ($('#retail_category').val() == "Choose a category") {
         alert("Please select a retail category.");
@@ -20,6 +19,11 @@ function validateAndSubmit() {
 
       if ($("#last_name").val().length < 1) {
         alert("Please provide your last name.");
+        return false;
+      }
+
+      if ($("#zip_code").val().length != 5) {
+        alert("Please provide your 5-digit zip code.");
         return false;
       }
 
@@ -89,6 +93,10 @@ function validateAndSubmit() {
 				<span class="inline-help">&#160;Email Address</span><br>
         <%= text_field_tag("email", params[:email], :class => "input-medium", :placeholder => "Email" )%>
 			  <br><hr>
+				<span class="inline-help">&#160;Zip Code</span><br>
+        <%= text_field_tag("zip_code", params[:zip_code], :class => "input-small", :placeholder => "Zip" )%>
+			  <br><hr>
+        
 			<span class="inline-help">&#160;Password</span><br>
       <%= password_field_tag("passwd_clear", params[:passwd_clear], :class => "input-medium", :placeholder => "Password") %>
       <br>
@@ -131,12 +139,6 @@ function validateAndSubmit() {
   <%= text_field_tag "website_url", params[:website_url], :class => "input-large", :placeholder => "ex: yourwebsite.com" %>
 
   <hr>
-
-<%= check_box_tag 'shipping', params[:shipping] %>
-  
-  <span class="">&#160;Provide Shipping</span> 
-  
-  <br><br>
 
 <%= check_box_tag 'tos', params[:tos] %>
   

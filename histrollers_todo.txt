@@ -548,11 +548,15 @@ notifications
   -release staging-server build to test flight
   -6:00
 
+  2/23
+  -1:00 start
+  -handle returns on sale post
+  -handle shipping on sale post
+  -2:00 stop
+
 
 Mandrill integration - working on this now
 
--returns (merchant page)
--return message on purhcase
 
 
 

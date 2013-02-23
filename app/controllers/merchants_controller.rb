@@ -40,6 +40,7 @@ class MerchantsController < ApplicationController
                        :custom_slug => params[:custom_slug],
                        :bio => params[:bio],
                        :city_id => City.first.id,
+                       :zip_code => params[:zip_code],
                        :website_url => params[:website_url])
       @user.photo = params[:photo]
       @user.save!

@@ -181,6 +181,7 @@ class UsersController < ApplicationController
       @user = User.new(:first_name => params[:first_name],
                        :last_name => params[:last_name],
                        :email => params[:email].downcase,
+                       :zip_code => params[:zip_code],
                        :passwd_clear => params[:passwd_clear],
                        :city_id => City.find(:first).id)
     end

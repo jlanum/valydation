@@ -543,6 +543,10 @@ notifications
   -addy form on purchase page
   -store addy on braintree
   -4:30
+  -5:30
+  -handle returns messaging
+  -release staging-server build to test flight
+  -6:00
 
 
 Mandrill integration - working on this now

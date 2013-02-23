@@ -34,6 +34,8 @@ function toggleAddress() {
 }
     </script>
 
+    <% if @sale.does_shipping %>
+
     <div class="" style="">
       <hr>
       <p>
@@ -60,6 +62,8 @@ function toggleAddress() {
     <% end %>
 
     </div>
+
+  <% end %> <!-- shipping -->
 
 
     <div class="row-fluid">
@@ -108,7 +112,7 @@ function toggleAddress() {
 
 <button id="submitButton" onclick="$('#submitButton')[0].innerText='Processing...'; $('#submitButton')[0].disabled = true; $('#payment-form').submit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
 
-<% if @sale.user.allow_returns %>
+<% if @sale.allow_returns %>
   *Merchant accepts returns within 10 days of sale
 <% else %>
     *Merchant does not accept returns

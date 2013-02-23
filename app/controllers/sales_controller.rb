@@ -93,7 +93,9 @@ class SalesController < ApplicationController
                      :longitude => params[:longitude],
                      :user_lat => params[:user_lat],
                      :user_lon => params[:user_lon],
-                     :city_id => @user.city_id )
+                     :city_id => @user.city_id,
+                     :allow_returns => (params[:allow_returns].to_i==1),
+                     :does_shipping => (params[:does_shipping].to_i==1) )
 
     if params[:comment] and params[:comment].size > 0
       comment = Comment.new(:user_id => @user.id,

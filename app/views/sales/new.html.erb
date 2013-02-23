@@ -224,27 +224,27 @@ $(function () {
 
 $(function() {
 
-    storeRefs = {}
+  storeRefs = {}
 
-    $('#store').autocomplete({
-      minLength: 1,
-      source: function(request, response) {
-        $.getJSON('/store_lookup?' + $('#store').serialize(), null, function(data){
-          $.each(data['predictions'], function(i,pred) { 
-            storeRefs[pred['description']] = pred['reference'] 
-          });
-          var storeNames = data['predictions'].map(function(pred,i) { 
-            return pred['description'] 
-          });
-          response(storeNames);
+  $('#store').autocomplete({
+    minLength: 1,
+    source: function(request, response) {
+      $.getJSON('/store_lookup?' + $('#store').serialize(), null, function(data){
+        $.each(data['predictions'], function(i,pred) { 
+          storeRefs[pred['description']] = pred['reference'] 
         });
-      },
-      select: function(event, ui) {
-        $('#store_reference')[0].value = storeRefs[ui.item.value];
-      }
-    });
-
+        var storeNames = data['predictions'].map(function(pred,i) { 
+          return pred['description'] 
+        });
+        response(storeNames);
+      });
+    },
+    select: function(event, ui) {
+      $('#store_reference')[0].value = storeRefs[ui.item.value];
+    }
   });
+
+});
 
 
 function previewFile(fileIndex) {
@@ -308,7 +308,7 @@ function validateForm() {
     alert('Please select available sizes.');
     return false;
   }
-  
+
 
   return true;
 }
@@ -332,7 +332,7 @@ function salePriceChanged() {
   var origPrice = parseFloat($('#orig_price').val());
   var percentOffBig = parseFloat($('#percent_off').val());
   var percentOff = percentOffBig / 100;  
-  
+
   if (origPrice > 0) {
     $('#percent_off')[0].value = Math.round((1.0 - (salePrice / origPrice)) * 100);    
   }
@@ -397,14 +397,14 @@ function selectSize(size_id) {
         <div id="dropzone" class="hero-unit">
           <div id="clickHere">
 
-          <center><h3>Drag and drop here</h3></center>
-            
+            <center><h3>Drag and drop here</h3></center>
+
             <div class="photoOr">
-            or 
+              or 
             </div>
 
             <button class="btn btn-large btn-success submit" id="selectFiles">Select Photos</button>
-            
+
 
             <%= direct_upload_form_for @uploader_0, :html => { :target => "_image_0_iframe", :id => "image_0_form" } do |f| %>
               <%= f.file_field :image_0, :onchange => "previewFile(0)" %>
@@ -460,10 +460,10 @@ function selectSize(size_id) {
                <div align="center">
                  <div class="row">
                    <%  categories = [["Select Category",-1]]
-                       Sale.categories.each_with_index { |c,i| categories << [c,i] }  %>
-                     <%= select_tag "category_id",
-                       options_for_select(categories, params[:category_id]) %>
-                   <br><br>
+                   Sale.categories.each_with_index { |c,i| categories << [c,i] }  %>
+                 <%= select_tag "category_id",
+                   options_for_select(categories, params[:category_id]) %>
+                 <br><br>
                    <div class="input-prepend">
                      <span class="add-on">Store</span>
                      <%= text_field_tag "store", params[:store], :class => "span2" %>
@@ -472,66 +472,95 @@ function selectSize(size_id) {
 
                      <span class="add-on">Brand</span>
                      <%= text_field_tag "brand", params[:brand], :class => "span2",
-                          :placeholder => "E.G., John Varvatos" %>
-                        <br><br>
-
-                     <span class="add-on">Orig $</span>
-                     <%= text_field_tag "orig_price", params[:orig_price], :class => "span2",
-                          :onchange => "origPriceChanged()" %>
+                       :placeholder => "E.G., John Varvatos" %>
                      <br><br>
 
-                     <span class="add-on">Sale $</span>
-                     <%= text_field_tag "sale_price", params[:sale_price], :class => "span2",
-                          :onchange => "salePriceChanged()" %>
-                     <br><br>
+                       <span class="add-on">Orig $</span>
+                       <%= text_field_tag "orig_price", params[:orig_price], :class => "span2",
+                         :onchange => "origPriceChanged()" %>
+                       <br><br>
 
-                     <span class="add-on">% Off</span>
-                     <%= text_field_tag "percent_off", params[:percent_off], :class => "span2",
-                          :onchange => "percentOffChanged()" %>
-                     <br><br>
+                         <span class="add-on">Sale $</span>
+                         <%= text_field_tag "sale_price", params[:sale_price], :class => "span2",
+                           :onchange => "salePriceChanged()" %>
+                         <br><br>
 
-                     <span class="add-on">Product</span>
-                     <%= text_field_tag "product", params[:product], :class => "span2",
-                       :placeholder => "E.G., Woll Sweater" %>
-                     <br><br>
-                   </div>
+                           <span class="add-on">% Off</span>
+                           <%= text_field_tag "percent_off", params[:percent_off], :class => "span2",
+                             :onchange => "percentOffChanged()" %>
+                           <br><br>
 
-                   <div id="hear">
-                     Select Sizes<br>
-                     <div class="" id="" style="max-width: 400px;">
+                             <span class="add-on">Product</span>
+                             <%= text_field_tag "product", params[:product], :class => "span2",
+                               :placeholder => "E.G., Woll Sweater" %>
+                             <br><br>
+                             </div>
 
-                       <table class="table table-bordered table-condensed" id="sizechart">            
-                         <% @sizes.each_with_index do |size_row, row| %>
-                           <tr>
-                           <% size_row.each_with_index do |size, col|
-                             size_id = "size_#{row}_#{col}" %>
-                           <td theSize="<%= size %>" id="<%= size_id %>" onclick="selectSize('<%= size_id %>')">
-                               <%= size %>
-                             </td>
-                           <% end %>
-                           </tr>
-                         <% end %>          
-                         </table>
+                             <div id="hear">
+                               Select Sizes<br>
+                               <div class="" id="" style="max-width: 400px;">
 
-                       </div>
+                                 <table class="table table-bordered table-condensed" id="sizechart">            
+                                   <% @sizes.each_with_index do |size_row, row| %>
+                                     <tr>
+                                     <% size_row.each_with_index do |size, col|
+                                       size_id = "size_#{row}_#{col}" %>
+                                     <td theSize="<%= size %>" id="<%= size_id %>" onclick="selectSize('<%= size_id %>')">
+                                         <%= size %>
+                                       </td>
+                                     <% end %>
+                                     </tr>
+                                   <% end %>          
+                                   </table>
 
-                       <br>
+                                 </div>
 
-                       <%= hidden_field_tag "size", params[:size], :id => "size" %>
+                                 <br>
 
-                       <br>
-                       <div class="postbtn">
-                         <center>
-                           <button id="uploady" class="btn btn-large btn-success submit span2" onclick="return false;">Post</button></center>
+                                 <%= hidden_field_tag "size", params[:size], :id => "size" %>
 
-                       </center>
+                                 <% if @user.is_merchant %>
 
-                     </div>
-                   </div>
-                 </div>
-               </div>
+                                 <div class="row-fluid">
+                                   <div class="span4"></div>
+                                   <div class="span4 shipping" style="text-align: left;">
+                                     <label class="radio">
+                                       <%= radio_button_tag "does_shipping", 0, (params[:does_shipping].to_i == 0) %>
+                                       No, shipping is not available for this item.
+                                     </label>
+                                     <label class="radio">
+                                       <%= radio_button_tag "does_shipping", 1, (params[:does_shipping].to_i == 1) %>
+                                       
+                                       Yes, I will ship this item within the Continental U.S.
+                                     </label>
+                                     <br><hr>
+                                     <label class="radio">
+                                       <%= radio_button_tag "allow_returns", 0, (params[:allow_returns].to_i == 0) %>
+                                       No, this item can not be returned.
+                                     </label>
+                                     <label class="radio">
+                                       <%= radio_button_tag "allow_returns", 1, (params[:allow_returns].to_i == 1) %>
+						  Yes, this item can be returned within (10) days of purchase.
+                                     </label>
+                                   </div>
+                                 </div>
+                               <% end %> <!-- is merchant/ship -->
 
 
-             <% end %>
 
-               <br><br>
+                                 <br>
+                                 <div class="postbtn">
+                                   <center>
+                                     <button id="uploady" class="btn btn-large btn-success submit span2" onclick="return false;">Post</button></center>
+
+                                 </center>
+
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+
+
+                       <% end %>
+
+                         <br><br>

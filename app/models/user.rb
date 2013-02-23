@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
                   :custom_slug,
                   :bio,
                   :website_url,
-                  :is_merchant,
-                  :does_shipping
+                  :is_merchant
 
   attr_accessor :other_user
 

@@ -23,7 +23,9 @@ class Sale < ActiveRecord::Base
                   :store_id,
                   :brand_id,
                   :visible,
-                  :percent_off_int
+                  :percent_off_int,
+                  :does_shipping,
+                  :allow_returns
 
   attr_accessor :current_user
   attr_accessor :image_upload_urls

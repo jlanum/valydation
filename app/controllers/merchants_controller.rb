@@ -33,13 +33,13 @@ class MerchantsController < ApplicationController
     else
       @user = User.new(:is_merchant => true,
                        :email => params[:email],
-                       :does_shipping => params[:shipping],
                        :first_name => params[:first_name],
                        :last_name => params[:last_name],
                        :passwd_clear => params[:passwd_clear],
                        :business_name => params[:business_name],
                        :custom_slug => params[:custom_slug],
                        :bio => params[:bio],
+                       :city_id => City.first.id,
                        :website_url => params[:website_url])
       @user.photo = params[:photo]
       @user.save!

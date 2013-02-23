@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222235742) do
+ActiveRecord::Schema.define(:version => 20130223011041) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20130222235742) do
     t.text     "website_url"
     t.string   "gender",          :limit => 1
     t.boolean  "does_shipping",                :default => false
+    t.boolean  "allow_returns",                :default => false
   end
 
   add_index "users", ["custom_slug"], :name => "index_users_on_custom_slug", :unique => true

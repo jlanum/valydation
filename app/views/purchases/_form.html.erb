@@ -3,7 +3,7 @@
     <input type="hidden" name="tr_data" value="<%= @tr_data %>" />
 
     <legend>Preferred Payment
-      <button id="submitButton" onclick="$('#submitButton')[0].innerText='Processing...'; $('#submitButton')[0].disabled = true; $('#payment-form').submit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button></legend>
+    </legend>
 
     <input name="transaction[customer][first_name]" type="text" class="input-small" placeholder="First Name" value="<%= params[:first_name] %>">
     <input name="transaction[customer][last_name]" type="text" class="input-small" placeholder="Last Name" value="<%= params[:last_name] %>">
@@ -26,14 +26,12 @@
 
     <script>
 function toggleAddress() {
-
-$.get('<%= new_sale_purchase_url(@sale) %>',
-  $('#payment-form').serialize(),
-  function(responseHTML) {
-    $('#payment-fieldset').replaceWith(responseHTML);
-  });
+  $.get('<%= new_sale_purchase_url(@sale) %>',
+        $('#payment-form').serialize(),
+        function(responseHTML) {
+          $('#payment-fieldset').replaceWith(responseHTML);
+        });
 }
-
     </script>
 
     <div class="" style="">
@@ -45,9 +43,9 @@ $.get('<%= new_sale_purchase_url(@sale) %>',
 
       <% if params[:ship].to_i == 1 %>
         <div id="address-container">
-          <%= hidden_field_tag "transaction[shipping][first_name]", @user.first_name %>
-          <%= hidden_field_tag "transaction[shipping][last_name]", @user.last_name %>
-          <%= hidden_field_tag "transaction[options][store_shipping_address_in_vault]", 'true' %>
+        <%= hidden_field_tag "transaction[shipping][first_name]", @user.first_name %>
+        <%= hidden_field_tag "transaction[shipping][last_name]", @user.last_name %>
+        <%= hidden_field_tag "transaction[options][store_shipping_address_in_vault]", 'true' %>
 
         <input type="text" class="span4" name="transaction[shipping][street_address]" placeholder="Street Address" value="<%= params[:address] %>">
         <input type="text" class="span4" name="transaction[shipping][extended_address]" placeholder="Apt." value="<%= params[:address_2] %>"><br>
@@ -59,52 +57,62 @@ $.get('<%= new_sale_purchase_url(@sale) %>',
 
         <input type="text" class="input-small" name="transaction[shipping][postal_code]" placeholder="Zip Code" value="<%= params[:zip] %>">
       </div>
-      <% end %>
+    <% end %>
 
     </div>
 
 
-    <div class="pull-right">
-      <table class="table table-bordered">  
-        <tr>
-          <td>
-            <font size="3" class="muted">Sale Price</font>
-          </td>
-          <td>
-            <%= humanized_money_with_symbol @sale.sale_price %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <font size="3" class="muted">Sales Tax</font>
-          </td>
-          <td>
-            <%= humanized_money_with_symbol @tax_amount %>
-          </td>
-        </tr>
-        <% if params[:ship].to_i == 1 %>
-        <tr id="shipping_row">
-          <td>
-            <font size="3" class="muted">Shipping</font>
-          </td>
-          <td>
-            <%= humanized_money_with_symbol @ship_amount %>
-          </td>
-        </tr>
+    <div class="row-fluid">
+      <div class="pull-right">
+        <table class="table table-bordered">  
+          <tr>
+            <td>
+              <font size="3" class="muted">Sale Price</font>
+            </td>
+            <td>
+              <%= humanized_money_with_symbol @sale.sale_price %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font size="3" class="muted">Sales Tax</font>
+            </td>
+            <td>
+              <%= humanized_money_with_symbol @tax_amount %>
+            </td>
+          </tr>
+          <% if params[:ship].to_i == 1 %>
+            <tr id="shipping_row">
+            <td>
+              <font size="3" class="muted">Shipping</font>
+            </td>
+            <td>
+              <%= humanized_money_with_symbol @ship_amount %>
+            </td>
+          </tr>
         <% end %>
-      </tr>
-      <tr id="total">
-        <td>
-          <font size="3" class="muted">Total</font>
-        </td>
-        <td>
-          <%= humanized_money_with_symbol @total_amount %>
-        </td>
-      </tr>                  
-    </table>
+        </tr>
+        <tr id="total">
+          <td>
+            <font size="3" class="muted">Total</font>
+          </td>
+          <td>
+            <%= humanized_money_with_symbol @total_amount %>
+          </td>
+        </tr>                  
+      </table>
+    </div>
   </div>
 
-
 </form>
+
+<button id="submitButton" onclick="$('#submitButton')[0].innerText='Processing...'; $('#submitButton')[0].disabled = true; $('#payment-form').submit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
+
+<% if @sale.user.allow_returns %>
+  *Merchant accepts returns within 10 days of sale
+<% else %>
+    *Merchant does not accept returns
+<% end %>
+
             </fieldset>
 

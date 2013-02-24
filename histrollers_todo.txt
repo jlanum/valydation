@@ -554,16 +554,9 @@ notifications
   -handle shipping on sale post
   -add zip code and other fixes for merchant signup
   -2:00 stop
-
-
-Mandrill integration - working on this now
-
-purchase special fields
-  -ship
-  -sales_tax
-  -shipping
-
-
+  -8:00 start
+  -mandrill API integration
+  -9 stop
 
 
 

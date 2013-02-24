@@ -56,6 +56,6 @@ gem 'carrierwave_direct'
 gem 'braintree'
 gem 'debugger'
 gem 'carmen', :git => 'git://github.com/jim/carmen.git'
-gem 'mandrill'
+gem 'mandrill', :git => 'git://github.com/cyu/mandrill.git'
 
 

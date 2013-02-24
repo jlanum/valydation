@@ -3,6 +3,7 @@ def send_emails
     puts "sending email for purchase #{purchase.id}"
     ##send email
 
+    purchase.send_initial_emails
     purchase.sent_initial_email = true
     purchase.save
   end

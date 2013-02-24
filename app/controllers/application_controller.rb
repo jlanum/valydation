@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :detect_iphone
 
   def self.mandrill_api_key
-    'ttWsPAoWdEjbcLoF1qYzxg'
+    'ttWsPAoWdEjbcLoFIqYzxg'
   end
 
   def self.s3_bucket
@@ -42,6 +42,8 @@ class ApplicationController < ActionController::Base
 
     sts.new_federated_session(federated_user_key, :policy => policy)
   end
+
+
 
   private
 

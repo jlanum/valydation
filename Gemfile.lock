@@ -99,6 +99,8 @@ GEM
     honeybadger (1.5.0)
       activesupport
       json
+    httpi (2.0.2)
+      rack
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
@@ -115,6 +117,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill (0.0.2)
+      httpi
+      json
     mime-types (1.21)
     mini_magick (3.4)
       subexec (~> 0.2.1)
@@ -217,6 +222,7 @@ DEPENDENCIES
   honeybadger
   jquery-rails
   kaminari
+  mandrill
   mini_magick
   money-rails
   newrelic_rpm

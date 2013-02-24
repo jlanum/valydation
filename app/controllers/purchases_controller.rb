@@ -12,7 +12,8 @@ class PurchasesController < ApplicationController
       :transaction => {
         :custom_fields => {"sale_id" => @sale.id,
                            "shipping_amount" => @ship_amount,
-                           "tax_amount" => @tax_amount},
+                           "tax_amount" => @tax_amount,
+                           "subtotal" => @sale.sale_price},
         :type => "sale",
         :amount => @total_amount})
 
@@ -53,6 +54,7 @@ class PurchasesController < ApplicationController
                                :zip => transaction.shipping_details.postal_code,
                                :shipping => transaction.custom_fields[:shipping_amount],
                                :tax => transaction.custom_fields[:tax_amount],
+                               :subtotal => transaction.custom_fields[:subtotal],
                                :total => transaction.amount)
       @purchase.save!
     else

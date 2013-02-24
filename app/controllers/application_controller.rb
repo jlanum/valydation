@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :detect_iphone
 
+  def self.mandrill_api_key
+    'ttWsPAoWdEjbcLoF1qYzxg'
+  end
+
   def self.s3_bucket
     "mst-images-#{Rails.env}"
   end

@@ -10,5 +10,15 @@ class Purchase < ActiveRecord::Base
                   :address_2, 
                   :city, 
                   :state, 
-                  :zip
+                  :zip,
+                  :shipping,
+                  :tax,
+                  :total,
+                  :subtotal
+
+  monetize :shipping_cents, :allow_nil => true
+  monetize :tax_cents, :allow_nil => true
+  monetize :total_cents, :allow_nil => true
+  monetize :subtotal_cents, :allow_nil => true
+  
 end

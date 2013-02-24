@@ -10,7 +10,9 @@ class PurchasesController < ApplicationController
     @tr_data = Braintree::TransparentRedirect.transaction_data(
       :redirect_url => purchase_confirmation_url,
       :transaction => {
-        :custom_fields => {"sale_id" => @sale.id},
+        :custom_fields => {"sale_id" => @sale.id,
+                           "shipping_amount" => @ship_amount,
+                           "tax_amount" => @tax_amount},
         :type => "sale",
         :amount => @total_amount})
 
@@ -26,9 +28,6 @@ class PurchasesController < ApplicationController
           params[:cc_number] = params[:transaction][:credit_card][:number]
           params[:cvv] = params[:transaction][:credit_card][:cvv]
         end
-
-        require 'pp'
-        pp params
       end
       render :partial => "purchases/form"
     end
@@ -51,7 +50,10 @@ class PurchasesController < ApplicationController
                                :address_2 => transaction.shipping_details.extended_address,
                                :city => transaction.shipping_details.locality,
                                :state => transaction.shipping_details.region,
-                               :zip => transaction.shipping_details.postal_code)
+                               :zip => transaction.shipping_details.postal_code,
+                               :shipping => transaction.custom_fields[:shipping_amount],
+                               :tax => transaction.custom_fields[:tax_amount],
+                               :total => transaction.amount)
       @purchase.save!
     else
       flash[:message] = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."

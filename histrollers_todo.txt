@@ -552,10 +552,16 @@ notifications
   -1:00 start
   -handle returns on sale post
   -handle shipping on sale post
+  -add zip code and other fixes for merchant signup
   -2:00 stop
 
 
 Mandrill integration - working on this now
+
+purchase special fields
+  -ship
+  -sales_tax
+  -shipping
 
 
 

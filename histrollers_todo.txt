@@ -563,6 +563,8 @@ notifications
   2/24
   -4:30 start
   -fixes for mobile web
+  -moved all js/css/image assets to S3 for enhanced performance
+  -5:30
 
 
 

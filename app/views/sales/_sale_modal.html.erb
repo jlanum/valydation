@@ -1,7 +1,13 @@
 <!-- Modal -->
 <div id="sale_modal_<%= sale.id %>" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button><center><a href="/sales"><img src="/assets/Logo_Website_v2.png" class="modal-brand" height="34" width="180" /></a></center><br>
+    <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button>
+    <center>
+      <a href="/sales">
+        <%= image_tag "Logo_Website_v2.png", :class => "modal-brand", :height => 34, :width => 180 %>
+      </a>
+    </center>
+    <br>
     <p id="myModalLabel"></p>
   </div>
 
@@ -13,9 +19,9 @@
     <span class="row-fluid">
       <% if sale.user and sale.user.is_merchant %>
         <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success span4 pull-right">Buy</a>
-      <% else %>
+    <% else %>
         <a href="#" class="btn btn-success span4 pull-right disabled">Buy</a>
-      <% end %>
+    <% end %>
     </span>
   </div>
 </div>

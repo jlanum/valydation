@@ -66,4 +66,9 @@ HiStrollers::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.action_mailer.delivery_method = :smtp  
+
+  config.action_controller.asset_host = Proc.new do |source, request|
+    method = request.ssl? ? "https" : "http"
+    "#{method}://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  end
 end

@@ -1,7 +1,7 @@
 <li class="span3">
 <div class="hover-group">
   <div class="image-wrapper">
-    <a href="#sale_modal_<%= sale.id %>" data-toggle="modal">
+    <a href="<%= sale_url(sale.id) %>" onclick="if (isMobile()) { return true; } else { $('#sale_modal_<%= sale.id %>').modal({}); return false; }">
       <img class="product-pic" src="<%= sale.image_0.versions[:web_index] %>" alt="">
     </a>
     <span class="thisInfo">

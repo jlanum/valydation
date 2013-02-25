@@ -495,3 +495,13 @@ width: 62px;
 .expiration {
   width: 80px !important;
 }
+
+.iphone-page {
+	padding-left: 20px !important;
+}
+.iphone-button {
+	padding-left: 38px;
+}
+.iphone-logo {
+	padding-left:5px;
+}

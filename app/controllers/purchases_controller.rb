@@ -1,7 +1,20 @@
 class PurchasesController < ApplicationController
   before_filter :handle_device
-  before_filter :require_user
-  before_filter :require_ssl
+  before_filter :require_user, :except => "available"
+  before_filter :require_ssl, :except => "available"
+
+  def available
+    @purchase = Purchase.find(params[:id])
+    if @purchase.available_key == params[:key]
+      if params[:available].to_i == 1
+        @purchase.send_available_email
+        redirect_to page_url(:slug => "item-available-thanks")        
+      else
+        @purchase.send_not_available_email
+        redirect_to page_url(:slug => "item-not-available-thanks")        
+      end
+    end
+  end
 
   def new
     @sale = Sale.find(params[:sale_id])

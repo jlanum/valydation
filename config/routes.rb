@@ -39,6 +39,8 @@ HiStrollers::Application.routes.draw do
   match '/purchase_confirmation' => 'purchases#confirmation',
     :as => 'purchase_confirmation'
 
+  match '/purchase_available' => 'purchases#available'
+
   match 'admin' => 'admin/sales#index'
   namespace :admin do
     resources :sales

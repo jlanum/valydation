@@ -55,7 +55,7 @@ class Sale < ActiveRecord::Base
   end
 
   def share_message
-    "#{self.user.display_name if self.user} posted on MySaleTable! #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off at #{self.store_name}"
+    "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on MySaleTable."
   end
 
   def process_images!

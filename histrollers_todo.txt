@@ -580,22 +580,17 @@ notifications
   -'register' page tweaks
   -merchant signup page tweaks
   -contact page tweaks
+  -8:15
 
 
 
 
 
 
-Contact:
-Got rid of address text
-*whole form needs to be moved over a bit, centered in between top container
 
 TOS and Privacy:
 Massive text changes
 
-Upload:
-Text Change: "Drag and drop photo here.
-Text change: "E.G., Green Sweater"
 
 Home Page:
 Dropped purple hover down to cover all of text. I can't really see the effects because my image is longer, but starting at -3px should I think work.

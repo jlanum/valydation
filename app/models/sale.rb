@@ -76,13 +76,14 @@ class Sale < ActiveRecord::Base
       if image_key = self.send("temp_image_url_#{image_index}")
         puts "processing #{image_key}"
         s3_obj = bucket.objects[image_key]
-        temp_filename = "#{Rails.root}/tmp/#{CGI.escape(image_key)}"
+        temp_filename = "image_#{Time.now.strftime("%Y_%m_%d_%H%M%S")}_#{self.id}_#{rand(10000000000)}.jpg"
+        temp_file_path = "#{Rails.root}/tmp/#{temp_filename}"
 
-        File.open(temp_filename,"wb") do |f|
+        File.open(temp_file_path,"wb") do |f|
           s3_obj.read { |chunk| f.write(chunk) }
         end
 
-        self.send("image_#{image_index}=",File.open(temp_filename))
+        self.send("image_#{image_index}=",File.open(temp_file_path))
       end
     end
 

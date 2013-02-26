@@ -60,8 +60,7 @@
 }
 
 .category-feed-align {
-	text-align: center;
-	padding-left: 220px;
+	padding-left: 240px;
 }
 
 .purchase {
@@ -80,7 +79,7 @@
 .hover-group .image-wrapper .hover-toggle {
   /* set it at the bottom of .image-wrapper */
   position: absolute;      
-  bottom: 0px;
+  bottom: -3px;
   left: 0px;
   /* and don't display it */
   display: none;
@@ -160,7 +159,7 @@
   border-radius: 6px;
   border: dotted;
   width: 700px;
-  margin-left: 130px;
+  margin-left: 65px;
 }
 
 

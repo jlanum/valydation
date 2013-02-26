@@ -16,7 +16,8 @@ class Purchase < ActiveRecord::Base
                   :shipping,
                   :tax,
                   :total,
-                  :subtotal
+                  :subtotal,
+                  :size
 
   belongs_to :sale
   belongs_to :user

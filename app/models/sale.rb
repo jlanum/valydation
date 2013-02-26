@@ -54,6 +54,10 @@ class Sale < ActiveRecord::Base
      "Pet"]
   end
 
+  def sizes
+    self.size.to_s.split(",").collect(&:strip)
+  end
+
   def share_message
     "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on MySaleTable."
   end

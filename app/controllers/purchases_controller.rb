@@ -42,6 +42,9 @@ class PurchasesController < ApplicationController
           params[:cc_number] = params[:transaction][:credit_card][:number]
           params[:cvv] = params[:transaction][:credit_card][:cvv]
         end
+        if params[:transaction][:custom_fields]
+          params[:size] = params[:transaction][:custom_fields][:size]
+        end
       end
       render :partial => "purchases/form"
     end
@@ -68,7 +71,8 @@ class PurchasesController < ApplicationController
                                :shipping => transaction.custom_fields[:shipping_amount],
                                :tax => transaction.custom_fields[:tax_amount],
                                :subtotal => transaction.custom_fields[:subtotal],
-                               :total => transaction.amount)
+                               :total => transaction.amount,
+                               :size => transaction.custom_fields[:size])
       @purchase.save!
     else
       flash[:message] = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."
@@ -81,6 +85,7 @@ class PurchasesController < ApplicationController
       city = transaction.shipping.locality
       state = transaction.shipping.region
       zip = transaction.shipping.postal_code
+      size = transaction.custom_fields[:size]
 
       redirect_to new_sale_purchase_url(:sale_id => sale_id,
                                         :exp_month => exp_month,
@@ -91,7 +96,8 @@ class PurchasesController < ApplicationController
                                         :address_2 => address_2,
                                         :city => city,
                                         :state => state,
-                                        :zip => zip)
+                                        :zip => zip,
+                                        :size => size)
     end
   end
 

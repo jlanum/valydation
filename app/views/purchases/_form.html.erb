@@ -68,7 +68,16 @@ function toggleAddress() {
 
     <div class="row-fluid">
       <div class="pull-right">
-        <table class="table table-bordered">  
+
+        <% unless @sale.sizes.empty? or @sale.size == "N/A" %>
+        <p>
+        <%= select_tag 'transaction[custom_fields][size]',
+          options_for_select((["Select Size"] + @sale.sizes), params[:size]) %>
+        </p>
+        <% end %>
+        
+
+        <table class="table table-bordered">               
           <tr>
             <td>
               <font size="3" class="muted">Sale Price</font>
@@ -110,7 +119,29 @@ function toggleAddress() {
 
 </form>
 
-<button id="submitButton" onclick="$('#submitButton')[0].innerText='Processing...'; $('#submitButton')[0].disabled = true; $('#payment-form').submit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
+<script>
+function validateAndSubmit() {
+  if ($('#transaction_custom_fields_size').length > 0) {
+    if ($('#transaction_custom_fields_size').val() == "Select Size") {
+      alert("Please select a size.");
+      return false;
+    } else {
+      justSubmit();
+    }
+  }
+  else {
+    justSubmit();
+  }
+}
+
+function justSubmit() {
+  $('#submitButton')[0].innerText='Processing...';
+  $('#submitButton')[0].disabled = true;
+  $('#payment-form').submit();
+}
+</script>
+
+<button id="submitButton" onclick="validateAndSubmit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
 
 <% if @sale.allow_returns %>
   *Merchant accepts returns within 10 days of sale

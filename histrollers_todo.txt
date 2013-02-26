@@ -583,7 +583,8 @@ notifications
   -share messages
   -set high start # for purchase id
   -fix upload post button
-  -8:45
+  -size selection
+  -9
 
 
   -start purchase id at 261202

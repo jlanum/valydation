@@ -85,7 +85,8 @@ function toggleAddress() {
               <font size="3" class="muted">Size</font>
             </td> 
             <td>
-             <%= @sale.size %> 
+              <%= @sale.size %> 
+              <%= hidden_field_tag 'transaction[custom_fields][size]', @sale.size %>
            </td>
          </tr>
          <% end %>

@@ -55,6 +55,7 @@ class SalesController < ApplicationController
   def handle_direct_uploaded_images
     (0..2).each do |image_index|
       if image_key = params["image_#{image_index}_key"] and not image_key.empty?
+        image_key = CGI.escape(image_key)
         @sale.send("temp_image_url_#{image_index}=",image_key)
         @sale.uploaded_images = true
       end

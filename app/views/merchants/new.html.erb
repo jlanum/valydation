@@ -79,12 +79,17 @@ function validateAndSubmit() {
     </div>
   <% end %>
 
-            <span class="inline-help">&#160;Retail Type&#160;</span>
+            <span class="inline-help">&#160;Primary Retail Type&#160;</span>
 
             <%= select_tag("retail_category",
-                           options_for_select(["Choose a category", "Wardrobe", "Home", "Kitchen", "Gift", "Pet"], params[:retail_category]),
+                            options_for_select((["Choose a category"] + Sale.categories), 
+                                               params[:retail_category]),
                            :class => "retail-type") %>
 						<hr>
+      <span class="inline-help">&#160;Business Name</span><br>
+      <%= text_field_tag("business_name", params[:business_name], :class => "input-medium" )%>
+      <br><br>
+            
             <span class="inline-help">&#160;Contact Name</span><br/>
             <%= text_field_tag("first_name", params[:first_name], :class => "input-medium", :placeholder => "First Name") %>
             <%= text_field_tag("last_name", params[:last_name], :class => "input-medium", :placeholder => "Last Name") %>
@@ -104,15 +109,7 @@ function validateAndSubmit() {
 			<span class="inline-help">&#160;Confirm Password</span><br>
       <%= password_field_tag("passwd_confirm", params[:passwd_confirm], :class => "input-medium", :placeholder => "Confirm Password") %>
       <br>
-      <br>
-      <br>
       
-			  <fieldset>
-			    <legend>Profile (shown publicly)</legend>
-			</fieldset>
-      <span class="inline-help">&#160;Business Name</span><br>
-      <%= text_field_tag("business_name", params[:business_name], :class => "input-medium" )%>
-      <br>
           <hr>
 				Your custom URL<br>
 				<div class="input-prepend">
@@ -127,7 +124,7 @@ function validateAndSubmit() {
         <br/>
       <hr>
 			
-      <span class="bio">About</span><br>
+      <span class="bio">Describe your store</span><br>
 
       <%= text_area_tag "bio", params[:bio], :placeholder => "Enter text (150 character limit)", :rows => "3" %>
       <br>

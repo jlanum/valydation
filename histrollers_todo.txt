@@ -575,7 +575,27 @@ notifications
   -available/notavailable email flow
   -login via username
   -username at signup
+  -7
+  -8
+  -'register' page tweaks
 
 
 
+
+
+
+Contact:
+Got rid of address text
+*whole form needs to be moved over a bit, centered in between top container
+
+TOS and Privacy:
+Massive text changes
+
+Upload:
+Text Change: "Drag and drop photo here.
+Text change: "E.G., Green Sweater"
+
+Home Page:
+Dropped purple hover down to cover all of text. I can't really see the effects because my image is longer, but starting at -3px should I think work.
+Also, I just centered the category feed to be in line with the logo and updated git. 
 

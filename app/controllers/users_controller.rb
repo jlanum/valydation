@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def register
+    @no_header_links = true
     render :layout => "prelogin"
   end
 

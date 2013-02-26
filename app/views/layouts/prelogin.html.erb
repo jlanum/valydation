@@ -42,9 +42,11 @@
 		
           <div class="nav-collapse collapse">
             <ul class="nav">
+              <% unless @no_header_links %>
               <li><%= link_to "Join", register_url %></li>
               <li><%= link_to "Login", new_session_url %></li>
               <li><%= link_to "Merchants", "/page/merchants-intro"  %></li>
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

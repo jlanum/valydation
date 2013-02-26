@@ -46,9 +46,6 @@ GEM
     amatch (0.2.11)
       tins (~> 0.3)
     arel (3.0.2)
-    asset_sync (0.5.4)
-      activemodel
-      fog
     aws-s3 (0.6.3)
       builder
       mime-types
@@ -215,7 +212,6 @@ PLATFORMS
 
 DEPENDENCIES
   amatch
-  asset_sync
   aws-s3
   aws-sdk
   bcrypt-ruby

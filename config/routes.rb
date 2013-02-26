@@ -44,7 +44,9 @@ HiStrollers::Application.routes.draw do
   match 'admin' => 'admin/sales#index'
   namespace :admin do
     resources :sales
-    resources :users
+    resources :users do
+      get 'export', :on => :collection
+    end
     resources :leads
     resources :pages
   end

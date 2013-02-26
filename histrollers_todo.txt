@@ -578,6 +578,8 @@ notifications
   -7
   -8
   -'register' page tweaks
+  -merchant signup page tweaks
+  -contact page tweaks
 
 
 

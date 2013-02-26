@@ -37,7 +37,13 @@
     <script>
 
 
-    function validateAndSubmit() {
+function validateAndSubmit() {
+
+      if ($("#username")[0].value.length < 2) {
+        alert("Please provide a username.");
+        return false;
+      }
+
       if (!$("#email")[0].value.match(".@.")) {
         alert("Please provide a valid email address.");
         return false;
@@ -87,6 +93,8 @@
 
       <center>
 
+      <input type="text" value="<%= params[:username] %>" id="username" name="username" class="input-block-level" placeholder="Username"><br>
+        
       <input type="text" value="<%= params[:email] %>" id="email" name="email" class="input-block-level" placeholder="Email"><br>
         <input type="password" value="<%= params[:passwd_clear] %>" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
         <input type="password" value="<%= params[:passwd_confirm] %>" id="passwd_confirm" name="passwd_confirm" class="input-block-level" placeholder="Confirm Password"><br>

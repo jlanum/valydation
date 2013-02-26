@@ -14,13 +14,14 @@ class SessionsController < ApplicationController
   def create
     params[:email] = params[:email].downcase
 
-    if @user = User.where(:email => params[:email]).first
+    if @user = (User.where(:email => params[:email]).first or
+                User.where(:custom_slug => params[:email]).first)
       unless BCrypt::Password.new(@user.passwd_hash) == params[:passwd_clear]
-        @error_message = "Email or password incorrect."
+        @error_message = "Email/Username or password incorrect."
         @user = nil
       end
     else
-      @error_message = "Email or password incorrect"
+      @error_message = "Email/Username or password incorrect"
     end
 
     if @error_message

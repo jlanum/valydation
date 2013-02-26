@@ -175,7 +175,9 @@ class UsersController < ApplicationController
   end
 
   def create_email
-    if User.find_by_email(params[:email].downcase)
+    if params[:username] and User.find_by_custom_slug(params[:username].downcase)
+      @error_message = "There is already a user registered with that username."
+    elsif User.find_by_email(params[:email].downcase)
       @error_message = "There is already a user registered with that email address."
     else
       @user = User.new(:first_name => params[:first_name],
@@ -184,6 +186,9 @@ class UsersController < ApplicationController
                        :zip_code => params[:zip_code],
                        :passwd_clear => params[:passwd_clear],
                        :city_id => City.find(:first).id)
+      if params[:username]
+        @user.custom_slug = params[:username]
+      end
     end
   end
 

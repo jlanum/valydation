@@ -570,6 +570,11 @@ notifications
   -3 start
   -various web tweaks
   -email templates setup
+  -4
+  -5
+  -available/notavailable email flow
+  -login via username
+  -username at signup
 
 
 

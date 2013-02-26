@@ -69,15 +69,26 @@ function toggleAddress() {
     <div class="row-fluid">
       <div class="pull-right">
 
-        <% unless @sale.sizes.empty? or @sale.size == "N/A" %>
-        <p>
-        <%= select_tag 'transaction[custom_fields][size]',
-          options_for_select((["Select Size"] + @sale.sizes), params[:size]) %>
-        </p>
+        <% unless @sale.sizes.empty? or @sale.size == "N/A" or @sale.sizes.length == 1 %>
+       
+          <p>
+          <%= select_tag 'transaction[custom_fields][size]',
+            options_for_select((["Select Size"] + @sale.sizes), params[:size]) %>
+          </p>
         <% end %>
         
 
         <table class="table table-bordered">               
+         <% if @sale.sizes.length == 1 %>
+           <tr>
+           <td>
+              <font size="3" class="muted">Size</font>
+            </td> 
+            <td>
+             <%= @sale.size %> 
+           </td>
+         </tr>
+         <% end %>
           <tr>
             <td>
               <font size="3" class="muted">Sale Price</font>

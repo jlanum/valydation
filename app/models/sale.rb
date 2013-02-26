@@ -58,6 +58,11 @@ class Sale < ActiveRecord::Base
     "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on MySaleTable."
   end
 
+  def t_share_message
+    "I discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on
+@MySaleTable."
+  end
+
   def process_images!
     full_session = ApplicationController.new_sts_session
     s3_full = AWS::S3.new(full_session.credentials)

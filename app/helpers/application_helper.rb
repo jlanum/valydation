@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def twitter_share_url(sale)
-    "https://twitter.com/share?url=#{CGI.escape(sale_url(sale))}&text=#{CGI.escape(sale.share_message)}"
+    "https://twitter.com/share?url=#{CGI.escape(sale_url(sale))}&text=#{CGI.escape(sale.t_share_message)}"
   end
 
   def fb_share_url(sale)

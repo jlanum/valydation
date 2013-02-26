@@ -583,16 +583,7 @@ notifications
   -8:15
 
 
+  -start purchase id at 261202
 
 
-
-
-
-TOS and Privacy:
-Massive text changes
-
-
-Home Page:
-Dropped purple hover down to cover all of text. I can't really see the effects because my image is longer, but starting at -3px should I think work.
-Also, I just centered the category feed to be in line with the logo and updated git. 
 

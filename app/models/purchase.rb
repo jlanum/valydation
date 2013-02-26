@@ -32,30 +32,7 @@ class Purchase < ActiveRecord::Base
 
   def send_initial_emails
     send_customer_processing_email
-  end
-
-  def common_merge_vars
-    base_available_url = "http://www.mysaletable.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
-
-    merge_vars = {
-      "ORDER_ID" => self.id,
-      "IMAGE_URL" => self.sale.image_0.versions[:web_modal].to_s,
-      "AVAILABLE_URL" => base_available_url + "&available=1",
-      "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.sale.brand,
-      "PRODUCT" => self.sale.product,
-      "SIZE" => self.sale.size,
-      "STORE" => self.sale.store_name,
-      "DELIVER" => ((self.shipping.to_f > 0) ? "Yes" : "No"),
-      "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
-      "SHIPPING" => humanized_money_with_symbol(self.shipping),
-      "TAX" => humanized_money_with_symbol(self.tax),
-      "TOTAL" => humanized_money_with_symbol(self.total)
-    }
-
-    merge_vars.inject([]) do |array, pair|
-      array << {:name => pair.first, :content => pair.last}
-    end
+    send_merchant_confirm_email
   end
 
   def send_customer_processing_email
@@ -128,6 +105,30 @@ class Purchase < ActiveRecord::Base
 
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
+  end
+
+  def common_merge_vars
+    base_available_url = "http://www.mysaletable.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
+
+    merge_vars = {
+      "ORDER_ID" => self.id,
+      "IMAGE_URL" => self.sale.image_0.versions[:web_modal].to_s,
+      "AVAILABLE_URL" => base_available_url + "&available=1",
+      "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
+      "BRAND" => self.sale.brand,
+      "PRODUCT" => self.sale.product,
+      "SIZE" => self.sale.size,
+      "STORE" => self.sale.store_name,
+      "DELIVER" => ((self.shipping.to_f > 0) ? "Yes" : "No"),
+      "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
+      "SHIPPING" => humanized_money_with_symbol(self.shipping),
+      "TAX" => humanized_money_with_symbol(self.tax),
+      "TOTAL" => humanized_money_with_symbol(self.total)
+    }
+
+    merge_vars.inject([]) do |array, pair|
+      array << {:name => pair.first, :content => pair.last}
+    end
   end
 
 end

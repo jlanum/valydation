@@ -71,4 +71,6 @@ HiStrollers::Application.configure do
     method = request.ssl? ? "https" : "http"
     "#{method}://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   end
+
+  config.assets.precompile += [ 'vendor/jquery-ui.js', 'vendor/jquery-ui.css' ]
 end

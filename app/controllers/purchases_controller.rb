@@ -75,17 +75,30 @@ class PurchasesController < ApplicationController
                                :size => transaction.custom_fields[:size])
       @purchase.save!
     else
+      #debugger
       flash[:message] = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."
-      sale_id = braintree_result.transaction.custom_fields[:sale_id]
-      exp_month, exp_year = braintree_result.transaction.credit_card_details.expiration_date.split("/").collect(&:to_i).collect(&:to_s)
-      first_name = braintree_result.transaction.customer_details.first_name
-      last_name = braintree_result.transaction.customer_details.last_name
-      address = transaction.shipping.street_address
-      address_2 = transaction.shipping.extended_address
-      city = transaction.shipping.locality
-      state = transaction.shipping.region
-      zip = transaction.shipping.postal_code
-      size = transaction.custom_fields[:size]
+
+      exp_month, exp_year, first_name, last_name, address, 
+        address_2, city, state, zip, ship = nil
+
+      sale_id = braintree_result.params[:transaction][:custom_fields][:sale_id]
+      size = braintree_result.params[:transaction][:custom_fields][:size]        
+      if braintree_result.params[:transaction][:credit_card]
+        exp_month = braintree_result.params[:transaction][:credit_card][:expiration_month]
+        exp_year = braintree_result.params[:transaction][:credit_card][:expiration_year]
+      end
+      if braintree_result.params[:transaction][:customer]
+        first_name = braintree_result.params[:transaction][:customer][:first_name]
+        last_name = braintree_result.params[:transaction][:customer][:last_name]
+      end
+      if braintree_result.params[:transaction][:shipping]
+        address = braintree_result.params[:transaction][:shipping][:street_address]
+        address_2 = braintree_result.params[:transaction][:shipping][:extended_address]
+        city = braintree_result.params[:transaction][:shipping][:locality]
+        state = braintree_result.params[:transaction][:shipping][:region]
+        zip = braintree_result.params[:transaction][:shipping][:postal_code]
+        ship = 1
+      end
 
       redirect_to new_sale_purchase_url(:sale_id => sale_id,
                                         :exp_month => exp_month,
@@ -97,7 +110,8 @@ class PurchasesController < ApplicationController
                                         :city => city,
                                         :state => state,
                                         :zip => zip,
-                                        :size => size)
+                                        :size => size,
+                                        :ship => ship)
     end
   end
 

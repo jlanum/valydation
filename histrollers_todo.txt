@@ -589,13 +589,13 @@ notifications
   -2/26
   -12 start
   -user export
-  -12:15
+  -12:30
   -3 start
   -fix upload bug - images with spaces in filenames
   -misc web tweaks
   -admin: edit sizes
-  -
-
+  -handle payment fail gracefully
+  -5
 
 
  -handle payment fail

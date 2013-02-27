@@ -599,6 +599,8 @@ notifications
 
   -2/27
   -12 start
+  -pre registration
+  -1
 
   -signup code
   -activated_web 

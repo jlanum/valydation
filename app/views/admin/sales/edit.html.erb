@@ -72,6 +72,14 @@ on <%= @sale.created_at.strftime("%b %d, %Y") %>.
           </div>
 
           <div class="control-group">
+            <label class="control-label" for="sale_product">Sizes</label>
+            <div class="controls">
+              <%= text_field(:sale, :size, :class => "input-large") %>
+              &nbsp;(comma separated e.g. 'XL, XXL, XXXL')
+            </div>
+          </div>
+
+          <div class="control-group">
             <label class="control-label" for="city_id">City</label>
             <div class="controls">
               <%= select(:sale, :city_id, @cities.collect { |c| [c.name,c.id] }) %>

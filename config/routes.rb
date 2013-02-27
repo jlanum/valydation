@@ -54,7 +54,8 @@ HiStrollers::Application.routes.draw do
   match 'store_lookup' => 'sales#store_lookup'
 
   match 'logout' => 'sessions#destroy'
-  match 'register' => 'users#register'
+  match 'register' => 'users#preregister'
+  match 'register_approved' => 'users#register'  
   match 'register_lead' => 'admin/leads#create'
 
   root :to => "users#landing"

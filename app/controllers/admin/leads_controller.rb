@@ -6,12 +6,18 @@ class Admin::LeadsController < ApplicationController
     :only => :index
 
   def create
+    if params[:promo_code] && params[:promo_code].downcase == 'mstpreview'
+      session[:promo_code] = 'mstpreview'
+      redirect_to(register_approved_url)
+      return
+    end
+
     @lead = Lead.new(:first_name => params[:first_name],
                      :last_name => params[:last_name],
                      :email => params[:email])
     @lead.save!
 
-    render :json => {"message" => "ok"}
+    redirect_to(page_url(:slug => 'preregister'))
   end
 
   def index

@@ -1,9 +1,10 @@
 class MerchantsController < ApplicationController
   layout 'prelogin'
 
+  before_filter :require_promo_code
 
   def new
-
+    #session[:promo_codedd] = nil
   end
 
   def create
@@ -32,6 +33,7 @@ class MerchantsController < ApplicationController
       render :action => "new"
     else
       @user = User.new(:is_merchant => true,
+                       :activated_web => true,
                        :email => params[:email],
                        :first_name => params[:first_name],
                        :last_name => params[:last_name],

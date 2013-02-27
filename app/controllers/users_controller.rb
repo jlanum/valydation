@@ -4,6 +4,15 @@ class UsersController < ApplicationController
   #before_filter :require_device
   before_filter :require_user, :only => [:update, :show, :edit]
   before_filter :handle_user, :only => [:landing, :new]
+  before_filter :require_promo_code, :only => [:new, :register]
+
+  def require_promo_code
+    if session[:promo_code]
+      true
+    else
+      false
+    end
+  end
 
   def landing
     if @user
@@ -27,6 +36,11 @@ class UsersController < ApplicationController
   end
 
   def register
+    @no_header_links = true
+    render :layout => "prelogin"
+  end
+
+  def preregister
     @no_header_links = true
     render :layout => "prelogin"
   end
@@ -100,6 +114,10 @@ class UsersController < ApplicationController
   end
 
   def create_html
+    unless require_promo_code
+      raise "Tried to create_html with no promo code!"
+    end
+
     if params[:fb_id]
       create_fb
     else
@@ -111,6 +129,7 @@ class UsersController < ApplicationController
       return
     end
 
+    @user.activated_web = true
     @user.save!
 
     session[:user_id] = @user.id

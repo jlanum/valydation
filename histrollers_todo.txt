@@ -601,6 +601,10 @@ notifications
   -12 start
   -pre registration
   -1
+  -4
+  -merchant welcome modal
+  -change share icons
+  -5
 
   -signup code
   -activated_web 

@@ -606,6 +606,4 @@ notifications
   -change share icons
   -5
 
-  -signup code
-  -activated_web 
-  
+ -curated feed items 

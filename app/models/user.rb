@@ -62,7 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    "#{self.first_name} #{self.last_name}"
+    if self.is_merchant
+      self.business_name.to_s
+    else
+      "#{self.first_name} #{self.last_name}"
+    end
   end
 
   def unregister_push!

@@ -611,4 +611,12 @@ notifications
   -testing production
   -10:00
 
- -curated feed items 
+  -2/28
+  -9:30 start
+  -emergency one-off merchant account edits
+  -make custom slug case-insensitive
+  -show biz name in app profiles
+  -10:30
+
+ -curated feed items
+ -edit user 

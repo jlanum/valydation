@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228175134) do
+ActiveRecord::Schema.define(:version => 20130228190331) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -178,10 +178,12 @@ ActiveRecord::Schema.define(:version => 20130228175134) do
     t.boolean  "processed_images",                        :default => false
     t.boolean  "does_shipping",                           :default => false
     t.boolean  "allow_returns",                           :default => false
+    t.boolean  "editors_pick",                            :default => false
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"
   add_index "sales", ["created_notifications"], :name => "index_sales_on_created_notifications"
+  add_index "sales", ["editors_pick"], :name => "index_sales_on_editors_pick"
   add_index "sales", ["store_id"], :name => "index_sales_on_store_id"
 
   create_table "stores", :force => true do |t|

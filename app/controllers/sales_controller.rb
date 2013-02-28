@@ -155,6 +155,33 @@ class SalesController < ApplicationController
     end    
   end
 
+  def all_sales
+    curated_sales = Sale.where(:category_id => params[:category_id],
+                               :editors_pick => true,
+                               #:city_id => @user.city_id,
+                               :visible => true).
+      select(%Q{sales.id}).
+      order(%Q{"sales"."created_at" DESC}).
+      limit(16)
+
+    curated_select = ["sales.*", "faves.id as my_fave_id"]
+    curated_order = "sales.created_at DESC"
+    
+    unless curated_sales.empty?
+      curated_select << "sales.id IN (#{curated_sales.collect(&:id).join(',')}) as curated"
+      curated_order = "curated DESC, #{curated_order}"
+    end
+
+    @sales = Sale.where(:category_id => params[:category_id],
+                        #:city_id => @user.city_id,
+                        :visible => true).
+      select(curated_select).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(curated_order)
+  end
+
   def index_html_all
     params[:category_id] ||= 0
 
@@ -164,14 +191,7 @@ class SalesController < ApplicationController
       session[:merchant_modal] = true
     end
 
-    @sales = Sale.where(:category_id => params[:category_id],
-                        #:city_id => @user.city_id,
-                        :visible => true).
-      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
-      order(%Q{"sales"."created_at" DESC}).
+    @sales = all_sales.
       page(params[:page]).
       per(16)
 

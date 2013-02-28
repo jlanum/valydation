@@ -16,11 +16,12 @@
   <% else %>
     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
   <% end %>
+  <br>
     <p>
 Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
+</p>
 <p>
   <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
-</p>
 </p>
 
 <p>

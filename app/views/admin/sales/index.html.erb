@@ -17,7 +17,7 @@
   <tbody>
   <% @sales.each do |sale| %>
     <tr>
-      <td>
+      <td class="nowrap">
         <% if sale.user %>
         <%= link_to "#{sale.user.first_name} #{sale.user.last_name}",
                     admin_user_url(sale.user) %>
@@ -26,7 +26,7 @@
       <td>
         <%= sale.store_name %>
       </td>
-      <td>
+      <td class="nowrap">
         <% if sale.metro %>
         <%= sale.metro.name %>
         <% end %>
@@ -37,11 +37,11 @@
       <td>
         <%= sale.product %>
       </td>
-      <td>
+      <td class="nowrap">
         <%= sale.created_at.strftime("%d %b %Y") %>
       </td>
 
-      <td>
+      <td class="nowrap">
         <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_path(sale) %>">Edit</a>
         <%= link_to 'Delete', admin_sale_path(sale),
           :confirm => 'Are you 100% positive that you want to delete this sale?', 

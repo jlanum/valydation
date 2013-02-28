@@ -18,15 +18,15 @@
   <tbody>
   <% @users.each do |user| %>
     <tr>
-      <td>
+      <td class="nowrap">
         <%= link_to "#{user.display_name}",
                     admin_user_url(user) %>
       </td>
       <td><%= user.email %></td>
-      <td><%= user.city.name if user.city %></td>
-      <td><%= user.created_at.strftime("%d %b %Y") %>
+      <td class="nowrap"><%= user.city.name if user.city %></td>
+      <td class="nowrap"><%= user.created_at.strftime("%d %b %Y") %>
       <td><%= user.sales.size %></td>
-      <td>
+      <td class="nowrap">
         <%= link_to 'View', admin_user_path(user),
           :class => "btn btn-info btn-small" %>
         <%= link_to 'Delete', admin_user_path(user),

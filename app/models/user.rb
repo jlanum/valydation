@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
                   :bio,
                   :website_url,
                   :is_merchant,
-                  :activated_web
+                  :activated_web,
+                  :retail_category
 
   attr_accessor :other_user
 

@@ -31,6 +31,28 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+    @user = User.find(params[:id])    
+    @cities = City.order("name ASC").all
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    @user.update_attributes(params[:user])
+
+    if params[:passwd_clear] and params[:passwd_clear].size > 0
+      @user.passwd_clear = params[:passwd_clear]
+    end
+
+    @user.save!
+
+    @cities = City.order("name ASC").all
+    @message = "The user has been updated."
+  
+    render :template => "admin/users/edit"
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

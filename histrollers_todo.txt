@@ -616,7 +616,8 @@ notifications
   -emergency one-off merchant account edits
   -make custom slug case-insensitive
   -show biz name in app profiles
-  -10:30
+  -editors pick functionality
+  -11:30
 
  -curated feed items
  -edit user 

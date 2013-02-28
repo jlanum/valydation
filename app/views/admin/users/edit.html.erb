@@ -1,0 +1,199 @@
+<% if @message %>
+  <div class="alert alert-success">
+  <%= @message %>
+</div>
+<% end %>
+
+
+<div class="page-header">
+  <h1>Edit User</h1>
+</div>
+
+<div class="page-header">
+  <% if @user.is_merchant %>
+    <h1><%= @user.business_name %></h1>
+    <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+  <% else %>
+    <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+  <% end %>
+    <p>
+Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
+<p>
+  <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
+</p>
+</p>
+
+<p>
+  <img src="<%= @user.photo.versions[:profile] %>">
+</p>
+
+
+
+</div>
+
+
+
+<%= form_for(@user, 
+                 :html => {:class => "form-horizontal well"},
+                 :url => admin_user_path(@user))  do |f| %>
+
+<fieldset>
+
+<div class="control-group">
+<label class="control-label">Email</label>
+<div class="controls">
+<%= text_field(:user, :email, :class => "input-xlarge") %>
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label" for="optionsCheckbox">Merchant</label>
+<div class="controls">
+<%= check_box(:user, :is_merchant) %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Business name</label>
+<div class="controls">
+<%= text_field(:user, :business_name, :class => "input-xlarge") %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">First name</label>
+<div class="controls">
+<%= text_field(:user, :first_name, :class => "input-large") %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Last name</label>
+<div class="controls">
+<%= text_field(:user, :last_name, :class => "input-large") %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="city_id">Retail category</label>
+<div class="controls">
+<%= select(:user, :retail_category, ([nil] + Sale.categories)) %>
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label" for="city_id">City</label>
+<div class="controls">
+<%= select(:user, :city_id, @cities.collect { |c| [c.name,c.id] }) %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Zip code</label>
+<div class="controls">
+<%= text_field(:user, :zip_code, :class => "input-small") %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Username (slug)</label>
+<div class="controls">
+<%= text_field(:user, :custom_slug, :class => "input-large") %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Website URL</label>
+<div class="controls">
+<%= text_field(:user, :website_url, :class => "input-xlarge") %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Bio</label>
+<div class="controls">
+  <%= text_area(:user, :bio, :rows => 3) %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="optionsCheckbox">Web access</label>
+<div class="controls">
+<%= check_box(:user, :activated_web) %>
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label">Change password</label>
+<div class="controls">
+<%= text_field_tag("passwd_clear", "", :class => "input-small") %>
+</div>
+</div>
+
+
+<div class="form-actions">
+<button type="submit" class="btn btn-primary">Save changes</button>
+<button type="reset" class="btn">Reset</button>
+</div>
+
+
+</fieldset>
+
+<% end %>
+
+<div class="page-header">
+  <h3>Posts</h3>
+</div>
+
+<% if @user.sales.empty? %>
+  <p> No posts.</p>
+<% else %>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Store</th>
+      <th>City</th>
+      <th>Brand</th>
+      <th>Product</th>
+      <th>Posted</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.sales.each do |sale| %>
+    <tr>
+      <td>
+        <%= sale.store_name %>
+      </td>
+      <td>
+        <% if sale.metro %>
+        <%= sale.metro.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= sale.brand %>
+      </td>
+      <td>
+        <%= sale.product %>
+      </td>
+      <td>
+        <%= sale.created_at.strftime("%d %b %Y") %>
+      </td>
+      <td>
+        <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_path(sale) %>">Edit</a>
+        <%= link_to 'Delete', admin_sale_path(sale),
+          :confirm => 'Are you 100% positive that you want to delete this sale?', 
+          :method => :delete,
+          :class => "btn btn-danger btn-small" %>
+      </td>
+    </tr> 
+  <% end %>
+  </tbody>
+</table>
+
+<% end %>
+

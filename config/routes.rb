@@ -64,6 +64,7 @@ HiStrollers::Application.routes.draw do
   match '/page/:slug' => 'pages#show', :as => :page
 
   ##IMPORTANT!!! THIS ALWAYS GOTTA GO LAST OR USERS MIGHT BREAK ROUTES WITH CUSTOM SLUGS!!
+  match '/static/landing2.html' => "users#landing"
   match '/:custom_slug' => 'users#show', :as => :custom_slug
   
   # Sample resource route with options:

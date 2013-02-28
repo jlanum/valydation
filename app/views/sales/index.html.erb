@@ -52,5 +52,13 @@
 
     <%= render "sales" %>
 
-        
+    <% if @merchant_modal and merchant_page = Page.find_by_slug("merchant-modal") %>
+      <%= raw merchant_page.content %>
+
+      <script>
+      $(function() {
+        $('#MerchantModal').modal();
+      });
+      </script>
+    <% end %>
 

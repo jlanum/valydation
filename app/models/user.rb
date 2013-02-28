@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :other_user
 
-  #validates :name, :format => {:with => /\A\w+\Z/}
+  before_save :set_custom_slug_lower
+
   belongs_to :city
   has_many :devices  
   
@@ -141,4 +142,9 @@ class User < ActiveRecord::Base
     self.devices.reload
   end
 
+  def set_custom_slug_lower
+    if self.custom_slug and not self.custom_slug.empty?
+      self.custom_slug_lower = self.custom_slug.downcase
+    end
+  end
 end

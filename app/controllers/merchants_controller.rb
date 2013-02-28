@@ -10,7 +10,7 @@ class MerchantsController < ApplicationController
   def create
     if User.where(:email => params[:email]).first
       @error_message = "There is already a user registered with that email address."
-    elsif User.where(:custom_slug => params[:custom_slug]).first
+    elsif User.where(:custom_slug_lower => params[:custom_slug].downcase).first
       @error_message = "That custom URL is already in use. Please pick another."
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228004304) do
+ActiveRecord::Schema.define(:version => 20130228175134) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -195,31 +195,33 @@ ActiveRecord::Schema.define(:version => 20130228004304) do
   add_index "stores", ["url"], :name => "index_stores_on_url"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                           :null => false
-    t.string   "passwd_hash",                                     :null => false
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.string   "email",                                             :null => false
+    t.string   "passwd_hash",                                       :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.string   "photo"
     t.string   "fb_id"
     t.string   "zip_code"
     t.integer  "city_id"
-    t.string   "first_name",                                      :null => false
-    t.string   "last_name",                                       :null => false
+    t.string   "first_name",                                        :null => false
+    t.string   "last_name",                                         :null => false
     t.text     "bio"
     t.boolean  "notify_faved"
     t.boolean  "notify_followed"
     t.boolean  "notify_posted"
-    t.boolean  "notify_comment",               :default => true
-    t.boolean  "is_merchant",                  :default => false
+    t.boolean  "notify_comment",                 :default => true
+    t.boolean  "is_merchant",                    :default => false
     t.string   "retail_category"
     t.string   "business_name"
     t.string   "custom_slug"
     t.text     "website_url"
-    t.string   "gender",          :limit => 1
-    t.boolean  "activated_web",                :default => false
+    t.string   "gender",            :limit => 1
+    t.boolean  "activated_web",                  :default => false
+    t.string   "custom_slug_lower"
   end
 
   add_index "users", ["custom_slug"], :name => "index_users_on_custom_slug", :unique => true
+  add_index "users", ["custom_slug_lower"], :name => "index_users_on_custom_slug_lower", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["fb_id"], :name => "index_users_on_fb_id", :unique => true
 

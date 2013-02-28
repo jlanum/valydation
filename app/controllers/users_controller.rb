@@ -57,7 +57,11 @@ class UsersController < ApplicationController
       end
     else
       if params[:custom_slug]
-        if show_user = User.where(:custom_slug => params[:custom_slug]).first
+        if show_user = User.where(:custom_slug_lower => params[:custom_slug].downcase).first
+          if show_user.custom_slug != params[:custom_slug]
+            redirect_to(custom_slug_url(:custom_slug => show_user.custom_slug))
+            return
+          end
           params[:id] = show_user.id
         else
           raise ActionController::RoutingError.new('Not Found')
@@ -229,8 +233,8 @@ class UsersController < ApplicationController
       end
     end
 
-    if params[:custom_slug] and params[:custom_slug] != @user.custom_slug
-      if User.where(:custom_slug => params[:custom_slug]).first
+    if params[:custom_slug] and params[:custom_slug].downcase != @user.custom_slug_lower
+      if User.where(:custom_slug_lower => params[:custom_slug].downcase).first
         @error_message = "That custom URL is already in use. Please try antoher."
         return render_error
       end

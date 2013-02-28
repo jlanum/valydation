@@ -146,6 +146,10 @@ class SalesController < ApplicationController
     end
   end
 
+
+  private
+
+
   def index_html
     @cities = City.order("name ASC").all
     if params[:my_feed]
@@ -153,33 +157,6 @@ class SalesController < ApplicationController
     else
       index_html_all
     end    
-  end
-
-  def all_sales
-    curated_sales = Sale.where(:category_id => params[:category_id],
-                               :editors_pick => true,
-                               #:city_id => @user.city_id,
-                               :visible => true).
-      select(%Q{sales.id}).
-      order(%Q{"sales"."created_at" DESC}).
-      limit(16)
-
-    curated_select = ["sales.*", "faves.id as my_fave_id"]
-    curated_order = "sales.created_at DESC"
-    
-    unless curated_sales.empty?
-      curated_select << "sales.id IN (#{curated_sales.collect(&:id).join(',')}) as curated"
-      curated_order = "curated DESC, #{curated_order}"
-    end
-
-    @sales = Sale.where(:category_id => params[:category_id],
-                        #:city_id => @user.city_id,
-                        :visible => true).
-      select(curated_select).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
-      order(curated_order)
   end
 
   def index_html_all
@@ -297,16 +274,36 @@ class SalesController < ApplicationController
   end
 
   def index_all(limit = 10)
+    @sales = all_sales.
+      limit(limit).
+      offset(params[:offset]).all
+  end
+
+  def all_sales
+    curated_sales = Sale.where(:category_id => params[:category_id],
+                               :editors_pick => true,
+                               #:city_id => @user.city_id,
+                               :visible => true).
+      select(%Q{sales.id}).
+      order(%Q{"sales"."created_at" DESC}).
+      limit(16)
+
+    curated_select = ["sales.*", "faves.id as my_fave_id"]
+    curated_order = "sales.created_at DESC"
+    
+    unless curated_sales.empty?
+      curated_select << "sales.id IN (#{curated_sales.collect(&:id).join(',')}) as curated"
+      curated_order = "curated DESC, #{curated_order}"
+    end
+
     @sales = Sale.where(:category_id => params[:category_id],
                         #:city_id => @user.city_id,
                         :visible => true).
-      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      select(curated_select).
       joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                AND "faves"."user_id"=#{@user.id}}).
       includes(:user).
-      order(%Q{"sales"."created_at" DESC}).
-      limit(limit).
-      offset(params[:offset]).all
+      order(curated_order)
   end
 
 end

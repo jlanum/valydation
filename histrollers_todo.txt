@@ -608,6 +608,7 @@ notifications
   -8
   -google analytics tracking
   -deploy to production
-  -9:30
+  -testing production
+  -10:00
 
  -curated feed items 

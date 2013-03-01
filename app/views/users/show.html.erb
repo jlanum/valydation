@@ -8,7 +8,10 @@ body {
 <div class="container">
   <div class="category-feed well">
     <center>
-      <font size="6" color="#432060">Profile</font>
+      <font size="6" color="#432060">
+        <% if @user.is_merchant %>Store<% else %>Shopper<% end %>
+        Profile
+      </font>
     </center>
   </div>
 </div>
@@ -59,9 +62,9 @@ jQuery(function($) {
 
     <% if @show_user.id != @user.id %>
 
-    <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success span2 profile-name", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
+    <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success profile-name", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
 
-    <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success span2 profile-name", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
+    <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success profile-name", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
 
   <% end %>
 

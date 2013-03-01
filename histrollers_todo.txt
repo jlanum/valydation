@@ -617,7 +617,7 @@ notifications
   -make custom slug case-insensitive
   -show biz name in app profiles
   -editors pick functionality
-  -11:30
+  -admin console edit user capability
+  -12:30
 
- -curated feed items
  -edit user 

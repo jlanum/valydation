@@ -505,5 +505,20 @@ width: 62px;
 	padding-left:5px;
 }
 
+.separate {
+  left: 720px !important;
+  position: absolute;
+}
 
+td.no-right-border {
+  border-right-style: none !important;
+}
 
+td.no-left-border {
+  border-left-style: none !important;
+}
+
+td.auto-width {
+  width: 1px;
+  white-space: nowrap;
+}

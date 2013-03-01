@@ -51,16 +51,22 @@
 
      -->
 
+    <% price_font_size = (detail ? 3 : 1) %>
+
     <br>
     <table class="table table-bordered">  
-      <td><%= (sale.percent_off * 100).round %>% Off</td>
       <td>
-        <font size="1">
+        <font size="<%= price_font_size %>">
+        <%= (sale.percent_off * 100).round %>% Off
+        </font>
+      </td>
+      <td>
+        <font size="<%= price_font_size %>">
           <%= humanized_money_with_symbol sale.sale_price %>          
         </font>
       </td>
 
-      <td><strike><font size="1"> 
+      <td><strike><font size="<%= price_font_size %>"> 
           <%= humanized_money_with_symbol sale.orig_price %>
       </font> </strike></td>
 
@@ -146,30 +152,30 @@ jQuery(function($) {
     <br>
     <table class="table table-bordered table-striped">
       <tr>  
-        <td>
-          <font size="1" class="muted">Store</font>&nbsp;
-          <% unless detail %><br><% end %>
+        <td class="no-right-border auto-width">
+          <font size="1" class="muted">Store</font>
+          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
           <%= sale.store_name %>
         </td>
       </tr>
       <tr> 
-        <td>
-          <font size="1" class="muted">Brand</font>&nbsp;
-          <% unless detail %><br><% end %>
+        <td class="no-right-border auto-width">
+          <font size="1" class="muted">Brand</font>
+          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
           <%= sale.brand %>
       </td>
       </tr>
       <tr>  
-        <td>
+        <td class="no-right-border auto-width">
           <font size="1" class="muted">Product</font>&nbsp;
-          <% unless detail %><br><% end %>
+          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
           <%= sale.product %>
         </td>
       </tr>
       <tr>  
-        <td>
+        <td class="no-right-border auto-width">
           <font size="1" class="muted">Size</font>&nbsp;
-          <% unless detail %><br><% end %>
+          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
           <%= sale.size %>
         </td>
       </tr>
@@ -184,7 +190,7 @@ jQuery(function($) {
     <a href="<%= twitter_share_url(sale) %>">
       <%= image_tag "T_logo.png", :height => 16, :width => 16 %>
     </a>
-    <font size="4">&#160;#mysaletable</font>
+    <font size="2">&#160;#mysaletable</font>
 
     <span class="comments form">
       <h3>Comments</h3>

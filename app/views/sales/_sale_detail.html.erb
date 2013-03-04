@@ -149,33 +149,32 @@ jQuery(function($) {
     <br><br>
   <% end %>
 
+
+  <% font_class = (detail ? 'table-width' : 'table-modal') %>
+
     <br>
     <table class="table table-bordered table-striped">
       <tr>  
-        <td class="no-right-border auto-width">
-          <font size="1" class="muted">Store</font>
-          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
+        <td class="">
+          <font size="1" class="muted <%= font_class %>">Store</font>
           <%= sale.store_name %>
         </td>
       </tr>
       <tr> 
-        <td class="no-right-border auto-width">
-          <font size="1" class="muted">Brand</font>
-          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
+        <td class="">
+          <font size="1" class="muted <%= font_class %>">Brand</font>
           <%= sale.brand %>
       </td>
       </tr>
       <tr>  
-        <td class="no-right-border auto-width">
-          <font size="1" class="muted">Product</font>&nbsp;
-          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
+        <td class="">
+          <font size="1" class="muted <%= font_class %>">Product</font>
           <%= sale.product %>
         </td>
       </tr>
       <tr>  
-        <td class="no-right-border auto-width">
-          <font size="1" class="muted">Size</font>&nbsp;
-          <% if detail %></td><td class="no-left-border"><% else %><br><% end %>
+        <td class="">
+          <font size="1" class="muted <%= font_class %>">Size</font>
           <%= sale.size %>
         </td>
       </tr>

@@ -113,7 +113,7 @@
     <br>
     <a href="<%= user_custom_slug_url(sale.user) %>"><b><%= sale.user.display_name if sale.user %></b></a>
     <br>
-    <p class="muted time"><%= sale.user.city.name if sale.user %></p>
+    <p class="muted time"><%= sale.metro.name if sale.metro %></p>
 
     <% if detail and sale.user.id != @user.id %>
 

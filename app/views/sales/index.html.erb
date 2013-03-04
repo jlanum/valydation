@@ -6,18 +6,24 @@ body {
 </style>
 
 <script type="text/javascript">
-$(document).on('click','#button', function(){
+$(document).on('click','#filter-button', function(){
   if($(this).siblings('#filter-section').is(':visible')){
     $(this).siblings('#filter-section').slideUp()
   }else{
     $(this).siblings('#filter-section').hide().slideDown()
   }
 });
+
+<% if params[:size] || params[:city_id] %>
+$(function() {
+  $('#filter-section').show();
+});
+<% end %>
 </script>
 
 <script>
-function submitCityForm() {
-  $('#city_form')[0].submit()
+function submitFilter() {
+  $('#filter_form')[0].submit()
 }
 </script>
 
@@ -31,7 +37,7 @@ function submitCityForm() {
 
 <div class="container">
   <div class="category-feed well">
-    <div id="button" class="filter-button">Filter</div>
+    <div id="filter-button" class="filter-button">Filter</div>
 
     <span class="category-feed-align">
       <% Sale.categories.each_with_index do |category, category_id| %>
@@ -47,26 +53,20 @@ function submitCityForm() {
     </a>
 
     <div id="filter-section" class="filter-section">	
+      <%= form_tag sales_url, :method => "get", :id => "filter_form" do %>
+      <%= hidden_field_tag "category_id", params[:category_id] %>
       <span class="pull-left">	
-        <%= form_for @user, :html => {:id => "city_form"} do |f| %>
-          <%= hidden_field_tag :source, "sales" %>
-        <select id="city_id" name="city_id" onchange="submitCityForm()">
-          <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
+        <select id="city_id" name="city_id" onchange="submitFilter()">
+          <%= options_for_select([["Filter by city",nil]] + @cities.collect { |c| [c.name, c.id] }, 
+                                 params[:city_id]) %>
         </select>
-      <% end %>
       </span>
       <span class="pull-left filter-city">	
-        <select>
-          <option>Filter by Size</option>
-          <option>New York</option>
-          <option>Dallas</option>
-          <option>Brooklyn</option>
-          <option>Atlanta</option>
-          <option>Chicago</option>
-          <option>Los Angeles</option>
-          <option>Orange County</option>
+        <select id="size" name="size" onchange="submitFilter()">
+          <%= options_for_select([["Filter by size",nil]]+Sale.sizes.flatten, params[:size]) %>
         </select>
       </span>
+      <% end %> <!-- form -->
     </div>
 
   </div>

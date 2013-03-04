@@ -280,10 +280,20 @@ class SalesController < ApplicationController
   end
 
   def all_sales
-    curated_sales = Sale.where(:category_id => params[:category_id],
-                               :editors_pick => true,
-                               #:city_id => @user.city_id,
-                               :visible => true).
+    where_conditions = {
+      :category_id => params[:category_id],
+      :visible => true
+    }
+
+    if params[:size] and not params[:size].empty?
+      where_conditions.update({:sizes => [params[:size]].to_postgres_array})
+    end
+    if params[:city_id] and not params[:city_id].empty?
+      where_conditions.update({:city_id => params[:city_id]})
+    end
+
+    curated_sales = Sale.where(where_conditions.merge({
+       :editors_pick => true})).
       select(%Q{sales.id}).
       order(%Q{"sales"."created_at" DESC}).
       limit(16)
@@ -296,9 +306,7 @@ class SalesController < ApplicationController
       curated_order = "curated DESC, #{curated_order}"
     end
 
-    @sales = Sale.where(:category_id => params[:category_id],
-                        #:city_id => @user.city_id,
-                        :visible => true).
+    @sales = Sale.where(where_conditions).
       select(curated_select).
       joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                AND "faves"."user_id"=#{@user.id}}).

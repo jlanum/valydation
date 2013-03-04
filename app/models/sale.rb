@@ -42,10 +42,11 @@ class Sale < ActiveRecord::Base
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
   belongs_to :user
   belongs_to :metro, :class_name => "City", :foreign_key => "city_id"
+  has_many :sizes, :class_name => "SaleSize", :foreign_key => "sale_id", :dependent => :destroy
 
-  before_create :set_store
-  before_create :set_brand
-
+  before_save :set_store
+  before_save :set_brand
+  before_save :set_sizes
 
   def self.categories
     ["Women",
@@ -55,9 +56,9 @@ class Sale < ActiveRecord::Base
      "Pet"]
   end
 
-  def sizes
-    self.size.to_s.split(",").collect(&:strip)
-  end
+  #def sizes
+    #self.size.to_s.split(",").collect(&:strip)
+  #end
 
   def share_message
     "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on MySaleTable."
@@ -145,6 +146,13 @@ class Sale < ActiveRecord::Base
       @brand = Brand.create!(:name => self.brand.upcase)
     end
     self.brand_id = @brand.id
+  end
+
+  def set_sizes
+    self.sizes.destroy_all
+    self.size.to_s.split(",").collect(&:strip).each do |size|
+      self.sizes << SaleSize.new(:value => size)
+    end
   end
 
   def my_fave_old

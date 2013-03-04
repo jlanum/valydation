@@ -42,7 +42,6 @@ class Sale < ActiveRecord::Base
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
   belongs_to :user
   belongs_to :metro, :class_name => "City", :foreign_key => "city_id"
-  has_many :sizes, :class_name => "SaleSize", :foreign_key => "sale_id", :dependent => :destroy
 
   before_save :set_store
   before_save :set_brand
@@ -149,10 +148,7 @@ class Sale < ActiveRecord::Base
   end
 
   def set_sizes
-    self.sizes.destroy_all
-    self.size.to_s.split(",").collect(&:strip).each do |size|
-      self.sizes << SaleSize.new(:value => size)
-    end
+    self.sizes = self.size.to_s.split(",").collect(&:strip)
   end
 
   def my_fave_old

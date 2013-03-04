@@ -285,8 +285,10 @@ class SalesController < ApplicationController
       :visible => true
     }
 
+    where_frag = nil
+
     if params[:size] and not params[:size].empty?
-      where_conditions.update({:sizes => [params[:size]].to_postgres_array})
+      where_frag = ["? = ANY (sales.sizes)",params[:size]]
     end
     if params[:city_id] and not params[:city_id].empty?
       where_conditions.update({:city_id => params[:city_id]})
@@ -294,6 +296,7 @@ class SalesController < ApplicationController
 
     curated_sales = Sale.where(where_conditions.merge({
        :editors_pick => true})).
+      where(where_frag).
       select(%Q{sales.id}).
       order(%Q{"sales"."created_at" DESC}).
       limit(16)
@@ -307,6 +310,7 @@ class SalesController < ApplicationController
     end
 
     @sales = Sale.where(where_conditions).
+      where(where_frag).
       select(curated_select).
       joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
                AND "faves"."user_id"=#{@user.id}}).

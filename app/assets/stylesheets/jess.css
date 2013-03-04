@@ -56,11 +56,13 @@
 	font-size: 14px !important;
 	font-weight: lighter !important;
 	color: #432060 !important;
-	
+  position:relative; 
+  text-align:center;
 }
 
 .category-feed-align {
-	padding-left: 240px;
+  display:block;
+  margin:0 auto;
 }
 
 .purchase {
@@ -74,20 +76,25 @@
 .hover-group .image-wrapper {
   /* We need this to make the .hover-toggle div relative to .image-wrapper */
   position: relative;
+  box-shadow: 0 0 6px 0px #aaa;
+  border-radius: 4px;
+}
+
+.hover-group .image-wrapper:hover {
+  border:2px dotted #432060;
+  width: 98%;
 }
 
 .hover-group .image-wrapper .hover-toggle {
   /* set it at the bottom of .image-wrapper */
-  position: absolute;      
-  bottom: -3px;
-  left: 0px;
   /* and don't display it */
-  display: none;
+  display: block;
   background-color: #432060;
   height: 38px;
   width: 100%;
   text-align:justify;
-
+  margin: 0px;
+  border-radius:0 0 4px 4px;
 }
 
 .hover-group:hover .image-wrapper .hover-toggle {
@@ -101,8 +108,7 @@
 }
 
 .product-pic:hover {
-	outline:#432060 dotted 2px;
-	
+	/*outline:#432060 dotted 2px;*/
 }
 
 
@@ -248,7 +254,15 @@ span.stretch {
 .lanvin {
 	font-weight: bold;
 	line-height: 20px !important;
-	margin-top: 5px;
+  display: block;
+  width: 100%;
+  margin: 0px;
+  padding: 5px 0;
+  border-radius: 4px 4px 0 0 !important;
+  font-size: 15px;
+  font-family: Helvetica, arial, sans-serif;
+  letter-spacing: 1px;
+  color: #666;
 }
 
 .percentoff {
@@ -351,7 +365,7 @@ width: 62px;
 }
 
 .modal-social {
-	padding-left: 52px;
+	padding-left: 49px;
   padding-bottom: 5px;
 }
 
@@ -521,4 +535,45 @@ td.no-left-border {
 td.auto-width {
   width: 1px;
   white-space: nowrap;
+}
+
+.table-width {
+  width:76px;
+  display: inline-table !important;
+}
+
+.filter-section {
+  display:none;
+  height:20px; 
+  width:100%; 
+  margin:15px 0 0; 
+  padding:10px 0 0; 
+  border-top:1px 
+  solid #bdbdbd;
+}
+
+.faves-script {
+  position:absolute; 
+  top:20px; 
+  right:20px;
+}
+
+.filter-button {
+  cursor:pointer; 
+  position:absolute; 
+  left:20px; 
+  top:20px;
+}
+
+.filter-city {
+  margin-left: 10px;
+}
+
+.table-modal {
+  width:39px;
+  display: inline-table !important;
+}
+
+.detail-twitter {
+  margin-left: 5px;
 }

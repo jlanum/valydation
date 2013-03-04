@@ -622,3 +622,6 @@ notifications
   -5
   -web edits/tweaks
   -5:30
+
+  -product info wrap in modal
+

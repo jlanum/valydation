@@ -1,64 +1,86 @@
 
 <style>
-    body {
-      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-    }
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
 </style>
-    
-    
-    <% if flash[:message] %>
-    <div class="alert alert-info"> 
-      <center>
-      <%= flash[:message] %>
-      </center>
-    </div>
+
+<script type="text/javascript">
+$(document).on('click','#button', function(){
+  if($(this).siblings('#filter-section').is(':visible')){
+    $(this).siblings('#filter-section').slideUp()
+  }else{
+    $(this).siblings('#filter-section').hide().slideDown()
+  }
+});
+</script>
+
+<script>
+function submitCityForm() {
+  $('#city_form')[0].submit()
+}
+</script>
+
+<% if flash[:message] %>
+  <div class="alert alert-info"> 
+  <center>
+    <%= flash[:message] %>
+  </center>
+</div>
     <% end %>
 
-    <div class="container">
-      <div class="category-feed well">
-        <span class="pull-left">
-          <script>
-  function submitCityForm() {
-    $('#city_form')[0].submit()
-  }
-          </script>
-          <%= form_for @user, :html => {:id => "city_form"} do |f| %>
-            <%= hidden_field_tag :source, "sales" %>
-            <select id="city_id" name="city_id" onchange="submitCityForm()">
-              <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
-            </select>
-          <% end %>
+<div class="container">
+  <div class="category-feed well">
+    <div id="button" class="filter-button">Filter</div>
 
-        </span>
+    <span class="category-feed-align">
+      <% Sale.categories.each_with_index do |category, category_id| %>
+        <% if category_id == params[:category_id].to_i %><strong><% end %>
+        <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
+        <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
+        <% if category_id == params[:category_id].to_i %></strong><% end %>
+      <% end %>
+    </span>
 
-        <span class="category-feed-align">
+    <a href="<%= my_faves_url %>">
+      <%= image_tag "favescript3.png", :width => 73, :height => 22, :class => "faves-script" %>
+    </a>
 
-          <% Sale.categories.each_with_index do |category, category_id| %>
-            <% if category_id == params[:category_id].to_i %><strong><% end %>
-              <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
-              <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
-            <% if category_id == params[:category_id].to_i %></strong><% end %>
-          <% end %>
-
-        </span>
-
-        <a href="<%= my_faves_url %>">
-          <%= image_tag "favescript3.png", :width => 73, :height => 22, :class => "pull-right" %>
-      </a>
-
-
-      </div>
+    <div id="filter-section" class="filter-section">	
+      <span class="pull-left">	
+        <%= form_for @user, :html => {:id => "city_form"} do |f| %>
+          <%= hidden_field_tag :source, "sales" %>
+        <select id="city_id" name="city_id" onchange="submitCityForm()">
+          <%= options_for_select(@cities.collect { |c| [c.name, c.id] }, @user.city_id) %>
+        </select>
+      <% end %>
+      </span>
+      <span class="pull-left filter-city">	
+        <select>
+          <option>Filter by Size</option>
+          <option>New York</option>
+          <option>Dallas</option>
+          <option>Brooklyn</option>
+          <option>Atlanta</option>
+          <option>Chicago</option>
+          <option>Los Angeles</option>
+          <option>Orange County</option>
+        </select>
+      </span>
     </div>
 
-    <%= render "sales" %>
+  </div>
+</div>
 
-    <% if @merchant_modal and merchant_page = Page.find_by_slug("merchant-modal") %>
-      <%= raw merchant_page.content %>
+<%= render "sales" %>
 
-      <script>
-      $(function() {
-        $('#MerchantModal').modal();
-      });
-      </script>
+<% if @merchant_modal and merchant_page = Page.find_by_slug("merchant-modal") %>
+  <%= raw merchant_page.content %>
+
+<script>
+$(function() {
+  $('#MerchantModal').modal();
+});
+</script>
     <% end %>
 

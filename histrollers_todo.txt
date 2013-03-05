@@ -632,5 +632,5 @@ notifications
   -7:15 start
   -filter by size
   -filter by city (separately from home city)
-  -9
+  -9:15
   

@@ -56,15 +56,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_promo_code
-    if session[:promo_code]
-      true
-    else
-      redirect_to register_url
-      false
-    end
-  end
-
   def require_ssl
     if request.ssl? or Rails.env == 'development' 
       true

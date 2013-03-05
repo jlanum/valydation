@@ -1,10 +1,8 @@
 class MerchantsController < ApplicationController
   layout 'prelogin'
 
-  before_filter :require_promo_code
 
   def new
-    #session[:promo_codedd] = nil
   end
 
   def create

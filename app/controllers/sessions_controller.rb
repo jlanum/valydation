@@ -16,9 +16,6 @@ class SessionsController < ApplicationController
 
     if @user = (User.where(:email => params[:email]).first or
                 User.where(:custom_slug => params[:email]).first)
-      unless @user.activated_web
-        @error_message = "We're excited to launch our site soon. You'll be the first to know!"
-      end
       unless BCrypt::Password.new(@user.passwd_hash) == params[:passwd_clear]
         @error_message = "Email/Username or password incorrect."
       end

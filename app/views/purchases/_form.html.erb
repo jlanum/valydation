@@ -73,7 +73,7 @@ function toggleAddress() {
        
           <p>
           <%= select_tag 'transaction[custom_fields][size]',
-            options_for_select((["Select Size"] + @sale.sizes.collect(&:value)), params[:size]) %>
+            options_for_select((["Select Size"] + @sale.sizes), params[:size]) %>
           </p>
         <% end %>
         

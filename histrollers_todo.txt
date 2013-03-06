@@ -633,5 +633,13 @@ notifications
   -filter by size
   -filter by city (separately from home city)
   -9:15
-  
+
+  3/5
+  -8
+  -v3: show store name everywhere when merchant
+  -v3: show city,state in sale details instead of address
+  -v3: enable logout for everyone
+  -v3: clarifications via emails
+  -v3: fix twitter/fb share messages (no charge)
+  -9:30 
 

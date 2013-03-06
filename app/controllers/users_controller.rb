@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     if params[:id] == "self"
       if @user
         render :json => @user.to_json(:methods => [:photo_fb, 
+                                      :display_name,
                                       :follower_count, 
                                       :following_count])
       else
@@ -63,7 +64,8 @@ class UsersController < ApplicationController
         wants.json do
           render :json => @show_user.
             to_json({:only => [:id, :first_name, :last_name, :bio],
-                 :methods => [:photo_fb, :is_followed, :follower_count, :following_count]})
+                 :methods => [:photo_fb, :display_name, :is_followed, 
+                              :follower_count, :following_count]})
         end
         wants.html do
           show_html

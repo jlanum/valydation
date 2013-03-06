@@ -38,6 +38,10 @@ class SalesController < ApplicationController
   end
 
   def handle_store_reference
+    if params[:store_url] and params[:store_reference].to_s.empty?
+      params[:store_reference] = params[:store_url]
+    end
+
     if params[:store_reference]
       place_url = "https://maps.googleapis.com/maps/api/place/details/json?key=#{ApplicationController.google_places_key}&reference=#{params[:store_reference]}&sensor=false"
       json_response = JSON.parse(open(place_url).read)
@@ -48,6 +52,18 @@ class SalesController < ApplicationController
       params[:latitude] = json_response["result"]["geometry"]["location"]["lat"]
       params[:longitude] = json_response["result"]["geometry"]["location"]["lng"]
 
+      addy = json_response["result"]["address_components"]
+
+      if locality_hash = addy.find { |h| h["types"].include?("locality") }
+        params[:city] = locality_hash["long_name"]
+      end
+  
+      if state_hash = addy.find { |h| h["types"].include?("administrative_area_level_1") }
+        params[:state] = state_hash["long_name"]
+      end
+    end
+
+    if params[:percent_off].to_f > 1.0
       params[:percent_off] = params[:percent_off].to_f / 100
     end
   end

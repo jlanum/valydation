@@ -30,6 +30,23 @@ class PurchasesController < ApplicationController
         :type => "sale",
         :amount => @total_amount})
 
+    respond_to do |wants|
+      wants.json { new_json }
+      wants.html { new_html }
+    end
+  end
+
+  def new_json
+    #debugger
+    render :json => {:post_url => Braintree::TransparentRedirect.url,
+                     :tr_data => @tr_data,
+                     :tax_amount => @tax_amount,
+                     :ship_amount => @ship_amount,
+                     :subtotal => @sale.sale_price,
+                     :total => @total_amount}
+  end
+
+  def new_html
     if request.xhr?
       if params[:transaction]
         if params[:transaction][:customer]
@@ -49,7 +66,6 @@ class PurchasesController < ApplicationController
       render :partial => "purchases/form"
     end
   end
-
 
   def confirmation
     braintree_result = Braintree::TransparentRedirect.confirm(request.query_string)

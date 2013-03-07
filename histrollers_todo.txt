@@ -643,3 +643,7 @@ notifications
   -v3: fix twitter/fb share messages (no charge)
   -9:30 
 
+  3/6
+  -9
+  -v3: purchase on app
+  -11

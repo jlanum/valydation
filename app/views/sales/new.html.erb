@@ -82,18 +82,15 @@ function submitSaleForm() {
 }
 
 function jsonFromIframe(iframe_id) {
-  var jsonText = compatibleInnerText($("#_image_0_iframe")[0].contentWindow.document.body);
+  var iframeBody = $("#"+iframe_id)[0].contentWindow.document.body;
+  var jsonText = (iframeBody.innerText || iframeBody.textContent);
   var jsonResponse = JSON.parse(jsonText);
-}
-
-function compatibleInnerText(el) {
-  return (el.innerText || el.textContent);
+  return jsonResponse;
 }
 
 $(document).ready(function () {
   $('#_image_0_iframe').load(function() {
-    var jsonText = compatibleInnerText($("#_image_0_iframe")[0].contentWindow.document.body);
-    var jsonResponse = JSON.parse(jsonText);
+    var jsonResponse = jsonFromIframe("_image_0_iframe");
     $('#image_0_key')[0].value = jsonResponse['key']
     if ($('#sale_image_uploader_image_1').val().length > 0) {
       $('#image_1_form').submit();
@@ -103,7 +100,7 @@ $(document).ready(function () {
   });
 
   $('#_image_1_iframe').load(function() {
-    var jsonResponse = JSON.parse($("#_image_1_iframe")[0].contentWindow.document.body.innerText);
+    var jsonResponse = jsonFromIframe("_image_1_iframe");
     $('#image_1_key')[0].value = jsonResponse['key']
     if ($('#sale_image_uploader_image_2').val().length > 0) {
       $('#image_2_form').submit();
@@ -113,7 +110,7 @@ $(document).ready(function () {
   });
 
   $('#_image_2_iframe').load(function() {
-    var jsonResponse = JSON.parse($("#_image_2_iframe")[0].contentWindow.document.body.innerText);
+    var jsonResponse = jsonFromIframe("_image_2_iframe");    
     $('#image_2_key')[0].value = jsonResponse['key'];
     submitSaleForm();
   });
@@ -137,7 +134,7 @@ $(document).ready(function () {
   $('#uploady').click(function() {
     if (validateForm()) {
       $('#uploady')[0].disabled = true      
-      $('#uploady')[0].innerText = "Uploading..."
+      $('#uploady')[0].innerHTML = "Uploading..."
       $('#image_0_form').submit();
     }
   });
@@ -256,8 +253,6 @@ function previewFile(fileIndex) {
 }
 
 function validateForm() {
-  return true;
-
   if ($('#category_id').val() == -1) {
     alert('Please select a category.');
     return false;

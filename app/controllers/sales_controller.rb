@@ -47,8 +47,8 @@ class SalesController < ApplicationController
       json_response = JSON.parse(open(place_url).read)
 
       params[:display_address] = json_response["result"]["formatted_address"]
-      params[:store_name] = json_response["result"]["name"]
-      params[:store_url] = params[:store_reference]
+      params[:store_name] = json_response["result"]["name"][0..254]
+      params[:store_url] = params[:store_reference][0..254]
       params[:latitude] = json_response["result"]["geometry"]["location"]["lat"]
       params[:longitude] = json_response["result"]["geometry"]["location"]["lng"]
 

@@ -81,10 +81,19 @@ function submitSaleForm() {
   $('#sale_form').submit()
 }
 
+function jsonFromIframe(iframe_id) {
+  var jsonText = compatibleInnerText($("#_image_0_iframe")[0].contentWindow.document.body);
+  var jsonResponse = JSON.parse(jsonText);
+}
+
+function compatibleInnerText(el) {
+  return (el.innerText || el.textContent);
+}
 
 $(document).ready(function () {
   $('#_image_0_iframe').load(function() {
-    var jsonResponse = JSON.parse($("#_image_0_iframe")[0].contentWindow.document.body.innerText);
+    var jsonText = compatibleInnerText($("#_image_0_iframe")[0].contentWindow.document.body);
+    var jsonResponse = JSON.parse(jsonText);
     $('#image_0_key')[0].value = jsonResponse['key']
     if ($('#sale_image_uploader_image_1').val().length > 0) {
       $('#image_1_form').submit();
@@ -247,6 +256,7 @@ function previewFile(fileIndex) {
 }
 
 function validateForm() {
+  return true;
 
   if ($('#category_id').val() == -1) {
     alert('Please select a category.');

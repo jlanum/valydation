@@ -95,7 +95,7 @@ function toggleAddress() {
               <font size="3" class="muted">Sale Price</font>
             </td>
             <td>
-              <%= humanized_money_with_symbol @sale.sale_price %>
+              <%= humanized_money_with_symbol @purchase.subtotal %>
             </td>
           </tr>
           <tr>
@@ -103,7 +103,7 @@ function toggleAddress() {
               <font size="3" class="muted">Sales Tax</font>
             </td>
             <td>
-              <%= humanized_money_with_symbol @tax_amount %>
+              <%= humanized_money_with_symbol @purchase.tax %>
             </td>
           </tr>
           <% if params[:ship].to_i == 1 %>
@@ -112,7 +112,7 @@ function toggleAddress() {
               <font size="3" class="muted">Shipping</font>
             </td>
             <td>
-              <%= humanized_money_with_symbol @ship_amount %>
+              <%= humanized_money_with_symbol @purchase.shipping %>
             </td>
           </tr>
         <% end %>
@@ -122,7 +122,7 @@ function toggleAddress() {
             <font size="3" class="muted">Total</font>
           </td>
           <td>
-            <%= humanized_money_with_symbol @total_amount %>
+            <%= humanized_money_with_symbol @purchase.total %>
           </td>
         </tr>                  
       </table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306043219) do
+ActiveRecord::Schema.define(:version => 20130308214739) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130306043219) do
     t.string   "state"
     t.string   "zip"
     t.string   "size"
+    t.boolean  "ship_it",                         :default => false
   end
 
   create_table "sales", :force => true do |t|

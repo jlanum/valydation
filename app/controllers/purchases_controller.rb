@@ -18,17 +18,21 @@ class PurchasesController < ApplicationController
 
   def new
     @sale = Sale.find(params[:sale_id])
-    calculate_total
+    @purchase = Purchase.new(:user_id => @user.id, :sale_id => @sale.id, :ship_it => params[:ship_it])
+    @purchase.calculate_total!
 
     @tr_data = Braintree::TransparentRedirect.transaction_data(
       :redirect_url => purchase_confirmation_url,
       :transaction => {
         :custom_fields => {"sale_id" => @sale.id,
-                           "shipping_amount" => @ship_amount,
-                           "tax_amount" => @tax_amount,
-                           "subtotal" => @sale.sale_price},
+                           "shipping_amount" => @purchase.shipping,
+                           "tax_amount" => @purchase.tax,
+                           "subtotal" => @purchase.subtotal},
         :type => "sale",
-        :amount => @total_amount})
+        :amount => @purchase.total})
+
+    @purchase.tr_data = @tr_data
+    @purchase.post_url = Braintree::TransparentRedirect.url
 
     respond_to do |wants|
       wants.json { new_json }
@@ -38,12 +42,13 @@ class PurchasesController < ApplicationController
 
   def new_json
     #debugger
-    render :json => {:post_url => Braintree::TransparentRedirect.url,
-                     :tr_data => @tr_data,
-                     :tax_amount => @tax_amount,
-                     :ship_amount => @ship_amount,
-                     :subtotal => @sale.sale_price,
-                     :total => @total_amount}
+    render :json => @purchase.to_json(:methods => [:previous_shipped_purchase, :tr_data, :post_url])
+    #render :json => {:post_url => Braintree::TransparentRedirect.url,
+                     #:tr_data => @tr_data,
+                     #:tax_amount => @purchase.tax,
+                     #:ship_amount => @purchase.shipping,
+                     #:subtotal => @purchase.subtta,
+                     #:total => @total_amount}
   end
 
   def new_html
@@ -131,20 +136,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  private
 
-  def calculate_total
-    if params[:ship].to_i == 1
-      @ship_amount = 5.0
-    else
-      @ship_amount = 0.0
-    end
-
-    tax_results = JSON.parse(open("http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{@sale.user.zip_code}").read)
-
-    sales_tax_rate = tax_results["results"].first["taxSales"]
-    @tax_amount = @sale.sale_price * sales_tax_rate
-    @total_amount = @sale.sale_price.to_f + @tax_amount.to_f + @ship_amount.to_f
-  end
 
 end

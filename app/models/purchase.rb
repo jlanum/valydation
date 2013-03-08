@@ -1,6 +1,8 @@
 class Purchase < ActiveRecord::Base
   include MoneyRails::ActionViewExtension
 
+  attr_accessor :tr_data, :post_url
+
   attr_accessible :user_id,
                   :sale_id,
                   :status,
@@ -17,7 +19,8 @@ class Purchase < ActiveRecord::Base
                   :tax,
                   :total,
                   :subtotal,
-                  :size
+                  :size,
+                  :ship_it
 
   belongs_to :sale
   belongs_to :user
@@ -30,6 +33,35 @@ class Purchase < ActiveRecord::Base
   def available_key
     Digest::MD5.hexdigest("#{self.id} #{self.user_id} #{self.sale_id} #{self.external_id}")
   end
+
+  def previous_purchases
+    Purchase.where(:user_id => self.user_id).
+             where(["created_at < ?", (self.created_at || Time.now)]).
+             order("created_at DESC")
+  end
+
+  def previous_shipped_purchase
+    @previous_shipped_purchase ||= previous_purchases.where(:ship_it => true).first
+  end
+
+  def calculate_total!
+    raise "Can't calculate total without a sale!" unless self.sale
+
+    if self.ship_it
+      self.shipping = 5.0
+    else
+      self.shipping = 0.0
+    end
+
+    tax_results = JSON.parse(open("http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{self.sale.user.zip_code}").read)
+    sales_tax_rate = tax_results["results"].first["taxSales"]
+
+    self.subtotal = self.sale.sale_price.to_f
+    self.tax = self.subtotal * sales_tax_rate
+
+    self.total = self.subtotal + self.tax + self.shipping
+  end
+
 
   def send_initial_emails
     send_customer_processing_email

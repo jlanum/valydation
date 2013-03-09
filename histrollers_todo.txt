@@ -663,3 +663,5 @@ notifications
   -5:00
   -v3: purchase form, selector views and other custom inputs
   -7:00
+  -v3: purchase braintree transaction. sold out status.
+  -10:30

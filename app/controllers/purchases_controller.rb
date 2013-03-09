@@ -70,6 +70,8 @@ class PurchasesController < ApplicationController
     transaction = braintree_result.transaction
     if braintree_result.success?
       #debugger
+      ship_it = (transaction.shipping_details.street_address and not transaction.shipping_details.street_address.empty?)
+      debugger
       @purchase = Purchase.new(:user_id => @user.id,
                                :sale_id => transaction.custom_fields[:sale_id],
                                :status => "approved",
@@ -86,7 +88,8 @@ class PurchasesController < ApplicationController
                                :tax => transaction.custom_fields[:tax_amount],
                                :subtotal => transaction.custom_fields[:subtotal],
                                :total => transaction.amount,
-                               :size => transaction.custom_fields[:size])
+                               :size => transaction.custom_fields[:size],
+                               :ship_it => ship_it)
       @purchase.save!
 
       respond_to do |wants|

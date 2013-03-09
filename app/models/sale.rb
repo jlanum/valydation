@@ -26,7 +26,8 @@ class Sale < ActiveRecord::Base
                   :percent_off_int,
                   :does_shipping,
                   :allow_returns,
-                  :editors_pick
+                  :editors_pick,
+                  :sold_out
 
   attr_accessor :current_user
   attr_accessor :image_upload_urls

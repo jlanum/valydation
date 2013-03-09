@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308214739) do
+ActiveRecord::Schema.define(:version => 20130309061338) do
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20130308214739) do
     t.boolean      "allow_returns",                           :default => false
     t.boolean      "editors_pick",                            :default => false
     t.string_array "sizes"
+    t.boolean      "sold_out",                                :default => false
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

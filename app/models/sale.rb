@@ -53,7 +53,7 @@ class Sale < ActiveRecord::Base
      "Men",
      "Kids",
      "Home",
-     "Pet"]
+     "Beauty"]
   end
 
   def self.sizes

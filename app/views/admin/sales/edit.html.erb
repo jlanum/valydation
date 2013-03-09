@@ -69,7 +69,7 @@
                      <label class="control-label" for="sale_category_id">Category</label>
                      <div class="controls">
                        <%= select(:sale, :category_id,
-                                  [['Women',0],['Men',1],['Kids',2],['Home',3],['Pet',4]]) %>
+                                  Sale.categories.collect { |c| [c, Sale.categories.index(c)] }) %>
                               </div>
                               </div>
 

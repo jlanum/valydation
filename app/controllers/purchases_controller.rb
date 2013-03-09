@@ -41,14 +41,7 @@ class PurchasesController < ApplicationController
   end
 
   def new_json
-    #debugger
     render :json => @purchase.to_json(:methods => [:previous_shipped_purchase, :tr_data, :post_url])
-    #render :json => {:post_url => Braintree::TransparentRedirect.url,
-                     #:tr_data => @tr_data,
-                     #:tax_amount => @purchase.tax,
-                     #:ship_amount => @purchase.shipping,
-                     #:subtotal => @purchase.subtta,
-                     #:total => @total_amount}
   end
 
   def new_html
@@ -95,9 +88,17 @@ class PurchasesController < ApplicationController
                                :total => transaction.amount,
                                :size => transaction.custom_fields[:size])
       @purchase.save!
+
+      respond_to do |wants|
+        wants.json do 
+          render :json =>  {"message" => "We're holding your item and are awaiting confirmation from the merchant. Your credit card will be charged once the sale is confirmed."}
+        end
+        wants.html { }
+      end
     else
       #debugger
-      flash[:message] = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."
+      @error_message = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."
+      flash[:message] = @error_message
 
       exp_month, exp_year, first_name, last_name, address, 
         address_2, city, state, zip, ship = nil
@@ -121,18 +122,25 @@ class PurchasesController < ApplicationController
         ship = 1
       end
 
-      redirect_to new_sale_purchase_url(:sale_id => sale_id,
-                                        :exp_month => exp_month,
-                                        :exp_year => exp_year,
-                                        :first_name => first_name,
-                                        :last_name => last_name,
-                                        :address => address,
-                                        :address_2 => address_2,
-                                        :city => city,
-                                        :state => state,
-                                        :zip => zip,
-                                        :size => size,
-                                        :ship => ship)
+      respond_to do |wants|
+        wants.json do
+          render :json => {"error" => @error_message}
+        end
+        wants.html do
+          redirect_to new_sale_purchase_url(:sale_id => sale_id,
+                                            :exp_month => exp_month,
+                                            :exp_year => exp_year,
+                                            :first_name => first_name,
+                                            :last_name => last_name,
+                                            :address => address,
+                                            :address_2 => address_2,
+                                            :city => city,
+                                            :state => state,
+                                            :zip => zip,
+                                            :size => size,
+                                            :ship => ship)
+        end
+      end
     end
   end
 

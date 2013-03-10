@@ -229,6 +229,8 @@ class SalesController < ApplicationController
       index_store
     elsif params[:brand_id]
       index_brand
+    elsif params[:q]
+      index_search
     else
       index_all
     end
@@ -287,6 +289,34 @@ class SalesController < ApplicationController
                   order(%Q{"sales"."created_at" DESC}).
                   limit(10).
                   offset(params[:offset]).all
+  end
+
+  def index_search
+    @brands = Brand.select(%Q{DISTINCT brands.id,brands.name}).
+      #where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      where(["(name ILIKE ?) OR (name ILIKE ?)","#{params[:q]}%", params[:q]]).
+      joins(%Q{INNER JOIN "sales" on "sales"."brand_id"="brands"."id"}).
+      limit(20)
+
+    @stores = Store.select(%Q{DISTINCT stores.id,stores.name,stores.url}).
+      #where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      where(["(name ILIKE ?) OR (name ILIKE ?)","#{params[:q]}%", params[:q]]).
+      joins(%Q{INNER JOIN "sales" on "sales"."store_id"="stores"."id"}).
+      limit(20)
+
+    @sales = Sale.where(["(brand_id IN (?)) OR (store_id IN (?))",
+                          @brands.collect(&:id),
+                          @stores.collect(&:id)]).
+      where(:visible => true).
+      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      limit(10).
+      offset(params[:offset]).all
+
+    puts "q: #{params[:q]} " + @sales.collect(&:id).join(",")
   end
 
   def index_all(limit = 10)

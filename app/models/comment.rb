@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   def create_activities
     unless self.user_id == self.sale.user_id
       Activity.create(:user_id => self.sale.user_id,
-                      :actor_id => self.id,
+                      :actor_id => self.user_id,
                       :sale_id => self.sale.id,
                       :message => "#{self.user.display_name} commented on your sale.")
     end

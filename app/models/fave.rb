@@ -19,7 +19,7 @@ class Fave < ActiveRecord::Base
 
     unless self.sale.user_id == self.user_id
       Activity.create(:user_id => self.sale.user_id,
-                      :actor_id => self.id,
+                      :actor_id => self.user_id,
                       :sale_id => self.sale.id,
                       :special_key => self.activity_key,
                       :message => "#{self.user.display_name} favorited your sale.")

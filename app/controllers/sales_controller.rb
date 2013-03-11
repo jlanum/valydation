@@ -10,6 +10,14 @@ class SalesController < ApplicationController
                AND "faves"."user_id"=#{@user.id}}).
       includes(:user).
       first
+
+    respond_to do |wants|
+      wants.json do 
+        render :json => @sale.to_json(:include => {:user => User.public_json},
+                                      :methods => [:my_fave])
+      end
+      wants.html { }
+    end
   end
 
   def new

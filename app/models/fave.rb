@@ -6,6 +6,31 @@ class Fave < ActiveRecord::Base
 
   after_create :count_faves_for_sale
   after_destroy :count_faves_for_sale
+  after_create :create_activities
+
+  def activity_key
+    "#{self.sale_id} #{self.user_id}"
+  end
+
+  def create_activities
+    if Activity.where(:special_key => self.activity_key).first
+      return
+    end
+
+    unless self.sale.user_id == self.user_id
+      Activity.create(:user_id => self.sale.user_id,
+                      :actor_id => self.id,
+                      :sale_id => self.sale.id,
+                      :special_key => self.activity_key,
+                      :message => "#{self.user.display_name} favorited your sale.")
+    end
+
+    Activity.create(:user_id => self.user_id,
+                    :actor_id => self.user_id,
+                    :sale_id => self.sale.id,
+                    :special_key => self.activity_key,
+                    :message => "You favorited a sale posted by #{self.sale.user.display_name}.")
+  end
 
   def notification_source_key
     "#{self.sale_id} #{self.user_id}"

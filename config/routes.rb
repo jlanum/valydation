@@ -27,6 +27,7 @@ HiStrollers::Application.routes.draw do
   resources :search_results
   resources :sessions
   resources :merchants
+  resources :activities
 
   match '/mine' => 'sales#index',
     :defaults => {:my_feed => true}, :as => "my_faves"

@@ -41,6 +41,9 @@ class User < ActiveRecord::Base
   has_many :followed, :class_name => "Follower", :foreign_key => "following_id", :dependent => :destroy
   has_many :following_users, :through => :followed, :class_name => "User"
 
+  has_many :activities, :dependent => :destroy
+  has_many :acted_activities, :class_name => "Activity", :foreign_key => "actor_id", :dependent => :destroy
+
   mount_uploader :photo, UserPhotoUploader
 
   def self.public_json

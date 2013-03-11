@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130309061338) do
+ActiveRecord::Schema.define(:version => 20130310224435) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "user_id",                   :null => false
+    t.integer  "sale_id",                   :null => false
+    t.integer  "actor_id",                  :null => false
+    t.string   "special_key", :limit => 24
+    t.text     "message"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "activities", ["special_key"], :name => "index_activities_on_special_key"
+  add_index "activities", ["user_id", "created_at"], :name => "index_activities_on_user_id_and_created_at", :order => {"created_at"=>:desc}
+  add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
 
   create_table "brands", :force => true do |t|
     t.string   "name",       :null => false

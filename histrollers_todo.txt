@@ -672,4 +672,7 @@ notifications
   -sale faves view
   -pets -> beauty
   -fix google art
-  -1:00
+  -1:00 stop
+  -8:00 start
+  -redo search to be like web
+  -9:00 stop

@@ -117,6 +117,20 @@
                               </div>
 
                               <div class="control-group">
+                                <label class="control-label" for="optionsCheckbox">Returnable</label>
+                                <div class="controls">
+                                  <%= check_box(:sale, :allow_returns) %>
+                                </div>
+                              </div>
+
+                              <div class="control-group">
+                                <label class="control-label" for="optionsCheckbox">Shipping Available</label>
+                                <div class="controls">
+                                  <%= check_box(:sale, :does_shipping) %>
+                                </div>
+                              </div>
+
+                              <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox">Editors' Pick</label>
                                 <div class="controls">
                                   <%= check_box(:sale, :editors_pick) %>

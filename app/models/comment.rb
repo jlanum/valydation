@@ -5,6 +5,22 @@ class Comment < ActiveRecord::Base
 
   after_create :count_comments_for_sale
   after_destroy :count_comments_for_sale
+  after_create :create_activities
+
+  def create_activities
+    unless self.user_id == self.sale.user_id
+      Activity.create(:user_id => self.sale.user_id,
+                      :actor_id => self.user_id,
+                      :sale_id => self.sale.id,
+                      :message => "#{self.user.display_name} commented on your sale.")
+    end
+
+    Activity.create(:user_id => self.user_id,
+                    :actor_id => self.user_id,
+                    :sale_id => self.sale.id,
+                    :message => "You commented on a sale posted by " + 
+                      (self.user_id == self.sale.user_id ? "you" : self.sale.user.display_name) + ".")
+  end
 
   def count_comments_for_sale
     self.sale.comment_count = self.sale.comments.count

@@ -26,7 +26,8 @@ class Sale < ActiveRecord::Base
                   :percent_off_int,
                   :does_shipping,
                   :allow_returns,
-                  :editors_pick
+                  :editors_pick,
+                  :sold_out
 
   attr_accessor :current_user
   attr_accessor :image_upload_urls
@@ -40,6 +41,8 @@ class Sale < ActiveRecord::Base
 
   has_many :comments, :dependent => :destroy
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
+  has_many :activities, :dependent => :destroy
+
   belongs_to :user
   belongs_to :metro, :class_name => "City", :foreign_key => "city_id"
 

@@ -643,3 +643,54 @@ notifications
   -v3: fix twitter/fb share messages (no charge)
   -9:30 
 
+  3/6
+  -9
+  -v3: purchase on app
+  -11
+
+  3/7
+  -7:30
+  -v3: purchase on app - purchase form
+  -11:00
+
+  -3/8
+  -11:30 start
+  -web bug fixes - firefox upload, admin logout, couple others
+  -12:30 pause
+  -1:00 start
+  -v3: purchase form, get tax/ship and previous addy from server
+  -3:00 pause
+  -5:00 start
+  -v3: purchase form, selector views and other custom inputs
+  -7:00 pause
+  -8 start
+  -v3: purchase braintree transaction. sold out status.
+  -10:30
+
+  -3/9
+  -12:00 start
+  -sale faves view
+  -pets -> beauty
+  -fix google art
+  -1:00 stop
+  -8:00 start
+  -redo search to be like web
+  -9:00 stop
+
+  -3/10
+  -4:00 start
+  -activities feed
+  -sale single view
+  -7:30 pause
+  -8:30 resume
+  -new artwork
+  -center camera preview on iphone 5
+  -10:00
+
+  -3/11
+  -8:00 start
+  -Shipping and returns on merchant post
+  -Returns policy on purchase
+  -Move lower faves button closer to edge on feed view
+  -New heart icon on tab bar
+  -tw/fb message revision

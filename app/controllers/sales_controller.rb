@@ -10,6 +10,14 @@ class SalesController < ApplicationController
                AND "faves"."user_id"=#{@user.id}}).
       includes(:user).
       first
+
+    respond_to do |wants|
+      wants.json do 
+        render :json => @sale.to_json(:include => {:user => User.public_json},
+                                      :methods => [:my_fave])
+      end
+      wants.html { }
+    end
   end
 
   def new
@@ -89,6 +97,12 @@ class SalesController < ApplicationController
   def create
     handle_store_reference
 
+    [:allow_returns, :does_shipping].each do |p|
+      if params[p].respond_to?(:to_i)
+        params[p] = (params[p].to_i == 1)
+      end
+    end
+
     @sale = Sale.new(:user_id => @user.id,
                      :brand => params[:brand],
                      :sale_price => params[:sale_price],
@@ -110,8 +124,8 @@ class SalesController < ApplicationController
                      :user_lat => params[:user_lat],
                      :user_lon => params[:user_lon],
                      :city_id => @user.city_id,
-                     :allow_returns => (params[:allow_returns].to_i==1),
-                     :does_shipping => (params[:does_shipping].to_i==1) )
+                     :allow_returns => params[:allow_returns],
+                     :does_shipping => params[:does_shipping] )
 
     if params[:comment] and params[:comment].size > 0
       comment = Comment.new(:user_id => @user.id,
@@ -229,6 +243,8 @@ class SalesController < ApplicationController
       index_store
     elsif params[:brand_id]
       index_brand
+    elsif params[:q]
+      index_search
     else
       index_all
     end
@@ -287,6 +303,34 @@ class SalesController < ApplicationController
                   order(%Q{"sales"."created_at" DESC}).
                   limit(10).
                   offset(params[:offset]).all
+  end
+
+  def index_search
+    @brands = Brand.select(%Q{DISTINCT brands.id,brands.name}).
+      #where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      where(["(name ILIKE ?) OR (name ILIKE ?)","#{params[:q]}%", params[:q]]).
+      joins(%Q{INNER JOIN "sales" on "sales"."brand_id"="brands"."id"}).
+      limit(20)
+
+    @stores = Store.select(%Q{DISTINCT stores.id,stores.name,stores.url}).
+      #where(["name ILIKE ? AND sales.city_id=?","#{params[:q]}%",@user.city_id]).
+      where(["(name ILIKE ?) OR (name ILIKE ?)","#{params[:q]}%", params[:q]]).
+      joins(%Q{INNER JOIN "sales" on "sales"."store_id"="stores"."id"}).
+      limit(20)
+
+    @sales = Sale.where(["(brand_id IN (?)) OR (store_id IN (?))",
+                          @brands.collect(&:id),
+                          @stores.collect(&:id)]).
+      where(:visible => true).
+      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+               AND "faves"."user_id"=#{@user.id}}).
+      includes(:user).
+      order(%Q{"sales"."created_at" DESC}).
+      limit(10).
+      offset(params[:offset]).all
+
+    puts "q: #{params[:q]} " + @sales.collect(&:id).join(",")
   end
 
   def index_all(limit = 10)

@@ -18,18 +18,33 @@ class PurchasesController < ApplicationController
 
   def new
     @sale = Sale.find(params[:sale_id])
-    calculate_total
+    @purchase = Purchase.new(:user_id => @user.id, :sale_id => @sale.id, :ship_it => params[:ship_it])
+    @purchase.calculate_total!
 
     @tr_data = Braintree::TransparentRedirect.transaction_data(
       :redirect_url => purchase_confirmation_url,
       :transaction => {
         :custom_fields => {"sale_id" => @sale.id,
-                           "shipping_amount" => @ship_amount,
-                           "tax_amount" => @tax_amount,
-                           "subtotal" => @sale.sale_price},
+                           "shipping_amount" => @purchase.shipping,
+                           "tax_amount" => @purchase.tax,
+                           "subtotal" => @purchase.subtotal},
         :type => "sale",
-        :amount => @total_amount})
+        :amount => @purchase.total})
 
+    @purchase.tr_data = @tr_data
+    @purchase.post_url = Braintree::TransparentRedirect.url
+
+    respond_to do |wants|
+      wants.json { new_json }
+      wants.html { new_html }
+    end
+  end
+
+  def new_json
+    render :json => @purchase.to_json(:methods => [:previous_shipped_purchase, :tr_data, :post_url])
+  end
+
+  def new_html
     if request.xhr?
       if params[:transaction]
         if params[:transaction][:customer]
@@ -50,12 +65,13 @@ class PurchasesController < ApplicationController
     end
   end
 
-
   def confirmation
     braintree_result = Braintree::TransparentRedirect.confirm(request.query_string)
     transaction = braintree_result.transaction
     if braintree_result.success?
       #debugger
+      ship_it = (transaction.shipping_details.street_address and not transaction.shipping_details.street_address.empty?)
+      debugger
       @purchase = Purchase.new(:user_id => @user.id,
                                :sale_id => transaction.custom_fields[:sale_id],
                                :status => "approved",
@@ -72,11 +88,20 @@ class PurchasesController < ApplicationController
                                :tax => transaction.custom_fields[:tax_amount],
                                :subtotal => transaction.custom_fields[:subtotal],
                                :total => transaction.amount,
-                               :size => transaction.custom_fields[:size])
+                               :size => transaction.custom_fields[:size],
+                               :ship_it => ship_it)
       @purchase.save!
+
+      respond_to do |wants|
+        wants.json do 
+          render :json =>  {"message" => "We're holding your item and are awaiting confirmation from the merchant. Your credit card will be charged once the sale is confirmed."}
+        end
+        wants.html { }
+      end
     else
       #debugger
-      flash[:message] = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."
+      @error_message = "The transaction was declined. Please ensure that your credit card details are entered correctly, and try again."
+      flash[:message] = @error_message
 
       exp_month, exp_year, first_name, last_name, address, 
         address_2, city, state, zip, ship = nil
@@ -100,35 +125,28 @@ class PurchasesController < ApplicationController
         ship = 1
       end
 
-      redirect_to new_sale_purchase_url(:sale_id => sale_id,
-                                        :exp_month => exp_month,
-                                        :exp_year => exp_year,
-                                        :first_name => first_name,
-                                        :last_name => last_name,
-                                        :address => address,
-                                        :address_2 => address_2,
-                                        :city => city,
-                                        :state => state,
-                                        :zip => zip,
-                                        :size => size,
-                                        :ship => ship)
+      respond_to do |wants|
+        wants.json do
+          render :json => {"error" => @error_message}
+        end
+        wants.html do
+          redirect_to new_sale_purchase_url(:sale_id => sale_id,
+                                            :exp_month => exp_month,
+                                            :exp_year => exp_year,
+                                            :first_name => first_name,
+                                            :last_name => last_name,
+                                            :address => address,
+                                            :address_2 => address_2,
+                                            :city => city,
+                                            :state => state,
+                                            :zip => zip,
+                                            :size => size,
+                                            :ship => ship)
+        end
+      end
     end
   end
 
-  private
 
-  def calculate_total
-    if params[:ship].to_i == 1
-      @ship_amount = 5.0
-    else
-      @ship_amount = 0.0
-    end
-
-    tax_results = JSON.parse(open("http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{@sale.user.zip_code}").read)
-
-    sales_tax_rate = tax_results["results"].first["taxSales"]
-    @tax_amount = @sale.sale_price * sales_tax_rate
-    @total_amount = @sale.sale_price.to_f + @tax_amount.to_f + @ship_amount.to_f
-  end
 
 end

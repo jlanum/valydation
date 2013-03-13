@@ -687,4 +687,10 @@ notifications
   -center camera preview on iphone 5
   -10:00
 
-
+  -3/11
+  -8:00 start
+  -Shipping and returns on merchant post
+  -Returns policy on purchase
+  -Move lower faves button closer to edge on feed view
+  -New heart icon on tab bar
+  -tw/fb message revision

@@ -14,12 +14,12 @@
     <span class="row-fluid">
       <% if sale.user and sale.user.is_merchant %>
         <% if sale.sold_out %>
-          <a href="#" class="btn btn-success span4 pull-right disabled">Sold Out</a>
+          <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Sold Out</a>
         <% else %>
           <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success span4 pull-right">Buy</a>
         <% end %>
     <% else %>
-        <a href="#" class="btn btn-success span4 pull-right disabled">Buy</a>
+        <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Buy</a>
     <% end %>
     </span>
   </div>

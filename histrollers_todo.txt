@@ -709,3 +709,25 @@ notifications
   -css tweaks
   -profile page tweaks
   -8:30
+
+
+
+Order Status Page: front and back - link from profile
+
+
+Stores Page: be able to control what shows here on the backend
+
+Pinterest Button: added with Pin it functionality
+
+Merchant page: link from Landing page without login (Links to 4 new pages from this page these are not built but will be basic) Might "new page" in admin work for this [the dream is a subdomain stores.mysaletable.com but we'll take what we can get]
+
+Store-profile page: make address a map link, adjust follow button position
+
+Template landing page: this page can be edited. Links to login or create account, then to at least 4 separate home page templates that we can curate all content from the back end.
+
+Contact Page: placeholder text - get rid of elipsis
+
+
+Bugs in FF 19.0.2:
+Clicking the grayed out Buy Button scrolls the page
+JS hover on detail box does not always work

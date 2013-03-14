@@ -7,6 +7,11 @@
     <a href="<%= sale_url(sale.id) %>" onclick="if (isMobile()) { return true; } else { $('#sale_modal_<%= sale.id %>').modal({}); return false; }">
       <img class="product-pic" src="<%= sale.image_0.versions[:web_index] %>" alt="">
     </a>
+    <% if sale.sold_out %>    
+    <span class="sold-tag sold">
+      <center>Sold</center>
+    </span>
+    <% end %>
     <span class="thisInfo">
     </span>
     <div class="hover-toggle">

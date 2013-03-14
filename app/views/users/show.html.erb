@@ -21,9 +21,10 @@ body {
   <div class="container">
   <div class="signup-unit">
     <span class="span4 pull-left">
-      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo_version_url(:profile_2x) %>" ><br><br>
-      <a href="<%= users_following_me_url(:user_id => @show_user.id) %>"class="btn span2"><%= @show_user.follower_count %> Followers</a><br>
-      <a href="<%= users_im_following_url(:user_id => @show_user.id) %>"class="btn span2"><%= @show_user.following_count %> Following</a>
+      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo_version_url(:profile_2x) %>" ><br>
+
+      <a href="<%= users_following_me_url(:user_id => @show_user.id) %>"class="btn btn-success span2 followers-button"><%= @show_user.follower_count %> Followers</a><br>
+      <a href="<%= users_im_following_url(:user_id => @show_user.id) %>"class="btn btn-success span2 following-button"><%= @show_user.following_count %> Following</a>
     </span>
 
     <font size="5"><%= @show_user.display_name %></font><br>
@@ -62,9 +63,9 @@ jQuery(function($) {
 
     <% if @show_user.id != @user.id %>
 
-    <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success profile-name", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
+    <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success btn profile-name span2", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
 
-    <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success profile-name", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
+    <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success btn profile-name span2", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
 
   <% end %>
 

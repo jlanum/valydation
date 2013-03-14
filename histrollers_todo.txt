@@ -694,3 +694,13 @@ notifications
   -Move lower faves button closer to edge on feed view
   -New heart icon on tab bar
   -tw/fb message revision
+  -10:30 stop
+
+  -3/12
+  -9 start
+  -purchase form tweaks
+  -deploy v3 on production
+  -submit app for review
+  -10 stop
+
+

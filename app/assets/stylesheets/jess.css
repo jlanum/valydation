@@ -54,7 +54,6 @@
 	margin-bottom: 16px;
 	    margin-top: 24px;
 	font-size: 14px !important;
-	font-weight: lighter !important;
 	color: #432060 !important;
   position:relative; 
   text-align:center;
@@ -136,7 +135,6 @@
 
 .contact {
 	color: #7d7d7d;
-	font-weight:lighter !important;
 }
 
 .Badges {
@@ -147,7 +145,6 @@
 
 .city {
 	
-	font-weight: lighter !important;
 	float: right;
 }
 
@@ -176,7 +173,6 @@
 
 .profile-upload {
 	float: left;
-	font-weight: lighter !important;
 }
 
 .zip {
@@ -274,7 +270,6 @@ span.stretch {
 }
 
 .our-story {
-	font-weight: lighter !important;
 }
 
 .photo-tips {
@@ -470,13 +465,14 @@ width: 62px;
 }
 
 .follow-page {
-	padding-right: 600px;
-
+  right:400px;
+  position: relative;
+  top: -22px;
 }
 
 .hey {
 	padding-left: 80px;
-	vertical-align: -10px;
+	vertical-align: -23px;
 }
 
 .postbtn {
@@ -493,7 +489,7 @@ width: 62px;
 }
 
 .pwd {
-	vertical-align:-.5px;
+	vertical-align:0px !important;
 }
 
 .url {
@@ -567,6 +563,7 @@ td.auto-width {
 
 .filter-city {
   margin-left: 10px;
+  padding-right: 10px;
 }
 
 .table-modal {
@@ -576,4 +573,253 @@ td.auto-width {
 
 .detail-twitter {
   margin-left: 5px;
+}
+
+.shopper-profile {
+	margin-left:56px !important;
+}
+
+.followers-button {
+	margin-top: 8px;
+	margin-bottom: 5px;
+	margin-left: 31px !important;
+}
+
+.following-button {
+	margin-left: 31px !important;
+}
+
+.profile-name {
+	margin-left:0px !important;
+}
+
+.table-modaltwo {
+	width:73px;
+	display: inline-table !important;
+	
+}
+
+.stores-page {
+	padding-left: 226px;
+	vertical-align:-10px;
+}
+
+.store-follow {
+	padding-left: 226px;
+	vertical-align:-10px;
+}
+
+
+.image-wrapper .sold-tag {
+	background-image:url('/Users/testuser/mysaletabledev/img/purplebar.png');
+	display:inline-block;
+	position: absolute;
+	color:white;
+	right:0px;
+	top: 43px;
+	left:160px	
+}
+
+.sold {
+	color: white;
+}
+
+.city-state {
+	font-weight: bold;
+	line-height: 20px !important;
+	display: block;
+	width: 100%;
+	margin: 0px;
+	padding: 5px 0;
+	bordr-radius: 4px 4px 0 0 !important;
+	font-size: 15px;
+	font-family: Helvetica, arial, sans-serif;
+	letter-spacing: 1px;
+	background-color:#432060 !important;
+	color: white;
+}
+
+.store-name {
+    vertical-align: sub;
+    padding-top: 10px;
+    line-height: 40px !important;
+    background-color:transparent !important;
+    font-size: 15px;
+	font-family: Helvetica, arial, sans-serif;
+	letter-spacing: 1px;
+   
+}
+.hover-group .image-wrapper .hover-boggle {
+  /* set it at the bottom of .image-wrapper */
+  /* and don't display it */
+  display: block;
+  height: 38px;
+  width: 100%;
+  text-align:justify;
+  margin:0px;
+  border-radius:0 0 4px 4px;
+}
+
+.asfeatured {
+	margin-top:40px;
+	
+}
+
+.hot-spot {
+	margin:0 auto; 
+	margin-left:80px !important;
+}
+
+
+.press-pass {
+	margin:auto;
+}
+
+.featurette-pics {
+	padding:20px;
+	margin:0 auto;
+}
+
+.featurette-pics1 {
+	padding:20px;
+	margin-bottom:20px;
+	margin-right: 20px;
+}
+
+.featurette-pics2 {
+	padding:20px;
+	margin-bottom:20px;
+	margin-right: 20px;
+}
+
+.featurette-pics3 {
+	padding:20px;
+	margin-bottom:20px;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .banner {
+      margin-bottom: 60px;
+    }
+
+    .banner .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+
+    .banner .item {
+      height: 400px;
+    }
+    .banner img {
+      position: absolute;
+      
+      min-width: 940px;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+	.hayes-phrase {
+		text-align:center;
+	}
+	
+	.marketing-template {
+        margin: 30px 0;
+        margin-bottom: 20px;
+      }
+
+.order-status {
+	color:#432060 !important;
+}
+
+.upload-image {
+	margin-bottom: 10px;
+}
+
+.aboutus {
+	text-align:center;
+	margin:-267px 15px;
+	position:absolute; 
+	vertical-align:middle;
+	height:316px 
+	width:710px; 
+	display:block;
+
 }

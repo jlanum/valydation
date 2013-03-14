@@ -708,12 +708,16 @@ notifications
   -8 start
   -css tweaks
   -profile page tweaks
-  -8:30
+  -edit profile tweaks
+  -sold out tag
+  -bug fixes
+  -9:0
 
 
 
 Order Status Page: front and back - link from profile
 
+welcome emails
 
 Stores Page: be able to control what shows here on the backend
 
@@ -729,5 +733,4 @@ Contact Page: placeholder text - get rid of elipsis
 
 
 Bugs in FF 19.0.2:
-Clicking the grayed out Buy Button scrolls the page
 JS hover on detail box does not always work

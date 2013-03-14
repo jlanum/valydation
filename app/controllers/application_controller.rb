@@ -79,11 +79,12 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_user
-    puts "session:"
-    puts session.to_json
-
     if session[:user_id]
-      @user = User.find(session[:user_id])
+      begin
+        @user = User.find(session[:user_id])
+      rescue
+        session[:user_id] = nil
+      end
     end
   end
 

@@ -713,9 +713,16 @@ notifications
   -bug fixes
   -9:0
 
+  3/14
+  -8 start
+  -user/merchant welcome emails
+  -customer facing order status view
+  -admin purchase status view
+  -admin change purchase status
+  -10 stop
 
 
-Order Status Page: front and back - link from profile
+
 
 Store-profile page: make address a map link, adjust follow button position
 

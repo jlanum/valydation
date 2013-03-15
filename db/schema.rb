@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310224435) do
+ActiveRecord::Schema.define(:version => 20130315035332) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20130310224435) do
     t.string   "zip"
     t.string   "size"
     t.boolean  "ship_it",                         :default => false
+    t.string   "retailer_status"
   end
 
   create_table "sales", :force => true do |t|

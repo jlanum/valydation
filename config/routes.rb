@@ -37,9 +37,9 @@ HiStrollers::Application.routes.draw do
   match '/users/:user_id/followers' => 'followers#index',
           :defaults => {:following_me => true}, :as => "users_following_me"
 
+  match '/purchases' => 'purchases#index'
   match '/purchase_confirmation' => 'purchases#confirmation',
     :as => 'purchase_confirmation'
-
   match '/purchase_available' => 'purchases#available'
 
   match 'admin' => 'admin/sales#index'

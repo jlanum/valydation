@@ -30,6 +30,13 @@ class Purchase < ActiveRecord::Base
   monetize :total_cents, :allow_nil => true
   monetize :subtotal_cents, :allow_nil => true
 
+  def self.statuses
+    ["Pending",
+     "Confirmed",
+     "Shipped",
+     "Canceled"]
+  end
+
   def available_key
     Digest::MD5.hexdigest("#{self.id} #{self.user_id} #{self.sale_id} #{self.external_id}")
   end

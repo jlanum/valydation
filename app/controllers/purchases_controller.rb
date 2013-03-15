@@ -3,6 +3,11 @@ class PurchasesController < ApplicationController
   before_filter :require_user, :except => "available"
   before_filter :require_ssl, :except => "available"
 
+  def index
+    @purchases = Purchase.where(:user_id => @user.id).
+                  order("created_at DESC").all
+  end
+
   def available
     @purchase = Purchase.find(params[:id])
     if @purchase.available_key == params[:key]

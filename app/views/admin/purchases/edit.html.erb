@@ -1,0 +1,83 @@
+<% if @message %>
+  <div class="alert alert-success">
+  <%= @message %>
+</div>
+<% end %>
+
+
+  <div style="float:right; padding: 24px;">
+  <div style="padding:8px;">
+    <img src="<%= @purchase.sale.image_0.versions[:feed] %>">
+  </div>
+  <div style="padding:8px;">
+    <img src="<%= @purchase.sale.image_1.versions[:feed] %>">
+  </div>
+  <div style="padding:8px;">
+    <img src="<%= @purchase.sale.image_2.versions[:feed] %>">
+  </div>
+</div>
+
+<div class="page-header">
+  <h1>Edit Purchase</h1>
+</div>
+
+<div class="page-header">
+
+
+<h2><%= link_to(@purchase.user.display_name, admin_user_url(@purchase.user) ) %></h2>
+<h3><%= link_to(@purchase.sale.user.display_name, admin_user_url(@purchase.sale.user)) %></h3>
+<h4><%= @purchase.sale.brand %> - <%= link_to(@purchase.sale.product, admin_sale_url(@purchase.sale)) %></h4>
+
+  <br>
+    <p>
+Sold <%= @purchase.created_at.strftime("%b %d, %Y") %>.
+</p>
+<p>
+  <a href="mailto:<%= @purchase.user.email %>"><%= @purchase.user.email %></a>
+</p>
+<br>
+
+<p>
+Subtotal: <%= humanized_money_with_symbol @purchase.subtotal %>
+</p>
+
+<p>
+Tax: <%= humanized_money_with_symbol @purchase.tax %>
+</p>
+
+<p>
+Shipping: <%= humanized_money_with_symbol @purchase.shipping %>
+</p>
+
+<p>
+Total: <%= humanized_money_with_symbol @purchase.total %>
+</p>
+</div>
+
+
+
+
+<%= form_for(@purchase, 
+             :html => {:class => "form-horizontal well"},
+             :url => admin_purchase_path(@purchase))  do |f| %>
+
+<fieldset>
+
+  <div class="control-group">
+   <label class="control-label" for="sale_store_name">Status</label>
+   <div class="controls">
+      <%= select(:purchase, :retailer_status,
+                  Purchase.statuses) %>
+   </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </div>
+
+</fieldset>
+
+<% end %>
+
+
+

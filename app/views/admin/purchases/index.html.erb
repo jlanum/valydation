@@ -8,8 +8,9 @@
       <th>Customer</th>
       <th>Store</th>
       <th>Product</th>
+      <th>Date</th>      
       <th>Total</th>
-      <th>Date</th>
+      <th>Status</th>      
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,8 +25,9 @@
       <td><%= purchase.sale.product %></td>
       <td class="nowrap"><%= purchase.created_at.strftime("%d %b %Y") %></td>
       <td><%= humanized_money_with_symbol purchase.total %></td>
+      <td><%= purchase.retailer_status %></td>
       <td class="nowrap">
-        <%= link_to 'View', admin_purchase_path(purchase),
+        <%= link_to 'View', edit_admin_purchase_path(purchase),
           :class => "btn btn-info btn-small" %>
         <%= link_to 'Delete', admin_purchase_path(purchase),
           :confirm => 'Are you 100% positive that you want to delete this purchase FOREVER?', 

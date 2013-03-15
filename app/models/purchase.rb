@@ -20,7 +20,8 @@ class Purchase < ActiveRecord::Base
                   :total,
                   :subtotal,
                   :size,
-                  :ship_it
+                  :ship_it,
+                  :retailer_status
 
   belongs_to :sale
   belongs_to :user

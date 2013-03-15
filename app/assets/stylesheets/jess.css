@@ -611,7 +611,7 @@ td.auto-width {
 
 
 .image-wrapper .sold-tag {
-	background-image:url('/Users/testuser/mysaletabledev/img/purplebar.png');
+	background-image:url('https://s3.amazonaws.com/mst-images-shared/purplebar.png');
 	display:inline-block;
 	position: absolute;
 	color:white;

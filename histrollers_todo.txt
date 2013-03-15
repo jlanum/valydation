@@ -715,12 +715,16 @@ notifications
 
   3/14
   -8 start
-  -user/merchant welcome emails
   -customer facing order status view
   -admin purchase status view
   -admin change purchase status
   -10 stop
 
+  3/15
+  -9 start
+  -user/merchant welcome emails
+  -prod deploy (patricia request for sold out feature)
+  -9:30
 
 
 

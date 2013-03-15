@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
 
   attr_accessor :other_user
 
-  after_create :send_welcome_email
   before_save :set_custom_slug_lower
 
   belongs_to :city

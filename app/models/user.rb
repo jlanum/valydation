@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :other_user
 
+  after_create :send_welcome_email
   before_save :set_custom_slug_lower
 
   belongs_to :city
@@ -155,4 +156,26 @@ class User < ActiveRecord::Base
       self.custom_slug_lower = self.custom_slug.downcase
     end
   end
+
+
+  def send_welcome_email
+    template_name = (self.is_merchant ? 'welcome-to-mysaletable-stores' : 
+                                        'welcome-to-mysaletable-shoppers')
+    md_temp_options = { 
+      :template_name => template_name, 
+      :template_content => [{:name => "sale_image", :content => ""}], 
+      :message => { 
+        :subject => "Welcome to MySaleTable", 
+        :from_email => "shop@mysaletable.com", 
+        :from_name => "MySaleTable", 
+        :to => [{:email => self.email}], 
+        :merge_vars => [{:rcpt => self.email, 
+                         :vars => []}]
+      }
+    }
+
+    m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
+    m_api.messages(:sendtemplate, md_temp_options)
+  end
+
 end

@@ -1,9 +1,7 @@
 require 'csv'
 
 class Admin::LeadsController < ApplicationController
-
-  http_basic_authenticate_with :name => "admin", :password => "Green1994",
-    :only => :index
+  before_filter :admin_auth, :only => :index  
 
   def create
     @lead = Lead.new(:first_name => params[:first_name],

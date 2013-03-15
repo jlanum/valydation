@@ -1,5 +1,5 @@
 class Admin::PagesController < ApplicationController
-  http_basic_authenticate_with :name => "admin", :password => "Green1994"
+  before_filter :admin_auth
   
   layout "admin"
 

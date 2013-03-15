@@ -1,0 +1,41 @@
+<div class="page-header">
+<h1>Purchases</h1>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Store</th>
+      <th>Product</th>
+      <th>Total</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @purchases.each do |purchase| %>
+    <tr>
+      <td class="nowrap">
+        <%= link_to purchase.user.display_name,
+                    admin_user_url(purchase.user) %>
+      </td>
+      <td class="nowrap"><%= purchase.sale.user.display_name %></td>
+      <td><%= purchase.sale.product %></td>
+      <td class="nowrap"><%= purchase.created_at.strftime("%d %b %Y") %>
+      <td><%= humanized_money_with_symbol purchase.total %></td>
+      <td class="nowrap">
+        <%= link_to 'View', admin_purchase_path(purchase),
+          :class => "btn btn-info btn-small" %>
+        <%= link_to 'Delete', admin_purchase_path(purchase),
+          :confirm => 'Are you 100% positive that you want to delete this purchase FOREVER?', 
+          :method => :delete,
+          :class => "btn btn-danger btn-small" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @purchases %>
+

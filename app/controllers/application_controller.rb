@@ -46,6 +46,12 @@ class ApplicationController < ActionController::Base
 
 
   private
+  
+  def admin_auth
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "admin" && password == "Green1994"
+    end
+  end
 
   def detect_iphone
     if request.env['HTTP_USER_AGENT'].match(/iPhone/) and not session[:iphone_redirected_from]

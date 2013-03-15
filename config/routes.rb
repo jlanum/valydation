@@ -44,12 +44,13 @@ HiStrollers::Application.routes.draw do
 
   match 'admin' => 'admin/sales#index'
   namespace :admin do
-    resources :sales
     resources :users do
       get 'export', :on => :collection
     end
+    resources :sales
     resources :leads
     resources :pages
+    resources :purchases
   end
 
   match 'store_lookup' => 'sales#store_lookup'

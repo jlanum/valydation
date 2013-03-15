@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if self.is_merchant
+    if self.is_merchant and self.business_name and not self.business_name.empty?
       self.business_name.to_s
     else
       "#{self.first_name} #{self.last_name}"

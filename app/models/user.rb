@@ -159,13 +159,19 @@ class User < ActiveRecord::Base
 
 
   def send_welcome_email
-    template_name = (self.is_merchant ? 'welcome-to-mysaletable-stores' : 
-                                        'welcome-to-mysaletable-shoppers')
+    if self.is_merchant
+      subject = "Welcome! Your Store Account is Created."
+      template_name = 'welcome-to-mysaletable-stores'
+    else 
+      subject = "Welcome! Your Account is Created."
+      template_name = 'welcome-to-mysaletable-shoppers'
+    end
+
     md_temp_options = { 
       :template_name => template_name, 
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
-        :subject => "Welcome to MySaleTable", 
+        :subject => subject,
         :from_email => "shop@mysaletable.com", 
         :from_name => "MySaleTable", 
         :to => [{:email => self.email}], 

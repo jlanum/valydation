@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def detect_iphone
-    if request.env['HTTP_USER_AGENT'].match(/iPhone/) and not session[:iphone_redirected_from]
+    if request.env['HTTP_USER_AGENT'].to_s.match(/iPhone/) and not session[:iphone_redirected_from]
       session[:iphone_redirected_from] = request.url
       redirect_to page_url(:slug => "iphone")
       false

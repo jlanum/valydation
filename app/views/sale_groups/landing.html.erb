@@ -11,34 +11,33 @@
     <%= raw @page.content %>
 
     <hr class="featurette-divider">
+
     <div class="featurette-pics">
+
       <div class="hot-spot">
         <ul class="thumbnails">
+
+          <% @groups.each do |group| %>
+            <% next unless sale = group.featured_sale %>
           <li class="span3">
-          <p class="hayes-phrase">From Hayes Valley</p></span><a href="#"><img class="product-pic img-polaroid" src="img/test_shoes.jpg" alt=""></a>
+        
+          <p class="hayes-phrase">From <%= group.name %></p>
 
-        </li>
-        <li class="span3">
-        <p class="hayes-phrase">From Hayes Valley</p></span><a href="#"><img class="product-pic img-polaroid" src="img/test_shoes.jpg" alt=""></a>
+            <%= link_to(image_tag(sale.image_0.versions[:web_index],
+                        :class => "product-pic img-polaroid"),
+                        group_slug_url(:slug => group.slug)) if sale.image_0 %>
 
-      </li>
-      <li class="span3">
-      <p class="hayes-phrase">From Hayes Valley</p></span><a href="#"><img class="product-pic img-polaroid" src="img/test_shoes.jpg" alt=""></a>
+          </li>
 
-    </li>
-  </ul>
+          <% end %>
+
+        </ul>
+      </div>
+
+  </div>
 </div>
 
-          </div></div>
-          <div class="container">
-            <hr class="featurette-divider">
-
-
-
-            <!-- /END THE FEATURETTES -->
-
-
-
-
-          </div><!-- /.container -->
+<div class="container">
+  <hr class="featurette-divider">
+</div><!-- /.container -->
 

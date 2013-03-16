@@ -65,6 +65,8 @@ HiStrollers::Application.routes.draw do
   match '/contact' => 'pages#contact', :as => :contact
   match '/page/:slug' => 'pages#show', :as => :page
 
+  match "/404", :to => "errors#not_found"
+
   ##IMPORTANT!!! THIS ALWAYS GOTTA GO LAST OR USERS MIGHT BREAK ROUTES WITH CUSTOM SLUGS!!
   match '/static/landing2.html' => "users#landing"
   match '/:custom_slug' => 'users#show', :as => :custom_slug

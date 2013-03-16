@@ -725,8 +725,14 @@ notifications
   -user/merchant welcome emails
   -prod deploy (patricia request for sold out feature)
   -9:30
+  -7:15
+  -/stores url, deploy
+  -7:30
 
 
+use custom 404
+
+Template landing page: this page can be edited. Links to login or create account, then to at least 4 separate home page templates that we can curate all content from the back end.
 
 Store-profile page: make address a map link, adjust follow button position
 
@@ -735,10 +741,10 @@ Stores Page: be able to control what shows here on the backend
 
 Pinterest Button: added with Pin it functionality
 
+merchant inventory management
 
 Merchant page: link from Landing page without login (Links to 4 new pages from this page these are not built but will be basic) Might "new page" in admin work for this [the dream is a subdomain stores.mysaletable.com but we'll take what we can get]
 
-Template landing page: this page can be edited. Links to login or create account, then to at least 4 separate home page templates that we can curate all content from the back end.
 
 
 

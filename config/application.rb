@@ -71,5 +71,7 @@ module HiStrollers
       r301 '/download', "https://itunes.apple.com/us/app/mysaletable/id594076994?mt=8&uo=4"
     end
 
+    config.exceptions_app = self.routes
+
   end
 end

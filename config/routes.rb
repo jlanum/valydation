@@ -66,6 +66,7 @@ HiStrollers::Application.routes.draw do
 
   match '/stores' => "pages#show", :defaults => {:slug => "merchants-intro"}, :as => :stores_page
   match '/contact' => 'pages#contact', :as => :contact
+  match '/page/:slug.css' => 'pages#css'
   match '/page/:slug' => 'pages#show', :as => :page
 
   match "/404", :to => "errors#not_found"

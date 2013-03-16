@@ -5,5 +5,6 @@ class AddCuratedPagesPage < ActiveRecord::Migration
 
   def down
     Page.find_by_slug('curated-landing').destroy
+    Page.find_by_slug('custom-css').destroy
   end
 end

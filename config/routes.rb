@@ -61,6 +61,7 @@ HiStrollers::Application.routes.draw do
   match 'register_lead' => 'admin/leads#create'
 
   root :to => "users#landing"
+  #root :to => "sale_groups#landing"
 
   match '/stores' => "pages#show", :defaults => {:slug => "merchants-intro"}, :as => :stores_page
   match '/contact' => 'pages#contact', :as => :contact

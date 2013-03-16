@@ -1,0 +1,2 @@
+class SaleGroupsController < ApplicationController
+end

@@ -728,6 +728,9 @@ notifications
   -7:15
   -/stores url, deploy
   -7:30
+  -8
+  -sale groups admin
+  -custom 404
 
 curated landing - 
   -SaleGroup model

@@ -48,6 +48,7 @@ HiStrollers::Application.routes.draw do
       get 'export', :on => :collection
     end
     resources :sales
+    resources :sale_groups
     resources :leads
     resources :pages
     resources :purchases

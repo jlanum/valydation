@@ -11,147 +11,162 @@
 
 
 
-  <h3>
-    Posted by 
-    <%= link_to "#{@sale.user.first_name} #{@sale.user.last_name}",
-      admin_user_url(@sale.user) %>
-    on <%= @sale.created_at.strftime("%b %d, %Y") %>.
-    </h3>
+<h3>
+  Posted by 
+  <%= link_to "#{@sale.user.first_name} #{@sale.user.last_name}",
+    admin_user_url(@sale.user) %>
+  on <%= @sale.created_at.strftime("%b %d, %Y") %>.
+  </h3>
 
-    <div style="float:right; padding: 24px;">
-      <div style="padding:8px;">
-        <img src="<%= @sale.image_0.versions[:feed] %>">
-      </div>
-      <div style="padding:8px;">
-        <img src="<%= @sale.image_1.versions[:feed] %>">
-      </div>
-      <div style="padding:8px;">
-        <img src="<%= @sale.image_2.versions[:feed] %>">
-      </div>
+  <div style="float:right; padding: 24px;">
+    <div style="padding:8px;">
+      <img src="<%= @sale.image_0.versions[:feed] %>">
     </div>
+    <div style="padding:8px;">
+      <img src="<%= @sale.image_1.versions[:feed] %>">
+    </div>
+    <div style="padding:8px;">
+      <img src="<%= @sale.image_2.versions[:feed] %>">
+    </div>
+  </div>
 
 
-    <%= form_for(@sale, 
-                 :html => {:class => "form-horizontal well"},
-                 :url => admin_sale_path(@sale))  do |f| %>
+  <%= form_for(@sale, 
+               :html => {:class => "form-horizontal well"},
+               :url => admin_sale_path(@sale))  do |f| %>
 
-                 <fieldset>
+               <fieldset>
 
-                   <div class="control-group">
-                     <label class="control-label" for="sale_store_name">Store</label>
-                     <div class="controls">
-                       <%= text_field(:sale, :store_name, :class => "input-xlarge") %>
-                     </div>
+                 <div class="control-group">
+                   <label class="control-label" for="sale_store_name">Store</label>
+                   <div class="controls">
+                     <%= text_field(:sale, :store_name, :class => "input-xlarge") %>
                    </div>
+                 </div>
 
-                   <div class="control-group">
-                     <label class="control-label" for="sale_display_address">Address</label>
-                     <div class="controls">
-                       <%= text_field(:sale, :display_address, :class => "input-xxlarge") %>
-                     </div>
+                 <div class="control-group">
+                   <label class="control-label" for="sale_display_address">Address</label>
+                   <div class="controls">
+                     <%= text_field(:sale, :display_address, :class => "input-xxlarge") %>
                    </div>
+                 </div>
 
-                   <div class="control-group">
-                     <label class="control-label" for="sale_brand">Brand</label>
-                     <div class="controls">
-                       <%= text_field(:sale, :brand, :class => "input-xlarge") %>
-                     </div>
+                 <div class="control-group">
+                   <label class="control-label" for="sale_brand">Brand</label>
+                   <div class="controls">
+                     <%= text_field(:sale, :brand, :class => "input-xlarge") %>
                    </div>
+                 </div>
 
-                   <div class="control-group">
-                     <label class="control-label" for="sale_product">Product</label>
-                     <div class="controls">
-                       <%= text_field(:sale, :product, :class => "input-xlarge") %>
-                     </div>
+                 <div class="control-group">
+                   <label class="control-label" for="sale_product">Product</label>
+                   <div class="controls">
+                     <%= text_field(:sale, :product, :class => "input-xlarge") %>
                    </div>
+                 </div>
 
-                   <div class="control-group">
-                     <label class="control-label" for="sale_category_id">Category</label>
-                     <div class="controls">
-                       <%= select(:sale, :category_id,
-                                  Sale.categories.collect { |c| [c, Sale.categories.index(c)] }) %>
+                 <div class="control-group">
+                   <label class="control-label" for="sale_category_id">Category</label>
+                   <div class="controls">
+                     <%= select(:sale, :category_id,
+                                Sale.categories.collect { |c| [c, Sale.categories.index(c)] }) %>
+                            </div>
+                            </div>
+
+                            <div class="control-group">
+                              <label class="control-label" for="sale_product">Sizes</label>
+                              <div class="controls">
+                                <%= text_field(:sale, :size, :class => "input-large") %>
+                                &nbsp;(comma separated e.g. 'XL, XXL, XXXL')
                               </div>
+                            </div>
+
+                            <div class="control-group">
+                              <label class="control-label" for="city_id">City</label>
+                              <div class="controls">
+                                <%= select(:sale, :city_id, @cities.collect { |c| [c.name,c.id] }) %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="sale_product">Sizes</label>
-                                <div class="controls">
-                                  <%= text_field(:sale, :size, :class => "input-large") %>
-                                  &nbsp;(comma separated e.g. 'XL, XXL, XXXL')
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="sale_orig_price">Orig Price</label>
+                              <div class="controls">
+                                <%= text_field(:sale, :orig_price, :class => "input-small") %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="city_id">City</label>
-                                <div class="controls">
-                                  <%= select(:sale, :city_id, @cities.collect { |c| [c.name,c.id] }) %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="sale_sale_price">Sale Price</label>
+                              <div class="controls">
+                                <%= text_field(:sale, :sale_price, :class => "input-small") %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="sale_orig_price">Orig Price</label>
-                                <div class="controls">
-                                  <%= text_field(:sale, :orig_price, :class => "input-small") %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="sale_orig_price">Percent Off</label>
+                              <div class="controls">
+                                <%= text_field(:sale, :percent_off_int, :class => "input-small") %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="sale_sale_price">Sale Price</label>
-                                <div class="controls">
-                                  <%= text_field(:sale, :sale_price, :class => "input-small") %>
-                                </div>
+                         <div class="control-group">
+                           <label class="control-label" for="sale_sale_group_id">Group</label>
+                           <div class="controls">
+                             <%= select(:sale, :sale_group_id,
+                                  [[]] + SaleGroup.all.collect { |g| [g.name, g.id] }) %>
+                            </div>
+                          </div>
+
+                            <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Visible</label>
+                              <div class="controls">
+                                <%= check_box(:sale, :visible) %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="sale_orig_price">Percent Off</label>
-                                <div class="controls">
-                                  <%= text_field(:sale, :percent_off_int, :class => "input-small") %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Returnable</label>
+                              <div class="controls">
+                                <%= check_box(:sale, :allow_returns) %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox">Visible</label>
-                                <div class="controls">
-                                  <%= check_box(:sale, :visible) %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Shipping Available</label>
+                              <div class="controls">
+                                <%= check_box(:sale, :does_shipping) %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox">Returnable</label>
-                                <div class="controls">
-                                  <%= check_box(:sale, :allow_returns) %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Editors' Pick</label>
+                              <div class="controls">
+                                <%= check_box(:sale, :editors_pick) %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox">Shipping Available</label>
-                                <div class="controls">
-                                  <%= check_box(:sale, :does_shipping) %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Group Featured</label>
+                              <div class="controls">
+                                <%= check_box(:sale, :group_curated) %>
                               </div>
+                            </div>
 
-                              <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox">Editors' Pick</label>
-                                <div class="controls">
-                                  <%= check_box(:sale, :editors_pick) %>
-                                </div>
+                            <div class="control-group">
+                              <label class="control-label" for="optionsCheckbox">Sold Out</label>
+                              <div class="controls">
+                                <%= check_box(:sale, :sold_out) %>
                               </div>
-
-                              <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox">Sold Out</label>
-                                <div class="controls">
-                                  <%= check_box(:sale, :sold_out) %>
-                                </div>
-                              </div>
-                              
+                            </div>
 
 
-                              <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                <button type="reset" class="btn">Reset</button>
-                              </div>
-                            </fieldset>
-                          </form>
 
-                        <% end %>
+                            <div class="form-actions">
+                              <button type="submit" class="btn btn-primary">Save changes</button>
+                              <button type="reset" class="btn">Reset</button>
+                            </div>
+                          </fieldset>
+                        </form>
+
+                      <% end %>
 

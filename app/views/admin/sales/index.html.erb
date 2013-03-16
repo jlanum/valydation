@@ -11,6 +11,7 @@
       <th>Brand</th>
       <th>Product</th>
       <th>Posted</th>
+      <th>Group</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -36,6 +37,9 @@
       </td>
       <td>
         <%= sale.product %>
+      </td>
+      <td>
+        <%= sale.sale_group.name if sale.sale_group %>
       </td>
       <td class="nowrap">
         <%= sale.created_at.strftime("%d %b %Y") %>

@@ -1,0 +1,46 @@
+<div class="page-header">
+<h1>Sale Groups</h1>
+<br>
+<a class="btn btn-info btn-small" href="<%= new_admin_sale_group_url %>">New Group</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Slug</th>
+      <th>Sales</th>
+      <th>Featured</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @groups.each do |group| %>
+    <tr>
+      <td class="nowrap">
+        <%= link_to group.name,
+                    edit_admin_sale_group_url(group) %>
+      </td>
+      <td>
+        <%= group.slug %>
+      </td>
+      <td class="nowrap">
+        <%= group.sales.size %>
+      </td>
+      <td>
+        <%= group.featured ? 'Yes' : 'No' %>
+      </td>
+      <td class="nowrap">
+        <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_group_path(group) %>">Edit</a>
+        <%= link_to 'Delete', admin_sale_group_path(group),
+          :confirm => 'Are you 100% positive that you want to delete this group?', 
+          :method => :delete,
+          :class => "btn btn-danger btn-small" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= paginate @groups %>

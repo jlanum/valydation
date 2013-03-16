@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315160917) do
+ActiveRecord::Schema.define(:version => 20130316035112) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -148,6 +148,16 @@ ActiveRecord::Schema.define(:version => 20130315160917) do
     t.string   "retailer_status"
   end
 
+  create_table "sale_groups", :force => true do |t|
+    t.string   "name",       :limit => 64,                    :null => false
+    t.string   "slug",       :limit => 64,                    :null => false
+    t.boolean  "featured",                 :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "sale_groups", ["slug"], :name => "index_sale_groups_on_slug", :unique => true
+
   create_table "sales", :force => true do |t|
     t.integer      "user_id",                                                    :null => false
     t.string       "store_name",               :limit => 128,                    :null => false
@@ -197,12 +207,15 @@ ActiveRecord::Schema.define(:version => 20130315160917) do
     t.boolean      "editors_pick",                            :default => false
     t.string_array "sizes"
     t.boolean      "sold_out",                                :default => false
+    t.integer      "sale_group_id"
+    t.boolean      "group_curated"
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"
   add_index "sales", ["category_id", "sizes", "created_at"], :name => "index_sales_on_category_id_and_sizes_and_created_at"
   add_index "sales", ["created_notifications"], :name => "index_sales_on_created_notifications"
   add_index "sales", ["editors_pick"], :name => "index_sales_on_editors_pick"
+  add_index "sales", ["sale_group_id"], :name => "index_sales_on_sale_group_id"
   add_index "sales", ["sizes"], :name => "index_sales_on_sizes"
   add_index "sales", ["store_id"], :name => "index_sales_on_store_id"
 

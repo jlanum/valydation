@@ -27,7 +27,10 @@ class Sale < ActiveRecord::Base
                   :does_shipping,
                   :allow_returns,
                   :editors_pick,
-                  :sold_out
+                  :sold_out,
+                  :sale_group_id,
+                  :group_curated
+
 
   attr_accessor :current_user
   attr_accessor :image_upload_urls
@@ -45,6 +48,7 @@ class Sale < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :metro, :class_name => "City", :foreign_key => "city_id"
+  belongs_to :sale_group
 
   before_save :set_store
   before_save :set_brand

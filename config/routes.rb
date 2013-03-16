@@ -61,6 +61,7 @@ HiStrollers::Application.routes.draw do
 
   root :to => "users#landing"
 
+  match '/stores' => "pages#show", :defaults => {:slug => "merchants-intro"}, :as => :stores_page
   match '/contact' => 'pages#contact', :as => :contact
   match '/page/:slug' => 'pages#show', :as => :page
 

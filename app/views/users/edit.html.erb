@@ -218,11 +218,23 @@ function submitGender() {
         <span class="add-on">Last Name</span>
           <%= text_field_tag "last_name", @user.last_name, :class => "span2", :placeholder => "Last Name" %>
         </div>
+
         <button class="btn url btn-success" type="button" onclick="$('#name_form')[0].submit();">Save</button>
 
         <% end %>
+
+        <% if @user.is_merchant %>
+
+        <span class="bio">Store Address</span>
         
-				<br>
+        <%= form_for(@user, :html => {:id => "address_form"}) do |f| %>
+          <%= text_area_tag "store_address", @user.store_address, :rows => 3, :placeholder => "Your store's address" %>&#160;
+          <button class="btn url btn-success" type="button" onclick="$('#address_form')[0].submit();">Save</button><br>
+        <% end %>
+
+      <% end %>
+
+				
 				Enter Username for Custom URL
         <div class="input-prepend">
           <%

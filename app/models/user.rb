@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
                   :website_url,
                   :is_merchant,
                   :activated_web,
-                  :retail_category
+                  :retail_category,
+                  :store_address
 
   attr_accessor :other_user
 

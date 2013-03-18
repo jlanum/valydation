@@ -28,7 +28,19 @@ body {
     </span>
 
     <font size="5"><%= @show_user.display_name %></font><br>
-    <p class="muted time"><%= @show_user.city.name if @show_user.city %></p>
+
+    <p class="muted time">
+    <% if @show_user.is_merchant %>
+      <a href="https://maps.google.com/?q=<%= CGI.escape(@show_user.store_address.to_s) %>">
+      <span style="white-space:pre-wrap;"><%= @show_user.store_address.to_s %></span>
+      </a>
+    <% else %>
+      <%= @show_user.city.name if @show_user.city %>
+    <% end %>
+    </p>
+
+    <br>
+
     <div style="min-height:180px;">
       <blockquote><%= @show_user.bio %></blockquote><br><br>
     </div>

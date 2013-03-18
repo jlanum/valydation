@@ -73,6 +73,7 @@
       <th>Brand</th>
       <th>Product</th>
       <th>Posted</th>
+      <th>Featured</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -95,6 +96,9 @@
       </td>
       <td>
         <%= sale.created_at.strftime("%d %b %Y") %>
+      </td>
+      <td>
+        <%= sale.group_curated ? 'Yes' : 'No' %>
       </td>
       <td>
         <a class="btn btn-warning btn-small" href="<%= edit_admin_sale_path(sale) %>">Edit</a>

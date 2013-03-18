@@ -735,6 +735,12 @@ notifications
   -custom css
   -10:15
 
+  -3/17
+  -9 start
+  -sale groups user-facing
+  -address to merchant's edit profile
+  -store profile show address
+  -10 stop
 
 
 Store-profile page: make address a map link, adjust follow button position

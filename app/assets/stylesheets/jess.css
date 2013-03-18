@@ -602,7 +602,7 @@ width: 62px;
 
 
 .image-wrapper .sold-tag {
-	background-image:url('/assets/purplebar.png');
+	background-image:url('https://s3.amazonaws.com/mst-images-shared/purplebar.png');
 	display:inline-block;
 	position: absolute;
 	color:white;

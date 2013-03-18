@@ -98,13 +98,15 @@ class ApplicationController < ActionController::Base
     handle_user
 
     unless @user
+      session[:post_login_url] = request.url
+
       respond_to do |wants|
         wants.json do 
           render :json => {"error" => "User not registered."},
                  :status => 404
         end
         wants.html do
-          redirect_to root_url
+          redirect_to new_session_url
         end
       end
       return false

@@ -735,10 +735,7 @@ notifications
   -custom css
   -10:15
 
-curated landing - 
-  -sale index by group  ?
 
-Template landing page: this page can be edited. Links to login or create account, then to at least 4 separate home page templates that we can curate all content from the back end.
 
 Store-profile page: make address a map link, adjust follow button position
 

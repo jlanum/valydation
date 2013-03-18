@@ -62,7 +62,7 @@ HiStrollers::Application.routes.draw do
 
   root :to => "sale_groups#landing"
 
-  match '/featured/:slug' => "sale_groups#show", :as => :group_slug
+  match '/featured/:slug' => "sales#group", :as => :group_slug
 
   match '/stores' => "pages#show", :defaults => {:slug => "merchants-intro"}, :as => :stores_page
   match '/contact' => 'pages#contact', :as => :contact

@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       return
     else
       session[:user_id] = @user.id
-      redirect_to sales_url
+      redirect_to (session[:post_login_url] or sales_url)
     end
   end
 

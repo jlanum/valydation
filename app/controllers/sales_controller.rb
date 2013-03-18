@@ -177,6 +177,20 @@ class SalesController < ApplicationController
   end
 
 
+  def group
+    @group = SaleGroup.where(:slug => params[:slug]).first
+    @sales = all_sales.where(:sale_group_id => @group.id).
+      page(params[:page]).
+      per(16)
+
+    if request.xhr?
+      render_lazy_rows
+    else
+      render :template => "sales/group"
+    end
+  end
+
+
   private
 
 
@@ -341,12 +355,14 @@ class SalesController < ApplicationController
 
   def all_sales
     where_conditions = {
-      :category_id => params[:category_id],
       :visible => true
     }
 
     where_frag = nil
 
+    if params[:category_id]
+      where_conditions.update({:category_id => params[:category_id]})
+    end
     if params[:size] and not params[:size].empty?
       where_frag = ["? = ANY (sales.sizes)",params[:size]]
     end

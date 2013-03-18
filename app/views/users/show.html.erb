@@ -46,12 +46,11 @@ body {
         
         <br><br>
         <% if @show_user.id != @user.id %>
-
-        <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success btn profile-name span2", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
-
-        <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success btn profile-name span2", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
-
+          <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success btn profile-name span2", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
+          <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success btn profile-name span2", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
         <% end %>
+
+      <br>
 
       </blockquote>
 

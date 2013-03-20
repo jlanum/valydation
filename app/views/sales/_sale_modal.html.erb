@@ -1,6 +1,7 @@
 <!-- Modal -->
 <div id="sale_modal_<%= sale.id %>" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
+
     <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button>
     <br>
     <p id="myModalLabel"></p>
@@ -12,15 +13,19 @@
 
   <div class="modal-footer">
     <span class="row-fluid">
-      <% if sale.user and sale.user.is_merchant %>
-        <% if sale.sold_out %>
-          <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Sold Out</a>
-        <% else %>
+      <% if sale.user_id == @user.id %>
+      <a href="<%= edit_sale_url(sale) %>" class="btn btn-success span4 pull-left">Edit Sale</a>
+      <% end %>
+
+      <% if sale.sold_out %>
+        <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Sold Out</a>
+      <% else %>
+        <% if sale.user and sale.user.is_merchant %>
           <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success span4 pull-right">Buy</a>
+        <% else %>
+          <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Buy</a>
         <% end %>
-    <% else %>
-        <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Buy</a>
-    <% end %>
+      <% end %>
     </span>
   </div>
 </div>

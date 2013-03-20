@@ -1,0 +1,150 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+<div class="container">
+
+
+  <% if flash[:message] %>
+    <div class="alert alert-success">
+    <%= flash[:message] %>
+  </div>
+<% end %>
+
+
+  <div class="page-header marketing-edit">
+    <h1>Edit Sale</h1>
+  </div>
+
+
+  <h3>
+    Posted by 
+    <%= link_to @sale.user.display_name,
+      user_custom_slug_url(@sale.user) %>
+    on <%= @sale.created_at.strftime("%b %d, %Y") %>.
+    </h3>
+
+    <div style="float:right; padding: 24px;">
+      <div style="padding:8px;">
+        <img src="<%= @sale.image_0.versions[:feed] %>">
+      </div>
+      <div style="padding:8px;">
+        <img src="<%= @sale.image_1.versions[:feed] %>">
+      </div>
+      <div style="padding:8px;">
+        <img src="<%= @sale.image_2.versions[:feed] %>">
+      </div>
+    </div>
+
+
+    <%= form_for(@sale, :html => {:class => "form-horizontal well"})  do |f| %>
+
+      <fieldset>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_store_name">Store</label>
+        <div class="controls">
+          <%= text_field(:sale, :store_name, :class => "input-xlarge") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_display_address">Address</label>
+        <div class="controls">
+          <%= text_field(:sale, :display_address, :class => "input-xxlarge") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_brand">Brand</label>
+        <div class="controls">
+          <%= text_field(:sale, :brand, :class => "input-xlarge") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_product">Product</label>
+        <div class="controls">
+          <%= text_field(:sale, :product, :class => "input-xlarge") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_category_id">Category</label>
+        <div class="controls">
+          <%= select(:sale, :category_id, Sale.categories.collect { |c| [c, Sale.categories.index(c)] }) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_product">Sizes</label>
+        <div class="controls">
+          <%= text_field(:sale, :size, :class => "input-large") %>
+          &nbsp;(comma separated e.g. 'XL, XXL, XXXL')
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="city_id">City</label>
+        <div class="controls">
+          <%= select(:sale, :city_id, @cities.collect { |c| [c.name,c.id] }) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_orig_price">Orig Price</label>
+        <div class="controls">
+          <%= text_field(:sale, :orig_price, :class => "input-small") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_sale_price">Sale Price</label>
+        <div class="controls">
+          <%= text_field(:sale, :sale_price, :class => "input-small") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="sale_orig_price">Percent Off</label>
+        <div class="controls">
+          <%= text_field(:sale, :percent_off_int, :class => "input-small") %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="optionsCheckbox">Returnable</label>
+        <div class="controls">
+          <%= check_box(:sale, :allow_returns) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="optionsCheckbox">Shipping Available</label>
+        <div class="controls">
+          <%= check_box(:sale, :does_shipping) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="optionsCheckbox">Sold Out</label>
+        <div class="controls">
+          <%= check_box(:sale, :sold_out) %>
+        </div>
+      </div>
+
+
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">Save changes</button>
+        <button type="reset" class="btn">Reset</button>
+      </div>
+    </fieldset>
+  </form>
+
+<% end %>
+
+
+</div>

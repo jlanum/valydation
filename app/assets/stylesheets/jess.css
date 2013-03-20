@@ -471,7 +471,7 @@ width: 62px;
 
 .hey {
 	padding-left: 80px;
-	vertical-align: -23px;
+	vertical-align: -6px;
 }
 
 .postbtn {
@@ -652,7 +652,10 @@ width: 62px;
 }
 
 .asfeatured {
-	margin-top:40px;
+	text-align:center;
+	font-size:xx-large;
+	letter-spacing:2px;
+	margin-top: 20px;
 	
 }
 
@@ -663,7 +666,7 @@ width: 62px;
 
 
 .press-pass {
-	margin:auto;
+	margin: 45px auto;
 }
 
 .featurette-pics {
@@ -719,6 +722,7 @@ width: 62px;
       
       min-width: 940px;
       height: 400px;
+	  margin:0 45px;
     }
 
     .carousel-caption {
@@ -761,7 +765,7 @@ width: 62px;
     ------------------------- */
 
     .featurette-divider {
-      margin: 60px 0; /* Space out the Bootstrap <hr> more */
+      margin: 9px 0; /* Space out the Bootstrap <hr> more */
     }
     .featurette {
       padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
@@ -805,10 +809,10 @@ width: 62px;
 
 .aboutus {
 	text-align:center;
-	margin:-267px 15px;
+	margin:-267px 5px;
 	position:absolute; 
 	vertical-align:middle;
-	height:316px 
+	height:316px; 
 	width:710px; 
 	display:block;
 
@@ -819,3 +823,13 @@ width: 62px;
       #footer {
         height: 60px;
       }
+
+
+.marketing-edit {
+	margin: 60px 0;
+	margin-bottom: 16px;
+}
+
+.center {
+	text-align: center;
+}

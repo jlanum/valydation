@@ -743,17 +743,14 @@ notifications
   -10 stop
 
 
-Store-profile page: make address a map link, adjust follow button position
 
 Stores Page: be able to control what shows here on the backend
 
 
 Pinterest Button: added with Pin it functionality
 
-merchant inventory management
 
 Merchant page: link from Landing page without login (Links to 4 new pages from this page these are not built but will be basic) Might "new page" in admin work for this [the dream is a subdomain stores.mysaletable.com but we'll take what we can get]
-
 
 
 

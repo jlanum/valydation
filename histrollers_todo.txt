@@ -742,6 +742,13 @@ notifications
   -store profile show address
   -10 stop
 
+  -3/19
+  -5 start
+  -merchant edit sale
+  -merchant sale status
+  -update curated landing
+  -7 stop
+
 
 
 Stores Page: be able to control what shows here on the backend

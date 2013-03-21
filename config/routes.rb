@@ -62,7 +62,7 @@ HiStrollers::Application.routes.draw do
   match 'register' => 'users#register'
   match 'register_lead' => 'admin/leads#create'
 
-  root :to => "sale_groups#landing"
+  root :to => "pages#show", :defaults => {:slug => "curated-landing"}
 
   match '/featured/:slug' => "sales#group", :as => :group_slug
 

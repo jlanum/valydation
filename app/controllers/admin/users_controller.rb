@@ -38,6 +38,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    
+    if params[:user][:custom_slug] == ""
+      params[:user][:custom_slug] = nil
+    end
 
     @user.update_attributes(params[:user])
 

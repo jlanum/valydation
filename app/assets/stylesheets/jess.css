@@ -653,7 +653,7 @@ width: 62px;
 
 .asfeatured {
 	text-align:center;
-	font-size:xx-large;
+	font-size:x-large;
 	letter-spacing:2px;
 	margin-top: 20px;
 	
@@ -666,11 +666,11 @@ width: 62px;
 
 
 .press-pass {
-	margin: 45px auto;
+	margin: 30px auto;
 }
 
 .featurette-pics {
-	padding:20px;
+	padding:20px 10px 20px 20px;
 	margin:0 auto;
 }
 
@@ -832,4 +832,8 @@ width: 62px;
 
 .center {
 	text-align: center;
+}
+
+.view-sales {
+	margin-left: 5px;
 }

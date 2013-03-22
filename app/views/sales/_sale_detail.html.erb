@@ -100,7 +100,7 @@
   <div class="span4 pull-right">
     <% if detail %>
       <% if sale.sold_out %>
-        <a href="#" class="btn btn-success btn-large span5 pull-right disabled">Sold Out</a>          
+        <a href="#" class="btn btn-success btn-large span5 pull-right disabled">SOLD</a>          
       <% else %> 
         <% if sale.user and sale.user.is_merchant %>      
           <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large span4 pull-right">Buy</a>

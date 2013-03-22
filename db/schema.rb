@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320023107) do
+ActiveRecord::Schema.define(:version => 20130321234811) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20130320023107) do
     t.string   "custom_slug_lower"
     t.boolean  "sent_welcome_email",              :default => false
     t.text     "store_address"
+    t.boolean  "featured",                        :default => false
   end
 
   add_index "users", ["custom_slug"], :name => "index_users_on_custom_slug", :unique => true

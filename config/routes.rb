@@ -18,7 +18,6 @@ HiStrollers::Application.routes.draw do
   end
 
   resources :faves
-  resources :users
   resources :comments
   resources :devices
   resources :cities
@@ -28,6 +27,9 @@ HiStrollers::Application.routes.draw do
   resources :sessions
   resources :merchants
   resources :activities
+  resources :users 
+
+  match '/stores/list' => "users#stores"
 
   match '/mine' => 'sales#index',
     :defaults => {:my_feed => true}, :as => "my_faves"

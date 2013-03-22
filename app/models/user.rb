@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
                   :is_merchant,
                   :activated_web,
                   :retail_category,
-                  :store_address
+                  :store_address,
+                  :featured
 
   attr_accessor :other_user
 

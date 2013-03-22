@@ -2,9 +2,31 @@ class UsersController < ApplicationController
   before_filter :handle_device
   #before_filter :use_test_user
   #before_filter :require_device
-  before_filter :require_user, :only => [:update, :show, :edit]
-  before_filter :handle_user, :only => [:landing, :new]
+  before_filter :require_user, :only => [:update, :show, :edit, :stores]
+  before_filter :handle_user, :only => [:landing, :new, :stores]
 
+
+  def stores
+    @stores = User.
+      where(:is_merchant => true, :featured => true).
+      limit(4).
+      order("updated_at DESC").
+      all
+
+    @sales = {}
+    @stores.each do |store|
+      @sales[store.id] = 
+        Sale.select(%Q{"sales".*, 
+                       "faves"."id" as my_fave_id}).
+             where([%Q{"sales"."visible"=true AND
+                       "sales"."user_id"=?}, store.id]).
+             joins(%Q{LEFT OUTER JOIN "faves" ON 
+               "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id}}).
+             order("created_at DESC").
+             limit(4).
+             all
+    end
+  end
 
   def landing
     if @user

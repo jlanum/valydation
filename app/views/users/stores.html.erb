@@ -13,13 +13,15 @@ body {
 </div>
 
 
+<% @stores.each_slice(4) do |row| %>
+
 <div class="row-fluid">
   <div class="container">
     <ul class="thumbnails">
 
-      <% @stores.each do |store| %>
+    <% row.each do |store| %>
 
-        <li class="span3">
+    <li class="span3">
       <div class="hover-group">
         <div class="image-wrapper">
           <span class="thisInfo">
@@ -35,37 +37,13 @@ body {
           <center><span class="store-name"><%= store.city.name %></span></center>
         </div>
       </div>
-      </li>
+    </li>
 
     <% end %>
 
     </ul>
   </div>
+</div>
 
-<% (0..3).each do |row| %>
-
-  <div class="row-fluid">
-    <div class="container">
-      <ul class="thumbnails">
-
-    <% (0..3).each do |col| %>
-      <% next unless store = @stores[col] %>
-      <% if sale = @sales[store.id][row] %>
-        <%= render :partial => "sales/sale_li", :locals => {:sale => sale} %>
-      <% else %>
-        <li class="span3"></li>
-      <% end %>
-    <% end %>
-
-        </ul>
-      </div>
-  </div>
-
-
-<% end %>
-
-
-<% @sales.values.flatten.each do |sale| %>
-  <%= render :partial => "sales/sale_modal", :locals => {:sale => sale} %>
 <% end %>
 

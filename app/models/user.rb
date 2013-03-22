@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
                   :activated_web,
                   :retail_category,
                   :store_address,
-                  :featured
+                  :featured,
+                  :display_order
 
   attr_accessor :other_user
 

@@ -749,10 +749,15 @@ notifications
   -update curated landing
   -7 stop
 
+  -3/21
+  -10 start
+  -curated landing revisions
+  -12 stop
+  -3  start
+  -featured merchants page
+  -6 stop
 
-
-Stores Page: be able to control what shows here on the backend
-
+  
 
 Pinterest Button: added with Pin it functionality
 

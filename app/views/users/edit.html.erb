@@ -167,17 +167,6 @@ function checkSize(max_img_size)
 }
       </script>
 
-      <img src="<%= @user.photo_version_url(:profile) %>"><br><br>
-
-      <%= form_for(@user, :html => {:id => "photo_form", :multipart => true}) do |f| %>
-
-        <%= file_field_tag("photo", :id => "photo_file_field") %><br>
-
-        <button class="btn url" type="button" onclick="uploadPhoto()">Upload Image</button><br>
-        
-      <% end %> 
-
-      
 
       <script>
 function submitGender() {

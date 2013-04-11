@@ -427,7 +427,7 @@ notifications
   -disable city filter
   -8:30 stop
 
-  -2/6
+  -2/6 4
   -5:00
   -finish login
   -finish join
@@ -436,7 +436,7 @@ notifications
   -sale index
   -9:30 pause
 
-  -2/7 - 8
+  -2/7 - 8 
   -9:30 start
   -sale index
   -sale detail
@@ -450,7 +450,7 @@ notifications
   -merchant signup form
   -8:30
 
-  -2/8
+  -2/8 9
   -11 start
   -merchant registration
   -sale detail view
@@ -461,7 +461,7 @@ notifications
   -upload profile photo
   -8:00
 
-  -2/9
+  -2/9 3.5
   -12 start
   -followers
   -following
@@ -470,14 +470,14 @@ notifications
   -fb/default avatar fixes
   -3:30
 
-  -2/10
+  -2/10 7
   -2 start
-  -upload
+  -upload sale
   -9 stop
 
-  -2/11
+  -2/11 8.5
   -12 start
-  -upload
+  -upload sale
   -image processing
   -5:30 pause
   -7:00 resume
@@ -487,7 +487,7 @@ notifications
   -staging deploy
   -10:00
 
-  -2/12
+  -2/12 7.5
   -12 start
   -purchase form
   -purchase confirmation
@@ -501,7 +501,7 @@ notifications
   -static pages admin
   -10:00
 
-  -2/13
+  -2/13 1
   -5 start
   -twitter share
   -fb share
@@ -509,19 +509,19 @@ notifications
   -contact form
   -6 stop
 
-  -2/17
+  -2/17 1
   -5 start
   -email sending
   -6 stop
 
-  -2/19
+  -2/19 0.5
   -10 start
   -new logo
   -new comment button 
   -new outline faves buttons
   -10:30 stop
 
-  -2/20
+  -2/20 4
   -12 start
   -css changes
   -footer changes
@@ -536,7 +536,7 @@ notifications
   -'offer shipping' field in merch signup
   -9:30
 
-  -2/22
+  -2/22 4.5
   -12:30 start
   -misc web tweaks
   -iphone redirect page
@@ -548,7 +548,7 @@ notifications
   -release staging-server build to test flight
   -6:00
 
-  2/23
+  2/23 2
   -1:00 start
   -handle returns on sale post
   -handle shipping on sale post
@@ -560,13 +560,13 @@ notifications
 
 
 
-  2/24
+  2/24 1
   -4:30 start
   -fixes for mobile web
   -moved all js/css/image assets to S3 for enhanced performance
   -5:30
 
-  2/25
+  2/25 4
   -3 start
   -various web tweaks
   -email templates setup
@@ -586,7 +586,7 @@ notifications
   -size selection
   -9
 
-  -2/26
+  -2/26 2.5
   -12 start
   -user export
   -12:30
@@ -597,7 +597,7 @@ notifications
   -handle payment fail gracefully
   -5
 
-  -2/27
+  -2/27 4
   -12 start
   -pre registration
   -1
@@ -611,7 +611,7 @@ notifications
   -testing production
   -10:00
 
-  -2/28
+  -2/28 3.5
   -9:30 start
   -emergency one-off merchant account edits
   -make custom slug case-insensitive
@@ -625,7 +625,7 @@ notifications
 
   -product info wrap in modal
 
-  3/3
+  3/3 3.5
   -5 start
   -web edits/tweaks
   -6:30 pause
@@ -634,7 +634,7 @@ notifications
   -filter by city (separately from home city)
   -9:15
 
-  3/5
+  3/5 1.5
   -8
   -v3: show store name everywhere when merchant
   -v3: show city,state in sale details instead of address
@@ -643,17 +643,17 @@ notifications
   -v3: fix twitter/fb share messages (no charge)
   -9:30 
 
-  3/6
+  3/6 2
   -9
   -v3: purchase on app
   -11
 
-  3/7
+  3/7 3.5
   -7:30
   -v3: purchase on app - purchase form
   -11:00
 
-  -3/8
+  -3/8 7.5
   -11:30 start
   -web bug fixes - firefox upload, admin logout, couple others
   -12:30 pause
@@ -667,7 +667,7 @@ notifications
   -v3: purchase braintree transaction. sold out status.
   -10:30
 
-  -3/9
+  -3/9 2
   -12:00 start
   -sale faves view
   -pets -> beauty
@@ -677,7 +677,7 @@ notifications
   -redo search to be like web
   -9:00 stop
 
-  -3/10
+  -3/10 5
   -4:00 start
   -activities feed
   -sale single view
@@ -687,7 +687,7 @@ notifications
   -center camera preview on iphone 5
   -10:00
 
-  -3/11
+  -3/11 2.5
   -8:00 start
   -Shipping and returns on merchant post
   -Returns policy on purchase
@@ -696,7 +696,7 @@ notifications
   -tw/fb message revision
   -10:30 stop
 
-  -3/12
+  -3/12 1
   -9 start
   -purchase form tweaks
   -deploy v3 on production
@@ -704,7 +704,7 @@ notifications
   -10 stop
 
 
-  -3/13
+  -3/13 1
   -8 start
   -css tweaks
   -profile page tweaks
@@ -713,14 +713,14 @@ notifications
   -bug fixes
   -9:0
 
-  3/14
+  3/14 2
   -8 start
   -customer facing order status view
   -admin purchase status view
   -admin change purchase status
   -10 stop
 
-  3/15
+  3/15 3
   -9 start
   -user/merchant welcome emails
   -prod deploy (patricia request for sold out feature)
@@ -735,21 +735,21 @@ notifications
   -custom css
   -10:15
 
-  -3/17
+  -3/17 1
   -9 start
   -sale groups user-facing
   -address to merchant's edit profile
   -store profile show address
   -10 stop
 
-  -3/19
+  -3/19 2
   -5 start
   -merchant edit sale
   -merchant sale status
   -update curated landing
   -7 stop
 
-  -3/21
+  -3/21 5.5
   -10 start
   -curated landing revisions
   -12 stop

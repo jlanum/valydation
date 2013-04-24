@@ -56,9 +56,24 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
 </div>
 
 <div class="control-group">
+<label class="control-label" for="optionsCheckbox">Featured</label>
+<div class="controls">
+<%= check_box(:user, :featured) %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label">Display order</label>
+<div class="controls">
+  <%= text_field(:user, :display_order, :class => "input-small") %>
+  Higher numbers are displayed first.  
+</div>
+</div>
+
+<div class="control-group">
 <label class="control-label">Business name</label>
 <div class="controls">
-<%= text_field(:user, :business_name, :class => "input-xlarge") %>
+  <%= text_field(:user, :business_name, :class => "input-xlarge") %>
 </div>
 </div>
 

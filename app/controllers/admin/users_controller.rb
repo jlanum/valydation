@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
   def index
     @users = User.page(params[:page]).
       order("created_at DESC").
-      per(50).
+      per(200).
       includes([:city, :sales])
   end
 
@@ -38,6 +38,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    
+    if params[:user][:custom_slug] == ""
+      params[:user][:custom_slug] = nil
+    end
 
     @user.update_attributes(params[:user])
 

@@ -18,7 +18,6 @@ HiStrollers::Application.routes.draw do
   end
 
   resources :faves
-  resources :users
   resources :comments
   resources :devices
   resources :cities
@@ -28,6 +27,9 @@ HiStrollers::Application.routes.draw do
   resources :sessions
   resources :merchants
   resources :activities
+  resources :users 
+
+  match '/stores/list' => "users#stores"
 
   match '/mine' => 'sales#index',
     :defaults => {:my_feed => true}, :as => "my_faves"
@@ -37,7 +39,9 @@ HiStrollers::Application.routes.draw do
   match '/users/:user_id/followers' => 'followers#index',
           :defaults => {:following_me => true}, :as => "users_following_me"
 
-  match '/purchases' => 'purchases#index'
+  resources :purchases do
+    get 'sold', :on => :collection
+  end
   match '/purchase_confirmation' => 'purchases#confirmation',
     :as => 'purchase_confirmation'
   match '/purchase_available' => 'purchases#available'
@@ -60,11 +64,13 @@ HiStrollers::Application.routes.draw do
   match 'register' => 'users#register'
   match 'register_lead' => 'admin/leads#create'
 
-  root :to => "users#landing"
-  #root :to => "sale_groups#landing"
+  root :to => "pages#show", :defaults => {:slug => "curated-landing"}
+
+  match '/featured/:slug' => "sales#group", :as => :group_slug
 
   match '/stores' => "pages#show", :defaults => {:slug => "merchants-intro"}, :as => :stores_page
   match '/contact' => 'pages#contact', :as => :contact
+  match '/page/:slug.css' => 'pages#css'
   match '/page/:slug' => 'pages#show', :as => :page
 
   match "/404", :to => "errors#not_found"

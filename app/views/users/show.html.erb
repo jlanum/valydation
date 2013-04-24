@@ -2,6 +2,8 @@
 body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+  .signup-unit { min-height: 330px; }
+
 </style>
 
 
@@ -21,16 +23,39 @@ body {
   <div class="container">
   <div class="signup-unit">
     <span class="span4 pull-left">
-      <img height="225" width="225" class="img-polaroid" src="<%= @show_user.photo_version_url(:profile_2x) %>" ><br>
+      <img class="img-polaroid" src="<%= @show_user.photo_version_url(:profile_2x) %>" ><br>
 
       <a href="<%= users_following_me_url(:user_id => @show_user.id) %>"class="btn btn-success span2 followers-button"><%= @show_user.follower_count %> Followers</a><br>
       <a href="<%= users_im_following_url(:user_id => @show_user.id) %>"class="btn btn-success span2 following-button"><%= @show_user.following_count %> Following</a>
     </span>
 
     <font size="5"><%= @show_user.display_name %></font><br>
-    <p class="muted time"><%= @show_user.city.name if @show_user.city %></p>
+
+    <p class="muted time">
+    <% if @show_user.is_merchant %>
+      <a href="https://maps.google.com/?q=<%= CGI.escape(@show_user.store_address.to_s) %>">
+      <span style="white-space:pre-wrap;"><%= @show_user.store_address.to_s %></span>
+      </a>
+    <% else %>
+      <%= @show_user.city.name if @show_user.city %>
+    <% end %>
+    </p>
+
+    <br>
+
     <div style="min-height:180px;">
-      <blockquote><%= @show_user.bio %></blockquote><br><br>
+      <blockquote><%= @show_user.bio %>
+        
+        <br><br>
+        <% if @show_user.id != @user.id %>
+          <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success btn profile-name span2", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
+          <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success btn profile-name span2", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
+        <% end %>
+
+      <br>
+
+      </blockquote>
+
     </div>
 
     <style>
@@ -60,16 +85,6 @@ jQuery(function($) {
 });
 
     </script>
-
-    <% if @show_user.id != @user.id %>
-
-    <%= link_to("Unfollow", follower_path(:id => (@show_user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn-large btn-success btn profile-name span2", :id=> "unfollow", :style => ("display:none;" unless @show_user.is_followed)) %>
-
-    <%= link_to("Follow", followers_path(:following_id => @show_user.id), :remote => true, :method => :post, :class => "btn-large btn-success btn profile-name span2", :id=> "follow", :style => ("display:none;" if @show_user.is_followed)) %>
-
-  <% end %>
-
-    <br>
 
   </div>
 </div>

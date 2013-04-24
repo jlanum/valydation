@@ -55,13 +55,14 @@
 	    margin-top: 24px;
 	font-size: 14px !important;
 	color: #432060 !important;
-  position:relative; 
-  text-align:center;
+	position:relative; 
+	text-align:center;
+	
 }
 
 .category-feed-align {
-  display:block;
-  margin:0 auto;
+	display:block;
+	margin:0 auto;
 }
 
 .purchase {
@@ -74,16 +75,14 @@
 
 .hover-group .image-wrapper {
   /* We need this to make the .hover-toggle div relative to .image-wrapper */
-  position: relative;
-  box-shadow: 0 0 6px 0px #aaa;
-  border-radius: 4px;
+	position: relative;
+	box-shadow: 0 0 6px 0px #aaa;
+	border-radius: 4px;
 }
-
 .hover-group .image-wrapper:hover {
   border:2px dotted #432060;
   width: 98%;
 }
-
 .hover-group .image-wrapper .hover-toggle {
   /* set it at the bottom of .image-wrapper */
   /* and don't display it */
@@ -92,7 +91,7 @@
   height: 38px;
   width: 100%;
   text-align:justify;
-  margin: 0px;
+  margin:0px;
   border-radius:0 0 4px 4px;
 }
 
@@ -107,17 +106,14 @@
 }
 
 .product-pic:hover {
-	/*outline:#432060 dotted 2px;*/
+	//outline:#432060 dotted 2px;
+	
 }
 
 
 .modal-image {
 	height: 400px;
 	width: 299px;
-}
-
-.modal-thumbnails {
-  padding-right: 8px;
 }
 
 .invite {
@@ -195,7 +191,7 @@
 
 /* Main marketing message and sign up button */
       .jumbotron {
-        margin: 60px 0;
+        margin: 30px 0;
         text-align: center;
       }
       .jumbotron h1 {
@@ -250,15 +246,15 @@ span.stretch {
 .lanvin {
 	font-weight: bold;
 	line-height: 20px !important;
-  display: block;
-  width: 100%;
-  margin: 0px;
-  padding: 5px 0;
-  border-radius: 4px 4px 0 0 !important;
-  font-size: 15px;
-  font-family: Helvetica, arial, sans-serif;
-  letter-spacing: 1px;
-  color: #666;
+	display: block;
+	width: 100%;
+	margin: 0px;
+	padding: 5px 0;
+	bordr-radius: 4px 4px 0 0 !important;
+	font-size: 15px;
+	font-family: Helvetica, arial, sans-serif;
+	letter-spacing: 1px;
+	color: #666;
 }
 
 .percentoff {
@@ -270,6 +266,7 @@ span.stretch {
 }
 
 .our-story {
+
 }
 
 .photo-tips {
@@ -296,7 +293,7 @@ span.stretch {
 
 
 .logo-fb {
-/*background-color: #5F75A9;*/
+background-color: #5F75A9;
 background-color: rgba(255, 255, 255, .2);
 background-image: url('/assets/logo_fb.png');
 }
@@ -346,7 +343,7 @@ text-align: left;
 .logo-twitter {
 background-color: #66CAF2;
 background-color: rgba(255, 255, 255, .2);
-background-image: url('../img/logo_twitter.png');
+background-image: url('/assets/logo_twitter.png');
 }
 
 .BigButton .logo-twitter {
@@ -361,7 +358,7 @@ width: 62px;
 
 .modal-social {
 	padding-left: 49px;
-  padding-bottom: 5px;
+	padding-bottom: 5px;
 }
 
 .photo-upload {
@@ -397,7 +394,7 @@ width: 62px;
 .time-banner .image-banner .banner-toggle {
   /* set it at the bottom of .image-wrapper */
   position: absolute;      
-  top: -94px;
+  top: -125px;
   left: 0px;
   /* and don't display it */
   display: none;
@@ -458,25 +455,27 @@ width: 62px;
 	
 	padding-top: 60px;
 	padding-left:40px;
+
 }
 
 .landing-text {
-	text-shadow: black 0.1em 0.1em 0.2em;
+	text-shadow: black 0.1em 0.1em 0.6em;
 }
 
 .follow-page {
-  right:400px;
-  position: relative;
-  top: -22px;
+	right:400px;
+	position: relative;
+	top: -22px;
+	
 }
 
 .hey {
 	padding-left: 80px;
-	vertical-align: -23px;
+	vertical-align: -6px;
 }
 
 .postbtn {
-	margin-left: 430px;
+	margin-left: 480px;
 }
 
 .fave {
@@ -502,7 +501,11 @@ width: 62px;
 }
 
 .expiration {
-  width: 80px !important;
+	width: 80px !important;
+}
+
+.shipping {
+	padding-left: 365px !important;
 }
 
 .iphone-page {
@@ -516,63 +519,51 @@ width: 62px;
 }
 
 .separate {
-  left: 720px !important;
-  position: absolute;
-}
-
-td.no-right-border {
-  border-right-style: none !important;
-}
-
-td.no-left-border {
-  border-left-style: none !important;
-}
-
-td.auto-width {
-  width: 1px;
-  white-space: nowrap;
+	left: 720px !important;
+	position: absolute;
 }
 
 .table-width {
-  width:76px;
-  display: inline-table !important;
+	width:76px;
+	display: inline-table !important;
 }
 
 .filter-section {
-  display:none;
-  height:20px; 
-  width:100%; 
-  margin:15px 0 0; 
-  padding:10px 0 0; 
-  border-top:1px 
-  solid #bdbdbd;
+	display:none;
+	height:20px; 
+	width:100%; 
+	margin:15px 0 0; 
+	padding:10px 0 0; 
+	border-top:1px 
+	solid #bdbdbd;
 }
 
 .faves-script {
-  position:absolute; 
-  top:20px; 
-  right:20px;
+	position:absolute; 
+	top:20px; 
+	right:20px;
 }
 
 .filter-button {
-  cursor:pointer; 
-  position:absolute; 
-  left:20px; 
-  top:20px;
+	cursor:pointer; 
+	position:absolute; 
+	left:20px; 
+	top:20px;
 }
 
 .filter-city {
-  margin-left: 10px;
-  padding-right: 10px;
+	margin-left: 10px;
+	padding-right: 10px;
 }
 
 .table-modal {
-  width:39px;
-  display: inline-table !important;
+	width:39px;
+	display: inline-table !important;
+	
 }
 
 .detail-twitter {
-  margin-left: 5px;
+	margin-left: 5px;
 }
 
 .shopper-profile {
@@ -661,7 +652,10 @@ td.auto-width {
 }
 
 .asfeatured {
-	margin-top:40px;
+	text-align:center;
+	font-size:x-large;
+	letter-spacing:2px;
+	margin-top: 20px;
 	
 }
 
@@ -672,11 +666,11 @@ td.auto-width {
 
 
 .press-pass {
-	margin:auto;
+	margin: 30px auto;
 }
 
 .featurette-pics {
-	padding:20px;
+	padding:20px 10px 20px 20px;
 	margin:0 auto;
 }
 
@@ -702,7 +696,7 @@ td.auto-width {
 
     /* Carousel base class */
     .banner {
-      margin-bottom: 60px;
+      margin-bottom: -29px;
     }
 
     .banner .container {
@@ -727,7 +721,8 @@ td.auto-width {
       position: absolute;
       
       min-width: 940px;
-      height: 500px;
+      height: 400px;
+	  margin:0 45px;
     }
 
     .carousel-caption {
@@ -770,7 +765,7 @@ td.auto-width {
     ------------------------- */
 
     .featurette-divider {
-      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+      margin: 9px 0; /* Space out the Bootstrap <hr> more */
     }
     .featurette {
       padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
@@ -802,7 +797,6 @@ td.auto-width {
 	
 	.marketing-template {
         margin: 30px 0;
-        margin-bottom: 20px;
       }
 
 .order-status {
@@ -815,11 +809,31 @@ td.auto-width {
 
 .aboutus {
 	text-align:center;
-	margin:-267px 15px;
+	margin:-267px 5px;
 	position:absolute; 
 	vertical-align:middle;
-	height:316px;
+	height:316px; 
 	width:710px; 
 	display:block;
 
+}
+
+/* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+
+
+.marketing-edit {
+	margin: 60px 0;
+	margin-bottom: 16px;
+}
+
+.center {
+	text-align: center;
+}
+
+.view-sales {
+	margin-left: 5px;
 }

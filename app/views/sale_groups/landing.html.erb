@@ -1,0 +1,55 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+
+
+<div class="container">
+  <div class="marketing-template">
+
+    <%= raw @page.content %>
+
+    <br>
+    <br>
+
+    <hr class="featurette-divider">
+
+    <div class="featurette-pics">
+
+      <div class="hot-spot">
+        <ul class="thumbnails">
+
+          <% @groups.each do |group| %>
+            <% next unless sale = group.featured_sale %>
+          <li class="span3">
+
+          <p class="hayes-phrase">From <%= group.name %></p>
+
+          <%= link_to(image_tag(sale.image_0.versions[:web_index],
+                                :class => "product-pic img-polaroid"),
+                                group_slug_url(:slug => group.slug)) if sale.image_0 %>
+
+      </li>
+
+      <% end %>
+
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="asfeatured">
+  <p>JOIN US</p>
+
+</div>
+
+<table class="press-pass">  
+  <td><a href="http://www.pinterst.com/mysaletable"><%= image_tag("pinterestlogo.png") %></a></td>
+  <td><a href="http://www.twitter.com/mysaletable"><%= image_tag("tbird.png") %></a></td>
+  <td><a href="http://www.facebook.com/mysaletable"><%= image_tag("fb_logo.png") %></a></td>
+  <td><a href="http://www.instagram.com/mysaletable"><%= image_tag("instagram.png") %></a></td>
+
+</table>
+

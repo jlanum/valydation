@@ -1,6 +1,15 @@
 class PagesController < ApplicationController
   before_filter :handle_user
 
+  def css
+    @page = Page.where(:slug => params[:slug]).first
+    if @page
+      render :text => @page.content, :layout => false, :content_type => 'text/css'
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def show
     @page = Page.where(:slug => params[:slug]).first
     @title = @page.title unless @page.title.to_s.empty?

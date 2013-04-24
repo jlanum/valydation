@@ -26,6 +26,8 @@ body {
 			<div class="signup-unit">
         <span class="order-status">
           <a href="<%= purchases_url %>"><u>Order Status</u></a>
+          <a href="<%= user_custom_slug_url(@user) %>"><u>View Sales</u></a>
+
 				</span>
 
 
@@ -165,17 +167,6 @@ function checkSize(max_img_size)
 }
       </script>
 
-      <img src="<%= @user.photo_version_url(:profile) %>"><br><br>
-
-      <%= form_for(@user, :html => {:id => "photo_form", :multipart => true}) do |f| %>
-
-        <%= file_field_tag("photo", :id => "photo_file_field") %><br>
-
-        <button class="btn url" type="button" onclick="uploadPhoto()">Upload Image</button><br>
-        
-      <% end %> 
-
-      
 
       <script>
 function submitGender() {
@@ -218,11 +209,23 @@ function submitGender() {
         <span class="add-on">Last Name</span>
           <%= text_field_tag "last_name", @user.last_name, :class => "span2", :placeholder => "Last Name" %>
         </div>
+
         <button class="btn url btn-success" type="button" onclick="$('#name_form')[0].submit();">Save</button>
 
         <% end %>
+
+        <% if @user.is_merchant %>
+
+        <span class="bio">Store Address</span>
         
-				<br>
+        <%= form_for(@user, :html => {:id => "address_form"}) do |f| %>
+          <%= text_area_tag "store_address", @user.store_address, :rows => 3, :placeholder => "Your store's address" %>&#160;
+          <button class="btn url btn-success" type="button" onclick="$('#address_form')[0].submit();">Save</button><br>
+        <% end %>
+
+      <% end %>
+
+				
 				Enter Username for Custom URL
         <div class="input-prepend">
           <%

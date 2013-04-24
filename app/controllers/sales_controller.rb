@@ -20,6 +20,13 @@ class SalesController < ApplicationController
     end
   end
 
+
+  def edit
+    @cities = City.order("name ASC").all    
+    @sale = Sale.where(:user_id => @user.id,
+                       :id => params[:id]).first
+  end
+
   def new
     if params[:bucket] and params[:key]
       handle_s3_upload
@@ -152,6 +159,27 @@ class SalesController < ApplicationController
   def update
     @sale = Sale.where(:id => params[:id], :user_id => @user.id).first
 
+    if params[:image_uploaded_keys]
+      handle_uploaded_image_keys
+      return
+    end
+
+    safe_params = [:store_name, :display_address, :brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out]
+
+    merge_params = safe_params.inject({}) do |h,p|
+      h[p] = params[:sale][p]
+      h
+    end
+
+    @sale.update_attributes(merge_params)
+    @sale.save!
+
+    flash[:message] = "The sale has been updated."
+  
+    redirect_to edit_sale_url(@sale)
+  end
+
+  def handle_uploaded_image_keys
     uploaded_images = false
 
     (0..2).each do |image_index|
@@ -173,6 +201,20 @@ class SalesController < ApplicationController
     respond_to do |wants|
       wants.json { index_json }
       wants.html { index_html }
+    end
+  end
+
+
+  def group
+    @group = SaleGroup.where(:slug => params[:slug]).first
+    @sales = all_sales.where(:sale_group_id => @group.id).
+      page(params[:page]).
+      per(16)
+
+    if request.xhr?
+      render_lazy_rows
+    else
+      render :template => "sales/group"
     end
   end
 
@@ -341,12 +383,14 @@ class SalesController < ApplicationController
 
   def all_sales
     where_conditions = {
-      :category_id => params[:category_id],
       :visible => true
     }
 
     where_frag = nil
 
+    if params[:category_id]
+      where_conditions.update({:category_id => params[:category_id]})
+    end
     if params[:size] and not params[:size].empty?
       where_frag = ["? = ANY (sales.sizes)",params[:size]]
     end

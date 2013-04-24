@@ -8,6 +8,13 @@ class PurchasesController < ApplicationController
                   order("created_at DESC").all
   end
 
+  def sold
+    @purchases = Purchase.
+      joins("LEFT JOIN sales on purchases.sale_id=sales.id").
+      where(["sales.user_id=?",@user.id]).
+      order("created_at DESC").all
+  end
+
   def available
     @purchase = Purchase.find(params[:id])
     if @purchase.available_key == params[:key]

@@ -782,7 +782,7 @@
   }
 }
 
-@media (max-width: 767px) {
+//*@media (max-width: 767px) {
   body {
     padding-right: 20px;
     padding-left: 20px;
@@ -1085,5 +1085,4 @@
     height: auto !important;
     overflow: visible !important;
   }
-}
-*/
+}*/

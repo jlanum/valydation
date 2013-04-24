@@ -153,6 +153,7 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #FFFFFF;
+  
   background-image: url('/assets/frenchstucco.png');
   
 }
@@ -6023,5 +6024,4 @@ button.close {
     height: auto !important;
     overflow: visible !important;
   }
-}
-*/
+}*/

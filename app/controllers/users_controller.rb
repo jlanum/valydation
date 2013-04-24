@@ -2,9 +2,16 @@ class UsersController < ApplicationController
   before_filter :handle_device
   #before_filter :use_test_user
   #before_filter :require_device
-  before_filter :require_user, :only => [:update, :show, :edit]
-  before_filter :handle_user, :only => [:landing, :new]
+  before_filter :require_user, :only => [:update, :show, :edit, :stores]
+  before_filter :handle_user, :only => [:landing, :new, :stores]
 
+
+  def stores
+    @stores = User.
+      where(:is_merchant => true, :featured => true).
+      order("display_order DESC").
+      all
+  end
 
   def landing
     if @user
@@ -252,7 +259,8 @@ class UsersController < ApplicationController
      :first_name,
      :last_name,
      :gender,
-     :photo
+     :photo,
+     :store_address
     ].each do |attr|
 
       value = params[attr]

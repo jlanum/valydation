@@ -151,6 +151,8 @@ class User < ActiveRecord::Base
   end
 
   def set_custom_slug_lower
+    return unless self.respond_to?(:custom_slug) and 
+                  self.respond_to?(:custom_slug_lower)
     if self.custom_slug and not self.custom_slug.empty?
       self.custom_slug_lower = self.custom_slug.downcase
     end

@@ -1,6 +1,6 @@
 class AddFAndLNamesToUser < ActiveRecord::Migration
   def change
-    User.destroy_all
+    #User.destroy_all
 
     add_column :users, :first_name, :string
     add_column :users, :last_name, :string

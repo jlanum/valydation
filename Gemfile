@@ -37,7 +37,7 @@ gem 'capistrano'
 # To use debugger
 # gem 'debugger'
 
-gem 'pg'
+gem 'pg', "~> 0.15.1"
 gem 'rails-database-url'
 gem 'aws-s3'
 gem 'aws-sdk'

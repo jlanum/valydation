@@ -258,10 +258,6 @@ function validateForm() {
     return false;
   }
 
-  if ($('#store_reference').val().length == 0) {
-    alert('Please enter a store name and select one of the results from the dropdown.');
-    return false;
-  }
 
   if ($('#brand').val().length == 0) {
     alert('Please enter the brand.');
@@ -453,38 +449,49 @@ function selectSize(size_id) {
                  <%= select_tag "category_id",
                    options_for_select(categories, params[:category_id]) %>
                  <br><br>
-                   <div class="input-prepend">
-                     <span class="add-on">Store</span>
-                     <%= text_field_tag "store", params[:store], :class => "span2" %>
-                     <%= hidden_field_tag "store_reference", params[:store_reference] %>
+                   
+
+                     <span class="add-on">Company</span>
+                     <%= text_field_tag "brand", params[:brand], :class => "span2" %>
                      <br><br>
 
-                     <span class="add-on">Brand</span>
-                     <%= text_field_tag "brand", params[:brand], :class => "span2",
-                       :placeholder => "E.G., John Varvatos" %>
-                     <br><br>
-
-                       <span class="add-on">Orig $</span>
+                       <span class="add-on">Orig Price $</span>
                        <%= text_field_tag "orig_price", params[:orig_price], :class => "span2",
                          :onchange => "origPriceChanged()" %>
                        <br><br>
 
-                         <span class="add-on">Sale $</span>
+                         <span class="add-on">Retail Price $</span>
                          <%= text_field_tag "sale_price", params[:sale_price], :class => "span2",
                            :onchange => "salePriceChanged()" %>
                          <br><br>
 
-                           <span class="add-on">% Off</span>
+												<span class="add-on">Tax $</span>
+	                       <%= text_field_tag "tax_cost", params[:tax_cost], :class => "span2" %>
+	                       <br><br>
+	
+												<span class="add-on">Shipping $</span>
+	                       <%= text_field_tag "shipping_price", params[:shipping_price], :class => "span2" %>
+	                       <br><br>
+
+                           <span class="add-on">% Margin</span>
                            <%= text_field_tag "percent_off", params[:percent_off], :class => "span2",
                              :onchange => "percentOffChanged()" %>
                            <br><br>
 
-                             <span class="add-on">Product</span>
-                             <%= text_field_tag "product", params[:product], :class => "span2",
-                               :placeholder => "E.G., Green Sweater" %>
+                             <span class="add-on">Description</span>
+                             <%= text_field_tag "product", params[:product], :class => "span2" %>
                              <br><br>
+															<label class="control-label" for="optionsCheckbox">Validated<%= check_box(:sale, :validated) %></label>
+										          
+										            
+										         
+
                              </div>
 
+													
+										          
+										        
+										
                              <div id="hear">
                                Select Sizes<br>
                                <div class="" id="" style="max-width: 400px;">
@@ -508,10 +515,9 @@ function selectSize(size_id) {
 
                                  <%= hidden_field_tag "size", params[:size], :id => "size" %>
 
-                                 <% if @user.is_merchant %>
+                                
 
-                                 <div class="row-fluid">
-                                   <div class="span4"></div>
+                                 
                                    <div class="span4 shipping" style="text-align: left;">
                                      <label class="radio">
                                        <%= radio_button_tag "does_shipping", 0, (params[:does_shipping].to_i == 0) %>
@@ -533,7 +539,7 @@ function selectSize(size_id) {
                                      </label>
                                    </div>
                                  </div>
-                               <% end %> <!-- is merchant/ship -->
+                                <!-- is merchant/ship -->
 
 
 
@@ -546,7 +552,7 @@ function selectSize(size_id) {
                                </div>
                              </div>
                            </div>
-                         </div>
+                         
 
 
                        <% end %>

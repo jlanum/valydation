@@ -819,9 +819,11 @@ width: 62px;
 }
 
 /* Set the fixed height of the footer here */
-      #push,
+     
       #footer {
-        height: 60px;
+        margin-top: 20px;
+		background-color: #F5F5F5;
+		padding:35px;
       }
 
 

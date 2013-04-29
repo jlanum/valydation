@@ -7,7 +7,6 @@ class Sale < ActiveRecord::Base
                   :product,
                   :category_id,
                   :size,
-                  :store_name,
                   :store_url,
                   :display_address,
                   :address,
@@ -50,14 +49,13 @@ class Sale < ActiveRecord::Base
   belongs_to :metro, :class_name => "City", :foreign_key => "city_id"
   belongs_to :sale_group
 
-  before_save :set_store
   before_save :set_brand
   before_save :set_sizes
 
   def self.categories
-    ["Women",
-     "Men",
-     "Kids",
+    ["Apparel",
+     "Campaign Art",
+     "Photography",
      "Home",
      "Beauty"]
   end
@@ -158,13 +156,6 @@ class Sale < ActiveRecord::Base
     notifications
   end
 
-  def set_store
-    unless @store = Store.find_by_url(self.store_url)
-      @store = Store.create!(:url => self.store_url,
-                             :name => self.store_name)
-    end
-    self.store_id = @store.id
-  end
   
   def set_brand
     unless @brand = Brand.find_by_name(self.brand.upcase)

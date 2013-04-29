@@ -102,7 +102,7 @@ class SalesController < ApplicationController
   end
 
   def create
-    handle_store_reference
+    
 
     [:allow_returns, :does_shipping].each do |p|
       if params[p].respond_to?(:to_i)
@@ -118,7 +118,6 @@ class SalesController < ApplicationController
                      :product => params[:product],
                      :category_id => params[:category_id],
                      :size => params[:size],
-                     :store_name => params[:store_name],
                      :store_url => params[:store_url],
                      :display_address => params[:display_address],
                      :address => params[:address],
@@ -164,7 +163,7 @@ class SalesController < ApplicationController
       return
     end
 
-    safe_params = [:store_name, :display_address, :brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out]
+    safe_params = [:brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out]
 
     merge_params = safe_params.inject({}) do |h,p|
       h[p] = params[:sale][p]

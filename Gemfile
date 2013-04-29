@@ -60,3 +60,4 @@ gem 'mandrill', :git => 'git://github.com/cyu/mandrill.git'
 gem "asset_sync"
 gem 'activerecord-postgres-array'
 
+

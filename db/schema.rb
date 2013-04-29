@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322040903) do
+ActiveRecord::Schema.define(:version => 20130429154234) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -159,14 +159,13 @@ ActiveRecord::Schema.define(:version => 20130322040903) do
   add_index "sale_groups", ["slug"], :name => "index_sale_groups_on_slug", :unique => true
 
   create_table "sales", :force => true do |t|
-    t.integer      "user_id",                                                    :null => false
-    t.string       "store_name",               :limit => 128,                    :null => false
+    t.integer      "user_id",                                                                                  :null => false
     t.text         "store_url"
-    t.string       "brand",                    :limit => 128,                    :null => false
-    t.string       "product",                  :limit => 128,                    :null => false
-    t.integer      "category_id",                                                :null => false
-    t.datetime     "created_at",                                                 :null => false
-    t.datetime     "updated_at",                                                 :null => false
+    t.string       "brand",                    :limit => 128,                                                  :null => false
+    t.string       "product",                  :limit => 128,                                                  :null => false
+    t.integer      "category_id",                                                                              :null => false
+    t.datetime     "created_at",                                                                               :null => false
+    t.datetime     "updated_at",                                                                               :null => false
     t.boolean      "has_image_1"
     t.boolean      "has_image_2"
     t.boolean      "has_image_0"
@@ -176,39 +175,43 @@ ActiveRecord::Schema.define(:version => 20130322040903) do
     t.float        "percent_off"
     t.text         "display_address"
     t.string       "size",                     :limit => 32
-    t.integer      "orig_price_cents",                        :default => 0,     :null => false
-    t.string       "orig_price_currency",                     :default => "USD", :null => false
-    t.integer      "sale_price_cents",                        :default => 0,     :null => false
-    t.string       "sale_price_currency",                     :default => "USD", :null => false
+    t.integer      "orig_price_cents",                                                      :default => 0,     :null => false
+    t.string       "orig_price_currency",                                                   :default => "USD", :null => false
+    t.integer      "sale_price_cents",                                                      :default => 0,     :null => false
+    t.string       "sale_price_currency",                                                   :default => "USD", :null => false
     t.float        "latitude"
     t.float        "longitude"
     t.string       "address"
     t.string       "state"
     t.string       "postal_code"
     t.string       "country"
-    t.integer      "comment_count",                           :default => 0
-    t.integer      "fave_count",                              :default => 0
+    t.integer      "comment_count",                                                         :default => 0
+    t.integer      "fave_count",                                                            :default => 0
     t.float        "user_lat"
     t.float        "user_lon"
     t.integer      "city_id"
     t.integer      "store_id"
     t.integer      "brand_id"
     t.string       "city"
-    t.boolean      "created_notifications",                   :default => false
+    t.boolean      "created_notifications",                                                 :default => false
     t.datetime     "created_notifications_at"
     t.string       "temp_image_url_0"
     t.string       "temp_image_url_1"
     t.string       "temp_image_url_2"
-    t.boolean      "visible",                                 :default => false
-    t.boolean      "uploaded_images",                         :default => false
-    t.boolean      "processed_images",                        :default => false
-    t.boolean      "does_shipping",                           :default => false
-    t.boolean      "allow_returns",                           :default => false
-    t.boolean      "editors_pick",                            :default => false
+    t.boolean      "visible",                                                               :default => false
+    t.boolean      "uploaded_images",                                                       :default => false
+    t.boolean      "processed_images",                                                      :default => false
+    t.boolean      "does_shipping",                                                         :default => false
+    t.boolean      "allow_returns",                                                         :default => false
+    t.boolean      "editors_pick",                                                          :default => false
     t.string_array "sizes"
-    t.boolean      "sold_out",                                :default => false
+    t.boolean      "sold_out",                                                              :default => false
     t.integer      "sale_group_id"
     t.boolean      "group_curated"
+    t.decimal      "shipping_price",                          :precision => 8, :scale => 2
+    t.decimal      "tax_cost",                                :precision => 8, :scale => 2
+    t.string       "condition"
+    t.boolean      "validated",                                                             :default => false
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

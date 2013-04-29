@@ -10,10 +10,10 @@ development:
   port: 5432
   adapter: postgresql
   encoding: unicode
-  database: histrollers
+  database: valydation
   pool: 5
-  username: histrollers
-  password: histrollers
+  username: testuser
+  password: 4544jsnl
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

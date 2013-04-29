@@ -55,7 +55,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="<%= new_sale_url %>">Upload</a></li>
-              <li><a href="/page/about">About</a></li>
+              <li><a href="/page/about">About Us</a></li>
               <li><a href="/stores">Retailers</a></li>
               <li><a href="<%= edit_user_url("self") %>">Profile</a></li>
             </ul>
@@ -69,12 +69,12 @@
     <%= yield %>
 
     <div id="footer">
-	    <div class="container">
-		    <div align="center">
-	        <a href="/page/faq-shoppers">FAQ</a> | <a href="/page/tos">Terms of Service</a> | <a href="/page/privacy">Privacy</a></p>
-	      </div>
+	    
+		    <medium>
+	        &copy;<%= link_to "Valydation 2013", "http://mysaletable.com" %> | <a href="/page/faq-shoppers">FAQ</a> | <a href="/page/tos">Terms of Service</a> | <a href="/page/privacy">Privacy</a></p>
+	      </medium>
 	    </div>
-	  </div>
+	 
 
 
     <link href="/page/custom-css.css" media="screen" rel="stylesheet" type="text/css" />

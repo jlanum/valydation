@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>User</th>
-      <th>Store</th>
       <th>City</th>
       <th>Brand</th>
       <th>Product</th>
@@ -24,9 +23,7 @@
                     admin_user_url(sale.user) %>
         <% end %>
       </td>
-      <td>
-        <%= sale.store_name %>
-      </td>
+      
       <td class="nowrap">
         <% if sale.metro %>
         <%= sale.metro.name %>

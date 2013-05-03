@@ -9,6 +9,7 @@
       <th>City</th>
       <th>Brand</th>
       <th>Product</th>
+			<th>Source</th>
       <th>Group</th>
       <th>Posted</th>
       <th>Actions</th>
@@ -34,6 +35,11 @@
       </td>
       <td>
         <%= sale.product %>
+      </td>
+			<td>
+				<% if sale.source %>
+        <%= sale.source %>
+				<% end %>
       </td>
       <td>
         <%= sale.sale_group.name if sale.sale_group %>

@@ -135,7 +135,7 @@ $(document).ready(function () {
     if (validateForm()) {
       $('#uploady')[0].disabled = true      
       $('#uploady')[0].innerHTML = "Uploading..."
-      $('#image_0_form').submit();
+      $('#sale_form').submit();
     }
   });
 
@@ -260,7 +260,12 @@ function validateForm() {
 
 
   if ($('#brand').val().length == 0) {
-    alert('Please enter the brand.');
+    alert('Please enter the company name.');
+    return false;
+  }
+
+	if ($('#source').val().length == 0) {
+    alert('Please enter the source.');
     return false;
   }
 
@@ -434,7 +439,9 @@ function selectSize(size_id) {
   </ul></div>
 
 
-  <%= form_tag({:controller => "sales", :action => "create"},
+		<br><br>
+
+  <%= form_tag({:controller => "sales", :action => "create", :multipart => true},
                {:id => "sale_form"}) do |f| %>
 
                <%= hidden_field_tag "image_0_key" %>
@@ -450,17 +457,20 @@ function selectSize(size_id) {
                    options_for_select(categories, params[:category_id]) %>
                  <br><br>
                    
-
+									
+									
+					
+					
                      <span class="add-on">Company</span>
                      <%= text_field_tag "brand", params[:brand], :class => "span2" %>
                      <br><br>
 
-                       <span class="add-on">Orig Price $</span>
+                       <span class="add-on">Retail Price $</span>
                        <%= text_field_tag "orig_price", params[:orig_price], :class => "span2",
                          :onchange => "origPriceChanged()" %>
                        <br><br>
 
-                         <span class="add-on">Retail Price $</span>
+                         <span class="add-on">Original Price $</span>
                          <%= text_field_tag "sale_price", params[:sale_price], :class => "span2",
                            :onchange => "salePriceChanged()" %>
                          <br><br>
@@ -479,10 +489,24 @@ function selectSize(size_id) {
                            <br><br>
 
                              <span class="add-on">Description</span>
-                             <%= text_field_tag "product", params[:product], :class => "span2" %>
+                             <%= text_area_tag "product", params[:product], :rows => 10, :class => "span2" %>
                              <br><br>
-															<label class="control-label" for="optionsCheckbox">Validated<%= check_box(:sale, :validated) %></label>
-										          
+
+														<span class="add-on">Condition $</span>
+			                       <%= text_field_tag "condition", params[:condition], :class => "span2" %>
+			                       <br><br>
+			
+															<div class="span4 shipping" style="text-align: left;">
+															<label class="radio">
+                                 <%= radio_button_tag "validated", 0, (params[:validated].to_i == 0) %>
+                                 No, not validated.
+                               </label>
+                               <label class="radio">
+                                 <%= radio_button_tag "validated", 1, (params[:validated].to_i == 1) %>
+                                 
+                                 Yes, it's validated.
+                               </label>
+										          </div>
 										            
 										         
 
@@ -516,7 +540,7 @@ function selectSize(size_id) {
                                  <%= hidden_field_tag "size", params[:size], :id => "size" %>
 
                                 
-
+															
                                  
                                    <div class="span4 shipping" style="text-align: left;">
                                      <label class="radio">
@@ -539,8 +563,8 @@ function selectSize(size_id) {
                                      </label>
                                    </div>
                                  </div>
-                                <!-- is merchant/ship -->
-
+                               
+																
 
 
                                  <br>
@@ -558,3 +582,4 @@ function selectSize(size_id) {
                        <% end %>
 
                          <br><br>
+<div class="container">

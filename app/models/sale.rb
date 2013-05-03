@@ -28,7 +28,12 @@ class Sale < ActiveRecord::Base
                   :editors_pick,
                   :sold_out,
                   :sale_group_id,
-                  :group_curated
+                  :group_curated,
+                  :source,
+                  :tax_cost,
+                  :shipping_price,
+                  :condition,
+                  :validated
 
 
   attr_accessor :current_user
@@ -36,10 +41,13 @@ class Sale < ActiveRecord::Base
 
   monetize :orig_price_cents, :allow_nil => true
   monetize :sale_price_cents, :allow_nil => true
+  monetize :shipping_price_cents, :allow_nil => true
+  monetize :tax_cost_cents, :allow_nil => true
 
   mount_uploader :image_0, SaleImageUploader
   mount_uploader :image_1, SaleImageUploader
   mount_uploader :image_2, SaleImageUploader
+  mount_uploader :source, SourceUploader
 
   has_many :comments, :dependent => :destroy
   has_many :faves, :dependent => :destroy, :class_name => "Fave"
@@ -51,11 +59,13 @@ class Sale < ActiveRecord::Base
 
   before_save :set_brand
   before_save :set_sizes
+  
+  
 
   def self.categories
     ["Apparel",
-     "Campaign Art",
-     "Photography",
+     "Collectibles",
+     "Games",
      "Home",
      "Beauty"]
   end
@@ -205,5 +215,7 @@ class Sale < ActiveRecord::Base
   def percent_off_int=(int_value)
     self.percent_off = int_value.to_f / 100
   end
+  
+  
 
 end

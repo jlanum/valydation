@@ -54,23 +54,7 @@
     <% price_font_size = (detail ? 3 : 1) %>
 
     <br>
-    <table class="table table-bordered">  
-      <td>
-        <font size="<%= price_font_size %>">
-        <%= (sale.percent_off * 100).round %>% Off
-        </font>
-      </td>
-      <td>
-        <font size="<%= price_font_size %>">
-          <%= humanized_money_with_symbol sale.sale_price %>          
-        </font>
-      </td>
-
-      <td><strike><font size="<%= price_font_size %>"> 
-          <%= humanized_money_with_symbol sale.orig_price %>
-      </font> </strike></td>
-
-    </table>
+    
 
     <%= hidden_field_tag "sale_fave_#{sale.id}", sale.my_fave_id %>
   
@@ -110,14 +94,9 @@
       <% end %>
   <% end %>
 
-    <a href="<%= user_custom_slug_url(sale.user) %>">
-
-      <img class="img-polaroid" src="<%= sale.user.photo_version_url(:feed_2x) if sale.user %>" height="60" width="60px">
-    </a>
+    
     <br>
-    <a href="<%= user_custom_slug_url(sale.user) %>"><b><%= sale.user.display_name if sale.user %></b></a>
-    <br>
-    <p class="muted time"><%= sale.metro.name if sale.metro %></p>
+   
 
     <% if detail and sale.user.id != @user.id %>
 
@@ -156,12 +135,12 @@ jQuery(function($) {
 
   <% font_class = (detail ? 'table-width' : 'table-modal') %>
 
-    <br>
+    <br><br>
     <table class="table table-bordered table-striped">
       
       <tr> 
         <td class="">
-          <font size="1" class="muted <%= font_class %>">Brand</font>
+          <font size="1" class="muted <%= font_class %>">Company</font>
           <%= sale.brand %>
       </td>
       </tr>
@@ -177,6 +156,18 @@ jQuery(function($) {
           <%= sale.size %>
         </td>
       </tr>
+			<tr>  
+        <td class="">
+          <font size="1" class="muted <%= font_class %>">Cost</font>
+          <%= humanized_money_with_symbol sale.orig_price %>
+        </td>
+      </tr>
+				<tr>  
+	        <td class="">
+	          <font size="1" class="muted <%= font_class %>">Condition</font>
+	          <%= sale.condition if sale.condition %>
+	        </td>
+	      </tr>
     </table>
 
     <% if detail %>
@@ -188,7 +179,7 @@ jQuery(function($) {
     <a href="<%= twitter_share_url(sale) %>">
       <%= image_tag "T_logo.png", :height => 16, :width => 16 %>
     </a>
-    <font size="2">&#160;#mysaletable</font>
+    <font size="2">&#160;#valydation</font>
 
     <span class="comments form">
       <h3>Comments</h3>
@@ -219,5 +210,5 @@ function submitComment(e) {
                 <% end %>
 
 
-                </div>
-              </div>
+               
+              

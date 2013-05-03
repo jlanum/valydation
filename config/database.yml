@@ -30,7 +30,7 @@ production:
   port: 5432
   adapter: postgresql
   encoding: unicode
-  database: histrollers
+  database: valydation
   pool: 5
-  username: histrollers
-  password: histrollers
+  username: testuser
+  password: 4544jsnl

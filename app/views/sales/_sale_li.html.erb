@@ -4,7 +4,7 @@
     <span class="thisInfo">
       <p class="lanvin"><%= sale.brand %></p>      
     </span>
-    <a href="<%= sale_url(sale.id) if sale.id %>" onclick="if (isMobile()) { return true; } else { $('#sale_modal_<%= sale.id %>').modal({}); return false; }">
+    <a href="<%= sale_url(sale.id) if sale.id %>" onclick="if (isMobile()) { return true; } else { $('#sale_image_<%= sale.id %>').modal({}); return false; }">
       <img class="product-pic" src="<%= sale.image_0.versions[:web_index] %>" alt="">
     </a>
     <% if sale.sold_out %>    

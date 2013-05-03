@@ -102,7 +102,7 @@ class SalesController < ApplicationController
   end
 
   def create
-    
+    @sale = Sale.new
 
     [:allow_returns, :does_shipping].each do |p|
       if params[p].respond_to?(:to_i)
@@ -129,10 +129,15 @@ class SalesController < ApplicationController
                      :longitude => params[:longitude],
                      :user_lat => params[:user_lat],
                      :user_lon => params[:user_lon],
+                     :shipping_price => params[:shipping_price],
+                     :tax_cost => params[:tax_cost],
+                     :validated => params[:validated],
+                     :condition => params[:condition],
                      :city_id => @user.city_id,
+                     :source => @sale.source.to_s,
                      :allow_returns => params[:allow_returns],
                      :does_shipping => params[:does_shipping] )
-
+   
     if params[:comment] and params[:comment].size > 0
       comment = Comment.new(:user_id => @user.id,
                             :text => params[:comment])
@@ -163,7 +168,7 @@ class SalesController < ApplicationController
       return
     end
 
-    safe_params = [:brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out]
+    safe_params = [:brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out, :source, :shipping_price, :tax_cost, :validated]
 
     merge_params = safe_params.inject({}) do |h,p|
       h[p] = params[:sale][p]

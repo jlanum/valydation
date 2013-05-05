@@ -31,6 +31,9 @@ class Admin::SalesController < ApplicationController
   
     render :template => "admin/sales/edit"
   end
+  
+  
+
 
   def destroy
     @sale = Sale.find(params[:id])

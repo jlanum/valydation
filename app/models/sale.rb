@@ -63,11 +63,11 @@ class Sale < ActiveRecord::Base
   
 
   def self.categories
-    ["Apparel",
-     "Collectibles",
-     "Games",
-     "Home",
-     "Beauty"]
+    ["Mens Wardrobe",
+     "Womens Wardrobe",
+     "History",
+     "Art",
+     "Upcoming Shows"]
   end
 
   def self.sizes

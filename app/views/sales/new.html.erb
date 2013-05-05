@@ -135,7 +135,7 @@ $(document).ready(function () {
     if (validateForm()) {
       $('#uploady')[0].disabled = true      
       $('#uploady')[0].innerHTML = "Uploading..."
-      $('#sale_form').submit();
+      $('#image_0_form').submit();
     }
   });
 
@@ -441,7 +441,7 @@ function selectSize(size_id) {
 
 		<br><br>
 
-  <%= form_tag({:controller => "sales", :action => "create", :multipart => true},
+  <%= form_tag({:controller => "sales", :action => "create"},
                {:id => "sale_form"}) do |f| %>
 
                <%= hidden_field_tag "image_0_key" %>

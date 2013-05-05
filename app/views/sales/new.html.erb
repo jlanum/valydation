@@ -264,11 +264,7 @@ function validateForm() {
     return false;
   }
 
-	if ($('#source').val().length == 0) {
-    alert('Please enter the source.');
-    return false;
-  }
-
+	
   if (!parseFloat($('#orig_price').val()) > 0) {
     alert('Please enter the original price.');
     return false;
@@ -470,7 +466,7 @@ function selectSize(size_id) {
                          :onchange => "origPriceChanged()" %>
                        <br><br>
 
-                         <span class="add-on">Original Price $</span>
+                         <span class="add-on">Cost $</span>
                          <%= text_field_tag "sale_price", params[:sale_price], :class => "span2",
                            :onchange => "salePriceChanged()" %>
                          <br><br>

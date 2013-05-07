@@ -135,7 +135,7 @@ $(document).ready(function () {
     if (validateForm()) {
       $('#uploady')[0].disabled = true      
       $('#uploady')[0].innerHTML = "Uploading..."
-      $('#image_0_form').submit();
+      $('#sale_form').submit();
     }
   });
 
@@ -436,7 +436,8 @@ function selectSize(size_id) {
 
 
 		<br><br>
-
+		
+	
   <%= form_tag({:controller => "sales", :action => "create"},
                {:id => "sale_form"}) do |f| %>
 
@@ -453,9 +454,8 @@ function selectSize(size_id) {
                    options_for_select(categories, params[:category_id]) %>
                  <br><br>
                    
+								
 									
-									
-					
 					
                      <span class="add-on">Company</span>
                      <%= text_field_tag "brand", params[:brand], :class => "span2" %>
@@ -576,6 +576,6 @@ function selectSize(size_id) {
 
 
                        <% end %>
-
+											
                          <br><br>
 <div class="container">

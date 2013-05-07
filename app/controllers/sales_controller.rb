@@ -102,8 +102,7 @@ class SalesController < ApplicationController
   end
 
   def create
-    @sale = Sale.new
-
+    
     [:allow_returns, :does_shipping].each do |p|
       if params[p].respond_to?(:to_i)
         params[p] = (params[p].to_i == 1)
@@ -134,7 +133,7 @@ class SalesController < ApplicationController
                      :validated => params[:validated],
                      :condition => params[:condition],
                      :city_id => @user.city_id,
-                     :source => @sale.source.to_s,
+                     :source => params[:source],
                      :allow_returns => params[:allow_returns],
                      :does_shipping => params[:does_shipping] )
    

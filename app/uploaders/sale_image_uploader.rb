@@ -84,7 +84,7 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   end
 
   version :web_index, :from_version => :feed_2x do
-    process :resize_to_fill => [318,415]
+    process :resize_to_fill => [329,329]
     process :set_content_type
   end
 

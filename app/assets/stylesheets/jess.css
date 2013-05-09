@@ -80,7 +80,7 @@
 	border-radius: 4px;
 }
 .hover-group .image-wrapper:hover {
-  border:2px dotted #432060;
+  border:2px solid #bdbdbd;
   width: 98%;
 }
 .hover-group .image-wrapper .hover-toggle {

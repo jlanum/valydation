@@ -14,7 +14,7 @@ $(document).on('click','#filter-button', function(){
   }
 });
 
-<% if params[:size] || params[:city_id] %>
+<% if params[:size] || params[:brand] %>
 $(function() {
   $('#filter-section').show();
 });
@@ -57,7 +57,7 @@ function submitFilter() {
       <%= hidden_field_tag "category_id", params[:category_id] %>
       <span class="pull-left">	
         <select id="city_id" name="city_id" onchange="submitFilter()">
-          <%= options_for_select([["Filter by city",nil]] + @cities.collect { |c| [c.name, c.id] }, 
+          <%= options_for_select([["Filter by brand",nil]] + @cities.collect { |c| [c.name, c.id] }, 
                                  params[:city_id]) %>
         </select>
       </span>

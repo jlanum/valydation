@@ -94,7 +94,7 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   end
 
   version :web_thumbnail, :from_version => :web_index do
-    process :resize_to_fill => [72,72]
+    process :resize_to_fill => [69,69]
     process :set_content_type
   end
 

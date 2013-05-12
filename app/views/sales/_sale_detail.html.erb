@@ -1,99 +1,202 @@
 <% detail ||= false %>
 
 <div class="row-fluid">
-  <div class="span2 modal-thumbnails">
-    <% [:image_0, :image_1, :image_2].each do |image_sym|
-      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
-        img_version = (detail ? :feed_large_2x : :web_modal)
-      %>
-      <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="100px" width="100px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
-      <%   end
-    end %>
-  <br>
-  </div> <!-- thumbnails -->
-  <div class="span6">
-    <% if !detail %>  
-      <span class="time-banner">
-    <% end %>
-      <span class="image-banner">
-
-        <% if detail %>
-          <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
-      <% else %>
-          <a href="<%= sale_url(sale.id) %>">
-          <img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:web_modal] if sale.image_0 %>" alt="" />
-        </a>
-      <% end %>
-
-      <!--
-        <span class="banner-toggle">
-
-          <% if !detail %>
-            <span class="percentoff">
-          <% end %>
-
-            <center>
-              <i class="icon-time <%= "icon-white" unless detail %> "> </i>
-              <font size="2">&#160;
-                <%= time_ago_in_words(sale.created_at) %>
-              </font>
-            </center>
-
-            <% if !detail %>
-            </span>
-        <% end %>
-
-          </span>
-        </span>
-        <% if !detail %>
-        </span>
-        <% end %>
-
-     -->
-
-    <% price_font_size = (detail ? 3 : 1) %>
-
-    <br>
+  <div class="container">
     
+  <br>
+  <div class="content-blog-bg-top">
+	        <div class="content-blog-bg-bot">
+	            <style>
+
+	                .content-blog-bg-bot {
+	                    background: none !important;
+	                    padding: 0px 0px 0px 0px
+	                }
+
+	                .content-blog-bg-top {
+	                    margin: 0 auto;
+	                }
+
+	            </style>
+	            <div class="product-detail-wrap top30 clearfix" id="mc_wrap">
+	                <!-- left container for images -->
+	                <div class="product-imgs-box left">
+	                    <!-- large image container -->
+
+
+
+
+											<img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
+	
+
+
+
+	<div class="more-views">
+	<!--    <h4></h4>-->
+	    <ul>
+
+	        	    <li>
+									<% [:image_0, :image_1, :image_2].each do |image_sym|
+							      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
+							        img_version = (detail ? :feed_large_2x : :web_modal)
+							      %>
+							      <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="69px" width="69px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
+							      <%   end
+							    end %>
+	        
+	    </li>
+
+	        </ul>
+	</div>
+
+             <!-- you may also like section -->
+	                                                        </div>
+	                <!--  end images block -->
+
+	                <!-- shopping container -->
+	                <div class="product-shop left clearfix">
+
+	                    <!-- add to bag area -->
+	                                        <div class="product-name">
+	                        <h2><%= sale.brand %></h2>
+
+	                        <h3><%= sale.product %></h3>
+
+	                        <p class="price">
+	                                                        <%= humanized_money_with_symbol sale.orig_price %>                        </p>
+
+	                        <p class="savings">
+
+	                                                           
+	            <%= sale.condition if sale.condition %>   
+
+
+	                                                                                      </p>
+	                                               
+	    <div class="button-wrap">
+	        <% if detail %>
+					      <% if sale.sold_out %>
+					        <a href="#" class="btn btn-success btn-large disabled">SOLD</a>          
+					      <% else %> 
+					        <% if sale.user and sale.user.is_merchant %>      
+					          <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large ">Add To Bag</a>
+					        <% else %>
+					          <a href="#" class="btn btn-success btn-large disabled">Add To Bag</a>
+					        <% end %>
+					      <% end %>
+					  <% end %>
+					
+	    </div>
+	</form>                    </div>
+
+	                    <div class="additional-links">
+	             <ul>
+	                 <li style="position:relative;top:0px;">
+	                     <a href="#" onclick="fave(<%= sale.id %>); return false">
+											          <% heart_src = (sale.my_fave_id ? "heart_16_16.png" : 
+											                                            "heart_outline.png") %>
+											          <%= image_tag heart_src, :id => "fave_icon_#{sale.id}", :height => 16, :width => 16 %>&#160;&#160;</a>
+											                     </li>
+	                 <li>																								<a href="<%= twitter_share_url(sale) %>">
+																			      <%= image_tag "T_logo.png", :height => 16, :width => 16 %>
+																			  &#160;&#160;  </a>
+									</li>
+	                 <li><a href="<%= fb_share_url(sale) %>">
+									        <%= image_tag "f_logo.png", :height => 16, :width => 16 %>
+									        &#160;&#160;
+									      </a>
+									</li>
+	             </ul>
+	         </div>
+
+
+
+
+
+	                    <!-- details and description -->
+	                    <div class="summary" id="accordian">
+	                        <h3 class="menu_head"><a href="#" class="">Description, Condition &amp; Return
+	                            Policy</a></h3>
+
+	                        <div class="menu_body">
+
+
+	        <p class="mc_condition_listing">
+	            <span class="mc_condition mc_condition_verygood active">VG</span>very good        </p>
+
+
+	                                                                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.<br>
+	<br>
+	<b>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</b></p>
+
+	                            <p>
+	                                <img class="left right15" src="" alt="Portero Promise" width="43" height="54">
+	                                As with all Valydation inventory, this item is<br> guaranteed by 
+	                                <a href="#promise-lightbox" class="promise_link">The Valydation Promise.</a>
+	                            </p>
+	                        </div>
+
+
+	                            <h3 class="menu_head menu_layaway"><a href="#" class="expanded">Other terms &amp; CONDITIONS</a></h3>
+	<div class="menu_body layaway_text" style="display: block;">
+	<!--                                <p>
+	        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	        <br><br>
+	        Condition Specifics:
+	        <br><br>
+	        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	        <br><br>
+	        Measurements: 14.5"W x 9"H x 7.25"D, 7" Strap Drop
+	        <br><br><br>
+	        <b>
+	            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	        </b>
+	    </p>-->
+	    <strong>Other</strong>
+	    <br><br>
+	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	    <br><br>
+	    <em>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</em>
+	    <br><br>
+	    <ul>
+	        Payment Options
+	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+	            <ul>
+	                <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</li>
+	                <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</li>
+	            </ul>
+	        </li>                                        
+	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</li>
+	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
+	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
+	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
+	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
+	    </ul>
+	    <br><br>
+	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	    <br><br>
+	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	</div>
+
+       
+	                                                
+	                       
+	                    </div>
+	                    <!-- end details and descriptions -->
+
+
+	                </div>
+	                <!-- end shopping container -->
+	            </div>
+	        </div>
+	        <!--  end product-detail-wrap -->
+	    </div>
+  </div> <!-- thumbnails -->
+  
 
     <%= hidden_field_tag "sale_fave_#{sale.id}", sale.my_fave_id %>
   
-    <% unless detail %>
-      <span class="modal-social">
-        <a href="#" onclick="fave(<%= sale.id %>); return false">
-          <% heart_src = (sale.my_fave_id ? "heart_16_16.png" : 
-                                            "heart_outline.png") %>
-          <%= image_tag heart_src, :id => "fave_icon_#{sale.id}", :height => 16, :width => 16 %>
-          &#160;&#160;
-        </a>
-      <a href="<%= sale_url(sale.id) %>">
-        <%= image_tag "comments_web.png", :height => 16, :width => 16 %>
-        &#160;&#160;
-      </a>
-      <a href="<%= fb_share_url(sale) %>">
-        <%= image_tag "f_logo.png", :height => 16, :width => 16 %>
-        &#160;&#160;
-      </a>
-      <a href="<%= twitter_share_url(sale) %>">
-        <%= image_tag "T_logo.png", :height => 16, :width => 16 %>        
-      </a>
-    </span>
-  <% end %>
-  </div>
-
-  <div class="span4 pull-right">
-    <% if detail %>
-      <% if sale.sold_out %>
-        <a href="#" class="btn btn-success btn-large span5 pull-right disabled">SOLD</a>          
-      <% else %> 
-        <% if sale.user and sale.user.is_merchant %>      
-          <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large span4 pull-right">Buy</a>
-        <% else %>
-          <a href="#" class="btn btn-success btn-large span4 pull-right disabled">Buy</a>
-        <% end %>
-      <% end %>
-  <% end %>
-
+    
     
     <br>
    
@@ -133,53 +236,10 @@ jQuery(function($) {
   <% end %>
 
 
-  <% font_class = (detail ? 'table-width' : 'table-modal') %>
-
-    <br><br>
-    <table class="table table-bordered table-striped">
-      
-      <tr> 
-        <td class="">
-          <font size="1" class="muted <%= font_class %>">Company</font>
-          <%= sale.brand %>
-      </td>
-      </tr>
-      <tr>  
-        <td class="">
-          <font size="1" class="muted <%= font_class %>">Product</font>
-          <%= sale.product %>
-        </td>
-      </tr>
-      <tr>  
-        <td class="">
-          <font size="1" class="muted <%= font_class %>">Size</font>
-          <%= sale.size %>
-        </td>
-      </tr>
-			<tr>  
-        <td class="">
-          <font size="1" class="muted <%= font_class %>">Cost</font>
-          <%= humanized_money_with_symbol sale.orig_price %>
-        </td>
-      </tr>
-				<tr>  
-	        <td class="">
-	          <font size="1" class="muted <%= font_class %>">Condition</font>
-	          <%= sale.condition if sale.condition %>
-	        </td>
-	      </tr>
-    </table>
-
+  
     <% if detail %>
       <br>
-      <a href="<%= fb_share_url(sale) %>">
-        <%= image_tag "f_logo.png", :height => 16, :width => 16 %>
-        &#160;&#160;
-    </a>
-    <a href="<%= twitter_share_url(sale) %>">
-      <%= image_tag "T_logo.png", :height => 16, :width => 16 %>
-    </a>
-    <font size="2">&#160;#valydation</font>
+      
 
     <span class="comments form">
       <h3>Comments</h3>

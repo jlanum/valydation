@@ -31,25 +31,27 @@
 
 
 
-	<div class="more-views">
-	<!--    <h4></h4>-->
-	    <ul>
+	
+									
+										<div class="more-views">
+										<!--    <h4></h4>-->
+										<% [:image_0, :image_1, :image_2].each do |image_sym|
+								      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
+								        img_version = (detail ? :feed_large_2x : :web_modal)
+								      %>
+										    <ul>
 
-	        	    <li>
-									<% [:image_0, :image_1, :image_2].each do |image_sym|
-							      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
-							        img_version = (detail ? :feed_large_2x : :web_modal)
-							      %>
-							      <img src="<%= img.versions[:web_thumbnail] %>" height="69px" width="69px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
+										        	    <li>
+							      <img src="<%= img.versions[:web_thumbnail] %>" height="69px" width="69px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" /></li>
 							      <%   end
 							    end %>
 	        
-	    </li>
+	    
 
 	        </ul>
 	</div>
 	<% if detail %>
-    <br>
+    <br><br><br><br>
     
 
   <span class="comments form">

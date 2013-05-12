@@ -64,7 +64,7 @@ class SaleImageUploader < CarrierWave::Uploader::Base
   #
 
   version :feed_large_2x do
-    process :resize_to_fill => [640, 640]
+    process :resize_to_fill => [425, 425]
     process :set_content_type
   end
 

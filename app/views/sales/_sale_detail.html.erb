@@ -40,7 +40,7 @@
 							      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
 							        img_version = (detail ? :feed_large_2x : :web_modal)
 							      %>
-							      <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" height="69px" width="69px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
+							      <img src="<%= img.versions[:web_thumbnail] %>" height="69px" width="69px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
 							      <%   end
 							    end %>
 	        
@@ -48,6 +48,38 @@
 
 	        </ul>
 	</div>
+	<% if detail %>
+    <br>
+    
+
+  <span class="comments form">
+    <h3>Comments</h3>
+    <% sale.comments.each do |comment| %>
+      <img height="36" width="36" src="<%= comment.user.photo_version_url(:feed) %>" >&#160;<%= comment.text %><br><br>
+  <% end %>
+
+    <script>
+function submitComment(e) {
+e = e || event;
+if (e.keyCode === 13) {
+  $('#comment_form').submit();
+  return false;
+}
+return true;
+}
+    </script>
+
+    <%= form_tag({:controller => "comments", 
+                  :action => "create",
+                  :sale_id => sale.id}, 
+                  :id => "comment_form") do |f| %>
+                  <img height="36" width="36" src="<%= @user.photo_version_url(:feed) %>">&#160;
+                  <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
+                <% end %>
+                </span>
+
+              <% end %>
+	
 
              <!-- you may also like section -->
 	                                                        </div>
@@ -237,38 +269,7 @@ jQuery(function($) {
 
 
   
-    <% if detail %>
-      <br>
-      
-
-    <span class="comments form">
-      <h3>Comments</h3>
-      <% sale.comments.each do |comment| %>
-        <img height="36" width="36" src="<%= comment.user.photo_version_url(:feed) %>" >&#160;<%= comment.text %><br><br>
-    <% end %>
-
-      <script>
-function submitComment(e) {
-  e = e || event;
-  if (e.keyCode === 13) {
-    $('#comment_form').submit();
-    return false;
-  }
-  return true;
-}
-      </script>
-
-      <%= form_tag({:controller => "comments", 
-                    :action => "create",
-                    :sale_id => sale.id}, 
-                    :id => "comment_form") do |f| %>
-                    <img height="36" width="36" src="<%= @user.photo_version_url(:feed) %>">&#160;
-                    <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
-                  <% end %>
-                  </span>
-
-                <% end %>
-
+    
 
                
               

@@ -40,6 +40,22 @@ class SalesController < ApplicationController
 
     @uploader_2 = Sale.new.image_2
     @uploader_2.success_action_redirect = new_sale_url
+    
+    @uploader_3 = Sale.new.image_3
+    @uploader_3.success_action_redirect = new_sale_url
+
+    @uploader_4 = Sale.new.image_4
+    @uploader_4.success_action_redirect = new_sale_url
+
+    @uploader_5 = Sale.new.image_5
+    @uploader_5.success_action_redirect = new_sale_url
+    
+    @uploader_6 = Sale.new.image_6
+    @uploader_6.success_action_redirect = new_sale_url
+
+    @uploader_7 = Sale.new.image_7
+    @uploader_7.success_action_redirect = new_sale_url
+
   end
 
   def handle_s3_upload
@@ -84,7 +100,7 @@ class SalesController < ApplicationController
   end
 
   def handle_direct_uploaded_images
-    (0..2).each do |image_index|
+    (0..7).each do |image_index|
       if image_key = params["image_#{image_index}_key"] and not image_key.empty?
         @sale.send("temp_image_url_#{image_index}=",image_key)
         @sale.uploaded_images = true
@@ -185,7 +201,7 @@ class SalesController < ApplicationController
   def handle_uploaded_image_keys
     uploaded_images = false
 
-    (0..2).each do |image_index|
+    (0..7).each do |image_index|
       if image_key = params[:image_uploaded_keys][image_index.to_s]
         
         @sale.send("temp_image_url_#{image_index}=","raw_uploads/#{image_key}")

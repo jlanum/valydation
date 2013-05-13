@@ -47,6 +47,11 @@ class Sale < ActiveRecord::Base
   mount_uploader :image_0, SaleImageUploader
   mount_uploader :image_1, SaleImageUploader
   mount_uploader :image_2, SaleImageUploader
+  mount_uploader :image_3, SaleImageUploader
+  mount_uploader :image_4, SaleImageUploader
+  mount_uploader :image_5, SaleImageUploader
+  mount_uploader :image_6, SaleImageUploader
+  mount_uploader :image_7, SaleImageUploader
   mount_uploader :source, SourceUploader
 
   has_many :comments, :dependent => :destroy
@@ -211,6 +216,26 @@ class Sale < ActiveRecord::Base
   
   def image_2_url
     self.image_url(2) if self.has_image_2
+  end
+  
+  def image_3_url
+    self.image_url(3) if self.has_image_3
+  end
+
+  def image_4_url
+    self.image_url(4) if self.has_image_4
+  end
+  
+  def image_5_url
+    self.image_url(5) if self.has_image_5
+  end
+  
+  def image_6_url
+    self.image_url(6) if self.has_image_6
+  end
+  
+  def image_7_url
+    self.image_url(7) if self.has_image_7
   end
 
   def percent_off_int

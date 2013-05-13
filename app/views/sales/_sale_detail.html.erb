@@ -35,7 +35,7 @@
 									
 										<div class="more-views">
 										<!--    <h4></h4>-->
-										<% [:image_0, :image_1, :image_2].each do |image_sym|
+										<% [:image_0, :image_1, :image_2, :image_3, :image_4, :image_5, :image_6, :image_7].each do |image_sym|
 								      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
 								        img_version = (detail ? :feed_large_2x : :web_modal)
 								      %>

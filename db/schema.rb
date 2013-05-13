@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430050211) do
+ActiveRecord::Schema.define(:version => 20130512221321) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -215,6 +215,21 @@ ActiveRecord::Schema.define(:version => 20130430050211) do
     t.string       "shipping_price_currency",                 :default => "USD", :null => false
     t.integer      "tax_cost_cents",                          :default => 0,     :null => false
     t.string       "tax_cost_currency",                       :default => "USD", :null => false
+    t.string       "image_3"
+    t.string       "image_4"
+    t.string       "image_5"
+    t.string       "image_6"
+    t.string       "image_7"
+    t.boolean      "has_image_3"
+    t.boolean      "has_image_4"
+    t.boolean      "has_image_5"
+    t.boolean      "has_image_6"
+    t.boolean      "has_image_7"
+    t.string       "temp_image_url_3"
+    t.string       "temp_image_url_4"
+    t.string       "temp_image_url_5"
+    t.string       "temp_image_url_6"
+    t.string       "temp_image_url_7"
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

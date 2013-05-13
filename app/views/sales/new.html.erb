@@ -109,15 +109,65 @@ $(document).ready(function () {
     }
   });
 
-  $('#_image_2_iframe').load(function() {
-    var jsonResponse = jsonFromIframe("_image_2_iframe");    
-    $('#image_2_key')[0].value = jsonResponse['key'];
+	$('#_image_2_iframe').load(function() {
+    var jsonResponse = jsonFromIframe("_image_2_iframe");
+    $('#image_2_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_3').val().length > 0) {
+      $('#image_3_form').submit();
+    } else {
+      submitSaleForm();
+    }
+  });
+
+	$('#_image_3_iframe').load(function() {
+    var jsonResponse = jsonFromIframe("_image_3_iframe");
+    $('#image_3_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_4').val().length > 0) {
+      $('#image_4_form').submit();
+    } else {
+      submitSaleForm();
+    }
+  });
+
+	$('#_image_4_iframe').load(function() {
+    var jsonResponse = jsonFromIframe("_image_4_iframe");
+    $('#image_4_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_5').val().length > 0) {
+      $('#image_5_form').submit();
+    } else {
+      submitSaleForm();
+    }
+  });
+
+	$('#_image_5_iframe').load(function() {
+    var jsonResponse = jsonFromIframe("_image_5_iframe");
+    $('#image_5_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_6').val().length > 0) {
+      $('#image_6_form').submit();
+    } else {
+      submitSaleForm();
+    }
+  });
+
+	$('#_image_6_iframe').load(function() {
+    var jsonResponse = jsonFromIframe("_image_6_iframe");
+    $('#image_6_key')[0].value = jsonResponse['key']
+    if ($('#sale_image_uploader_image_7').val().length > 0) {
+      $('#image_7_form').submit();
+    } else {
+      submitSaleForm();
+    }
+  });
+
+  $('#_image_7_iframe').load(function() {
+    var jsonResponse = jsonFromIframe("_image_7_iframe");    
+    $('#image_7_key')[0].value = jsonResponse['key'];
     submitSaleForm();
   });
 
 
   $('#selectFiles').click(function() {
-    $.each([0,1,2],function(i) {
+    $.each([0,1,2,3,4,5,6,7],function(i) {
       var fileElly = $('#sale_image_uploader_image_' + i);
 
       if (fileElly.val().length == 0) {
@@ -125,7 +175,7 @@ $(document).ready(function () {
         return false;
       }
 
-      if (i==2) {
+      if (i==7) {
         fileElly.click();
       }
     });
@@ -146,7 +196,7 @@ $(document).ready(function () {
 function nextEmptyFileInput() {
   var fileInput;
 
-  $.each([0,1,2],function(i) {
+  $.each([0,1,2,3,4,5,6,7],function(i) {
     fileInput = $('#sale_image_uploader_image_' + i);
 
     if (fileInput.val().length == 0) {
@@ -363,8 +413,11 @@ function selectSize(size_id) {
 <iframe name="_image_0_iframe" id="_image_0_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
 <iframe name="_image_1_iframe" id="_image_1_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
 <iframe name="_image_2_iframe" id="_image_2_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
-
-
+<iframe name="_image_3_iframe" id="_image_3_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_4_iframe" id="_image_4_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_5_iframe" id="_image_5_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_6_iframe" id="_image_6_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
+<iframe name="_image_7_iframe" id="_image_7_iframe" width="0" height="0" border="0" style="width: 0; height: 0; border: none;"></iframe>
 
 <div class="container">
 
@@ -404,6 +457,26 @@ function selectSize(size_id) {
               <%= f.file_field :image_2, :onchange => "previewFile(2)" %>
           <% end %>
 
+            <%= direct_upload_form_for @uploader_3, :html => { :target => "_image_3_iframe", :id => "image_3_form" } do |f| %>
+              <%= f.file_field :image_3, :onchange => "previewFile(3)" %>
+          <% end %>
+
+            <%= direct_upload_form_for @uploader_4, :html => { :target => "_image_4_iframe", :id => "image_4_form" } do |f| %>
+              <%= f.file_field :image_4, :onchange => "previewFile(4)" %>
+          <% end %>
+
+            <%= direct_upload_form_for @uploader_5, :html => { :target => "_image_5_iframe", :id => "image_5_form" } do |f| %>
+              <%= f.file_field :image_5, :onchange => "previewFile(5)" %>
+          <% end %>
+
+            <%= direct_upload_form_for @uploader_6, :html => { :target => "_image_6_iframe", :id => "image_6_form" } do |f| %>
+              <%= f.file_field :image_6, :onchange => "previewFile(6)" %>
+          <% end %>
+
+            <%= direct_upload_form_for @uploader_7, :html => { :target => "_image_7_iframe", :id => "image_7_form" } do |f| %>
+              <%= f.file_field :image_7, :onchange => "previewFile(7)" %>
+          <% end %>
+
           </div>
 
 
@@ -432,6 +505,31 @@ function selectSize(size_id) {
         <img id="img_preview_2" data-src="holder.js/260x180">
       </div>
       </li>
+			<li>
+      <div class="thumbnail">
+        <img id="img_preview_3" data-src="holder.js/260x180">
+      </div>
+      </li>
+			<li>
+      <div class="thumbnail">
+        <img id="img_preview_4" data-src="holder.js/260x180">
+      </div>
+      </li>
+			<li>
+      <div class="thumbnail">
+        <img id="img_preview_5" data-src="holder.js/260x180">
+      </div>
+      </li>
+			<li>
+      <div class="thumbnail">
+        <img id="img_preview_6" data-src="holder.js/260x180">
+      </div>
+      </li>
+			<li>
+      <div class="thumbnail">
+        <img id="img_preview_7" data-src="holder.js/260x180">
+      </div>
+      </li>
   </ul></div>
 
 
@@ -444,6 +542,12 @@ function selectSize(size_id) {
                <%= hidden_field_tag "image_0_key" %>
                <%= hidden_field_tag "image_1_key" %>
                <%= hidden_field_tag "image_2_key" %>
+							<%= hidden_field_tag "image_3_key" %>
+               <%= hidden_field_tag "image_4_key" %>
+               <%= hidden_field_tag "image_5_key" %>
+							<%= hidden_field_tag "image_6_key" %>
+               <%= hidden_field_tag "image_7_key" %>
+              
 
 
                <div align="center">

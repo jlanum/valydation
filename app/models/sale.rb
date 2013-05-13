@@ -112,7 +112,7 @@ class Sale < ActiveRecord::Base
     s3_full = AWS::S3.new(full_session.credentials)
     bucket = s3_full.buckets["#{ApplicationController.s3_bucket}"]
 
-    (0..2).each do |image_index|
+    (0..7).each do |image_index|
       if image_key = self.send("temp_image_url_#{image_index}")
         puts "processing #{image_key}"
         s3_obj = bucket.objects[image_key]

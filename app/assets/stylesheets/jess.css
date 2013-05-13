@@ -485,6 +485,7 @@ width: 62px;
 .comment-box {
 	padding-bottom: -10px;
 	margin-top: 5px;
+	width:350px;
 }
 
 .pwd {
@@ -1128,3 +1129,9 @@ width: 62px;
 .tab-menu li a#tab_3            { background:url(/skin/frontend/portero/default/images/content/p_tabs/add-info.gif) 0 0 no-repeat; }
 .tab-menu li a#tab_4            { background:url(/skin/frontend/portero/default/images/content/p_tabs/similar.gif) 0 0 no-repeat; }
 .tab-menu li a#tab_5            { background:url(/skin/frontend/portero/default/images/content/p_tabs/brand.gif) 0 0 no-repeat; }
+
+more-views ul {
+	padding: 0;
+	  margin: 0 0 10px -19px !important;
+	}
+}

@@ -1,6 +1,6 @@
 <% detail ||= false %>
 
-<div class="row-fluid">
+<div class="row">
   <div class="container">
     
   <br>
@@ -75,7 +75,7 @@ return true;
                   :action => "create",
                   :sale_id => sale.id}, 
                   :id => "comment_form") do |f| %>
-                  <img height="36" width="36" src="<%= @user.photo_version_url(:feed) %>">&#160;
+                  <img height="50" width="50" src="<%= @user.photo_version_url(:feed) %>">&#160;
                   <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
                 <% end %>
                 </span>
@@ -98,7 +98,7 @@ return true;
 
 	                        <p class="price">
 	                                                        <%= humanized_money_with_symbol sale.orig_price %>                        </p>
-
+<br>
 	                        <p class="savings">
 
 	                                                           
@@ -125,18 +125,14 @@ return true;
 
 	                    <div class="additional-links">
 	             <ul>
-	                 <li style="position:relative;top:0px;">
-	                     <a href="#" onclick="fave(<%= sale.id %>); return false">
-											          <% heart_src = (sale.my_fave_id ? "heart_16_16.png" : 
-											                                            "heart_outline.png") %>
-											          <%= image_tag heart_src, :id => "fave_icon_#{sale.id}", :height => 16, :width => 16 %>&#160;&#160;</a>
+	                 
 											                     </li>
 	                 <li>																								<a href="<%= twitter_share_url(sale) %>">
-																			      <%= image_tag "T_logo.png", :height => 16, :width => 16 %>
+																			      <%= image_tag "T_logo.png", :height => 32, :width => 32 %>
 																			  &#160;&#160;  </a>
 									</li>
 	                 <li><a href="<%= fb_share_url(sale) %>">
-									        <%= image_tag "f_logo.png", :height => 16, :width => 16 %>
+									        <%= image_tag "f_logo.png", :height => 32, :width => 32 %>
 									        &#160;&#160;
 									      </a>
 									</li>
@@ -149,8 +145,7 @@ return true;
 
 	                    <!-- details and description -->
 	                    <div class="summary" id="accordian">
-	                        <h3 class="menu_head"><a href="#" class="">Description, Condition &amp; Return
-	                            Policy</a></h3>
+	                        <h3 class="menu_head"><a href="#" class="">Description</a></h3>
 
 	                        <div class="menu_body">
 

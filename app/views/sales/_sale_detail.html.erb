@@ -1,4 +1,17 @@
 <% detail ||= false %>
+<div class="row">
+	<div class="container">
+  <div class="category-feed-sale well">
+    <div class="back-button btn btn-success"><a href="/sales">Back</a></div>
+		
+	</div>
+	
+</div>
+    
+     
+    
+
+  </div>
 
 <div class="row">
   <div class="container">
@@ -145,13 +158,13 @@ return true;
 
 	                    <!-- details and description -->
 	                    <div class="summary" id="accordian">
-	                        <h3 class="menu_head"><a href="#" class="">Description</a></h3>
+	                        <h3 class="menu_head">The Story</h3>
 
 	                        <div class="menu_body">
 
 
 	        <p class="mc_condition_listing">
-	            <span class="mc_condition mc_condition_verygood active">VG</span>very good        </p>
+	                    </p>
 
 
 	                                                                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.<br>
@@ -159,7 +172,7 @@ return true;
 	<b>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</b></p>
 
 	                            <p>
-	                                <img class="left right15" src="" alt="Portero Promise" width="43" height="54">
+	                               
 	                                As with all Valydation inventory, this item is<br> guaranteed by 
 	                                <a href="#promise-lightbox" class="promise_link">The Valydation Promise.</a>
 	                            </p>
@@ -229,40 +242,8 @@ return true;
     
     <br>
    
-
-    <% if detail and sale.user.id != @user.id %>
-
-      <script>
-
-jQuery(function($) {
-  $("a#follow").bind("ajax:success", function(event, data, status, xhr) {
-    follow_link = $('a#follow')[0];
-    follow_link.style.display = "none";
-
-    unfollow_link = $('a#unfollow')[0];
-    unfollow_link.style.display = "";
-    unfollow_link.href = "/followers/" + data['id'];
-  });
-
-  $("a#unfollow").bind("ajax:success", function(event, data, status, xhr) {
-    follow_link = $('a#follow')[0];
-    follow_link.style.display = "";
-
-    unfollow_link = $('a#unfollow')[0];
-    unfollow_link.style.display = "none";
-  });
-});
-
-    </script>
-
-    <% sale.user.other_user = @user %>
-
-    <%= link_to("Unfollow", follower_path(:id => (sale.user.is_followed || "blah")), :remote => true, :method => :delete, :class => "btn pull-right span12", :id=> "unfollow", :style => ("display:none;" unless sale.user.is_followed)) %>
-
-    <%= link_to("Follow", followers_path(:following_id => sale.user.id), :remote => true, :method => :post, :class => "btn pull-right span12", :id=> "follow", :style => ("display:none;" if sale.user.is_followed)) %>
-
-    <br><br>
-  <% end %>
+<div class="container">
+   
 
 
   

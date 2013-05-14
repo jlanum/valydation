@@ -60,6 +60,15 @@
 	
 }
 
+.category-feed-sale {
+	margin-bottom: -24px;
+	margin-top: -17px;
+	font-size: 14px !important;
+	color: #432060 !important;
+
+	
+}
+
 .category-feed-align {
 	display:block;
 	margin:0 auto;
@@ -552,6 +561,19 @@ width: 62px;
 	top:20px;
 }
 
+.back-button {
+	cursor:pointer; 
+	color:white !important;
+}
+
+.back-button a {
+	color:white !important;
+}
+
+.faves-script-detail {
+	float:right;
+}
+
 .filter-city {
 	margin-left: 10px;
 	padding-right: 10px;
@@ -946,7 +968,7 @@ width: 62px;
 #mc_wrap .product-shop {
 	width: 439px;
 	min-height: 875px;
-	padding-left: 30px;
+	padding-left: 57px;
 	border-left: 1px solid #E3DFDF;
     margin: 0;
 }
@@ -967,7 +989,7 @@ width: 62px;
 	font-weight: 600;
     /* Style to override old declaration */
     font: 600 24px "proxima-nova-n6", "proxima-nova", Helvetica, Arial, sans-serif;
-    margin: 19px 0 10px;
+    margin: -3px 0 10px;
 }
 
 #mc_wrap .product-shop .product-name h3 {
@@ -1024,7 +1046,7 @@ width: 62px;
 
 .additional-links ul {
 	margin:0 auto 0 auto;
-	padding:0 0 10px 0;
+	padding:8px 0 10px 0;
 }
 
 .additional-links ul li {
@@ -1130,7 +1152,7 @@ width: 62px;
 .tab-menu li a#tab_4            { background:url(/skin/frontend/portero/default/images/content/p_tabs/similar.gif) 0 0 no-repeat; }
 .tab-menu li a#tab_5            { background:url(/skin/frontend/portero/default/images/content/p_tabs/brand.gif) 0 0 no-repeat; }
 
-more-views ul {
+.more-views ul {
 	padding: 0;
 	  margin: 0 0 10px -19px !important;
 	}

@@ -574,6 +574,10 @@ width: 62px;
 	float:right;
 }
 
+.faves-script-detail a {
+	color:white !important;
+}
+
 .filter-city {
 	margin-left: 10px;
 	padding-right: 10px;
@@ -848,8 +852,7 @@ width: 62px;
 		background-color: #432060;
 		padding:35px;
 		color:white;
-	p { color:white !important;
-	}
+		text-align:center;
 		
       }
 

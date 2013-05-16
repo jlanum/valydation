@@ -25,9 +25,7 @@ body {
 		<div class="marketing">
 			<div class="signup-unit">
         <span class="order-status">
-          <a href="<%= purchases_url %>"><u>Order Status</u></a>
-          <a href="<%= user_custom_slug_url(@user) %>"><u>View Sales</u></a>
-
+         
 				</span>
 
 
@@ -41,15 +39,8 @@ body {
         </legend>
 
         
-        <%= form_for @user, :html => {:id => "city_form"} do |f| %>
-
-
-          Current City <br/>
-
-          <select id="city_id" name="city_id" class="" onchange="$('#city_form')[0].submit()">
-        <%= options_for_select(City.order("name ASC").all.collect { |c| [c.name, c.id] }, @user.city_id) %>
-          </select>
-        <% end %>
+      	<a href="<%= purchases_url %>"><u>Order Status</u></a><br>
+        <a href="<%= user_custom_slug_url(@user) %>"><u>View Sales</u></a>
         <hr>
 
 
@@ -94,7 +85,7 @@ function checkSize(max_img_size)
       <% end %> 
 
 
-        
+        Email
             <div class="input-append">
 
         <%= form_for(@user, :html => {:id => "email_form"}) do |f| %>
@@ -122,7 +113,7 @@ function changePassword() {
             }
           }
         </script>
-
+				Password
         <%= form_for(@user, :html => {:id => "passwd_form"}) do |f| %>
           <%= password_field_tag "passwd_clear", "", :class => "span2 pwd", :placeholder => "Current Password" %> 
           <br>
@@ -168,34 +159,10 @@ function checkSize(max_img_size)
       </script>
 
 
-      <script>
-function submitGender() {
-  $.post($('#gender_form')[0].action, $('#gender_form').serialize())
-}
-      </script>
-
-      <%= form_for(@user, :html => {:id => "gender_form"}) do |f| %>
-      
-			<label class="radio inline">
-        <%= radio_button_tag "gender", "f", (@user.gender == "f"),
-              :onchange => "submitGender()" %>
-			  Female
-			</label>
-			<label class="radio inline">
-        <%= radio_button_tag "gender", "m", (@user.gender == "m"), 
-     :onchange => "submitGender()" %>
-			  Male
-			</label>
-			<label class="radio inline">
-        <%= radio_button_tag "gender", "p", (@user.gender == "p"),
-     :onchange => "submitGender()" %>
-			  Pass 
-			</label>
-      <% end %>
 
 			<form class="horizontal">
 			  <fieldset>
-			    <legend>Profile (shown publicly)</legend>
+			    <legend>Profile (shown publicly when posting comments)</legend>
 			</fieldset>
 			</form>
 
@@ -226,29 +193,14 @@ function submitGender() {
       <% end %>
 
 				
-				Enter Username for Custom URL
-        <div class="input-prepend">
-          <%
-              custom_slug = "YourNameHere"
-              if @user.custom_slug and @user.custom_slug.size > 0
-                custom_slug = @user.custom_slug
-              end
-          %>
-        <span class="add-on">http://www.mysaletable.com/<%= custom_slug %></span>
-				</div>
-
-        <%= form_for(@user, :html => {:id => "custom_slug_form"}) do |f| %>
-          <%= text_field_tag "custom_slug", @user.custom_slug,
-            :class => "span2", :placeholder => custom_slug %>
-				  <button class="btn url btn-success" type="button" onclick="$('#custom_slug_form')[0].submit();">Save</button><br>
-				<% end %>
+			
 			   <hr>
 			
-			<span class="bio">Bio</span>
-
+			Bio
+<span class="bio">
         <%= form_for(@user, :html => {:id => "bio_form"}) do |f| %>
-          <%= text_area_tag "bio", @user.bio, :rows => 3, :placeholder => "Enter text (150 character limit)" %>
-        &#160;
+          <%= text_area_tag "bio", @user.bio, :rows => 5, :style => "width:300px;", :placeholder => "Enter text (150 character limit)" %></span>
+        <br>
         <button class="btn url btn-success" type="button" onclick="$('#bio_form')[0].submit();">Save</button><br>
       <% end %>
 		<hr>
@@ -264,7 +216,7 @@ function submitGender() {
 	
 	 </div><!--end marketing -->		
 	</div><!--end container -->
-
+</div>
 	
 	
 

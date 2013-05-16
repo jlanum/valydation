@@ -3650,8 +3650,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-inverse .nav > li > a:focus,
 .navbar-inverse .nav > li > a:hover {
-  background-color: #F5F5F5;
-  color: #000000;
+  color: #432060;
 }
 .navbar-inverse .nav .active > a,
 .navbar-inverse .nav .active > a:hover,
@@ -3663,7 +3662,7 @@ input[type="submit"].btn.btn-mini {
   color: #999999;
 }
 .navbar-inverse .navbar-link:hover {
-  color: #ffffff;
+  color: #432060;
 }
 .navbar-inverse .divider-vertical {
   border-left-color: #111111;

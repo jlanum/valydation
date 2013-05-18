@@ -21,14 +21,7 @@ end
   </div>
 <% end %>
 </div></div></div>
-<div id="footer">
-    <medium>
-     <font color="#ffffff"> 
-<p><%= link_to "ABOUT US", "pages/about" %> | <a href="/page/faq-shoppers">JOBS</a> | <%= link_to "BLOG", "http://www.valydation.tumblr.com", :target => "_blank" %> | <a href="/page/privacy">BECOME A SILICON LEGEND</a> | <a href="/page/faq-shoppers">AFFILIATES</a> | <a href="/page/faq-shoppers">HELP</a> | <a href="/page/faq-shoppers">JOBS</a> | <a href="/page/faq-shoppers">AUTHENTICITY</a> | <a href="/page/faq-shoppers">CONTACT US</a></p>
 
-<p>&copy;<%= link_to "Valydation 2013, All rights reserved.", "http://mysaletable.com" %><a href="/page/tos">Terms of Service</a> and <a href="/page/privacy">Privacy Policy</a></p>
-   </font> </medium>
-  </div>
 
 <% @sales.each do |sale| %>
   <%= render :partial => "sales/sale_modal", :locals => {:sale => sale} %>

@@ -1,20 +1,30 @@
 <% detail ||= false %>
 <div class="row">
 	<div class="container">
-  <div class="category-feed-sale well">
-    <div class="back-button btn btn-success"><a href="/sales">Back</a></div>
-		<%= sale.category_id if sale.category_id %>
-		<a href="/featured/new-stuff" class="faves-script-detail btn btn-success">
-      What's New
-    </a>
-	</div>
+	  <div class="category-feed-detail well">
+	    <div class="back-button btn btn-success"><a href="/sales">Back</a></div>
+
+	    <span class="category-feed-align">
+	      <% Sale.categories.each_with_index do |category, category_id| %>
+	        <% if category_id == params[:category_id].to_i %><strong><% end %>
+	        <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
+	        <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
+	        <% if category_id == params[:category_id].to_i %></strong><% end %>
+	      <% end %>
+	    </span>
+
+	    <a href="/featured/new-stuff" class="faves-script-detail btn btn-success">
+	      What's New
+	    </a>
+
+	    
+
+	  </div> </div> </div>
 	
-</div>
-    
      
     
 
-  </div>
+  
 
 <div class="row">
   <div class="container">
@@ -161,7 +171,7 @@ return true;
 
 	                    <!-- details and description -->
 	                    <div class="summary" id="accordian">
-	                        <h3 class="menu_head">The Story</h3>
+	                        <h3 class="menu_head">Product History</h3>
 
 	                        <div class="menu_body">
 
@@ -172,7 +182,7 @@ return true;
 
 	                                                                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.<br>
 	<br>
-	<b>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</b></p>
+	Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
 
 	                            <p>
 	                               
@@ -182,7 +192,7 @@ return true;
 	                        </div>
 
 
-	                            <h3 class="menu_head menu_layaway"><a href="#" class="expanded">Other terms &amp; CONDITIONS</a></h3>
+	                            <h3 class="menu_head menu_layaway">Terms &amp; CONDITIONS</h3>
 	<div class="menu_body layaway_text" style="display: block;">
 	<!--                                <p>
 	        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
@@ -197,7 +207,7 @@ return true;
 	            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
 	        </b>
 	    </p>-->
-	    <strong>Other</strong>
+	    Other
 	    <br><br>
 	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
 	    <br><br>

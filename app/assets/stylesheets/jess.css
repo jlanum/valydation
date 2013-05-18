@@ -555,6 +555,12 @@ width: 62px;
 	right:20px;
 }
 
+.faves-script-detail {
+	position:absolute; 
+	top:14px; 
+	right:20px;
+}
+
 .filter-button {
 	cursor:pointer; 
 	position:absolute; 
@@ -565,6 +571,9 @@ width: 62px;
 .back-button {
 	cursor:pointer; 
 	color:white !important;
+	position: absolute;
+	left: 20px;
+	top: 14px;
 }
 
 .back-button a {
@@ -694,7 +703,8 @@ width: 62px;
 
 
 .press-pass {
-	margin: 30px auto;
+	margin: 0px 24px 0px 355px;
+	width: 284px;
 }
 
 .featurette-pics {
@@ -1026,7 +1036,7 @@ width: 62px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: #828D9B;
-	margin: 0 0 30px 0;
+	margin: 0 0 10px 0;
 }
 
 .sold-out .sold {
@@ -1050,7 +1060,6 @@ width: 62px;
 
 .additional-links ul {
 	margin:0 auto 0 auto;
-	padding:8px 0 10px 0;
 }
 
 .additional-links ul li {
@@ -1107,7 +1116,8 @@ width: 62px;
 .additional-prices dl.msrp dd,
 .additional-prices dl.msrp dt   { color: #333; }
 .additional-prices dl.msrp dd   { text-decoration: line-through; }
-.additional-links               { margin:20px 0; padding: 15px 0; border-bottom:1px solid #86A2B4; border-top: 1px dotted #86A2B4; }
+.additional-links               { margin:20px 0; padding: 15px 0; border-bottom: 1px solid #bdbdbd;
+border-top: 1px solid #bdbdbd; }
 .additional-links li            { background: url(/skin/frontend/portero/default/images/bg_additional_links.gif) center left no-repeat; padding-left: 10px; }
 .additional-links a             { color: #0f7ecd; font-weight: bold }
 
@@ -1160,3 +1170,16 @@ width: 62px;
 	padding: 0;
 	  margin: 0 0 10px -19px !important;
 	}
+	
+	.category-feed-detail {
+	margin-bottom: -21px;
+	margin-top: 24px;
+	font-size: 14px !important;
+	color: #432060 !important;
+	position: relative;
+	text-align: center;
+	}
+	
+.contact-margin {
+	margin-top: 34px;
+}

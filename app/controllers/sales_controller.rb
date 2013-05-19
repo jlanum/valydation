@@ -1,6 +1,7 @@
 class SalesController < ApplicationController
   before_filter :handle_device
   before_filter :require_user
+  before_filter :admin_auth, :except => [:show, :index]
   
  # before_filter :use_test_user
 

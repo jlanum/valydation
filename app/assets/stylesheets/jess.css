@@ -837,8 +837,8 @@ width: 62px;
         margin: 30px 0;
       }
 
-.order-status {
-	color:#432060 !important;
+.view-sales-btn {
+	width: 77px;
 }
 
 .upload-image {
@@ -1183,3 +1183,5 @@ border-top: 1px solid #bdbdbd; }
 .contact-margin {
 	margin-top: 34px;
 }
+
+

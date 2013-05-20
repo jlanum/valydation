@@ -55,7 +55,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <% if @user.is_merchant %><li><a href="<%= new_sale_url %>">Upload</a></li><% end %>
-              <li><a href=#>Product Care</a></li>
+              <li><a href="/page/photo-tips">Product Care</a></li>
 							<li><a href="<%= edit_user_url("self") %>">Account</a></li>
               <li><a href="/page/about">About Us</a></li>
               <li><%= link_to "Blog", "http://www.valydation.tumblr.com", :target => "_blank" %></li>
@@ -72,7 +72,7 @@
     <div id="footer">
 		    <medium>
 	       <font color="#ffffff"> 
-		<p><%= link_to "ABOUT US", "pages/about" %> | <%= link_to "BLOG", "http://www.valydation.tumblr.com", :target => "_blank" %> | <a href="/page/privacy">BECOME A SILICON LEGEND</a> | <a href="/page/faq-shoppers">AFFILIATES</a> | <a href="/page/help">HELP</a> | <a href="/page/jobs">JOBS</a> | <a href="/page/authenticity">AUTHENTICITY</a> | <a href="/page/contact">CONTACT US</a></p>
+		<p><%= link_to "ABOUT US", "pages/about" %> | <%= link_to "BLOG", "http://www.valydation.tumblr.com", :target => "_blank" %> | <a href="/page/privacy">BECOME A SILICON LEGEND</a> | <a href="/page/affiliates">AFFILIATES</a> | <a href="/page/help">HELP</a> | <a href="/page/jobs">JOBS</a> | <a href="/page/authenticity">AUTHENTICITY</a> | <a href="/page/contact">CONTACT US</a></p>
 		
 		<p>&copy;<%= link_to "Valydation 2013, All rights reserved.", "http://valydation.com" %><a href="/page/tos"> Terms of Service</a> and <a href="/page/privacy">Privacy Policy</a></p>
 	     </font> </medium>

@@ -24,23 +24,21 @@ body {
 	<div class="container">
 		<div class="marketing">
 			<div class="signup-unit">
-        <span class="order-status">
-         
-				</span>
+       
 
-
-        <fieldset>
+       
 
 
             <legend>Edit Account Settings 
 
-              <a href="/logout" class="btn btn-medium pull-right">Logout</a>
+              <a href="/logout" class="btn btn-medium pull-right btn-success">Logout</a>
         
         </legend>
 
-        
-      	<a href="<%= purchases_url %>"><u>Order Status</u></a><br>
-        <a href="<%= user_custom_slug_url(@user) %>"><u>View Sales</u></a>
+      
+      	<%= link_to "Order Status", purchases_url, :class => "btn btn-success" %><br><br>
+
+        <%= link_to "View Sales", user_custom_slug_url(@user), :class => "btn btn-success view-sales-btn" %>
         <hr>
 
 
@@ -79,22 +77,22 @@ function checkSize(max_img_size)
         
         <img src="<%= @user.photo_version_url(:profile) %>"><br><br>
         
-        <button class="btn url" type="button" onclick="$('#photo_file_field').click()">Select Image</button>        
-        <button id="upload-button" class="btn url" type="button" onclick="uploadPhoto()" style="display:none;">Upload Image</button><br>
+        <button class="btn url btn-success" type="button" onclick="$('#photo_file_field').click()">Upload Image</button>        
+        <button id="upload-button" class="btn url btn-success" type="button" onclick="uploadPhoto()" style="display:none;">Upload Image</button><br>
         
       <% end %> 
 
 
         Email
-            <div class="input-append">
+            
 
         <%= form_for(@user, :html => {:id => "email_form"}) do |f| %>
           <%= text_field_tag "email", '',
             :class => "span2", :placeholder => @user.email %>
-				  <button class="btn url" type="button" onclick="$('#email_form')[0].submit();">Change Email</button><br>
+				  <button class="btn url btn-success" type="button" onclick="$('#email_form')[0].submit();">Change Email</button><br>
 				<% end %>
 
-					</div>
+					
 				  </fieldset>
 				<hr>
 
@@ -119,16 +117,17 @@ function changePassword() {
           <br>
           <%= password_field_tag "passwd_new", "", :class => "span2 pwd", :placeholder => "New Password" %>
           <%= password_field_tag "passwd_confirm", "", :class => "span2 pwd", :placeholder => "Confirm Password" %>
-				  <button class="btn url" type="button" onclick="return changePassword();">Change Password</button><br>
+				  <button class="btn url btn-success" type="button" onclick="return changePassword();">Change Password</button><br>
         <% end %>
 
         <hr>
-          <div class="input-prepend">
+				Zip Code
+          
         <%= form_for(@user, :html => {:id => "zip_form"}) do |f| %>
           <%= text_field_tag "zip_code", "", :class => "span1", :placeholder => @user.zip_code, :maxlength => 5 %>
-				  <button class="btn url" type="button" onclick="$('#zip_form')[0].submit();">Change Zip Code</button><br>
+				  <button class="btn btn-success url" type="button" onclick="$('#zip_form')[0].submit();">Change Zip Code</button><br>
         <% end %>
-			</div>
+		
       <hr>
 
       <script type="text/javascript">
@@ -162,7 +161,7 @@ function checkSize(max_img_size)
 
 			<form class="horizontal">
 			  <fieldset>
-			    <legend>Profile (shown publicly when posting comments)</legend>
+			    Profile (shown publicly when posting comments)
 			</fieldset>
 			</form>
 
@@ -203,7 +202,7 @@ function checkSize(max_img_size)
         <br>
         <button class="btn url btn-success" type="button" onclick="$('#bio_form')[0].submit();">Save</button><br>
       <% end %>
-		<hr>
+		
 		
 
 	

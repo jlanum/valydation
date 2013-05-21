@@ -841,6 +841,10 @@ width: 62px;
 	width: 77px;
 }
 
+.order-status-btn {
+	margin-bottom: -12px;
+}
+
 .upload-image {
 	margin-bottom: 10px;
 }
@@ -1184,4 +1188,19 @@ border-top: 1px solid #bdbdbd; }
 	margin-top: 34px;
 }
 
+.what-we-do h3 {
+	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+	font-weight: lighter;
+	font-stretch: normal;
+	font-size: 31px;
+	color: #432060;
+       margin-bottom: -11px;
+}
 
+.about-us-text {
+	font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;
+	font-weight: normal;
+	font-stretch: normal;
+	font-size: 21px;
+        line-height: 23px;
+}

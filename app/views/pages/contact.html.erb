@@ -10,7 +10,7 @@ body {
 	          <div class="well sidebar-nav">
 	            <ul class="nav nav-list">
 	              <li class="nav-header">Helpful Stuff</li>
-            <li class="active"><a href="/page/about">About</a></li>
+            <li><a href="/page/about">About</a></li>
             <li><a href="/page/photo-tips">Authenticity</a></li>
              <li><a href="/page/help">Help</a></li>
             <li><a href="http://valydation.tumblr.com/">Blog</a></li>
@@ -27,9 +27,9 @@ body {
 <div class="container">
   <div class="span2"></div>
   <div class="span8">
-<div class="contact-margin contact">
-  <p><font size="8">Contact</font></p>
-  <h4>Send us a message</h4>
+<div class="contact-margin what-we-do">
+  <h3>Contact</h3><br>
+  <p class="about-us-text">Send us a message</p>
   <%= form_tag(contact_url, :method => "post") do |f| %>
   <fieldset>
 
@@ -48,7 +48,8 @@ body {
   </fieldset>
   <label>Message *</label>
   <textarea name="message" rows="10" class="span9"></textarea><br>
-  <button type="submit" class="btn btn-large btn-success">Submit</button>
+  <button type="submit" class="btn btn-large btn-success">Submit</button><br>
+* indicates a required field
 <% end %>
 </div>
 </div>

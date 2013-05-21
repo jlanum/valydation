@@ -82,8 +82,8 @@ class Purchase < ActiveRecord::Base
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => "Processing Your Sale", 
-        :from_email => "shop@mysaletable.com", 
-        :from_name => "MySaleTable", 
+        :from_email => "hi@valydation.com", 
+        :from_name => "/valydation", 
         :to => [{:email => self.user.email}], 
         :merge_vars => [{:rcpt => self.user.email, 
                          :vars => common_merge_vars}]
@@ -100,8 +100,8 @@ class Purchase < ActiveRecord::Base
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => "You have a customer", 
-        :from_email => "shop@mysaletable.com", 
-        :from_name => "MySaleTable", 
+        :from_email => "hi@valydation.com", 
+        :from_name => "/valydation", 
         :to => [{:email => self.sale.user.email}], 
         :merge_vars => [{:rcpt => self.sale.user.email, 
                          :vars => common_merge_vars}]
@@ -118,10 +118,10 @@ class Purchase < ActiveRecord::Base
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => "Item is available", 
-        :from_email => "shop@mysaletable.com", 
-        :from_name => "MySaleTable", 
-        :to => [{:email => "shop@mysaletable.com"}], 
-        :merge_vars => [{:rcpt => "shop@mysaletable.com", 
+        :from_email => "hi@valydation.com", 
+        :from_name => "/valydation", 
+        :to => [{:email => "hi@valydation.com"}], 
+        :merge_vars => [{:rcpt => "hi@valydation.com", 
                          :vars => common_merge_vars}]
       }
     }
@@ -136,10 +136,10 @@ class Purchase < ActiveRecord::Base
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => "Item is not available", 
-        :from_email => "shop@mysaletable.com", 
-        :from_name => "MySaleTable", 
-        :to => [{:email => "shop@mysaletable.com"}], 
-        :merge_vars => [{:rcpt => "shop@mysaletable.com", 
+        :from_email => "hi@valydation.com", 
+        :from_name => "/valydation", 
+        :to => [{:email => "hi@valydation.com"}], 
+        :merge_vars => [{:rcpt => "hi@valydation.com", 
                          :vars => common_merge_vars}]
       }
     }

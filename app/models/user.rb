@@ -176,8 +176,8 @@ class User < ActiveRecord::Base
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => subject,
-        :from_email => "shop@mysaletable.com", 
-        :from_name => "MySaleTable", 
+        :from_email => "hi@valydation.com", 
+        :from_name => "/valydation", 
         :to => [{:email => self.email}], 
         :merge_vars => [{:rcpt => self.email, 
                          :vars => []}]

@@ -1,8 +1,8 @@
 class ShopMailer < ActionMailer::Base
-  default from: "MySaleTable <shop@mysaletable.com>"
+  default from: "/valydation <kelly@valydation.com>"
 
   def test_email(recip)
-    mail(:to => recip, :subject => "Your MySaleTable purchase is complete!")
+    mail(:to => recip, :subject => "Your /valydation purchase is complete!")
   end
 
   def contact_email(from_name, from_email, subject, body)
@@ -11,7 +11,7 @@ class ShopMailer < ActionMailer::Base
     @subject = subject
     @body = body
 
-    mail(:to => "hi@mysaletable.com",
+    mail(:to => "kelly@valydation.com",
          :subject => subject)
   end
 

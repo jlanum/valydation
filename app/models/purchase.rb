@@ -21,7 +21,9 @@ class Purchase < ActiveRecord::Base
                   :subtotal,
                   :size,
                   :ship_it,
-                  :retailer_status
+                  :retailer_status,
+                  :items,
+                  :cart
 
   belongs_to :sale
   belongs_to :user

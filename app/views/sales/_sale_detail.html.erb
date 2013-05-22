@@ -138,8 +138,8 @@ return true;
 					      <% if sale.sold_out %>
 					        <a href="#" class="btn btn-success btn-large disabled">SOLD</a>          
 					      <% else %> 
-					        <% if sale.user and sale.user.is_merchant %>      
-					          <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success btn-large ">Add To Bag</a>
+					        <% if sale.user or sale.user.is_merchant %>      
+					          <a href="<%= add_to_cart_url(:sale_id => sale.id) %>" class="btn btn-success btn-large ">Add To Cart</a>
 					        <% else %>
 					          <a href="#" class="btn btn-success btn-large disabled">Add To Bag</a>
 					        <% end %>
@@ -148,7 +148,7 @@ return true;
 					
 	    </div>
 	</form>                    </div>
-
+ 
 	                    <div class="additional-links">
 	             <ul>
 	                 

@@ -28,7 +28,7 @@ HiStrollers::Application.routes.draw do
   resources :merchants
   resources :activities
   resources :users 
-
+  match '/purchases/add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
   match '/stores/list' => "users#stores"
 
   match '/mine' => 'sales#index',
@@ -38,15 +38,16 @@ HiStrollers::Application.routes.draw do
           :defaults => {:im_following => true}, :as => "users_im_following"
   match '/users/:user_id/followers' => 'followers#index',
           :defaults => {:following_me => true}, :as => "users_following_me"
-
+ 
   resources :purchases do
     get 'sold', :on => :collection
   end
   match '/purchase_confirmation' => 'purchases#confirmation',
     :as => 'purchase_confirmation'
   match '/purchase_available' => 'purchases#available'
-
   match 'admin' => 'admin/sales#index'
+  match 'add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
+  match 'clear_cart' => 'purchases#clear_cart', :as => 'clear_cart'
   namespace :admin do
     resources :users do
       get 'export', :on => :collection
@@ -70,6 +71,7 @@ HiStrollers::Application.routes.draw do
 
   match '/stores' => "pages#show", :defaults => {:slug => "merchants-intro"}, :as => :stores_page
   match '/contact' => 'pages#contact', :as => :contact
+  match '/consignment' => 'pages#consignment', :as => :consignment
   match '/page/:slug.css' => 'pages#css'
   match '/page/:slug' => 'pages#show', :as => :page
 

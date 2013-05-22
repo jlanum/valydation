@@ -4,6 +4,23 @@ class SalesController < ApplicationController
   before_filter :admin_auth, :except => [:show, :index, :group]
   
  # before_filter :use_test_user
+ def add_to_cart
+     @cart = get_cart
+     @cart.add_to_cart(Sale.find(:sale_id => params[:sale_id]))
+   end
+
+   def get_cart
+     if session[:cart]
+       return session[:cart]
+     else
+       session[:cart] = Cart.new
+       return session[:cart]
+     end
+   end
+
+   def clear
+     @items.clear
+   end
 
   def show
     @sale = Sale.where(:id => params[:id], :visible => true).

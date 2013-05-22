@@ -63,7 +63,7 @@ module HiStrollers
     require 'rails-database-url'
 
     config.logger = Logger.new(STDOUT)
-
+   
     config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
       #r301 %r{.*}, 'http://www.mysaletable.com$&',
       #  :if => Proc.new { |rack_env| rack_env['SERVER_NAME'] != 'www.mysaletable.com' }

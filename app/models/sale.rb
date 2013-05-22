@@ -33,7 +33,8 @@ class Sale < ActiveRecord::Base
                   :tax_cost,
                   :shipping_price,
                   :condition,
-                  :validated
+                  :validated,
+                  :purchases
 
 
   attr_accessor :current_user

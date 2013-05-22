@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :acted_activities, :class_name => "Activity", :foreign_key => "actor_id", :dependent => :destroy
 
+ 
   mount_uploader :photo, UserPhotoUploader
 
   def self.public_json

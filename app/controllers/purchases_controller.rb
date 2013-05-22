@@ -2,6 +2,24 @@ class PurchasesController < ApplicationController
   before_filter :handle_device
   before_filter :require_user, :except => "available"
   before_filter :require_ssl, :except => "available"
+  
+  def add_to_cart
+      @cart = get_cart
+      @cart.add_to_cart(Sale.find(params[:sale_id]))
+    end
+
+  def get_cart
+      session[:cart] ||= Cart.new
+    end
+    
+  def view_cart
+    	@cart = get_cart
+    end
+    
+  def clear_cart
+      @cart = get_cart
+      @cart.clear
+  end
 
   def index
     @purchases = Purchase.where(:user_id => @user.id).
@@ -162,3 +180,7 @@ class PurchasesController < ApplicationController
 
 
 end
+
+
+
+

@@ -1,0 +1,59 @@
+<style>
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+<div class="container">
+	      <div class="row-fluid">
+	        <div class="span3">
+		<div class="marketing">
+	          <div class="well sidebar-nav">
+	            <ul class="nav nav-list">
+	              <li class="nav-header">Helpful Stuff</li>
+            <li><a href="/page/about">About</a></li>
+            <li><a href="/page/photo-tips">Authenticity</a></li>
+             <li><a href="/page/help">Help</a></li>
+            <li><a href="http://valydation.tumblr.com/">Blog</a></li>
+              <li><a href="/page/jobs">Jobs</a></li>
+            <li><a href="/contact">Contact</a></li>
+						<li class="active"><a href="/contact">Consignment</a></li>
+            <li class="nav-header">Legal Stuff</li>
+            <li><a href="/page/privacy">Privacy Policy</a></li>
+            <li><a href="/page/tos">Terms of Service</a></li>
+	              
+	            </ul>
+	          </div><!--/.well -->
+	        </div><!--/span-->
+	</div><!-- end marketing -->
+<div class="container">
+  <div class="span2"></div>
+  <div class="span8">
+<div class="contact-margin what-we-do">
+  <h3>Consignment</h3><br>
+  <p class="about-us-text">Tell us what you'd like to sell.</p>
+  <%= form_tag(contact_url, :method => "post") do |f| %>
+  <fieldset>
+
+    <label>Your Name *</label>
+    <input name="name" type="text" placeholder="Type here">
+  </fieldset>
+  <fieldset>
+
+    <label>Email *</label>
+    <input name="email" type="text" placeholder="Type something">
+  </fieldset>
+  <fieldset>
+
+    <label>Phone Number *</label>
+    <input name="subject" type="text" placeholder="Type something">
+  </fieldset>
+  <label>Company and Product Description *</label>
+  <textarea name="message" rows="10" class="span9"></textarea><br>
+  <button type="submit" class="btn btn-large btn-success">Submit</button><br>
+* indicates a required field
+<% end %>
+</div>
+</div>
+</div></div></div>
+<br><br><br>
+

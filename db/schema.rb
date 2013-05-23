@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522171024) do
+ActiveRecord::Schema.define(:version => 20130523164807) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(:version => 20130522171024) do
     t.string       "temp_image_url_0"
     t.string       "temp_image_url_1"
     t.string       "temp_image_url_2"
-    t.boolean      "visible",                                 :default => false
     t.boolean      "uploaded_images",                         :default => false
     t.boolean      "processed_images",                        :default => false
     t.boolean      "does_shipping",                           :default => false
@@ -226,6 +225,8 @@ ActiveRecord::Schema.define(:version => 20130522171024) do
     t.string       "temp_image_url_5"
     t.string       "temp_image_url_6"
     t.string       "temp_image_url_7"
+    t.boolean      "visible",                                 :default => true
+    t.string       "product_history"
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

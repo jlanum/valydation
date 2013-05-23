@@ -53,22 +53,16 @@
                <fieldset>
 
                
-                 <div class="control-group">
-                   <label class="control-label" for="sale_display_address">Address</label>
-                   <div class="controls">
-                     <%= text_field(:sale, :display_address, :class => "input-xxlarge") %>
-                   </div>
-                 </div>
 
                  <div class="control-group">
-                   <label class="control-label" for="sale_brand">Brand</label>
+                   <label class="control-label" for="sale_brand">Company</label>
                    <div class="controls">
                      <%= text_field(:sale, :brand, :class => "input-xlarge") %>
                    </div>
                  </div>
 
                  <div class="control-group">
-                   <label class="control-label" for="sale_product">Product</label>
+                   <label class="control-label" for="sale_product">Product Desc</label>
                    <div class="controls">
                      <%= text_field(:sale, :product, :class => "input-xlarge") %>
                    </div>
@@ -91,31 +85,40 @@
                             </div>
 
 
-                            <div class="control-group">
-                              <label class="control-label" for="city_id">City</label>
-                              <div class="controls">
-                                <%= select(:sale, :city_id, @cities.collect { |c| [c.name,c.id] }) %>
-                              </div>
-                            </div>
+                         
 
                             <div class="control-group">
-                              <label class="control-label" for="sale_orig_price">Orig Price</label>
+                              <label class="control-label" for="sale_orig_price">Retails Price</label>
                               <div class="controls">
                                 <%= text_field(:sale, :orig_price, :class => "input-small") %>
                               </div>
                             </div>
 
                             <div class="control-group">
-                              <label class="control-label" for="sale_sale_price">Sale Price</label>
+                              <label class="control-label" for="sale_sale_price">Cost</label>
                               <div class="controls">
                                 <%= text_field(:sale, :sale_price, :class => "input-small") %>
                               </div>
                             </div>
 
                             <div class="control-group">
-                              <label class="control-label" for="sale_orig_price">Percent Off</label>
+                              <label class="control-label" for="sale_orig_price">Margin</label>
                               <div class="controls">
                                 <%= text_field(:sale, :percent_off_int, :class => "input-small") %>
+                              </div>
+                            </div>
+
+														<div class="control-group">
+                              <label class="control-label" for="sale_product_history">Product History</label>
+                              <div class="controls">
+                                <%= text_area_tag(:sale, :product_history, :rows => 10, :class => "input-xxlarge") %>
+                              </div>
+                            </div>
+
+														<div class="control-group">
+                              <label class="control-label" for="sale_condition">Condition</label>
+                              <div class="controls">
+                                <%= text_field(:sale, :condition, :class => "input-small") %>
                               </div>
                             </div>
 

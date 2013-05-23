@@ -81,7 +81,7 @@
     
 
   <span class="comments form">
-    <h3>Comments</h3>
+    <h3 class="comment-form">Comments</h3>
     <% sale.comments.each do |comment| %>
       <img height="36" width="36" src="<%= comment.user.photo_version_url(:feed) %>" >&#160;<%= comment.text %><br><br>
   <% end %>
@@ -180,9 +180,7 @@ return true;
 	                    </p>
 
 
-	                                                                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.<br>
-	<br>
-	Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+	                           <p><%= sale.product_history %></p>
 
 	                            <p>
 	                               
@@ -192,7 +190,7 @@ return true;
 	                        </div>
 
 
-	                            <h3 class="menu_head menu_layaway">Terms &amp; CONDITIONS</h3>
+	                            <h3 class="menu_head menu_layaway">Terms &amp; Conditions</h3>
 	<div class="menu_body layaway_text" style="display: block;">
 	<!--                                <p>
 	        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.

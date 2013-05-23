@@ -34,7 +34,8 @@ class Sale < ActiveRecord::Base
                   :shipping_price,
                   :condition,
                   :validated,
-                  :purchases
+                  :purchases,
+                  :product_history
 
 
   attr_accessor :current_user

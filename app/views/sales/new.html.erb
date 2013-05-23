@@ -583,6 +583,10 @@ function selectSize(size_id) {
                              <%= text_area_tag "product", params[:product], :rows => 10, :class => "span2" %>
                              <br><br>
 
+														<span class="add-on">Product History</span>
+                             <%= text_area_tag "product_history", params[:product_history], :rows => 10, :class => "span2" %>
+                             <br><br>
+
 														<span class="add-on">Condition </span>
 			                       <%= text_field_tag "condition", params[:condition], :class => "span2" %>
 			                       <br><br>
@@ -623,26 +627,7 @@ function selectSize(size_id) {
                                 
 															
                                  
-                                   <div class="span4 shipping" style="text-align: left;">
-                                     <label class="radio">
-                                       <%= radio_button_tag "does_shipping", 0, (params[:does_shipping].to_i == 0) %>
-                                       No, shipping is not available for this item.
-                                     </label>
-                                     <label class="radio">
-                                       <%= radio_button_tag "does_shipping", 1, (params[:does_shipping].to_i == 1) %>
-                                       
-                                       Yes, I will ship this item within the Continental U.S.
-                                     </label>
-                                     <br><hr>
-                                     <label class="radio">
-                                       <%= radio_button_tag "allow_returns", 0, (params[:allow_returns].to_i == 0) %>
-                                       No, this item can not be returned.
-                                     </label>
-                                     <label class="radio">
-                                       <%= radio_button_tag "allow_returns", 1, (params[:allow_returns].to_i == 1) %>
-						  Yes, this item can be returned within (10) days of purchase.
-                                     </label>
-                                   </div>
+                                  
                                  </div>
                                
 																

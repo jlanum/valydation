@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521163300) do
+ActiveRecord::Schema.define(:version => 20130522171024) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -211,10 +211,6 @@ ActiveRecord::Schema.define(:version => 20130521163300) do
     t.string       "condition"
     t.boolean      "validated",                               :default => false
     t.string       "source"
-    t.integer      "shipping_price_cents",                    :default => 0,     :null => false
-    t.string       "shipping_price_currency",                 :default => "USD", :null => false
-    t.integer      "tax_cost_cents",                          :default => 0,     :null => false
-    t.string       "tax_cost_currency",                       :default => "USD", :null => false
     t.string       "image_3"
     t.string       "image_4"
     t.string       "image_5"

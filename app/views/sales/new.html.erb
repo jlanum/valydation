@@ -320,10 +320,7 @@ function validateForm() {
     return false;
   }
 
-  if (!parseFloat($('#sale_price').val()) > 0) {
-    alert('Please enter the sale price.');
-    return false;
-  }
+
 
   if (!parseFloat($('#percent_off').val()) > 0) {
     alert('Please enter the percent off.');
@@ -575,13 +572,7 @@ function selectSize(size_id) {
                            :onchange => "salePriceChanged()" %>
                          <br><br>
 
-												<span class="add-on">Tax $</span>
-	                       <%= text_field_tag "tax_cost", params[:tax_cost], :class => "span2" %>
-	                       <br><br>
-	
-												<span class="add-on">Shipping $</span>
-	                       <%= text_field_tag "shipping_price", params[:shipping_price], :class => "span2" %>
-	                       <br><br>
+											
 
                            <span class="add-on">% Margin</span>
                            <%= text_field_tag "percent_off", params[:percent_off], :class => "span2",
@@ -592,21 +583,11 @@ function selectSize(size_id) {
                              <%= text_area_tag "product", params[:product], :rows => 10, :class => "span2" %>
                              <br><br>
 
-														<span class="add-on">Condition $</span>
+														<span class="add-on">Condition </span>
 			                       <%= text_field_tag "condition", params[:condition], :class => "span2" %>
 			                       <br><br>
 			
-															<div class="span4 shipping" style="text-align: left;">
-															<label class="radio">
-                                 <%= radio_button_tag "validated", 0, (params[:validated].to_i == 0) %>
-                                 No, not validated.
-                               </label>
-                               <label class="radio">
-                                 <%= radio_button_tag "validated", 1, (params[:validated].to_i == 1) %>
-                                 
-                                 Yes, it's validated.
-                               </label>
-										          </div>
+															
 										            
 										         
 

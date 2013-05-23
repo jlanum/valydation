@@ -163,8 +163,6 @@ class SalesController < ApplicationController
                      :longitude => params[:longitude],
                      :user_lat => params[:user_lat],
                      :user_lon => params[:user_lon],
-                     :shipping_price => params[:shipping_price],
-                     :tax_cost => params[:tax_cost],
                      :validated => params[:validated],
                      :condition => params[:condition],
                      :city_id => @user.city_id,

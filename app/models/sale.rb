@@ -69,10 +69,10 @@ class Sale < ActiveRecord::Base
   
 
   def self.categories
-    ["Vintage Apparel",
-     "Mugs & Glassware",
-     "Bags",
-     "Hardware",
+    ["Apparel",
+     "Ceramic & Glass",
+     "Promotional",
+     "Photography",
      "Silicon Legends"]
   end
 

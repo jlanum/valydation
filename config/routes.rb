@@ -44,10 +44,14 @@ HiStrollers::Application.routes.draw do
   end
   match '/purchase_confirmation' => 'purchases#confirmation',
     :as => 'purchase_confirmation'
+    match '/purchase_new' => 'purchases#new',
+      :as => 'purchase_new'
   match '/purchase_available' => 'purchases#available'
   match 'admin' => 'admin/sales#index'
   match 'add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
   match 'clear_cart' => 'purchases#clear_cart', :as => 'clear_cart'
+  match 'view_cart' => 'purchases#view_cart', :as => 'view_cart'
+  match 'new' => 'purchases#new', :as => 'new'
   namespace :admin do
     resources :users do
       get 'export', :on => :collection

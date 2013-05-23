@@ -6,21 +6,21 @@ class SalesController < ApplicationController
  # before_filter :use_test_user
  def add_to_cart
      @cart = get_cart
-     @cart.add_to_cart(Sale.find(:sale_id => params[:sale_id]))
+     @cart.add_to_cart(Sale.find(params[:sale_id]))
    end
 
-   def get_cart
-     if session[:cart]
-       return session[:cart]
-     else
-       session[:cart] = Cart.new
-       return session[:cart]
-     end
+ def get_cart
+     session[:cart] ||= Cart.new
    end
-
-   def clear
-     @items.clear
+   
+ def view_cart
+   	@cart = get_cart
    end
+   
+ def clear_cart
+     @cart = get_cart
+     @cart.clear
+ end
 
   def show
     @sale = Sale.where(:id => params[:id], :visible => true).

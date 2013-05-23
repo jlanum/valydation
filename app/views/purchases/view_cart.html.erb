@@ -15,8 +15,59 @@ body {
 	<li><%= h(item.brand) %></li>
 	<li><%= h(item.orig_price) %></li>
 	
-<% end %>
-</ul>
 
-<a href="/sales" class="btn btn-success">Return to Shopping</a>
-<%= link_to "Clear Cart", :action => "clear_cart" %>
+</ul>
+<table class="table table-bordered">               
+ <% if @item.sizes.length == 1 %>
+   <tr>
+   <td>
+      <font size="3" class="muted">Size</font>
+    </td> 
+    <td>
+      <%= @item.size %> 
+      <%= hidden_field_tag 'transaction[custom_fields][size]', @item.size %>
+   </td>
+ </tr>
+ <% end %>
+  <tr>
+    <td>
+      <font size="3" class="muted">Sale Price</font>
+    </td>
+    <td>
+      <%= humanized_money_with_symbol @item.subtotal %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <font size="3" class="muted">Sales Tax</font>
+    </td>
+    <td>
+      <%= humanized_money_with_symbol @item.tax %>
+    </td>
+  </tr>
+  <% if params[:ship].to_i == 1 %>
+    <tr id="shipping_row">
+    <td>
+      <font size="3" class="muted">Shipping</font>
+    </td>
+    <td>
+      <%= humanized_money_with_symbol @item.shipping %>
+    </td>
+  </tr>
+<% end %>
+</tr>
+<tr id="total">
+  <td>
+    <font size="3" class="muted">Total</font>
+  </td>
+  <td>
+    <%= humanized_money_with_symbol @purchase.total %>
+  </td>
+</tr>                  
+</table>
+<% end %>
+
+</div><br><br><br><br><br>
+<a href="/sales" class="btn btn-success">Return to Shopping</a><br><br>
+<%= button_to "Clear Cart", {:action => "clear_cart"}, :class => "btn btn-success" %>
+</div>

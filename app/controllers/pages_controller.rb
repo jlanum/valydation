@@ -9,6 +9,7 @@ class PagesController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
   end
+  
 
   def show
     @page = Page.where(:slug => params[:slug]).first

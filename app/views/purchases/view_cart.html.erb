@@ -45,7 +45,7 @@ Your cart is empty!
 <% for item in @cart.items %>
 <div class="item-listing row-fluid" style="display: block;"><input class="check-box" type="checkbox" checked="">
 <a href="<%= sale_url(item.id) if item.id %>">
-  <img class="pull-left" id="sale_image_<%= item.id %>" src="<%= item.image_0.versions[:web_index] if item.image_0 %>" alt="" />
+  <img class="pull-left" id="sale_image_<%= item.id %>" src="<%= item.image_0.versions[:web_thumbnail] if item.image_0 %>" alt="" />
 </a>
 <div class="item-info">
   <a class="title"><%= h(item.product) %></a>

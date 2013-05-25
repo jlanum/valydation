@@ -8,8 +8,13 @@ class PurchasesController < ApplicationController
       @cart.add_to_cart(Sale.find(params[:sale_id]))
     end
 
-  def get_cart
-      session[:cart] ||= Cart.new
+    def get_cart
+      if session[:cart]
+        return session[:cart]
+      else
+        session[:cart] = Cart.new
+        return session[:cart]
+      end
     end
     
   def view_cart

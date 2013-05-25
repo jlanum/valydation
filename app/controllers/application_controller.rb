@@ -93,6 +93,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
+  
 
   def require_user
     handle_user

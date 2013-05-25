@@ -49,7 +49,7 @@ Your cart is empty!
 <div class="summary-title">Order Summary</div>
 <div class="summary-totals-container" style=""><dl>
 	<% for item in @cart.items %>
-	<dt class="subtotal"><%= h(item.product) %>:</dt>
+	<dt class="subtotal"><%= h(item.brand) %>:</dt>
   <dd class="subtotal">$<%= h(item.orig_price) %></dd>
 	<% end %>
   <dt class="subtotal">Subtotal:</dt>

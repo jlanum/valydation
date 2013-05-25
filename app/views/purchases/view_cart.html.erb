@@ -1,4 +1,5 @@
-    <div class="container">
+<div class="cart-container">   
+ <div class="container">
      
       	<div class="category-feed-cart well">
 			    <div class="back-button btn btn-success"><a href="/sales">Back</a></div>
@@ -40,18 +41,38 @@ Your cart is empty!
 <% end %>
 </div>
 </div>
+
+<% for item in @cart.items %>
+<div class="item-listing row-fluid" style="display: block;"><input class="check-box" type="checkbox" checked="">
+<a href="<%= sale_url(item.id) if item.id %>">
+  <img class="pull-left" id="sale_image_<%= item.id %>" src="<%= item.image_0.versions[:web_index] if item.image_0 %>" alt="" />
+</a>
+<div class="item-info">
+  <a class="title"><%= h(item.product) %></a>
+  <ul>
+    <li>Size: ONE SIZE</li>
+  </ul><br>
+  <hr>
+  <div class="item-price">
+    <strong>
+     $<%= h(item.orig_price) %>
+    </strong>
+  </div>
+  <a class="pull-right remove-link" href="#">remove</a>
+</div></div>
+<% end %>
+
+
+
 </div>
 <div class="loading" style="display: none;">
 <div class="spinner"></div>
 </div>
-<div class="order-summary" style="position: static; top: 70px; left: 665px; width: 360px;">
+<div class="order-summary">
 <div class="cart-body summary-body">
 <div class="summary-title">Order Summary</div>
 <div class="summary-totals-container" style=""><dl>
-	<% for item in @cart.items %>
-	<dt class="subtotal"><%= h(item.brand) %>:</dt>
-  <dd class="subtotal">$<%= h(item.orig_price) %></dd>
-	<% end %>
+	
   <dt class="subtotal">Subtotal:</dt>
   <dd class="subtotal"><%= humanized_money_with_symbol @cart.items.sum(&:orig_price) %></dd>
   <dt>	Shipping:</dt>

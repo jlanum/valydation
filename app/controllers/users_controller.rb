@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   #before_filter :require_device
   before_filter :require_user, :only => [:update, :show, :edit, :stores]
   before_filter :handle_user, :only => [:landing, :new, :stores]
+  before_filter :get_cart
+  before_filter :view_cart
 
 
   def stores

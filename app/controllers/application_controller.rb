@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_device
-    @device or raise "WTF, no device for you."
+    @device or raise "There seems to be a problem with your device."
   end
 
   def handle_user
@@ -94,7 +94,28 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
+  def add_to_cart
+       @cart = get_cart
+       @cart.add_to_cart(Sale.find(params[:sale_id]))
+     end
+
+     def get_cart
+       if session[:cart]
+         return session[:cart]
+       else
+         session[:cart] = Cart.new
+         return session[:cart]
+       end
+     end
+
+   def view_cart
+     	@cart = get_cart
+     end
+
+   def clear_cart
+       @cart = get_cart
+       @cart.clear
+   end
 
   def require_user
     handle_user

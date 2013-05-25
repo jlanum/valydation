@@ -2,7 +2,8 @@ class SalesController < ApplicationController
   before_filter :handle_device
   before_filter :require_user
   before_filter :admin_auth, :except => [:show, :index, :group]
-  
+  before_filter :get_cart
+  before_filter :view_cart
  # before_filter :use_test_user
  def add_to_cart
      @cart = get_cart

@@ -81,15 +81,15 @@ function checkSize(max_img_size)
         <button id="upload-button" class="btn url btn-success" type="button" onclick="uploadPhoto()" style="display:none;">Upload Image</button><br>
         
       <% end %> 
+<hr>
 
-
-        Email
+      Change Email
             
 
         <%= form_for(@user, :html => {:id => "email_form"}) do |f| %>
           <%= text_field_tag "email", '',
-            :class => "span2", :placeholder => @user.email %>
-				  <button class="btn url btn-success" type="button" onclick="$('#email_form')[0].submit();">Change Email</button><br>
+            :class => "span3", :placeholder => @user.email %>
+				  <button class="btn url btn-success" type="button" onclick="$('#email_form')[0].submit();">Save</button><br>
 				<% end %>
 
 					
@@ -111,21 +111,21 @@ function changePassword() {
             }
           }
         </script>
-				Password
+				Change Password
         <%= form_for(@user, :html => {:id => "passwd_form"}) do |f| %>
           <%= password_field_tag "passwd_clear", "", :class => "span2 pwd", :placeholder => "Current Password" %> 
           <br>
           <%= password_field_tag "passwd_new", "", :class => "span2 pwd", :placeholder => "New Password" %>
           <%= password_field_tag "passwd_confirm", "", :class => "span2 pwd", :placeholder => "Confirm Password" %>
-				  <button class="btn url btn-success" type="button" onclick="return changePassword();">Change Password</button><br>
+				  <button class="btn url btn-success" type="button" onclick="return changePassword();">Save</button><br>
         <% end %>
 
         <hr>
-				Zip Code
+				Change Zip Code
           
         <%= form_for(@user, :html => {:id => "zip_form"}) do |f| %>
           <%= text_field_tag "zip_code", "", :class => "span1", :placeholder => @user.zip_code, :maxlength => 5 %>
-				  <button class="btn btn-success url" type="button" onclick="$('#zip_form')[0].submit();">Change Zip Code</button><br>
+				  <button class="btn btn-success url" type="button" onclick="$('#zip_form')[0].submit();">Save</button><br>
         <% end %>
 		
       <hr>

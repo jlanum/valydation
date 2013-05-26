@@ -50,7 +50,7 @@ Your cart is empty!
 <div class="item-info">
   <a class="title"><%= h(item.product) %></a>
   <ul>
-    <li>Size: ONE SIZE</li>
+    <li>Size: <%= h(item.size) %></li>
   </ul><br>
   <hr>
   <div class="item-price">
@@ -58,7 +58,7 @@ Your cart is empty!
      $<%= h(item.orig_price) %>
     </strong>
   </div>
-  <a class="pull-right remove-link" href="#">remove</a>
+  <a class="pull-right remove-link" href="#">Remove</a>
 </div></div>
 <% end %>
 
@@ -78,14 +78,14 @@ Your cart is empty!
   <dt>	Shipping:</dt>
   <dd class="free">FREE</dd>
 </dl>
-<hr>
+
 <dl class="total">
   <dt>Total:</dt>
   <dd><%= humanized_money_with_symbol @cart.items.sum(&:orig_price) %></dd>
 </dl></div>
 <div class="checkout-button">
 <div style="margin:0;padding:0;display:inline"></div>
-<button class="btn btn-success" disabled="disabled">Continue &gt;</button>
+<button class="btn btn-success" disabled="disabled">Continue </button>
 </form>
 
 </div>
@@ -93,10 +93,12 @@ Your cart is empty!
 </div>
 <div class="summary-bookend">
 
-<div class="pull-right">
-Questions? <a href="mailto:hi@vayldation.com">Email Us</a>
 
-</div>
+Questions? <a href="mailto:hi@vayldation.com">Email Us</a> 
+<span class="pull-right">
+<%= link_to "Clear Cart", {:action => "clear_cart"} %>
+</span>
+
 </div>
 
 

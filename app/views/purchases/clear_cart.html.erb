@@ -1,9 +1,1 @@
-<h1>Your Cart is now cleared</h1>
-
-<ul>
-<% for item in @cart.items %>
-	<li><%= h(item.brand) %>
-<% end %>
-</ul>
-
-<a href="/sales" class="btn btn-success">Return to Shopping</a>
+<%= render :partial => 'cart' %>

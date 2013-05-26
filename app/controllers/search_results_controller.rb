@@ -1,6 +1,8 @@
 class SearchResultsController < ApplicationController
   before_filter :handle_device
   before_filter :require_user
+  before_filter :get_cart
+  before_filter :view_cart
   #before_filter :use_search_results
 
   def index

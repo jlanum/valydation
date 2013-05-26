@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery :secret => '8469743d0834440b177c1019d068506a'
+  protect_from_forgery 
 
   before_filter :detect_iphone
 

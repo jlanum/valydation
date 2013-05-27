@@ -1,6 +1,10 @@
 class Cart 
 attr_reader :items
+attr_accessor :current_user
+attr_accessor :image_upload_urls
+ 
 
+  
   def initialize
       @items = []
     end
@@ -12,6 +16,8 @@ attr_reader :items
       def clear
         @items.clear
       end
+      
+      
       
       
   end

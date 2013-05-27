@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_filter :handle_device
   before_filter :require_user
-
+  before_filter :get_cart
+  before_filter :view_cart
   def index
     @comments = Comment.where(:sale_id => params[:sale_id]).
       order("created_at ASC").all

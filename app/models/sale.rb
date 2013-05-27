@@ -33,8 +33,6 @@ class Sale < ActiveRecord::Base
                   :tax_cost,
                   :shipping_price,
                   :condition,
-                  :validated,
-                  :purchases,
                   :product_history,
                   :cart,
                   :items

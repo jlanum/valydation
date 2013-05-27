@@ -95,6 +95,24 @@ function checkSize(max_img_size)
 					
 				  </fieldset>
 				<hr>
+				
+					Edit Username for Custom URL (shown publicly when posting comments)
+				        <div class="input-prepend">
+				          <%
+				             custom_slug = "YourNameHere"
+				             if @user.custom_slug and @user.custom_slug.size > 0
+				               custom_slug = @user.custom_slug
+				            end
+				          %>
+				        <span class="add-on">http://www.valydation.com/<%= custom_slug %></span>
+								</div>
+				
+				        <%= form_for(@user, :html => {:id => "custom_slug_form"}) do |f| %>
+				         <%= text_field_tag "custom_slug", @user.custom_slug,
+				           :class => "span2", :placeholder => custom_slug %>
+								  <button class="btn url btn-success" type="button" onclick="$('#custom_slug_form')[0].submit();">Save</button><br>
+				<% end %>			
+				<hr>
 
         <script>
 function changePassword() {
@@ -161,7 +179,7 @@ function checkSize(max_img_size)
 
 			<form class="horizontal">
 			  <fieldset>
-			    Profile (shown publicly when posting comments)
+			    Profile 
 			</fieldset>
 			</form>
 

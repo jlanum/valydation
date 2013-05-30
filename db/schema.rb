@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523164807) do
+ActiveRecord::Schema.define(:version => 20130530214824) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(:version => 20130523164807) do
     t.string       "temp_image_url_6"
     t.string       "temp_image_url_7"
     t.boolean      "visible",                                 :default => true
-    t.string       "product_history"
+    t.text         "product_history"
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

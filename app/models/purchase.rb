@@ -58,7 +58,7 @@ class Purchase < ActiveRecord::Base
     raise "Can't calculate total without a sale!" unless self.sale
 
     if self.ship_it
-      self.shipping = 5.0
+      self.shipping = 0.0
     else
       self.shipping = 0.0
     end
@@ -69,7 +69,7 @@ class Purchase < ActiveRecord::Base
     self.subtotal = self.sale.sale_price.to_f
     self.tax = self.subtotal * sales_tax_rate
 
-    self.total = self.subtotal + self.tax + self.shipping
+    self.total = self.subtotal
   end
 
 
@@ -161,7 +161,6 @@ class Purchase < ActiveRecord::Base
       "BRAND" => self.sale.brand,
       "PRODUCT" => self.sale.product,
       "SIZE" => self.sale.size,
-      "STORE" => self.sale.store_name,
       "DELIVER" => ((self.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
       "SHIPPING" => humanized_money_with_symbol(self.shipping),

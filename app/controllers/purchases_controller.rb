@@ -52,14 +52,14 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    @sale = Sale.find(params[:sale_id])
+    @item = Item.find(params[:item_id])
     @purchase = Purchase.new(:user_id => @user.id, :sale_id => @sale.id, :ship_it => params[:ship_it])
     @purchase.calculate_total!
 
     @tr_data = Braintree::TransparentRedirect.transaction_data(
       :redirect_url => purchase_confirmation_url,
       :transaction => {
-        :custom_fields => {"sale_id" => @sale.id,
+        :custom_fields => {"item_id" => @item.id,
                            "shipping_amount" => @purchase.shipping,
                            "tax_amount" => @purchase.tax,
                            "subtotal" => @purchase.subtotal},

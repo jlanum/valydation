@@ -9,8 +9,8 @@ attr_accessor :image_upload_urls
       @items = []
     end
 
-    def add_to_cart(sale) 
-      @items << sale
+    def add_to_cart(sale_id) 
+      @items << sale_id
       end
       
       def clear

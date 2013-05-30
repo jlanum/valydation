@@ -35,7 +35,8 @@ class Sale < ActiveRecord::Base
                   :condition,
                   :product_history,
                   :cart,
-                  :items
+                  :items,
+                  :validated
 
 
   attr_accessor :current_user

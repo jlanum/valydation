@@ -70,12 +70,7 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
 </div>
 </div>
 
-<div class="control-group">
-<label class="control-label">Business name</label>
-<div class="controls">
-  <%= text_field(:user, :business_name, :class => "input-xlarge") %>
-</div>
-</div>
+
 
 <div class="control-group">
 <label class="control-label">First name</label>
@@ -120,12 +115,7 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
 </div>
 </div>
 
-<div class="control-group">
-<label class="control-label">Website URL</label>
-<div class="controls">
-<%= text_field(:user, :website_url, :class => "input-xlarge") %>
-</div>
-</div>
+
 
 <div class="control-group">
 <label class="control-label">Bio</label>
@@ -171,7 +161,6 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Store</th>
       <th>City</th>
       <th>Brand</th>
       <th>Product</th>
@@ -182,14 +171,7 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
   <tbody>
   <% @user.sales.each do |sale| %>
     <tr>
-      <td>
-        <%= sale.store_name %>
-      </td>
-      <td>
-        <% if sale.metro %>
-        <%= sale.metro.name %>
-        <% end %>
-      </td>
+      
       <td>
         <%= sale.brand %>
       </td>

@@ -171,12 +171,7 @@ class Sale < ActiveRecord::Base
 
     notifications
   end
-  def set_source
-    unless @source = Source.find_by_name(self.source.upcase)
-      @source = Source.create!(:name => self.source.upcase)
-    end
-    self.source_id = @source.id
-  end
+  
   
   def set_brand
     unless @brand = Brand.find_by_name(self.brand.upcase)

@@ -207,7 +207,7 @@ class SalesController < ApplicationController
       return
     end
 
-    safe_params = [:brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out, :source, :shipping_price, :tax_cost, :product_history, :condition]
+    safe_params = [:brand, :product, :category_id, :size, :city_id, :orig_price, :sale_price, :percent_off_int, :allow_returns, :does_shipping, :sold_out, :shipping_price, :tax_cost, :product_history, :condition]
 
     merge_params = safe_params.inject({}) do |h,p|
       h[p] = params[:sale][p]

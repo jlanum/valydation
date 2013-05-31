@@ -67,6 +67,7 @@ class Sale < ActiveRecord::Base
   before_save :set_brand
   before_save :set_sizes
   
+   validates_length_of :product, :minimum => 3, :maximum => 128
   
 
   def self.categories

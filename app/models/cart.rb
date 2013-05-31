@@ -1,6 +1,6 @@
 class Cart 
 attr_reader :items
-attr_accessor :current_user
+attr_accessor :current_user, :sale_id, :user_id, :item_id
 attr_accessor :image_upload_urls
  
 
@@ -9,8 +9,8 @@ attr_accessor :image_upload_urls
       @items = []
     end
 
-    def add_to_cart(sale_id) 
-      @items << sale_id
+    def add_to_cart(sale) 
+      @items << sale
       end
       
       def clear

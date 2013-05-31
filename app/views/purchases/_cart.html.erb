@@ -43,7 +43,7 @@ Your cart is empty!
 </div>
 
 <% for item in @cart.items %>
-<div class="item-listing row-fluid" style="display: block;"><input class="check-box" type="checkbox" checked="">
+<div class="item-listing row-fluid" style="display: block;">
 <a href="<%= sale_url(item.id) if item.id %>">
   <img class="pull-left" id="sale_image_<%= item.id %>" src="<%= item.image_0.versions[:web_index] if item.image_0 %>" alt="" />
 </a>
@@ -85,7 +85,7 @@ Your cart is empty!
 </dl></div>
 <div class="checkout-button">
 <div style="margin:0;padding:0;display:inline"></div>
-<button class="btn btn-success" disabled="disabled">Continue </button>
+<button class="btn btn-success">Continue</button>
 </form>
 
 </div>

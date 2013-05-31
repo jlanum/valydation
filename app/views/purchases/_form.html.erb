@@ -40,7 +40,7 @@ function toggleAddress() {
       <hr>
       <p>
       <%= check_box_tag "ship", '1', (params[:ship].to_i == 1), :onchange => "toggleAddress()" %>
-      Add shipping within the continental U.S. for a flat rate of $5
+      Add shipping within the continental U.S. for free
       </p>
 
       <% if params[:ship].to_i == 1 %>

@@ -52,7 +52,7 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    @item = Item.find(params[:item_id])
+    @item = Sale.find(params[:sale_id])
     @purchase = Purchase.new(:user_id => @user.id, :sale_id => @sale.id, :ship_it => params[:ship_it])
     @purchase.calculate_total!
 

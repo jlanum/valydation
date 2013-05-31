@@ -51,7 +51,7 @@ HiStrollers::Application.routes.draw do
   match 'add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
   match 'clear_cart' => 'purchases#clear_cart', :as => 'clear_cart'
   match 'view_cart' => 'purchases#view_cart', :as => 'view_cart'
-  match 'new' => 'purchases#new', :as => 'new'
+  match 'new_sale_purchase' => 'purchases#new', :as => 'new_sale_purchase'
   namespace :admin do
     resources :users do
       get 'export', :on => :collection

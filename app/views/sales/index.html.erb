@@ -56,14 +56,14 @@ function submitFilter() {
       <%= form_tag sales_url, :method => "get", :id => "filter_form" do %>
       <%= hidden_field_tag "category_id", params[:category_id] %>
       <span class="pull-left">	
-        <select id="city_id" name="city_id" onchange="submitFilter()">
-          <%= options_for_select([["Filter by brand",nil]] + @cities.collect { |c| [c.name, c.id] }, 
-                                 params[:city_id]) %>
+        <select id="brand_id" name="brand_id" onchange="submitFilter()">
+          <%= options_for_select([["By company",nil]] + Sale.select("DISTINCT brand").collect(&:brand).compact, 
+                                 params[:brand]) %>
         </select>
       </span>
       <span class="pull-left filter-city">	
         <select id="size" name="size" onchange="submitFilter()">
-          <%= options_for_select([["Filter by size",nil]]+Sale.sizes.flatten, params[:size]) %>
+          <%= options_for_select([["By size",nil]]+Sale.sizes.flatten, params[:size]) %>
         </select>
       </span>
       <% end %> <!-- form -->

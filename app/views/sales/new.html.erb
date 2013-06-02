@@ -332,8 +332,8 @@ function validateForm() {
     return false;
   }
 
-  if ($('#product').val().length == 0) {
-    alert('Please enter the product name.');
+  if ($('#product').val().length > 128) {
+    alert('Please keep description under 128 characters, Patricia.');
     return false;
   }
 

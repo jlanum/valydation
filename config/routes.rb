@@ -28,7 +28,13 @@ HiStrollers::Application.routes.draw do
   resources :merchants
   resources :activities
   resources :users 
+
+  match 'add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
+  match 'clear_cart' => 'purchases#clear_cart', :as => 'clear_cart'
+  match 'remove_from_cart/:sale_id' => 'purchases#remove_from_cart', :as => 'remove_from_cart'
+  match 'view_cart' => 'purchases#view_cart', :as => 'view_cart'
   match '/purchases/add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
+
   match '/stores/list' => "users#stores"
 
   match '/mine' => 'sales#index',
@@ -48,9 +54,6 @@ HiStrollers::Application.routes.draw do
       :as => 'purchase_new'
   match '/purchase_available' => 'purchases#available'
   match 'admin' => 'admin/sales#index'
-  match 'add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
-  match 'clear_cart' => 'purchases#clear_cart', :as => 'clear_cart'
-  match 'view_cart' => 'purchases#view_cart', :as => 'view_cart'
   match 'new_sale_purchase' => 'purchases#new', :as => 'new_sale_purchase'
   namespace :admin do
     resources :users do

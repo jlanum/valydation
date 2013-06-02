@@ -15,6 +15,10 @@ class Cart
     @items
   end
 
+  def remove_from_cart(sale)
+    @items.delete_if { |i| i.id == sale.id }
+  end
+
   def clear
     @items.clear
   end

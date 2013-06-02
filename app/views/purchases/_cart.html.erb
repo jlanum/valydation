@@ -58,7 +58,7 @@ Your cart is empty!
      $<%= h(item.orig_price) %>
     </strong>
   </div>
-  <a class="pull-right remove-link" href="#">Remove</a>
+  <%= link_to "Remove", remove_from_cart_url(item), :class => "pull-right remove-link" %>
 </div></div>
 <% end %>
 

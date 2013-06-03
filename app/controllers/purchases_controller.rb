@@ -5,45 +5,49 @@ class PurchasesController < ApplicationController
   
 
 ### Cart stuff
-### note from Max to Jesse - I recommend moving everything between here and 
-### the "purchases stuff" comment below
-### into a separate controller called "cartcontroller" or something of the like.
-### Just for reasons of clear code organization, there is no functional benefit.
+### note from Max to Jesse - I recommend moving everything between here
+### and the "purchases stuff" comment below into a separate controller 
+### called "cartcontroller" or something of the like.
+### Just for reasons of clear code organization, there is no functional benefit...
   
 
   def add_to_cart
-    @cart = get_cart
+    get_cart
     @cart.add_to_cart(Sale.find(params[:sale_id]))
+    save_cart
     redirect_to view_cart_url
   end
 
   def remove_from_cart
-    @cart = get_cart
+    get_cart
     @cart.remove_from_cart(Sale.find(params[:sale_id]))
+    save_cart
     redirect_to view_cart_url
   end
 
-  def get_cart
-    if session[:cart]
-      return session[:cart]
-    else
-      session[:cart] = Cart.new
-      return session[:cart]
-    end
-  end
-    
   def view_cart
-    @cart = get_cart
+    get_cart
   end
-    
+
   def clear_cart
-    @cart = get_cart
+    get_cart
     @cart.clear
+    save_cart
   end
 
-  
+  def save_cart
+    session[:cart_json] = @cart.to_json
+  end
 
-### Purchases stuff (legacy)
+  def get_cart
+    if session[:cart_json]
+      @cart = Cart.from_json(session[:cart_json])
+    else
+      @cart = Cart.new
+    end
+  end 
+
+### Purchases stuff 
 
   def index
     @purchases = Purchase.where(:user_id => @user.id).
@@ -71,6 +75,35 @@ class PurchasesController < ApplicationController
   end
 
   def new
+    get_cart
+    @purchase = Purchase.new(:user_id => @user.id)
+    @purchase.purchased_sales = @cart.items.collect do |sale|
+      sale.to_purchased_sale
+    end
+    @purchase.calculate_total!
+
+    sale_ids = @purchase.purchased_sales.collect(&:sale_id).join(",")
+
+    @tr_data = Braintree::TransparentRedirect.transaction_data(
+      :redirect_url => purchase_confirmation_url,
+      :transaction => {
+        :custom_fields => {"item_id" => sale_ids,
+                           "shipping_amount" => @purchase.shipping,
+                           "tax_amount" => @purchase.tax,
+                           "subtotal" => @purchase.subtotal},
+        :type => "sale",
+        :amount => @purchase.total})
+
+    @purchase.tr_data = @tr_data
+    @purchase.post_url = Braintree::TransparentRedirect.url
+
+    respond_to do |wants|
+      wants.html { new_html }
+    end
+  end
+
+
+  def new_old
     @item = Sale.find(params[:sale_id])
     @purchase = Purchase.new(:user_id => @user.id, :sale_id => @sale.id, :ship_it => params[:ship_it])
     @purchase.calculate_total!

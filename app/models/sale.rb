@@ -96,9 +96,31 @@ class Sale < ActiveRecord::Base
     ]
   end
 
-  #def sizes
-    #self.size.to_s.split(",").collect(&:strip)
-  #end
+  def to_purchased_sale
+    PurchasedSale.new(:sale_id => self.id,
+                      :brand => self.brand,
+                      :product => self.product,
+                      :size => self.size,
+                      :sizes => self.sizes,
+                      :orig_price_cents => self.orig_price_cents,
+                      :orig_price_currency => self.orig_price_currency,
+                      :sale_price_cents => self.sale_price_cents,
+                      :sale_price_currency => self.sale_price_currency,
+                      :does_shipping => self.does_shipping,
+                      :allow_returns => self.allow_returns,
+                      :condition => self.condition,
+                      :validated => self.validated,
+                      :source => self.source,
+                      :product_history => self.product_history,
+                      :image_0 => self.image_0,
+                      :image_1 => self.image_1,
+                      :image_2 => self.image_2,
+                      :image_3 => self.image_3,
+                      :image_4 => self.image_4,
+                      :image_5 => self.image_5,
+                      :image_6 => self.image_6,
+                      :image_7 => self.image_7)
+  end
 
   def share_message
     "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on MySaleTable."

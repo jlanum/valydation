@@ -1,8 +1,5 @@
 class Cart 
   attr_reader :items
-  attr_accessor :current_user, :sale_id, :user_id, :item_id
-  attr_accessor :image_upload_urls
-
 
   def initialize
     @items = []
@@ -21,6 +18,25 @@ class Cart
 
   def clear
     @items.clear
+  end
+
+  def as_json
+    {:items => @items.collect { |item| { :sale_id => item.id } }}
+  end
+
+  def to_json
+    as_json.to_json
+  end
+
+  def self.from_json(json)
+    hash = JSON.parse(json)
+    cart = Cart.new
+    hash['items'].each do |item_hash|
+      if sale = Sale.where(:id => item_hash['sale_id']).first
+        cart.add_to_cart(sale)
+      end
+    end
+    cart
   end
 
 end

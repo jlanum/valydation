@@ -69,6 +69,7 @@ function toggleAddress() {
     <div class="row-fluid">
       <div class="pull-right">
 
+        <% if false #disabled for now %> 
         <% unless @sale.sizes.empty? or @sale.size == "N/A" or @sale.sizes.length == 1 %>
        
           <p>
@@ -76,9 +77,11 @@ function toggleAddress() {
             options_for_select((["Select Size"] + @sale.sizes), params[:size]) %>
           </p>
         <% end %>
+        <% end %>
         
 
         <table class="table table-bordered">               
+        <% if false #disabled for now %>
          <% if @sale.sizes.length == 1 %>
            <tr>
            <td>
@@ -89,6 +92,7 @@ function toggleAddress() {
               <%= hidden_field_tag 'transaction[custom_fields][size]', @sale.size %>
            </td>
          </tr>
+         <% end %>
          <% end %>
           <tr>
             <td>
@@ -155,10 +159,12 @@ function justSubmit() {
 
 <button id="submitButton" onclick="validateAndSubmit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
 
+<% if false %>
 <% if @sale.allow_returns %>
   *Merchant accepts returns within 10 days of sale
 <% else %>
     *Merchant does not accept returns
+<% end %>
 <% end %>
 
             </fieldset>

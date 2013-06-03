@@ -27,6 +27,7 @@ class Purchase < ActiveRecord::Base
 
   belongs_to :sale
   belongs_to :user
+  has_many :purchased_sales
 
   monetize :shipping_cents, :allow_nil => true
   monetize :tax_cents, :allow_nil => true
@@ -55,7 +56,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def calculate_total!
-    raise "Can't calculate total without a sale!" unless self.sale
+    raise "Can't calculate total without a sale!" if self.purchased_sales.empty?
 
     if self.ship_it
       self.shipping = 0.0
@@ -63,11 +64,16 @@ class Purchase < ActiveRecord::Base
       self.shipping = 0.0
     end
 
-    tax_results = JSON.parse(open("http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{self.sale.user.zip_code}").read)
-    sales_tax_rate = tax_results["results"].first["taxSales"]
-
-    self.subtotal = self.sale.sale_price.to_f
-    self.tax = self.subtotal * sales_tax_rate
+    self.purchased_sales.each do |p|
+      next unless p.sale and p.sale.user and p.sale.user.zip_code.to_s.length >= 5
+      tax_results = JSON.parse(open("http://api.zip-tax.com/request/v20?key=VJNRDXJ&postalcode=#{p.sale.user.zip_code}").read)
+      sales_tax_rate = tax_results["results"].first["taxSales"]
+      p.tax = p.orig_price.to_f * sales_tax_rate.to_f
+    end
+    
+    self.subtotal = self.purchased_sales.
+      collect { |s| s.orig_price.to_f }.sum
+    self.tax = self.purchased_sales.collect { |s| s.tax.to_f }.sum
 
     self.total = self.subtotal
   end

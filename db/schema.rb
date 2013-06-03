@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603030943) do
+ActiveRecord::Schema.define(:version => 20130603182922) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -158,7 +158,6 @@ ActiveRecord::Schema.define(:version => 20130603030943) do
 
   create_table "purchases", :force => true do |t|
     t.integer  "user_id",                                            :null => false
-    t.integer  "sale_id",                                            :null => false
     t.string   "status",                                             :null => false
     t.string   "card_last_4",        :limit => 4
     t.string   "external_id"

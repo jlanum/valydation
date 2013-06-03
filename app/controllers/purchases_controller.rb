@@ -35,6 +35,7 @@ class PurchasesController < ApplicationController
     save_cart
   end
 
+  ## should put this and the next method in ApplicationController so they're available in all controllers
   def save_cart
     session[:cart_json] = @cart.to_json
   end
@@ -87,7 +88,7 @@ class PurchasesController < ApplicationController
     @tr_data = Braintree::TransparentRedirect.transaction_data(
       :redirect_url => purchase_confirmation_url,
       :transaction => {
-        :custom_fields => {"item_id" => sale_ids,
+        :custom_fields => {"sale_id" => sale_ids,
                            "shipping_amount" => @purchase.shipping,
                            "tax_amount" => @purchase.tax,
                            "subtotal" => @purchase.subtotal},
@@ -102,30 +103,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-
-  def new_old
-    @item = Sale.find(params[:sale_id])
-    @purchase = Purchase.new(:user_id => @user.id, :sale_id => @sale.id, :ship_it => params[:ship_it])
-    @purchase.calculate_total!
-
-    @tr_data = Braintree::TransparentRedirect.transaction_data(
-      :redirect_url => purchase_confirmation_url,
-      :transaction => {
-        :custom_fields => {"item_id" => @item.id,
-                           "shipping_amount" => @purchase.shipping,
-                           "tax_amount" => @purchase.tax,
-                           "subtotal" => @purchase.subtotal},
-        :type => "sale",
-        :amount => @purchase.total})
-
-    @purchase.tr_data = @tr_data
-    @purchase.post_url = Braintree::TransparentRedirect.url
-
-    respond_to do |wants|
-      wants.json { new_json }
-      wants.html { new_html }
-    end
-  end
 
   def new_json
     render :json => @purchase.to_json(:methods => [:previous_shipped_purchase, :tr_data, :post_url])
@@ -158,9 +135,14 @@ class PurchasesController < ApplicationController
     if braintree_result.success?
       #debugger
       ship_it = (transaction.shipping_details.street_address and not transaction.shipping_details.street_address.empty?)
-      debugger
+
+      sale_ids = transaction.custom_fields[:sale_id].split(",").collect(&:to_i)
+      purchased_sales = sale_ids.collect do |sale_id|
+        Sale.where(:id => sale_id).first.to_purchased_sale
+      end
+
       @purchase = Purchase.new(:user_id => @user.id,
-                               :sale_id => transaction.custom_fields[:sale_id],
+                               :purchased_sales => purchased_sales,
                                :status => "approved",
                                :card_last_4 => transaction.credit_card_details.last_4,
                                :external_id => transaction.id,
@@ -177,7 +159,9 @@ class PurchasesController < ApplicationController
                                :total => transaction.amount,
                                :size => transaction.custom_fields[:size],
                                :ship_it => ship_it)
+
       @purchase.save!
+      clear_cart
 
       respond_to do |wants|
         wants.json do 
@@ -193,8 +177,7 @@ class PurchasesController < ApplicationController
       exp_month, exp_year, first_name, last_name, address, 
         address_2, city, state, zip, ship = nil
 
-      sale_id = braintree_result.params[:transaction][:custom_fields][:sale_id]
-      size = braintree_result.params[:transaction][:custom_fields][:size]        
+      #size = braintree_result.params[:transaction][:custom_fields][:size]        
       if braintree_result.params[:transaction][:credit_card]
         exp_month = braintree_result.params[:transaction][:credit_card][:expiration_month]
         exp_year = braintree_result.params[:transaction][:credit_card][:expiration_year]
@@ -217,8 +200,7 @@ class PurchasesController < ApplicationController
           render :json => {"error" => @error_message}
         end
         wants.html do
-          redirect_to new_sale_purchase_url(:sale_id => sale_id,
-                                            :exp_month => exp_month,
+          redirect_to new_sale_purchase_url(:exp_month => exp_month,
                                             :exp_year => exp_year,
                                             :first_name => first_name,
                                             :last_name => last_name,
@@ -227,7 +209,6 @@ class PurchasesController < ApplicationController
                                             :city => city,
                                             :state => state,
                                             :zip => zip,
-                                            :size => size,
                                             :ship => ship)
         end
       end

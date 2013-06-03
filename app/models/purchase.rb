@@ -23,7 +23,8 @@ class Purchase < ActiveRecord::Base
                   :ship_it,
                   :retailer_status,
                   :items,
-                  :cart
+                  :cart,
+                  :purchased_sales
 
   belongs_to :sale
   belongs_to :user

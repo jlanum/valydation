@@ -76,38 +76,7 @@
 </ul>
 	        
 	</div>
-	<% if detail %>
-    <br><br><br><br>
-    
 
-  <span class="comments form">
-    <h3 class="comment-form">Comments</h3>
-    <% sale.comments.each do |comment| %>
-      <img height="36" width="36" src="<%= comment.user.photo_version_url(:feed) %>" >&#160;<%= comment.text %><br><br>
-  <% end %>
-
-    <script>
-function submitComment(e) {
-e = e || event;
-if (e.keyCode === 13) {
-  $('#comment_form').submit();
-  return false;
-}
-return true;
-}
-    </script>
-
-    <%= form_tag({:controller => "comments", 
-                  :action => "create",
-                  :sale_id => sale.id}, 
-                  :id => "comment_form") do |f| %>
-                  <img height="50" width="50" src="<%= @user.photo_version_url(:feed) %>">&#160;
-                  <textarea id="new_comment" name="text" data-provide="limit" data-counter="#counter"  class="comment-box" placeholder="Enter your comment here"rows="2" onkeydown="return submitComment(event);"></textarea>
-                <% end %>
-                </span>
-
-              <% end %>
-	
 
              <!-- you may also like section -->
 	                                                        </div>
@@ -129,7 +98,7 @@ return true;
 
 	                                                           
 	            <%= sale.condition if sale.condition %>   <br>
-							size: <%= sale.size if sale.size %>
+							 <h3>size: <%= sale.size if sale.size %></h3>
 
 
 	                                                                                      </p>
@@ -191,45 +160,11 @@ return true;
 	                        </div>
 
 
-	                            <h3 class="menu_head menu_layaway">Terms &amp; Conditions</h3>
+	                            
 	<div class="menu_body layaway_text" style="display: block;">
-	<!--                                <p>
-	        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-	        <br><br>
-	        Condition Specifics:
-	        <br><br>
-	        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-	        <br><br>
-	        Measurements: 14.5"W x 9"H x 7.25"D, 7" Strap Drop
-	        <br><br><br>
-	        <b>
-	            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-	        </b>
-	    </p>-->
-	    Other
-	    <br><br>
-	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-	    <br><br>
-	    <em>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</em>
-	    <br><br>
-	    <ul>
-	        Payment Options
-	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-	            <ul>
-	                <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</li>
-	                <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</li>
-	            </ul>
-	        </li>                                        
-	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</li>
-	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
-	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
-	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
-	        <li>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</li>
-	    </ul>
-	    <br><br>
-	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-	    <br><br>
-	    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+	
+	    Read our <u><a href="/tos">Terms and Conditions</a></u>
+	   
 	</div>
 
        

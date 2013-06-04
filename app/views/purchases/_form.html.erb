@@ -5,8 +5,8 @@
     <legend>Preferred Payment
     </legend>
 
-    <input name="transaction[customer][first_name]" type="text" class="input-small" placeholder="First Name" value="<%= params[:first_name] %>">
-    <input name="transaction[customer][last_name]" type="text" class="input-small" placeholder="Last Name" value="<%= params[:last_name] %>">
+    <input name="transaction[customer][first_name]" type="text" class="input-large" placeholder="First Name" value="<%= params[:first_name] %>">
+    <input name="transaction[customer][last_name]" type="text" class="input-large" placeholder="Last Name" value="<%= params[:last_name] %>">
     <br>
     <input name="transaction[credit_card][number]"  autocomplete="off" type="text" class="span4" placeholder="Card Number" value="<%= params[:cc_number] %>">
     <input name="transaction[credit_card][cvv]" type="text" class="span3" placeholder="Security Code" value="<%= params[:cvv] %>">

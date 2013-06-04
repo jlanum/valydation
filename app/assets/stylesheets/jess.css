@@ -156,7 +156,7 @@
 .signup-unit {
   padding: 60px;
   padding-top: -10px;
-  margin-bottom: 30px;
+  margin-bottom: 75px;
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
@@ -165,9 +165,9 @@
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  border: solid;
+  border: solid thin;
   width: 700px;
-  margin-left: 65px;
+  margin-left: 120px;
 }
 
 
@@ -787,9 +787,7 @@ width: 62px;
     -------------------------------------------------- */
 
     /* Center align the text within the three columns below the carousel */
-    .marketing .span4 {
-      text-align: center;
-    }
+    
     .marketing h2 {
       font-weight: normal;
     }
@@ -1122,7 +1120,7 @@ width: 62px;
 .additional-prices dl.msrp dd,
 .additional-prices dl.msrp dt   { color: #333; }
 .additional-prices dl.msrp dd   { text-decoration: line-through; }
-.additional-links               { margin:20px 0; padding: 15px 0 10px 0; border-bottom: 1px solid #bdbdbd;
+.additional-links               { margin:20px 0; padding: 18px 0 10px 0; border-bottom: 1px solid #bdbdbd;
 border-top: 1px solid #bdbdbd; }
 .additional-links li            { background: url(/skin/frontend/portero/default/images/bg_additional_links.gif) center left no-repeat; padding-left: 10px; }
 .additional-links a             { color: #0f7ecd; font-weight: bold }

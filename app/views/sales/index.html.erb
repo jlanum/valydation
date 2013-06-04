@@ -14,7 +14,7 @@ $(document).on('click','#filter-button', function(){
   }
 });
 
-<% if params[:size] || params[:brand] %>
+<% if params[:size] || params[:brand_id] %>
 $(function() {
   $('#filter-section').show();
 });
@@ -57,8 +57,8 @@ function submitFilter() {
       <%= hidden_field_tag "category_id", params[:category_id] %>
       <span class="pull-left">	
         <select id="brand_id" name="brand_id" onchange="submitFilter()">
-          <%= options_for_select([["By company",nil]] + Sale.select("DISTINCT brand").collect(&:brand).compact, 
-                                 params[:brand]) %>
+          <%= options_for_select([["By company",nil]]+Sale.select("DISTINCT brand").collect(&:brand).compact, 
+                                 params[:brand_id]) %>
         </select>
       </span>
       <span class="pull-left filter-city">	

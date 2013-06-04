@@ -96,7 +96,7 @@ function checkSize(max_img_size)
 				  </fieldset>
 				<hr>
 				
-					Edit Username for Custom URL (shown publicly when posting comments)
+					Edit Username (shown publicly when posting comments)
 				        <div class="input-prepend">
 				          <%
 				             custom_slug = "YourNameHere"
@@ -104,7 +104,7 @@ function checkSize(max_img_size)
 				               custom_slug = @user.custom_slug
 				            end
 				          %>
-				        <span class="add-on">http://www.valydation.com/<%= custom_slug %></span>
+				        <br>
 								</div>
 				
 				        <%= form_for(@user, :html => {:id => "custom_slug_form"}) do |f| %>

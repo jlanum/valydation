@@ -18,31 +18,25 @@
   on <%= @sale.created_at.strftime("%b %d, %Y") %>.
   </h3>
 
-  <div style="float:right; padding: 24px;">
-    <div style="padding:8px;">
-      <img src="<%= @sale.image_0.versions[:web_thumbnail] %>">
-    </div>
-    <div style="padding:8px;">
-      <img src="<%= @sale.image_1.versions[:web_thumbnail] %>">
-    </div>
-    <div style="padding:8px;">
-      <img src="<%= @sale.image_2.versions[:web_thumbnail] %>">
-    </div>
-		<div style="padding:8px;">
-      <img src="<%= @sale.image_3.versions[:web_thumbnail] %>">
-    </div>
-    <div style="padding:8px;">
-      <img src="<%= @sale.image_4.versions[:web_thumbnail] %>">
-    </div>
-    <div style="padding:8px;">
-      <img src="<%= @sale.image_5.versions[:web_thumbnail] %>">
-    </div>
-		<div style="padding:8px;">
-      <img src="<%= @sale.image_6.versions[:web_thumbnail] %>">
-    </div>
-    <div style="padding:8px;">
-      <img src="<%= @sale.image_7.versions[:web_thumbnail] %>">
-    </div>
+  <div style="float:right; padding: 8px; width: 140px; height: 100px;">
+    <% (0..7).to_a.each do |i| %>
+      <div style="margin-bottom: 16px; ">
+        <% image = @sale.send("image_#{i}") %>
+        <div style="border: 1px dashed black; margin-left:27px; margin-bottom: 2px; width: 69px; height: 69px;">
+          <% if image.url %>
+          <img src="<%= image.versions[:web_thumbnail] %>" width="69" height="69">
+          <% end %>
+        </div>
+        <div style="margin-left: 27px; width: 69px; text-align: center; margin-bottom: 2px; ">
+          Image <%= i %>
+        </div>
+        <div class="clear"></div>
+        <button type="submit" class="btn btn-small btn-primary">Upload</button>
+        <% if image.url %>
+        <button type="submit" class="btn btn-small btn-danger">Delete</button>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
 
@@ -53,7 +47,6 @@
                <fieldset>
 
                
-
                  <div class="control-group">
                    <label class="control-label" for="sale_brand">Company</label>
                    <div class="controls">

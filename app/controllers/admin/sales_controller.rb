@@ -12,6 +12,7 @@ class Admin::SalesController < ApplicationController
   end
 
   def edit
+    @message = params[:message]
     @sale = Sale.find(params[:id])
     @cities = City.order("name ASC").all
   end

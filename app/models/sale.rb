@@ -141,8 +141,14 @@ class Sale < ActiveRecord::Base
         temp_filename = "image_#{Time.now.strftime("%Y_%m_%d_%H%M%S")}_#{self.id}_#{rand(10000000000)}.jpg"
         temp_file_path = "#{Rails.root}/tmp/#{temp_filename}"
 
-        File.open(temp_file_path,"wb") do |f|
-          s3_obj.read { |chunk| f.write(chunk) }
+        begin
+          File.open(temp_file_path,"wb") do |f|
+            puts "reading #{image_key}"
+            s3_obj.read { |chunk| f.write(chunk) }
+          end
+        rescue AWS::S3::Errors::NoSuchKey => e
+          puts e.message
+          next
         end
 
         self.send("image_#{image_index}=",File.open(temp_file_path))

@@ -238,6 +238,11 @@ class UsersController < ApplicationController
       @error_message = "Please provide your first name."
       return render_error
     end
+    
+    if params[:zip_code] and params[:zip_code].empty?
+      @error_message = "Please provide your zip code."
+      return render_error
+    end
 
     if params[:last_name] and params[:last_name].empty?
       @error_message = "Please provide your last name."

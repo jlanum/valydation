@@ -142,7 +142,7 @@ function changePassword() {
 				Change Zip Code
           
         <%= form_for(@user, :html => {:id => "zip_form"}) do |f| %>
-          <%= text_field_tag "zip_code", "", :class => "span1", :placeholder => @user.zip_code, :maxlength => 5 %>
+          <%= text_field_tag "zip_code", "", :class => "span2", :placeholder => @user.zip_code, :maxlength => 5 %>
 				  <button class="btn btn-success url" type="button" onclick="$('#zip_form')[0].submit();">Save</button><br>
         <% end %>
 		

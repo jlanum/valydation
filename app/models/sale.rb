@@ -72,9 +72,7 @@ class Sale < ActiveRecord::Base
   def self.categories
     ["Apparel",
      "Ceramic & Glass",
-     "Promotional",
-     "Photography",
-     "Silicon Legends"]
+     "Promotional"]
   end
 
   def self.sizes

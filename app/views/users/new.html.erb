@@ -69,7 +69,7 @@ function validateAndSubmit() {
         return false;
       }
 
-      if ($("#zip").val().length != 5) {
+      if ($("#zip_code").val().length != 5) {
         alert("Please provide your 5-digit zip code.");
         return false;
       }
@@ -100,7 +100,7 @@ function validateAndSubmit() {
         <input type="password" value="<%= params[:passwd_confirm] %>" id="passwd_confirm" name="passwd_confirm" class="input-block-level" placeholder="Confirm Password"><br>
         <input type="text" value="<%= params[:first_name] %>" id="first_name" name="first_name" class="input-block-level" placeholder="First Name"><br>
         <input type="text" value="<%= params[:last_name] %>" id="last_name" name="last_name" class="input-block-level" placeholder="Last Name"><br>
-        <input type="text" value="<%= params[:zip] %>" id="zip" name="zip" class="input-block-level" placeholder="Zip Code"><br>
+        <input type="text" value="<%= params[:zip_code] %>" id="zip_code" name="zip_code" class="input-block-level" placeholder="Zip Code"><br>
         
 
         <a href="#" onclick="return validateAndSubmit()">

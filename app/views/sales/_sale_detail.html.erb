@@ -5,13 +5,17 @@
 	    <div class="back-button btn btn-success"><a href="/sales">Back</a></div>
 
 	    <span class="category-feed-align">
-	      <% Sale.categories.each_with_index do |category, category_id| %>
-	        <% if category_id == params[:category_id].to_i %><strong><% end %>
-	        <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
-	        <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
-	        <% if category_id == params[:category_id].to_i %></strong><% end %>
-	      <% end %>
-	    </span>
+			<a href="/sales">HOME</a>&#160;/
+		        <% if sale.category_id == 0 %>
+						APPAREL
+						<% if sale.category_id == 1 %>
+						CERAMIC & GLASS
+						 <% if sale.category_id == 2 %>
+						PROMOTIONAL
+						<% end %>	<% end %>	<% end %>	
+		        
+		    
+	    </span> 
 
 	    <a href="/featured/new-stuff" class="faves-script-detail btn btn-success">
 	      What's New
@@ -150,7 +154,7 @@
 	                    </p>
 
 
-	                           <p><%= sale.product_history %></p>
+	                           <p><%= raw sale.product_history %></p>
 
 	                            <p>
 	                               

@@ -36,7 +36,8 @@ class Sale < ActiveRecord::Base
                   :product_history,
                   :cart,
                   :items,
-                  :validated
+                  :validated,
+                  :product_specifics
 
 
   attr_accessor :current_user
@@ -107,6 +108,7 @@ class Sale < ActiveRecord::Base
                       :validated => self.validated,
                       :source => self.source.url,
                       :product_history => self.product_history,
+                      :product_specifics => self.product_specifics,
                       :image_0 => self.image_0.url,
                       :image_1 => self.image_1.url,
                       :image_2 => self.image_2.url,
@@ -119,12 +121,12 @@ class Sale < ActiveRecord::Base
   end
 
   def share_message
-    "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on MySaleTable."
+    "#{self.user.display_name if self.user} discovered #{self.brand} #{self.product} on Valydation."
   end
 
   def t_share_message
-    "I discovered #{self.brand} #{self.product} for #{(self.percent_off.to_f*100).round}% off on
-@MySaleTable."
+    "I discovered #{self.brand} #{self.product} on
+@Valydation."
   end
 
   def process_images!

@@ -12,6 +12,7 @@ class PurchasedSale < ActiveRecord::Base
                   :validated,
                   :source,
                   :product_history,
+                  :product_specifics,
                   :image_0,
                   :image_1,
                   :image_2,

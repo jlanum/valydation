@@ -569,16 +569,12 @@ width: 62px;
 }
 
 .back-button {
-	cursor:pointer; 
-	color:white !important;
 	position: absolute;
 	left: 20px;
 	top: 14px;
 }
 
-.back-button a {
-	color:white !important;
-}
+
 
 .faves-script-detail {
 	float:right;

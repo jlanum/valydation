@@ -174,6 +174,7 @@ class SalesController < ApplicationController
                      :city_id => @user.city_id,
                      :source => params[:source],
                      :product_history => params[:product_history],
+                     :product_specifics => params[:product_specifics],
                      :allow_returns => params[:allow_returns],
                      :does_shipping => params[:does_shipping] )
    

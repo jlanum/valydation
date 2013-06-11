@@ -8,15 +8,17 @@
 			<a href="/sales">HOME</a>&#160;/
 		        <% if sale.category_id == 0 %>
 						APPAREL
+						<% else %> 
 						<% if sale.category_id == 1 %>
 						CERAMIC & GLASS
+						<% else %> 
 						 <% if sale.category_id == 2 %>
 						PROMOTIONAL
 						<% end %>	<% end %>	<% end %>	
 		        
 		    
-	  
-</div>
+	  </div>
+
 	    <a href="/featured/new-stuff" class="faves-script-detail btn btn-success">
 	      What's New
 	    </a>

@@ -278,7 +278,7 @@ class SalesController < ApplicationController
   def index_html_all
     params[:category_id] ||= 0
 
-    if @user and (Time.now - @user.created_at) < 1.day 
+    if @user.is_merchant and (Time.now - @user.created_at) < 1.day 
       @merchant_modal = true
       session[:merchant_modal] = true
     end
@@ -437,8 +437,8 @@ class SalesController < ApplicationController
     if params[:size] and not params[:size].empty?
       where_frag = ["? = ANY (sales.sizes)",params[:size]]
     end
-    if params[:city_id] and not params[:city_id].empty?
-      where_conditions.update({:city_id => params[:city_id]})
+    if params[:brand_id] and not params[:brand_id].empty?
+      where_conditions.update({:brand_id => params[:brand_id]})
     end
 
     curated_sales = Sale.where(where_conditions.merge({

@@ -574,7 +574,9 @@ width: 62px;
 	top: 14px;
 }
 
-
+.back-button-color a {
+	color:white !important;
+}
 
 .faves-script-detail {
 	float:right;

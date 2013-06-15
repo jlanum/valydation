@@ -14,7 +14,7 @@ $(document).on('click','#filter-button', function(){
   }
 });
 
-<% if params[:size] || params[:brand_id] %>
+<% if params[:size] || params[:brand] %>
 $(function() {
   $('#filter-section').show();
 });
@@ -37,7 +37,7 @@ function submitFilter() {
 </div>
     <% end %>
 
-<div class="container">
+<div class="container"> 
   <div class="category-feed well">
     <div id="filter-button" class="filter-button">Filter</div>
 
@@ -59,7 +59,7 @@ function submitFilter() {
       <%= hidden_field_tag "category_id", params[:category_id] %>
       <span class="pull-left">	
         <select id="brand_id" name="brand_id" onchange="submitFilter()">
-          <%= options_for_select([["By company",nil]]+Sale.select("DISTINCT brand").collect(&:brand).compact, 
+          <%= options_for_select([["By company",nil]]+Brand.all.collect {|p| [ p.name, p.id ] }.compact,
                                  params[:brand_id]) %>
         </select>
       </span>
@@ -77,13 +77,22 @@ function submitFilter() {
 
 
 
-<% if @merchant_modal and merchant_page = Page.find_by_slug("merchant-modal") %>
-  <%= raw merchant_page.content %>
 
-<script>
-$(function() {
-  $('#MerchantModal').modal();
-});
-</script>
-    <% end %>
+	<script>
+	var str = "Welcome to the Tech Revolution. Collected.";
+	var num = 150;
+	defiredWriteText(str, num);
+	function defiredWriteText(text,time, index){
+	    if(index === null || index === undefined) {
+	        index=0;
+	    }
+	    setTimeout(function (){
+	        var dude = text[index];
+	        document.getElementById("guide").innerHTML += dude;
+	        if(index < text.length-1)
+	            defiredWriteText(text, time, ++index);
+	    }, time)
+	}
+	</script>
 
+   

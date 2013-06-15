@@ -278,8 +278,7 @@ class SalesController < ApplicationController
   def index_html_all
     params[:category_id] ||= 0
 
-    if @user.is_merchant and (Time.now - @user.created_at) < 1.day and 
-      not session[:merchant_modal]
+    if @user and (Time.now - @user.created_at) < 1.day 
       @merchant_modal = true
       session[:merchant_modal] = true
     end

@@ -68,12 +68,18 @@ function submitFilter() {
           <%= options_for_select([["By size",nil]]+Sale.sizes.flatten, params[:size]) %>
         </select>
       </span>
+			
+
       <% end %> <!-- form -->
     </div>
+		
 
   </div>
-
+<% if @sales.empty? %>
+<h2>Want to see something from this company? Please let us know on the <u><a href="/contact">Contact</a></u> page.</h2></div>
+<% else %>
 <%= render "sales" %>
+<% end %>
 
 
 

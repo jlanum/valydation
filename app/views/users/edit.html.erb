@@ -42,46 +42,6 @@ body {
         <hr>
 
 
-         <script type="text/javascript">
-
-function uploadPhoto() {
-  if (checkSize(1024*1024)) {
-    $('#photo_form')[0].submit();
-  } else {
-
-  }
-}
-
-function checkSize(max_img_size)
-{
-    var input = document.getElementById("photo_file_field");
-    // check for browser support (may need to be modified)
-    if(input.files && input.files.length == 1)
-    {           
-        if (input.files[0].size > max_img_size) 
-        {
-            alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
-            return false;
-        }
-    }
-
-    return true;
-}
-      </script>
-
-
-      <%= form_for(@user, :html => {:id => "photo_form", :multipart => true}) do |f| %>
-
-
-        <%= file_field_tag("photo", :id => "photo_file_field", :style => "display: none;", :onchange => "$('#upload-button').show()") %>
-        
-        <img src="<%= @user.photo_version_url(:profile) %>"><br><br>
-        
-        <button class="btn url btn-success" type="button" onclick="$('#photo_file_field').click()">Upload Image</button>        
-        <button id="upload-button" class="btn url btn-success" type="button" onclick="uploadPhoto()" style="display:none;">Upload Image</button><br>
-        
-      <% end %> 
-<hr>
 
       Change Email
             
@@ -96,7 +56,7 @@ function checkSize(max_img_size)
 				  </fieldset>
 				<hr>
 				
-					Edit Username (shown publicly when posting comments)
+					Edit Username
 				        <div class="input-prepend">
 				          <%
 				             custom_slug = "YourNameHere"
@@ -104,7 +64,7 @@ function checkSize(max_img_size)
 				               custom_slug = @user.custom_slug
 				            end
 				          %>
-				        <br>
+				        
 								</div>
 				
 				        <%= form_for(@user, :html => {:id => "custom_slug_form"}) do |f| %>
@@ -148,32 +108,6 @@ function changePassword() {
 		
       <hr>
 
-      <script type="text/javascript">
-
-function uploadPhoto() {
-  if (checkSize(1024*1024)) {
-    $('#photo_form')[0].submit();
-  } else {
-
-  }
-}
-
-function checkSize(max_img_size)
-{
-    var input = document.getElementById("photo_file_field");
-    // check for browser support (may need to be modified)
-    if(input.files && input.files.length == 1)
-    {           
-        if (input.files[0].size > max_img_size) 
-        {
-            alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
-            return false;
-        }
-    }
-
-    return true;
-}
-      </script>
 
 
 
@@ -211,15 +145,6 @@ function checkSize(max_img_size)
 
 				
 			
-			   <hr>
-			
-			Bio
-<span class="bio">
-        <%= form_for(@user, :html => {:id => "bio_form"}) do |f| %>
-          <%= text_area_tag "bio", @user.bio, :rows => 5, :style => "width:300px;", :placeholder => "Enter text (150 character limit)" %></span>
-        <br>
-        <button class="btn url btn-success" type="button" onclick="$('#bio_form')[0].submit();">Save</button><br>
-      <% end %>
 		
 		
 

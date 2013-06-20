@@ -4861,7 +4861,7 @@ a.thumbnail:hover {
 .carousel-control {
   position: absolute;
   top: 40%;
-  left: 15px;
+  left: 58px;
   width: 40px;
   height: 40px;
   margin-top: -20px;
@@ -4880,7 +4880,7 @@ a.thumbnail:hover {
 }
 .carousel-control.right {
   left: auto;
-  right: 15px;
+  right: 82px;
 }
 .carousel-control:hover {
   color: #ffffff;

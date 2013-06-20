@@ -37,7 +37,7 @@ function submitFilter() {
 </div>
     <% end %>
 
-<div class="container"> 
+<div class="container">
   <div class="category-feed well">
     <div id="filter-button" class="filter-button">Filter</div>
 
@@ -84,21 +84,5 @@ function submitFilter() {
 
 
 
-	<script>
-	var str = "Welcome to the Tech Revolution. Collected.";
-	var num = 150;
-	defiredWriteText(str, num);
-	function defiredWriteText(text,time, index){
-	    if(index === null || index === undefined) {
-	        index=0;
-	    }
-	    setTimeout(function (){
-	        var dude = text[index];
-	        document.getElementById("guide").innerHTML += dude;
-	        if(index < text.length-1)
-	            defiredWriteText(text, time, ++index);
-	    }, time)
-	}
-	</script>
 
    

@@ -31,7 +31,7 @@ body {
 <div class="contact-margin what-we-do">
   <h3>Consignment</h3><br>
   <p class="about-us-text">Tell us what you'd like to sell.</p>
-  <%= form_tag(contact_url, :method => "post") do |f| %>
+  <%= form_tag(consignment_url, :method => "post") do |f| %>
   <fieldset>
 
     <label>Your Name *</label>
@@ -42,6 +42,31 @@ body {
     <label>Email *</label>
     <input name="email" type="text" placeholder="Type here">
   </fieldset>
+
+	<fieldset>
+
+    <label>City *</label>
+    <input name="city" type="text" placeholder="Type here">
+  </fieldset>
+
+	<fieldset>
+
+    <label>State *</label>
+    <input name="state" type="text" placeholder="Type here">
+  </fieldset>
+
+	<fieldset>
+
+    <label>Zip Code *</label>
+    <input name="zip_code" type="text" placeholder="Type here">
+  </fieldset>
+
+	<fieldset>
+
+    <label>Country *</label>
+    <input name="country" type="text" placeholder="Type here">
+  </fieldset>
+
   <fieldset>
 
     <label>Phone Number *</label>

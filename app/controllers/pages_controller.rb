@@ -27,6 +27,22 @@ class PagesController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
   end
+  
+  def consignment
+    if params[:email]
+      #send email here
+      ShopMailer.contact_email(params[:name], 
+                               params[:email], 
+                               params[:subject],
+                               params[:city],
+                               params[:state],
+                               params[:zip_code],
+                               params[:country], 
+                               params[:message]).deliver
+      flash[:message] = "Your message has been sent, and we'll get back to you soon."
+      redirect_to sales_url
+    end
+  end
 
   def contact
     if params[:email]

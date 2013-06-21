@@ -13,9 +13,10 @@ class ShopMailer < ActionMailer::Base
 
     mail(:to => "kelly@valydation.com",
          :subject => subject)
-  end
+    end
   
-  def contact_email(from_name, from_email, subject, body, city, state, country, zip_code)
+
+  def consignment_email(from_name, from_email, subject, body, city, state, country, zip_code, phone_number)
     @from_name = from_name
     @from_email = from_email
     @subject = subject
@@ -24,9 +25,11 @@ class ShopMailer < ActionMailer::Base
     @state = state
     @country = country
     @zip_code = zip_code
+    @phone_number = phone_number
 
     mail(:to => "kelly@valydation.com",
          :subject => subject)
+      
+    end
   end
 
-end

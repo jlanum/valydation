@@ -1,4 +1,4 @@
 mst-rails
 =========
 
-MySaleTable Rails App
+Valydation Rails App

@@ -253,7 +253,7 @@ class SalesController < ApplicationController
     @group = SaleGroup.where(:slug => params[:slug]).first
     @sales = all_sales.where(:sale_group_id => @group.id).
       page(params[:page]).
-      per(16)
+      per(15)
 
     if request.xhr?
       render_lazy_rows
@@ -285,7 +285,7 @@ class SalesController < ApplicationController
 
     @sales = all_sales.
       page(params[:page]).
-      per(16)
+      per(15)
 
     if request.xhr?
       render_lazy_rows
@@ -302,7 +302,7 @@ class SalesController < ApplicationController
       includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       page(params[:page]).
-      per(16)    
+      per(15)    
 
     if request.xhr?
       render_lazy_rows
@@ -446,7 +446,7 @@ class SalesController < ApplicationController
       where(where_frag).
       select(%Q{sales.id}).
       order(%Q{"sales"."created_at" DESC}).
-      limit(16)
+      limit(15)
 
     curated_select = ["sales.*", "faves.id as my_fave_id"]
     curated_order = "sales.created_at DESC"

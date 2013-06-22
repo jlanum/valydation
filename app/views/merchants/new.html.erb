@@ -45,7 +45,7 @@ function validateAndSubmit() {
       }
 
       if ($("#custom_slug").val().length < 1) {
-        alert("Please provide a custom MySaleTable URL.");
+        alert("Please provide a custom Valydation URL.");
         return false;
       }
 
@@ -113,7 +113,7 @@ function validateAndSubmit() {
           <hr>
 				Your custom URL<br>
 				<div class="input-prepend">
-				  <span class="add-on">http://www.mysaletable.com/</span>
+				  <span class="add-on">http://www.valydation.com/</span>
           <%= text_field_tag("custom_slug", params[:custom_slug], :class => "span2", :placeholder => "Custom") %>
         </div><hr>
 				

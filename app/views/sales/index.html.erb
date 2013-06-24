@@ -59,7 +59,7 @@ function submitFilter() {
       <%= hidden_field_tag "category_id", params[:category_id] %>
       <span class="pull-left">	
         <select id="brand_id" name="brand_id" onchange="submitFilter()">
-          <%= options_for_select([["By company",nil]]+Brand.all.collect {|p| [ p.name, p.id ] }.compact,
+          <%= options_for_select([["By company",nil]]+Brand.all.collect {|p| [ p.name, p.id ] }.sort,
                                  params[:brand_id]) %>
         </select>
       </span>

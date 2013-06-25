@@ -127,8 +127,9 @@
  
 	                    <div class="additional-links">
 	             <ul>
-	                 
-											                     </li>
+									<li class="italic-detail">	
+	                 Share this item
+											                     </li> &#160;&#160;
 	                 <li>																								<a href="<%= twitter_share_url(sale) %>">
 																			      <%= image_tag "twitter_32_icon.png", :height => 32, :width => 32 %>
 																			  &#160;&#160;  </a>
@@ -157,6 +158,7 @@
 
 
 	                           <p><%= raw sale.product_history %></p>
+	<h3 class="menu_head">Product Condition</h3>
 															<p><%= raw sale.product_specifics if sale.product_specifics %></p>
 
 	                            <p>

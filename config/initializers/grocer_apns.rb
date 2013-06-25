@@ -3,7 +3,7 @@ push_configs = {
     'certificate' => Rails.root.to_s + "/certs/MySaleTableDev.pem"
   },
   'production' => {
-    'certificate' => Rails.root.to_s + "/certs/MySaleTableProd.pem"
+    'certificate' => Rails.root.to_s + "/certs/MySaleTableDev.pem"
   }
 }
 

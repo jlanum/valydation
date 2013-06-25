@@ -1280,3 +1280,8 @@ color: #fff;
 width: 44px;
 }
 
+.email-sign {
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 12px !important;
+}

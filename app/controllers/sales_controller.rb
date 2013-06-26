@@ -175,6 +175,7 @@ class SalesController < ApplicationController
                      :source => params[:source],
                      :product_history => params[:product_history],
                      :product_specifics => params[:product_specifics],
+                     :product_condition => params[:product_condition],
                      :allow_returns => params[:allow_returns],
                      :does_shipping => params[:does_shipping] )
    

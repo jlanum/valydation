@@ -13,6 +13,7 @@ class PurchasedSale < ActiveRecord::Base
                   :source,
                   :product_history,
                   :product_specifics,
+                  :product_condition,
                   :image_0,
                   :image_1,
                   :image_2,

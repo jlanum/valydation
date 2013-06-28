@@ -44,11 +44,7 @@ function validateAndSubmit() {
         return false;
       }
 
-      if (!$("#email")[0].value.match(".@.")) {
-        alert("Please provide a valid email address.");
-        return false;
-      }
-
+   
       if ($("#passwd_clear").val().length < 4) {
         alert("Your password must be at least 4 characters");
         return false;
@@ -59,15 +55,7 @@ function validateAndSubmit() {
         return false;
       }
 
-      if ($("#first_name").val().length < 1) {
-        alert("Please provide your first name.");
-        return false;
-      }
-
-      if ($("#last_name").val().length < 1) {
-        alert("Please provide your last name.");
-        return false;
-      }
+  
 
       if ($("#zip_code").val().length != 5) {
         alert("Please provide your 5-digit zip code.");

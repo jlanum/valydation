@@ -73,6 +73,7 @@ HiStrollers::Application.routes.draw do
   match 'logout' => 'sessions#destroy'
   match 'register' => 'users#register'
   match 'register_lead' => 'admin/leads#create'
+  match 'forgot_passwd' => 'users#forgot_passwd'
 
   root :to => "pages#show", :defaults => {:slug => "curated-landing"}
 

@@ -4,6 +4,12 @@ class ShopMailer < ActionMailer::Base
   def test_email(recip)
     mail(:to => recip, :subject => "Your /valydation purchase is complete!")
   end
+  
+  def create_and_deliver_passwd_change(user, passwd_hash)
+    @user = user
+    @passwd_hash = passwd_hash
+    mail(:to => @user.email, :subject => "Your /valydation password change is complete!")
+  end
 
   def contact_email(from_name, from_email, subject, body)
     @from_name = from_name

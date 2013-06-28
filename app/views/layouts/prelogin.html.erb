@@ -50,12 +50,9 @@
           </a>
 						<%= form_tag(register_lead_url,
 				                 {:class => "form-search"}) do %>
-												<% if @error_message %>
-										    <div class="alert alert-error">  
-										      <%= @error_message %>
-										    </div>
-										    <% end %>
-				<input type="text" value="<%= params[:email] %>" id="email" name="email" class="input-block-level" placeholder="ENTER EMAIL"><button class="btn btn-small email-sign" type="submit" onclick="alert(document.getElementById('HiddenHear').innerHTML);">Submit</button>
+											
+										   
+				<input type="text" value="<%= params[:email] %>" id="email_signup" name="email" class="input-block-level" placeholder="ENTER EMAIL"><button class="btn btn-small email-sign" type="submit" onclick="alert(document.getElementById('HiddenHear').innerHTML);">Submit</button>
 				<% end %><div id="HiddenHear" style="display:none">You're on the email list!</div>
           <center>
           <a class="brand" href="/sales">

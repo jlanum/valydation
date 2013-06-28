@@ -100,7 +100,11 @@
       </ul>
 
       <hr>
-
+			<% if flash[:message] %>
+			<div class="alert alert-success">
+			 <%= flash[:message] %>.
+			</div>
+			<% end %>
         <% if @error_message %>
         <div class="alert alert-error">  
         <%= @error_message %>
@@ -118,5 +122,10 @@
 
         <% end %>
 		 </ul>
-       
-   
+		<%= form_tag({:controller => "users", :action => "forgot_passwd"},
+                  {:class => "form-signin"}) do %>
+Forgot your password?
+       <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Enter Your Email"><br>
+<button class="btn btn-large btn-success" type="submit">Submit</button><br>
+   <% end %>
+</div>

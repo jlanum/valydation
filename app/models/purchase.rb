@@ -158,7 +158,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def common_merge_vars
-    base_available_url = "http://www.mysaletable.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
+    base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
 
     merge_vars = {
       "ORDER_ID" => self.id,

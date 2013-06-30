@@ -87,9 +87,8 @@
 
     <div class="container ">
       <ul class="nav">
-        <%= form_tag({:controller => "sessions", :action => "create"},
-                     {:class => "form-signin"}) do %>
-        
+        <%= form_tag({:controller => "sessions", :action => "create"}) do %>
+        <div class="form-signin">
         <center><p><font size="5">Log In</font></p></center>
         <hr>
         <center>Sign in with</center><br/>
@@ -115,17 +114,16 @@
           Sign in with your email<br/><br/>
           <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Email"><br>
           <input type="password" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
-          <button class="btn btn-large btn-success" type="submit">Login</button><br>
+          <button class="btn btn-large btn-success" type="submit">Login</button><br><br>
 
 
-        </center>
+        
 
         <% end %>
-		 </ul>
-		<%= form_tag({:controller => "users", :action => "forgot_passwd"},
-                  {:class => "form-signin"}) do %>
+		
+		<%= form_tag({:controller => "users", :action => "forgot_passwd"}) do %>
 Forgot your password?
        <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Enter Your Email"><br>
 <button class="btn btn-large btn-success" type="submit">Submit</button><br>
-   <% end %>
-</div>
+   <% end %></center>
+</div></div><br><br><br><br><br><br>

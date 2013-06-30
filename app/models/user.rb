@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
                   :email, 
                   :passwd_hash,
                   :passwd_clear,
-                  :random_passwd_hash, 
+                  :random_password, 
                   :fb_id,
                   :city_id,
                   :zip_code,

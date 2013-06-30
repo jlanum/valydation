@@ -315,14 +315,14 @@ class UsersController < ApplicationController
   
   def forgot_passwd
       @user = User.find_by_email(params[:email])
-      random_passwd_hash = Array.new(10).map { (65 + rand(58)).chr }.join
-      @user.passwd_hash = random_passwd_hash
+      random_password = Array.new(10).map { (65 + rand(58)).chr }.join
+      @user.passwd_hash = random_password
       @user.save!
-      ShopMailer.create_and_deliver_passwd_change(params[:random_passwd_hash]).deliver
+      ShopMailer.create_and_deliver_passwd_change(@user).deliver
       flash[:message] = "Your new password has been emailed to you."
       redirect_to :back 
-    end
- 
+    
+ end
   def render_error
     respond_to do |wants|
       wants.json do 

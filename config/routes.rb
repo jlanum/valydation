@@ -34,7 +34,7 @@ HiStrollers::Application.routes.draw do
   match 'remove_from_cart/:sale_id' => 'purchases#remove_from_cart', :as => 'remove_from_cart'
   match 'view_cart' => 'purchases#view_cart', :as => 'view_cart'
   match '/purchases/add_to_cart' => 'purchases#add_to_cart', :as => 'add_to_cart'
-
+  match 'forgot_passwd' => 'users#forgot_passwd'
   match '/stores/list' => "users#stores"
 
   match '/mine' => 'sales#index',
@@ -73,7 +73,7 @@ HiStrollers::Application.routes.draw do
   match 'logout' => 'sessions#destroy'
   match 'register' => 'users#register'
   match 'register_lead' => 'admin/leads#create'
-  match 'forgot_passwd' => 'users#forgot_passwd'
+  
 
   root :to => "pages#show", :defaults => {:slug => "curated-landing"}
 

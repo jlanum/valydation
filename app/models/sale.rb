@@ -37,7 +37,8 @@ class Sale < ActiveRecord::Base
                   :cart,
                   :items,
                   :validated,
-                  :product_specifics
+                  :product_specifics,
+                  :product_condition
 
 
   attr_accessor :current_user
@@ -72,7 +73,7 @@ class Sale < ActiveRecord::Base
 
   def self.categories
     ["Apparel",
-     "Ceramic & Glass",
+     "Ceramics & Glass",
      "Promotional"]
   end
 
@@ -109,6 +110,7 @@ class Sale < ActiveRecord::Base
                       :source => self.source.url,
                       :product_history => self.product_history,
                       :product_specifics => self.product_specifics,
+                      :product_condition => self.product_condition,
                       :image_0 => self.image_0.url,
                       :image_1 => self.image_1.url,
                       :image_2 => self.image_2.url,

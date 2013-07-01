@@ -35,6 +35,8 @@ class SessionsController < ApplicationController
       redirect_to redirect_url
     end
   end
+  
+  
 
   def destroy
     session[:user_id] = nil

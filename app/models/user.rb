@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
                   :last_name,
                   :email, 
                   :passwd_hash,
-                  :passwd_clear, 
+                  :passwd_clear,
+                  :random_password, 
                   :fb_id,
                   :city_id,
                   :zip_code,
@@ -24,6 +25,7 @@ class User < ActiveRecord::Base
                   :store_address,
                   :featured,
                   :display_order
+                  
 
   attr_accessor :other_user
 
@@ -169,7 +171,7 @@ class User < ActiveRecord::Base
       template_name = 'welcome-to-mysaletable-stores'
     else 
       subject = "Welcome! Your Account is Created."
-      template_name = 'welcome-to-mysaletable-shoppers'
+      template_name = 'welcome-to-valydation'
     end
 
     md_temp_options = { 

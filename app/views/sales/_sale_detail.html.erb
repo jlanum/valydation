@@ -7,15 +7,15 @@
 	   
 			<a href="/sales">HOME</a>&#160;/
 		        <% if sale.category_id == 0 %>
-						APPAREL
+				<a href="/sales">APPAREL</a>
 						<% else %> 
 						<% if sale.category_id == 1 %>
-						CERAMIC & GLASS
+						<a href="/sales?category_id=1">CERAMICS & GLASS</a>
 						<% else %> 
 						 <% if sale.category_id == 2 %>
-						PROMOTIONAL
+						<a href="/sales?category_id=2">PROMOTIONAL</a>
 						<% end %>	<% end %>	<% end %>	
-		        
+		        / <%= sale.product.upcase %>
 		    
 	  </div>
 
@@ -127,8 +127,9 @@
  
 	                    <div class="additional-links">
 	             <ul>
-	                 
-											                     </li>
+									<li class="italic-detail">	
+	                 Share this item
+											                     </li> &#160;&#160;
 	                 <li>																								<a href="<%= twitter_share_url(sale) %>">
 																			      <%= image_tag "twitter_32_icon.png", :height => 32, :width => 32 %>
 																			  &#160;&#160;  </a>
@@ -157,7 +158,12 @@
 
 
 	                           <p><%= raw sale.product_history %></p>
+	<h3 class="menu_head">Product Details</h3>
 															<p><%= raw sale.product_specifics if sale.product_specifics %></p>
+															
+															<h3 class="menu_head">Product Condition</h3>
+																													<p><%= raw sale.product_condition if sale.product_condition %></p>
+															
 
 	                            <p>
 	                               

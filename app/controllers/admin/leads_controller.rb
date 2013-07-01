@@ -9,7 +9,7 @@ class Admin::LeadsController < ApplicationController
                      :email => params[:email])
     @lead.save!
 
-    redirect_to(page_url(:slug => 'preregister'))
+    redirect_to :back
   end
 
   def index

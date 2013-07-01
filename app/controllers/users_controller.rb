@@ -312,7 +312,17 @@ class UsersController < ApplicationController
       render_error
     end
   end
-
+  
+  def forgot_passwd
+      @user = User.find_by_email(params[:email])
+      random_password = Array.new(10).map { (65 + rand(58)).chr }.join
+      @user.passwd_hash = random_password
+      @user.save!
+      ShopMailer.create_and_deliver_passwd_change(@user).deliver
+      flash[:message] = "Your new password has been emailed to you."
+      redirect_to :back 
+    
+ end
   def render_error
     respond_to do |wants|
       wants.json do 

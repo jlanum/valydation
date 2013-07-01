@@ -1031,7 +1031,7 @@ height: 60px;
 	font-weight: normal;
 	line-height: 18px;
     /* Style to override old declaration */
-    font: italic normal 20px/20px utopia-std, Times, 'Times New Roman', Georgia, serif;
+    font: italic normal 16px/18px utopia-std, Times, 'Times New Roman', Georgia, serif;
     text-transform: none;
 }
 #mc_wrap .product-shop .product-name .price {

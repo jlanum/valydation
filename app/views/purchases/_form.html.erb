@@ -39,11 +39,11 @@ function toggleAddress() {
     <div class="" style="">
       <hr>
       <p>
-      <%= check_box_tag "ship", '1', (params[:ship].to_i == 1), :onchange => "toggleAddress()" %>
-      Add shipping within the continental U.S. for free
+      
+     Shipping within the continental U.S. is free
       </p>
 
-      <% if params[:ship].to_i == 1 %>
+     
         <div id="address-container">
         <%= hidden_field_tag "transaction[shipping][first_name]", @user.first_name %>
         <%= hidden_field_tag "transaction[shipping][last_name]", @user.last_name %>
@@ -59,7 +59,7 @@ function toggleAddress() {
 
         <input type="text" class="input-small" name="transaction[shipping][postal_code]" placeholder="Zip Code" value="<%= params[:zip] %>">
       </div>
-    <% end %>
+    
 
     </div>
 

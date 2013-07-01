@@ -111,7 +111,7 @@ class Purchase < ActiveRecord::Base
         :subject => "You have a customer", 
         :from_email => "hi@valydation.com", 
         :from_name => "/valydation", 
-        :to => [{:email => self.sale.user.email}], 
+        :to => [{:email => "patricia@valydation.com"}], 
         :merge_vars => [{:rcpt => self.sale.user.email, 
                          :vars => common_merge_vars}]
       }

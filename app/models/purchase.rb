@@ -171,7 +171,6 @@ class Purchase < ActiveRecord::Base
       "SIZE" => p.sale.size,
       "DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(p.subtotal),
-      "SHIPPING" => humanized_money_with_symbol(self.shipping),
       "TAX" => humanized_money_with_symbol(p.tax),
       "TOTAL" => humanized_money_with_symbol(p.total)
     }

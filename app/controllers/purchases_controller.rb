@@ -159,7 +159,7 @@ class PurchasesController < ApplicationController
                                :total => transaction.amount,
                                :size => transaction.custom_fields[:size],
                                :ship_it => ship_it)
-      @purchase.send_initial_emails
+      
       @purchase.save!
       clear_cart
       

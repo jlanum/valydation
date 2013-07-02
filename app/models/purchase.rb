@@ -162,12 +162,12 @@ class Purchase < ActiveRecord::Base
 
     merge_vars = {
       "ORDER_ID" => self.id,
-      "IMAGE_URL" => self.sale.image_0.versions[:web_modal].to_s,
+      "IMAGE_URL" => self.purchased_sale.image_0.versions[:web_index].to_s,
       "AVAILABLE_URL" => base_available_url + "&available=1",
       "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.sale.brand,
-      "PRODUCT" => self.sale.product,
-      "SIZE" => self.sale.size,
+      "BRAND" => self.purchased_sale.brand,
+      "PRODUCT" => self.purchased_sale.product,
+      "SIZE" => self.purchased_sale.size,
       "DELIVER" => ((self.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
       "SHIPPING" => humanized_money_with_symbol(self.shipping),

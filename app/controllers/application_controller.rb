@@ -44,26 +44,33 @@ class ApplicationController < ActionController::Base
   end
   
   def add_to_cart
-       @cart = get_cart
-       @cart.add_to_cart(Sale.find(params[:sale_id]))
-     end
-
-     def get_cart
-       if session[:cart]
-         return session[:cart]
-       else
-         session[:cart] = Cart.new
-         return session[:cart]
-       end
-     end
+    get_cart
+    @cart.add_to_cart(Sale.find(params[:sale_id]))
+    save_cart
+    redirect_to view_cart_url
+  end
+ 
 
    def view_cart
      	@cart = get_cart
      end
 
-   def clear_cart
-       @cart = get_cart
+     def clear_cart
+       get_cart
        @cart.clear
+       save_cart
+     end
+   
+   def save_cart
+     session[:cart_json] = @cart.to_json
+   end
+
+   def get_cart
+     if session[:cart_json]
+       @cart = Cart.from_json(session[:cart_json])
+     else
+       @cart = Cart.new
+     end
    end
 
 

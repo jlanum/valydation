@@ -160,21 +160,21 @@ class Purchase < ActiveRecord::Base
   def common_merge_vars
    ## base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
     
-    self.purchased_sales.each do |p|
+    
     merge_vars = {
       "ORDER_ID" => self.id,
-      "IMAGE_URL" => p.sale.image_0.versions[:web_index].to_s,
+      "IMAGE_URL" => self.purchased_sales.sale.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => p.brand,
-      "PRODUCT" => p.product,
-      "SIZE" => p.sale.size,
+      "BRAND" => self.purchased_sales.brand,
+      "PRODUCT" => self.purchased_sales.product,
+      "SIZE" => self.purchased_sales.sale.size,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
       "TAX" => humanized_money_with_symbol(self.tax),
       "TOTAL" => humanized_money_with_symbol(self.total)
     }
-    end
+   
     merge_vars.inject([]) do |array, pair|
       array << {:name => pair.first, :content => pair.last}
     end

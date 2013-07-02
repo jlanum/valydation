@@ -87,7 +87,7 @@ class Purchase < ActiveRecord::Base
 
   def send_customer_processing_email
     md_temp_options = { 
-      :template_name => "customer-processing-your-sale", 
+      :template_name => "valydation-processing-your-sale", 
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => "Processing Your Sale", 

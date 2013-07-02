@@ -105,7 +105,7 @@ class Purchase < ActiveRecord::Base
 
   def send_merchant_confirm_email
     md_temp_options = { 
-      :template_name => "merchant-confirm-sale", 
+      :template_name => "merchant-customer-information", 
       :template_content => [{:name => "sale_image", :content => ""}], 
       :message => { 
         :subject => "You have a customer", 
@@ -158,14 +158,14 @@ class Purchase < ActiveRecord::Base
   end
 
   def common_merge_vars
-    base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
+   ## base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
     
     self.purchased_sales.each do |p|
     merge_vars = {
-      "ORDER_ID" => p.id,
+      "ORDER_ID" => self.id,
       "IMAGE_URL" => p.sale.image_0.versions[:web_index].to_s,
-      "AVAILABLE_URL" => base_available_url + "&available=1",
-      "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
+      ##"AVAILABLE_URL" => base_available_url + "&available=1",
+     ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
       "BRAND" => p.brand,
       "PRODUCT" => p.product,
       "SIZE" => p.sale.size,

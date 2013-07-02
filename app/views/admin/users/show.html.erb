@@ -45,8 +45,6 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Store</th>
-      <th>City</th>
       <th>Brand</th>
       <th>Product</th>
       <th>Posted</th>
@@ -56,14 +54,7 @@ Joined <%= @user.created_at.strftime("%b %d, %Y") %>.
   <tbody>
   <% @user.sales.each do |sale| %>
     <tr>
-      <td>
-        <%= sale.store_name %>
-      </td>
-      <td>
-        <% if sale.metro %>
-        <%= sale.metro.name %>
-        <% end %>
-      </td>
+   
       <td>
         <%= sale.brand %>
       </td>

@@ -110,7 +110,7 @@ function toggleAddress() {
               <%= humanized_money_with_symbol @purchase.tax %>
             </td>
           </tr>
-          <% if params[:ship].to_i == 1 %>
+          <% if params[:ship].to_i == 0 %>
             <tr id="shipping_row">
             <td>
               <font size="3" class="muted">Shipping</font>

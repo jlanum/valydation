@@ -159,10 +159,10 @@ class PurchasesController < ApplicationController
                                :total => transaction.amount,
                                :size => transaction.custom_fields[:size],
                                :ship_it => ship_it)
-
+      @purchase.send_initial_emails
       @purchase.save!
       clear_cart
-
+      
       respond_to do |wants|
         wants.json do 
           render :json =>  {"message" => "We're holding your item and are awaiting confirmation from the merchant. Your credit card will be charged once the sale is confirmed."}

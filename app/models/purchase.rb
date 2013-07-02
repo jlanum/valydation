@@ -76,7 +76,7 @@ class Purchase < ActiveRecord::Base
       collect { |s| s.orig_price.to_f }.sum
     self.tax = self.purchased_sales.collect { |s| s.tax.to_f }.sum
 
-    self.total = self.subtotal
+    self.total = self.subtotal + self.tax + self.shipping
   end
 
 

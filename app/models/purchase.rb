@@ -170,9 +170,9 @@ class Purchase < ActiveRecord::Base
       "PRODUCT" => p.product,
       "SIZE" => p.sale.size,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
-      "SUBTOTAL" => humanized_money_with_symbol(p.subtotal),
-      "TAX" => humanized_money_with_symbol(p.tax),
-      "TOTAL" => humanized_money_with_symbol(p.total)
+      "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
+      "TAX" => humanized_money_with_symbol(self.tax),
+      "TOTAL" => humanized_money_with_symbol(self.total)
     }
     end
     merge_vars.inject([]) do |array, pair|

@@ -166,13 +166,14 @@ class Purchase < ActiveRecord::Base
      ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.purchased_sale.brand,
-      "PRODUCT" => self.purchased_sale.product,
-      "SIZE" => self.purchased_sale.sale.size,
+      "BRAND" => self.purchased_sales.collect { |s| s.brands }.sort,
+      "PRODUCT" => self.purchased_sales.collect { |s| s.products }.sort,
+      "SIZE" => self.purchased_sales.collect { |s| s.sizes }.sort,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
-      "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
-      "TAX" => humanized_money_with_symbol(self.tax),
-      "TOTAL" => humanized_money_with_symbol(self.total)
+      "SUBTOTAL" => humanized_money_with_symbol(self.purchased_sales.
+        collect { |s| s.orig_price.to_f }.sum),
+      "TAX" => humanized_money_with_symbol(self.purchased_sales.collect { |s| s.tax.to_f }.sum),
+      "TOTAL" => humanized_money_with_symbol(self.subtotal + self.tax + self.shipping)
     }
    
     merge_vars.inject([]) do |array, pair|

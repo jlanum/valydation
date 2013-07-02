@@ -163,7 +163,7 @@ class Purchase < ActiveRecord::Base
     
     merge_vars = {
       "ORDER_ID" => self.id,
-      "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
+     ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
       "BRAND" => self.purchased_sales.brand,

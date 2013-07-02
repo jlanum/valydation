@@ -43,7 +43,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def available_key
-    Digest::MD5.hexdigest("#{self.id} #{self.user_id} #{self.sale_id} #{self.external_id}")
+    Digest::MD5.hexdigest("#{self.purchased_sales.id} #{self.purchased_sales.user_id} #{self.purchased_sales.sale_id} #{self.external_id}")
   end
 
   def previous_purchases
@@ -112,7 +112,7 @@ class Purchase < ActiveRecord::Base
         :from_email => "hi@valydation.com", 
         :from_name => "/valydation", 
         :to => [{:email => "patricia@valydation.com"}], 
-        :merge_vars => [{:rcpt => self.sale.user.email, 
+        :merge_vars => [{:rcpt => "patricia@valydation.com", 
                          :vars => common_merge_vars}]
       }
     }
@@ -159,22 +159,23 @@ class Purchase < ActiveRecord::Base
 
   def common_merge_vars
     base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
-
+    
+    self.purchased_sales.each do |p|
     merge_vars = {
-      "ORDER_ID" => self.id,
-      "IMAGE_URL" => self.purchased_sale.image_0.versions[:web_index].to_s,
+      "ORDER_ID" => p.id,
+      "IMAGE_URL" => p.sale.image_0.versions[:web_index].to_s,
       "AVAILABLE_URL" => base_available_url + "&available=1",
       "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.purchased_sale.brand,
-      "PRODUCT" => self.purchased_sale.product,
-      "SIZE" => self.purchased_sale.size,
-      "DELIVER" => ((self.shipping.to_f > 0) ? "Yes" : "No"),
-      "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
-      "SHIPPING" => humanized_money_with_symbol(self.shipping),
-      "TAX" => humanized_money_with_symbol(self.tax),
-      "TOTAL" => humanized_money_with_symbol(self.total)
+      "BRAND" => p.brand,
+      "PRODUCT" => p.product,
+      "SIZE" => p.sale.size,
+      "DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
+      "SUBTOTAL" => humanized_money_with_symbol(p.subtotal),
+      "SHIPPING" => humanized_money_with_symbol(p.shipping),
+      "TAX" => humanized_money_with_symbol(p.tax),
+      "TOTAL" => humanized_money_with_symbol(p.total)
     }
-
+    end
     merge_vars.inject([]) do |array, pair|
       array << {:name => pair.first, :content => pair.last}
     end

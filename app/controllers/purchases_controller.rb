@@ -130,7 +130,7 @@ class PurchasesController < ApplicationController
   end
 
   def confirmation
-    braintree_result = Braintree::Transaction.submit_for_settlement(request.query_string)
+    braintree_result = Braintree::TransparentRedirect.confirm(request.query_string)
     transaction = braintree_result.transaction
     if braintree_result.success?
       #debugger

@@ -172,7 +172,7 @@ class Purchase < ActiveRecord::Base
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(self.purchased_sales.
         collect { |s| s.orig_price.to_f }.sum),
-      "TAX" => humanized_money_with_symbol(self.purchased_sales.collect { |s| s.tax.to_f }.sum),
+      "TAX" => humanized_money_with_symbol(self.tax),
       "TOTAL" => humanized_money_with_symbol(self.subtotal + self.tax + self.shipping)
     }
    

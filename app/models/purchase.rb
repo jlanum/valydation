@@ -166,9 +166,9 @@ class Purchase < ActiveRecord::Base
      ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.purchased_sales.collect { |s| s.brand }.sort,
-      "PRODUCT" => self.purchased_sales.collect { |s| s.product }.sort,
-      "SIZE" => self.purchased_sales.collect { |s| s.sizes }.sort,
+      "BRAND" => self.purchased_sales.collect { |s| s.brand }.flatten,
+      "PRODUCT" => self.purchased_sales.collect { |s| s.product }.flatten,
+      "SIZE" => self.purchased_sales.collect { |s| s.sizes }.flatten,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(self.purchased_sales.
         collect { |s| s.orig_price.to_f }.sum),

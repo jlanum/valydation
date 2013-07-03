@@ -56,7 +56,7 @@ class PurchasesController < ApplicationController
   end
 
   def sold
-    @purchases = Purchase.
+    @purchased_sales = Purchased_sale.
       joins("LEFT JOIN sales on purchases.sale_id=sales.id").
       where(["sales.user_id=?",@user.id]).
       order("created_at DESC").all

@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
   
   def products_string
-  render_to_string(:action => "purchases/products_email", :layout => false)
+  render(:action => "purchases/products_email", :layout => false)
   end
   
   def add_to_cart

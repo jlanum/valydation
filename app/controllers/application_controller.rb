@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
   
   def products_string
-  render(:action => "purchases/products_email", :layout => false)
+  render :partial => "purchases/products_email", :layout => false
   end
   
   def add_to_cart

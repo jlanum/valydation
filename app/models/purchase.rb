@@ -88,7 +88,7 @@ class Purchase < ActiveRecord::Base
   def send_customer_processing_email
     md_temp_options = { 
       :template_name => "valydation-processing-your-sale", 
-      :template_content => [{:name => "sale_image", :content => ""}], 
+      :template_content => [{:name => "product_email_stuff", :content => products_string}], 
       :message => { 
         :subject => "Processing Your Sale", 
         :from_email => "hi@valydation.com", 
@@ -102,11 +102,15 @@ class Purchase < ActiveRecord::Base
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end
+  
+  def products_string
+    render_to_string(:action => "purchases/products_email", :layout => false)
+  end
 
   def send_merchant_confirm_email
     md_temp_options = { 
       :template_name => "merchant-customer-information", 
-      :template_content => [{:name => "sale_image", :content => ""}], 
+      :template_content => [{:name => "product_email_stuff", :content => products_string}], 
       :message => { 
         :subject => "You have a customer", 
         :from_email => "hi@valydation.com", 
@@ -166,7 +170,7 @@ class Purchase < ActiveRecord::Base
      ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.purchased_sales.collect { |s| s.brand }.first,
+      "BRAND" => self.purchased_sales.collect { |s| s.brand }.flatten,
       "PRODUCT" => self.purchased_sales.collect { |s| s.product }.second,
       "SIZE" => self.purchased_sales.collect { |s| s.sizes }.flatten,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),

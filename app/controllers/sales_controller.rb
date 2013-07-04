@@ -268,7 +268,7 @@ class SalesController < ApplicationController
 
 
   def index_html
-    @cities = City.order("name ASC").all
+    
     if params[:my_feed]
       index_html_mine
     else

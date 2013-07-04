@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     sts.new_federated_session(federated_user_key, :policy => policy)
   end
   
+  def products_string
+  render_to_string(:partial => "purchases/products_email", :layout => false)
+  end
+  
   def add_to_cart
      get_cart
      @cart.add_to_cart(Sale.find(params[:sale_id]))

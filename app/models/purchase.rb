@@ -98,15 +98,14 @@ class Purchase < ActiveRecord::Base
                          :vars => common_merge_vars}]
       }
     }
-  
+    products_string = render_to_string(:partial => "purchases/products_email", :layout => false)
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end
   
-  def products_string
-    render_to_string(:partial => "purchases/products_email", :layout => false)
+  products_string = render_to_string(:partial => "purchases/products_email", :layout => false)
     
-  end
+    
 
   def send_merchant_confirm_email
     md_temp_options = { 
@@ -121,7 +120,7 @@ class Purchase < ActiveRecord::Base
                          :vars => common_merge_vars}]
       }
     }
-
+    products_string = render_to_string(:partial => "purchases/products_email", :layout => false)
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end

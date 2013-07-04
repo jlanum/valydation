@@ -103,10 +103,6 @@ class PurchasesController < ApplicationController
     end
   end
   
-  def products_string
-    render_to_string(:partial => "purchases/products_email", :layout => false)
-  end
-
 
   def new_json
     render :json => @purchase.to_json(:methods => [:previous_shipped_purchase, :tr_data, :post_url])

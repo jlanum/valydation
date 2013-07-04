@@ -104,7 +104,7 @@ class PurchasesController < ApplicationController
   end
   
   def products_string
-  render :partial => "purchases/products_email", :layout => false
+  render(:partial => "purchases/products_email", :layout => false).to_s
   end
 
   def new_json

@@ -104,7 +104,7 @@ class PurchasesController < ApplicationController
   end
   
   def products_string
-  render_to_string(:partial => "purchases/products_email", :layout => false)
+  render_to_string(:action => "purchases/products_email", :layout => false)
   end
 
   def new_json

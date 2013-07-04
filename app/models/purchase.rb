@@ -86,7 +86,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def send_customer_processing_email
-    products_string = render(:partial => "purchases/products_email", :layout => false).to_s
+    
     md_temp_options = { 
       :template_name => "valydation-processing-your-sale", 
       :template_content => [{:name => "product_email_stuff", :content => products_string}], 
@@ -109,7 +109,7 @@ class Purchase < ActiveRecord::Base
     
 
   def send_merchant_confirm_email
-    products_string = render(:partial => "purchases/products_email", :layout => false).to_s
+    
     md_temp_options = { 
       :template_name => "merchant-customer-information", 
       :template_content => [{:name => "product_email_stuff", :content => products_string}], 
@@ -126,6 +126,8 @@ class Purchase < ActiveRecord::Base
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end
+  
+
 
   def send_available_email
     md_temp_options = { 

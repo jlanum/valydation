@@ -166,8 +166,8 @@ class Purchase < ActiveRecord::Base
      ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.purchased_sales.collect { |s| s.brand }.flatten,
-      "PRODUCT" => self.purchased_sales.collect { |s| s.product }.flatten,
+      "BRAND" => self.purchased_sales.collect { |s| s.brand }.first,
+      "PRODUCT" => self.purchased_sales.collect { |s| s.product }.second,
       "SIZE" => self.purchased_sales.collect { |s| s.sizes }.flatten,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
       "SUBTOTAL" => humanized_money_with_symbol(self.purchased_sales.
@@ -177,7 +177,7 @@ class Purchase < ActiveRecord::Base
     }
    
     merge_vars.inject([]) do |array, pair|
-      array << {:name => pair.first, :content => pair.last}
+      array << {:name => pair.first, :content => self.purchased_sales.collect { |s| s.brand }.flatten}
     end
   end
 

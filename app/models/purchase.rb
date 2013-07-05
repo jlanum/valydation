@@ -100,9 +100,13 @@ class Purchase < ActiveRecord::Base
                          :vars => common_merge_vars}]
       }
     }
-
+    
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
+  end
+  
+  def products_string
+    products_string
   end
   
   

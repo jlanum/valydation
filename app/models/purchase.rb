@@ -105,7 +105,9 @@ class Purchase < ActiveRecord::Base
     m_api.messages(:sendtemplate, md_temp_options)
   end
   
-  
+  def products_string
+    products_string = email_render
+  end
     
     
 

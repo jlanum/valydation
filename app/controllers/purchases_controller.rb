@@ -103,7 +103,7 @@ class PurchasesController < ApplicationController
     end
   end
   
-  def products_string
+  def email_render
   render(:action => "purchases/products_email", :layout => false).to_s
   end
 

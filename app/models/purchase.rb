@@ -87,7 +87,11 @@ class Purchase < ActiveRecord::Base
   end
 
   def send_customer_processing_email
-    
+    products_string = ActionController::Base.new.
+      render_to_string("purchases/products_email", 
+                       :layout => false, 
+                       :locals => {:purchased_sales => self.purchased_sales})
+
     md_temp_options = { 
       :template_name => "valydation-processing-your-sale", 
       :template_content => [{:name => "product_email_stuff", :content => products_string}], 
@@ -104,11 +108,6 @@ class Purchase < ActiveRecord::Base
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end
-  
-  def products_string
-    products_string
-  end
-  
   
  
   def send_merchant_confirm_email

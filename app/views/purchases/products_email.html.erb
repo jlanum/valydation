@@ -1,9 +1,6 @@
-<div mc:edit="product_email_stuff">
-	<% purchased_sales.each do |p| %>
-		<%= h(p.image_0.versions[:web_index].to_s) %>
-		<%= h(p.brand) %>
-		<%= h(p.product) %>
-		<%= h(p.sizes %>
-		<% end %>
-		
-	</div>
+<% purchased_sales.each do |p| %>
+  <%= h(p.brand) %>
+  <%= h(p.product) %>
+  <%= h(p.sizes) %>
+<% end %>
+  

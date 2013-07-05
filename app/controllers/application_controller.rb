@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     sts.new_federated_session(federated_user_key, :policy => policy)
   end
   
-  def email_render
+  def products_string
   render(:action => "purchases/products_email", :layout => false).to_s
   end
   

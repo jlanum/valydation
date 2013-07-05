@@ -90,7 +90,7 @@ class Purchase < ActiveRecord::Base
     
     md_temp_options = { 
       :template_name => "valydation-processing-your-sale", 
-      :template_content => [{:name => "product_email_stuff", :content => products_string}], 
+      :template_content => [{:name => "product_email_stuff", :content => :products_string}], 
       :message => { 
         :subject => "Processing Your Sale", 
         :from_email => "hi@valydation.com", 
@@ -105,9 +105,7 @@ class Purchase < ActiveRecord::Base
     m_api.messages(:sendtemplate, md_temp_options)
   end
   
-  def products_string
-    products_string = email_render
-  end
+  
     
     
 

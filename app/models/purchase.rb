@@ -24,7 +24,8 @@ class Purchase < ActiveRecord::Base
                   :retailer_status,
                   :items,
                   :cart,
-                  :purchased_sales
+                  :purchased_sales,
+                  :products_string
 
   belongs_to :sale
   belongs_to :user

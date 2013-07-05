@@ -56,6 +56,7 @@ HiStrollers::Application.routes.draw do
   match 'admin' => 'admin/sales#index'
   match 'new_sale_purchase' => 'purchases#new', :as => 'new_sale_purchase'
   match 'puchases_url' => 'purchases#index', :as => 'purchases_url'
+  
   namespace :admin do
     resources :users do
       get 'export', :on => :collection

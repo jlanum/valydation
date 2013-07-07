@@ -94,7 +94,11 @@ class PurchasesController < ApplicationController
                            "tax_amount" => @purchase.tax,
                            "subtotal" => @purchase.subtotal},
         :type => "sale",
-        :amount => @purchase.total})
+        :amount => @purchase.total,
+        
+        :options => {
+                  :submit_for_settlement => true
+                }})
 
     @purchase.tr_data = @tr_data
     @purchase.post_url = Braintree::TransparentRedirect.url

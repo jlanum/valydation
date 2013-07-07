@@ -58,13 +58,14 @@
           <a class="brand" href="/">
             <%= image_tag 'valydation_logo.png', :height => 34, :width => 180 %>
           </a>
+
         </center>
 		
           <div class="nav-collapse collapse">
             <ul class="nav">
               <% unless @no_header_links %>
               <li><%= link_to "Join", register_url %></li>
-              <li><%= link_to "About Us", "page/about" %></li>
+              <li><%= link_to "About Us", "/page/about" %></li>
               <li><%= link_to "Login", new_session_url %></li>
               <% end %>
             </ul>

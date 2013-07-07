@@ -2,7 +2,8 @@ class PurchasesController < ApplicationController
   before_filter :handle_device
   before_filter :require_user, :except => "available"
   before_filter :require_ssl, :except => "available"
-  
+  before_filter :get_cart
+  before_filter :view_cart
 
 ### Cart stuff
 ### note from Max to Jesse - I recommend moving everything between here

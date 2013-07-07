@@ -4508,7 +4508,7 @@ a.thumbnail:hover {
   z-index: 1050;
   width: 660px;
   margin: -250px 0 0 -242px;
-  background-color: #333;
+  background-color: #FFFFFF;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);
   *border: 1px solid #999;
@@ -4551,7 +4551,7 @@ a.thumbnail:hover {
   overflow-y: auto;
   max-height: 400px;
   padding: 15px;
- color:#fff;
+ color:#333;
 }
 .modal-form {
   margin-bottom: 0;

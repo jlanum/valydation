@@ -49,10 +49,10 @@ body {
           <% if purchase.sale %>
           <div class="span2">
             <% [:image_0, :image_1, :image_2, :image_3, :image_4, :image_5, :image_6, :image_7].each do |image_sym|
-                if (img = purchase.sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
-                  img_version = :web_modal
+                if (img = purchase.sale.send(image_sym)) and not img.versions[:web_index].to_s.empty? 
+                  img_version = :web_index
                 %>
-                <img class="img-polaroid" src="<%= img.versions[:web_thumbnail] %>" onmouseover="$('#sale_image_<%= purchase.sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= purchase.sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
+                <img class="img-polaroid" src="<%= img.versions[:web_index] %>" onmouseover="$('#sale_image_<%= purchase.sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= purchase.sale.id %>')[0].src='<%= img.versions[img_version] %>'" />
                 <br>
                 <%   end
               end %>
@@ -60,7 +60,7 @@ body {
           <div class="span6">	
             <span class="time-banner">
               <span class="image-banner">
-                 <img id="sale_image_<%= purchase.sale.id %>" src="<%= purchase.sale.image_0.versions[:web_modal] if purchase.sale.image_0 %>" alt="" />
+                 <img id="sale_image_<%= purchase.sale.id %>" src="<%= purchase.sale.image_0.versions[:web_index] if purchase.sale.image_0 %>" alt="" />
               </span>
             </span>
             <br>

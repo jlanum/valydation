@@ -48,12 +48,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-						<%= form_tag(register_lead_url,
-				                 {:class => "form-search"}) do %>
-											
-										   
-				<input type="text" value="<%= params[:email] %>" id="email_signup" name="email" class="input-block-level" placeholder="ENTER EMAIL"><button class="btn btn-small email-sign" type="submit" onclick="alert(document.getElementById('HiddenHear').innerHTML);">Submit</button>
-				<% end %><div id="HiddenHear" style="display:none">You're on the email list!</div>
+					
           <center>
           <a class="brand" href="/">
             <%= image_tag 'valydation_logo.png', :height => 34, :width => 180 %>

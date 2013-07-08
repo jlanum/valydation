@@ -114,7 +114,7 @@ class Purchase < ActiveRecord::Base
     
     md_temp_options = { 
       :template_name => "merchant-customer-information", 
-      :template_content => [{:name => "product_email_stuff", :content => "products_string"}], 
+      :template_content => [{:name => "product_email_stuff", :content => products_string}], 
       :message => { 
         :subject => "You have a customer", 
         :from_email => "hi@valydation.com", 

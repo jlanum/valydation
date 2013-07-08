@@ -4,19 +4,14 @@
 </div>
 <% end %>
 
-
+<% purchased_sales.each do |p| %>
   <div style="float:right; padding: 24px;">
   <div style="padding:8px;">
-    <img src="<%= @purchase.sale.image_0.versions[:web_index] %>">
+    <img src="<%= p.image_0.versions[:web_index] %>">
   </div>
-  <div style="padding:8px;">
-    <img src="<%= @purchase.sale.image_1.versions[:web_index] %>">
-  </div>
-  <div style="padding:8px;">
-    <img src="<%= @purchase.sale.image_2.versions[:web_index] %>">
-  </div>
+  
 </div>
-
+<% end %>
 <div class="page-header">
   <h1>Edit Purchase</h1>
 </div>
@@ -24,9 +19,7 @@
 <div class="page-header">
 
 
-<h2><%= link_to(@purchase.user.display_name, admin_user_url(@purchase.user) ) %></h2>
-<h3><%= link_to(@purchase.sale.user.display_name, admin_user_url(@purchase.sale.user)) %></h3>
-<h4><%= @purchase.sale.brand %> - <%= link_to(@purchase.sale.product, admin_sale_url(@purchase.sale)) %></h4>
+
 
   <br>
     <p>

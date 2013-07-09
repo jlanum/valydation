@@ -12,7 +12,7 @@ Order ID: <%= p.purchase_id %><br>
 <% end %>
 
 
- Shipping Address: <%= @purchase.address %><br>
-<%= @purchase.address_2 %><br>
-<%= @purchase.city %>, <%= @purchase.state %><br>
-<%= @purchase.zip %><br>
+ Shipping Address: <%= @purchase.address if @purchase.address %><br>
+<%= @purchase.address_2 if @purchase.address_2 %><br>
+<%= @purchase.city if @purchase.city %>, <%= @purchase.state if @purchase.state %><br>
+<%= @purchase.zip if @purchase.zip %><br>

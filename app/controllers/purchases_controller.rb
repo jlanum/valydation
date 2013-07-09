@@ -110,7 +110,7 @@ class PurchasesController < ApplicationController
   end
   
   def products_email
-    @purchase.calculate_total!
+    @purchase = Purchase.where(:user_id => @user.id)
   end
   
   def new_json

@@ -54,6 +54,7 @@ class PurchasesController < ApplicationController
   def index
     @purchases = Purchase.where(:user_id => @user.id).
                   order("created_at DESC").all
+
   end
 
   def sold
@@ -106,6 +107,10 @@ class PurchasesController < ApplicationController
     respond_to do |wants|
       wants.html { new_html }
     end
+  end
+  
+  def products_email
+    @purchase.calculate_total!
   end
   
   def new_json

@@ -23,7 +23,12 @@ class PurchasedSale < ActiveRecord::Base
                   :image_6,
                   :image_7,
                   :purchase_id,
-                  :display_address
+                  :display_address,
+                  :address, 
+                  :address_2, 
+                  :city, 
+                  :state, 
+                  :zip
 
   belongs_to :purchase
   belongs_to :sale

@@ -91,7 +91,7 @@ class Purchase < ActiveRecord::Base
       render_to_string("purchases/products_email", 
                        :layout => false, 
                        :locals => {:purchased_sales => self.purchased_sales,
-                                   :purchase => self})
+                                                          :purchase => self})
 
     md_temp_options = { 
       :template_name => "valydation-processing-your-sale", 
@@ -115,7 +115,8 @@ class Purchase < ActiveRecord::Base
     products_string = ActionController::Base.new.
       render_to_string("purchases/products_email", 
                        :layout => false, 
-                       :locals => {:purchased_sales => self.purchased_sales})
+                       :locals => {:purchased_sales => self.purchased_sales,
+                                                          :purchase => self})
                        
     md_temp_options = { 
       :template_name => "merchant-customer-information", 

@@ -1,6 +1,11 @@
 <% purchased_sales.each do |p| %>
-  <%= h(p.brand) %>
-  <%= h(p.product) %>
-  <%= h(p.sizes) %>
+Order ID:<%= p.id %><br>
+<%= h(p.image_0.versions[:web_index].to_s) %>
+ Company: <%= h(p.brand) %><br>
+ Product: <%= h(p.product) %><br>
+ Size: <%= h(p.sizes) %><br>
+Subtotal:<%= p.collect { |s| s.orig_price.to_f }.sum %><br>
+Tax:<%= p.tax { |s| s.tax.to_f }.sum %><br>
+Total:<%= p.total { |s| s.total.to_f }.sum %><br>
 <% end %>
   

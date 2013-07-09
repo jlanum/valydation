@@ -172,7 +172,7 @@ class Purchase < ActiveRecord::Base
     
     
     merge_vars = {
-      "ORDER_ID" => self.id,
+     ## "ORDER_ID" => self.id,
      ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
       ##"AVAILABLE_URL" => base_available_url + "&available=1",
      ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
@@ -180,10 +180,10 @@ class Purchase < ActiveRecord::Base
      ##  "PRODUCT" => self.purchased_sales.collect { |s| s.product }.second,
      ##  "SIZE" => self.purchased_sales.collect { |s| s.sizes }.flatten,
       ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
-      "SUBTOTAL" => humanized_money_with_symbol(self.purchased_sales.
+    ##  "SUBTOTAL" => humanized_money_with_symbol(self.purchased_sales.
         collect { |s| s.orig_price.to_f }.sum),
-      "TAX" => humanized_money_with_symbol(self.tax),
-      "TOTAL" => humanized_money_with_symbol(self.subtotal + self.tax + self.shipping)
+    ##  "TAX" => humanized_money_with_symbol(self.tax),
+     ## "TOTAL" => humanized_money_with_symbol(self.subtotal + self.tax + self.shipping)
     }
    
     merge_vars.inject([]) do |array, pair|

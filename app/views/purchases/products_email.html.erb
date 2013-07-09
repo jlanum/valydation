@@ -1,3 +1,4 @@
+Order ID:<%= purchase.id %><br>
 <% purchased_sales.each do |p| %>
 Order ID:<%= p.id %><br>
 <%= h(p.image_0.versions[:web_index].to_s) %>
@@ -7,6 +8,6 @@ Order ID:<%= p.id %><br>
 
 <% end %>
   
-Subtotal:<%= purchase.subtotal %><br>
-Tax:<%= purchase.tax %><br>
-Total:<%= purchase.total %><br>
+Subtotal:<%= humanized_money_with_symbol @purchase.subtotal %><br>
+Tax:<%= humanized_money_with_symbol @purchase.tax %><br>
+Total:<%= humanized_money_with_symbol @purchase.total %><br>

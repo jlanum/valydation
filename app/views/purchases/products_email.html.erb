@@ -5,12 +5,13 @@ Order ID: <%= p.purchase_id %><br>
  Company: <%= h(p.brand) %><br>
  Product: <%= h(p.product) %><br>
  Size: <%= h(p.size) %><br>
- Shipping Address: <%= p.address %><br>
-<%= p.address_2 %><br>
-<%= p.city %>, <%= p.state %><br>
-<%= p.zip %><br>
+
 <%= humanized_money_with_symbol p.orig_price %><br>
 <%= humanized_money_with_symbol p.tax_cents %><br>
 
 <% end %>
 
+ Shipping Address: <%= @purchases.address %><br>
+<%= @purchase.address_2 %><br>
+<%= @purchase.city %>, <%= @purchase.state %><br>
+<%= @purchass.zip %><br>

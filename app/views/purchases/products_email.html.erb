@@ -7,8 +7,9 @@ Link to Product Image: <%= h(p.image_0.to_s) %><br>
  Product: <%= h(p.product) %><br>
  Size: <%= h(p.size) %><br>
  Shipping: <%= p.display_address %>
-Shipping: <%= p.subtotal %>
-Shipping: <%= p.tax %>
-Shipping: <%= p.total %>
+
 <% end %>
 
+ Subtotal: <%= humanized_money_with_symbol @purchase.subtotal %><br>
+ Tax:<%= humanized_money_with_symbol @purchase.tax %><br>
+ Total:<%= humanized_money_with_symbol @purchase.total %><br>

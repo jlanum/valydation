@@ -11,9 +11,8 @@ Order ID: <%= p.purchase_id %><br>
 
 <% end %>
 
-<% purchases.each do |p| %>
- Shipping Address: <%= p.address %><br>
-<%= p.address_2 %><br>
-<%= p.city %>, <%= @purchase.state %><br>
-<%= p.zip %><br>
-<% end %>
+
+ Shipping Address: <%= @purchase.address %><br>
+<%= @purchase.address_2 %><br>
+<%= @purchase.city %>, <%= @purchase.state %><br>
+<%= @purchase.zip %><br>

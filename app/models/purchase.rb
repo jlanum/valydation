@@ -111,7 +111,11 @@ class Purchase < ActiveRecord::Base
   
  
   def send_merchant_confirm_email
-    
+    products_string = ActionController::Base.new.
+      render_to_string("purchases/products_email", 
+                       :layout => false, 
+                       :locals => {:purchased_sales => self.purchased_sales})
+                       
     md_temp_options = { 
       :template_name => "merchant-customer-information", 
       :template_content => [{:name => "product_email_stuff", :content => products_string}], 

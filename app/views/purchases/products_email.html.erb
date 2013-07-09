@@ -1,9 +1,7 @@
-<% @purchases.each do |purchase| %>
-Order ID:<%= purchase.id %><br>
-<% end %>
+
 
 <% purchased_sales.each do |p| %>
-Order ID:<%= p.id %><br>
+
 <%= h(p.image_0.versions[:web_index].to_s) %>
  Company: <%= h(p.brand) %><br>
  Product: <%= h(p.product) %><br>

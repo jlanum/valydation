@@ -4,8 +4,8 @@ Order ID:<%= p.id %><br>
  Company: <%= h(p.brand) %><br>
  Product: <%= h(p.product) %><br>
  Size: <%= h(p.sizes) %><br>
-Subtotal:<%= p.orig_price.sum %><br>
-Tax:<%= p.tax.sum %><br>
-Total:<%= p.total.sum %><br>
+Subtotal:<%= p.subtotal %><br>
+Tax:<%= p.tax %><br>
+Total:<%= p.total %><br>
 <% end %>
   

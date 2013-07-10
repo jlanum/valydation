@@ -83,7 +83,7 @@ class Purchase < ActiveRecord::Base
 
   def send_initial_emails
     send_customer_processing_email
-    
+    send_merchant_confirm_email
   end
 
   def send_customer_processing_email
@@ -100,7 +100,7 @@ class Purchase < ActiveRecord::Base
         :subject => "Processing Your Sale", 
         :from_email => "hi@valydation.com", 
         :from_name => "/valydation", 
-        :to => [{:email => self.user.email, "patricia@valydation.com"}], 
+        :to => [{:email => self.user.email}], 
         :merge_vars => [{:rcpt => self.user.email, 
                          :vars => common_merge_vars}]
       }

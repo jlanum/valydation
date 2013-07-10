@@ -6,8 +6,8 @@ Order ID: <%= p.purchase_id %><br>
  Product: <%= h(p.product) %><br>
  Size: <%= h(p.size) %><br>
 
-Subtotal:<%= humanized_money_with_symbol p.orig_price.sum %><br>
-Tax:<%= humanized_money_with_symbol p.tax_cents.sum %><br>
+Subtotal:<%= p.orig_price.sum %><br>
+Tax:<%= p.tax_cents.sum %><br>
 
 <% end %>
 

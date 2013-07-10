@@ -341,13 +341,13 @@ class SalesController < ApplicationController
   end
   
   def index_mine
-    @sales = Sale.select(%Q{"sales".*, 
-                            "faves"."id" as my_fave_id}).
+   @sales = Sale.select(%Q{"sales".*, 
+                           "faves"."id" as my_fave_id}).
       where(%Q{"sales"."visible"=true AND 
-               "faves"."id" IS NOT NULL}).
+              "faves"."id" IS NOT NULL}).
       joins(%Q{LEFT OUTER JOIN "faves" ON 
                "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+     includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       limit(10).
       offset(params[:offset]).all

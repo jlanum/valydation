@@ -6,9 +6,6 @@ Order ID: <%= p.purchase_id %><br>
  Product: <%= h(p.product) %><br>
  Size: <%= h(p.size) %><br>
 
-Subtotal:<%= p.orig_price.sum %><br>
-Tax:<%= p.tax_cents.sum %><br>
-
 <% end %>
 
 Shipping Address: <%= @purchase.address if @purchase.address %><br>

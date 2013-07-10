@@ -5,14 +5,13 @@ Order ID: <%= p.purchase_id %><br>
  Company: <%= h(p.brand) %><br>
  Product: <%= h(p.product) %><br>
  Size: <%= h(p.size) %><br>
- Cost: <%= h(p.orig_price) %><br>
+
+Subtotal:<%= humanized_money_with_symbol p.sum(&:orig_price) %><br>
+Tax:<%= humanized_money_with_symbol p.sum(&:tax_cents) %><br>
 
 <% end %>
 
-Subtotal:<%= @purchase.subtotal_cents %><br>
-Tax:<%= @purchase.tax_cents %><br>
-Total: <%= @purchase.total_cents %>
- Shipping Address: <%= @purchase.address if @purchase.address %><br>
+Shipping Address: <%= @purchase.address if @purchase.address %><br>
 <%= @purchase.address_2 if @purchase.address_2 %><br>
 <%= @purchase.city if @purchase.city %>, <%= @purchase.state if @purchase.state %><br>
 <%= @purchase.zip if @purchase.zip %><br>

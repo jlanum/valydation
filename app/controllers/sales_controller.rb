@@ -276,7 +276,7 @@ class SalesController < ApplicationController
     end    
   end
 
-  def index_html_all
+ def index_html_all
     params[:category_id] ||= 0
 
     if @user.is_merchant and (Time.now - @user.created_at) < 1.day 

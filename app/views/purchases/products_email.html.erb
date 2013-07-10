@@ -9,9 +9,9 @@ Order ID: <%= p.purchase_id %><br>
 
 <% end %>
 
-Subtotal:<%= humanized_money_with_symbol @purchase.subtotal_cents %><br>
-Tax:<%= humanized_money_with_symbol @purchase.tax_cents %><br>
-Total: <%= humanized_money_with_symbol @purchase.total_cents %>
+Subtotal:<%= @purchase.subtotal_cents %><br>
+Tax:<%= @purchase.tax_cents %><br>
+Total: <%= @purchase.total_cents %>
  Shipping Address: <%= @purchase.address if @purchase.address %><br>
 <%= @purchase.address_2 if @purchase.address_2 %><br>
 <%= @purchase.city if @purchase.city %>, <%= @purchase.state if @purchase.state %><br>

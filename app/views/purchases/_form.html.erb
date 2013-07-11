@@ -64,10 +64,10 @@ function toggleAddress() {
     </div>
 
 
-
+<br>
 
     <div class="row-fluid">
-      <div class="pull-right">
+      <div class="pull-left" style="width: 300px;">
 
         <% if false #disabled for now %> 
         <% unless @sale.sizes.empty? or @sale.size == "N/A" or @sale.sizes.length == 1 %>
@@ -157,7 +157,7 @@ function justSubmit() {
 }
 </script>
 
-<button id="submitButton" onclick="validateAndSubmit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
+<button id="submitButton" onclick="validateAndSubmit(); return false;" type="submit" class="btn btn-success">Submit Payment</button>
 
 <% if false %>
 <% if @sale.allow_returns %>

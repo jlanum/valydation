@@ -269,20 +269,20 @@ class SalesController < ApplicationController
 
   def index_html
     
-    if params[:my_feed]
-      index_html_mine
-    else
+#    if params[:my_feed]
+#      index_html_mine
+#    else
       index_html_all
-    end    
+ #   end    
   end
 
  def index_html_all
     params[:category_id] ||= 0
 
-    if @user.is_merchant and (Time.now - @user.created_at) < 1.day 
-      @merchant_modal = true
-      session[:merchant_modal] = true
-    end
+#    if @user.is_merchant and (Time.now - @user.created_at) < 1.day 
+#      @merchant_modal = true
+#      session[:merchant_modal] = true
+#    end
 
     @sales = all_sales.
       page(params[:page]).

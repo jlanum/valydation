@@ -90,14 +90,7 @@
         <%= form_tag({:controller => "sessions", :action => "create"}) do %>
         <div class="form-signin">
         <center><p><font size="5">Log In</font></p></center>
-        <hr>
-        <center>Sign in with</center><br/>
-        <ul class="buttons">
-				<li style="list-style-type: none;" >
-        <a class="facebook BigButton" href="#" onclick="fbLogin()">
-        <span class="logo-fb"></span>Facebook</a></li><br>
-      </ul>
-
+        
       <hr>
 			<% if flash[:message] %>
 			<div class="alert alert-success">

@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   before_filter :handle_device
-  before_filter :require_user
+  before_filter :require_user, :except => [:show, :index, :group]
   before_filter :admin_auth, :except => [:show, :index, :group]
   before_filter :get_cart
   before_filter :view_cart
@@ -30,10 +30,10 @@ class SalesController < ApplicationController
 
   def show
     @sale = Sale.where(:id => params[:id], :visible => true).
-      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+    #  select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+    #  joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+    #          AND "faves"."user_id"=#{@user.id}}).
+    #  includes(:user).
       first
 
     respond_to do |wants|
@@ -449,20 +449,20 @@ class SalesController < ApplicationController
       order(%Q{"sales"."created_at" DESC}).
       limit(15)
 
-    curated_select = ["sales.*", "faves.id as my_fave_id"]
+    curated_select = ["sales.*"]
     curated_order = "sales.created_at DESC"
     
-    unless curated_sales.empty?
+   unless curated_sales.empty?
       curated_select << "sales.id IN (#{curated_sales.collect(&:id).join(',')}) as curated"
-      curated_order = "curated DESC, #{curated_order}"
+     curated_order = "curated DESC, #{curated_order}"
     end
 
     @sales = Sale.where(where_conditions).
       where(where_frag).
       select(curated_select).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+   #   joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+   #            AND "faves"."user_id"=#{@user.id}}).
+    #  includes(:user).
       order(curated_order)
   end
 

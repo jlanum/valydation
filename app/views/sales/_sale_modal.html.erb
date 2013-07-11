@@ -13,9 +13,9 @@
 
   <div class="modal-footer">
     <span class="row-fluid">
-      <% if sale.user_id == @user.id %>
+    <% #if sale.user_id == @user.id %>
       <a href="<%= edit_sale_url(sale) %>" class="btn btn-success span4 pull-left">Edit Sale</a>
-      <% end %>
+      <% #end %>
 
       <% if sale.sold_out %>
         <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">SOLD</a>

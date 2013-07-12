@@ -6,9 +6,21 @@ body {
 
 <div class="container">
   <div class="category-feed well">
-    <center>
-      <font size="6" color="#432060">Results for '<%= params[:q] %>'</font>
-    </center>
+   <div class="back-button ">
+      Results for '<%= params[:q] %>'
+  </div>
+	 <span class="category-feed-align">
+      <% Sale.categories.each_with_index do |category, category_id| %>
+        <% if category_id == params[:category_id].to_i %><strong><% end %>
+        <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
+        <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
+        <% if category_id == params[:category_id].to_i %></strong><% end %>
+      <% end %>&#160;|&#160;<a href="/page/photography">PHOTOGRAPHY</a>&#160;|&#160;<a href="/page/siliconlegends">SILICON LEGENDS</a>
+    </span>
+
+    <a href="/featured/tech-connects-us-07-01-2013" class="faves-script btn btn-success">
+      What's New
+    </a>
   </div>
 
 

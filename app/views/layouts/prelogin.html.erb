@@ -59,9 +59,8 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <% unless @no_header_links %>
-              <li><%= link_to "Join", new_user_url %></li>
               <li><%= link_to "About Us", "/page/about" %></li>
-              <li><%= link_to "Login", new_session_url %></li>
+              <li><%= link_to "Account", new_session_url %></li>
               <% end %>
             </ul>
           </div><!--/.nav-collapse -->
@@ -77,7 +76,16 @@
 		    <medium>
 	       <font color="#ffffff"> 
 		
-		<p>&copy;<%= link_to "Valydation 2013, All rights reserved.", "http://valydation.com" %> <u><a href="/page/tos">Terms of Service</a></u> and <u><a href="/page/privacy">Privacy Policy</a></u></p>
+		<p>&copy;<%= link_to "Valydation 2013, All rights reserved.", "http://valydation.com" %> <u><a href="/page/tos">Terms of Service</a></u> and <u><a href="/page/privacy">Privacy Policy</a></u>			<%= form_tag(register_lead_url,
+									                 {:class => "form-search"}) do %>
+																	<% if @error_message %>
+															    <div class="alert alert-error">  
+															      <%= @error_message %>
+															    </div>
+															    <% end %>
+								<input type="text" value="<%= params[:email] %>" id="email" name="email" class="input-block-level" placeholder="ENTER EMAIL"><button class="btn btn-small email-sign" type="submit" onclick="alert(document.getElementById('HiddenHear').innerHTML);">Submit</button>
+									<% end %><div id="HiddenHear" style="display:none">You're on the email list!</div>
+		</p>
 	     </font> </medium>
 	    </div>
 

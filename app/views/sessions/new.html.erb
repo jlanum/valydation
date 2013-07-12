@@ -89,7 +89,7 @@
       <ul class="nav">
         <%= form_tag({:controller => "sessions", :action => "create"}) do %>
         <div class="form-signin">
-        <center><p><font size="5">Log In</font></p></center>
+        <center><p><font size="5">Sign In</font></p></center>
         
       <hr>
 			<% if flash[:message] %>
@@ -104,7 +104,7 @@
         <% end %>
 
         <center>
-          Sign in with your email<br/><br/>
+         
           <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Email"><br>
           <input type="password" id="passwd_clear" name="passwd_clear" class="input-block-level" placeholder="Password"><br>
           <button class="btn btn-large btn-success" type="submit">Login</button><br><br>
@@ -113,10 +113,12 @@
         
 
         <% end %>
+<u><%= link_to "Create an account", new_user_url %></u>
+
 	<!-- Will put this back later
 		<%= form_tag({:controller => "users", :action => "forgot_passwd"}) do %>
 Forgot your password?
        <input type="text" id="email" name="email" value="<%= params[:email] %>" class="input-block-level" placeholder="Enter Your Email"><br>
 <button class="btn btn-large btn-success" type="submit">Submit</button><br>
    <% end %></center>-->
-</div></div><br><br><br><br><br><br>
+</div></div><br><br><br><br><br><br><br><br><br><br><br><br>

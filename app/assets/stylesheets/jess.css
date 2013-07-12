@@ -1285,3 +1285,7 @@ width: 44px;
 	margin-left: 10px;
 	margin-top: 12px !important;
 }
+
+#footer .form-search {
+margin-top: -14px !important;
+}

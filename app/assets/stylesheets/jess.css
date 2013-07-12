@@ -1283,9 +1283,11 @@ width: 44px;
 .email-sign {
 	position: absolute;
 	margin-left: 10px;
-	margin-top: 12px !important;
-}
+	margin-top: 9px !important;
+	padding: 5px;
+	}
 
 #footer .form-search {
 margin-top: -14px !important;
+left: 500px;
 }

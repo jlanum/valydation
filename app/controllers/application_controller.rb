@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery 
 
-  before_filter :detect_iphone
+  #before_filter :detect_iphone
 
   def self.mandrill_api_key
     'ttWsPAoWdEjbcLoFIqYzxg'
@@ -43,28 +43,46 @@ class ApplicationController < ActionController::Base
     sts.new_federated_session(federated_user_key, :policy => policy)
   end
   
+  def products_string
+  products_string << render(:action => "purchases/products_email", :layout => false).to_s
+  end
+  
+  
   def add_to_cart
-       @cart = get_cart
-       @cart.add_to_cart(Sale.find(params[:sale_id]))
-     end
+     get_cart
+     @cart.add_to_cart(Sale.find(params[:sale_id]))
+     save_cart
+     redirect_to view_cart_url
+   end
 
-     def get_cart
-       if session[:cart]
-         return session[:cart]
-       else
-         session[:cart] = Cart.new
-         return session[:cart]
-       end
-     end
+   def remove_from_cart
+     get_cart
+     @cart.remove_from_cart(Sale.find(params[:sale_id]))
+     save_cart
+     redirect_to view_cart_url
+   end
 
    def view_cart
-     	@cart = get_cart
-     end
+     get_cart
+   end
 
    def clear_cart
-       @cart = get_cart
-       @cart.clear
+     get_cart
+     @cart.clear
+     save_cart
    end
+  
+  def save_cart
+    session[:cart_json] = @cart.to_json
+  end
+
+  def get_cart
+    if session[:cart_json]
+      @cart = Cart.from_json(session[:cart_json])
+    else
+      @cart = Cart.new
+    end
+  end
 
 
 
@@ -76,13 +94,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def detect_iphone
-    if request.env['HTTP_USER_AGENT'].to_s.match(/iPhone/) and not session[:iphone_redirected_from]
-      session[:iphone_redirected_from] = request.url
-      redirect_to page_url(:slug => "iphone")
-      false
-    end
-  end
+  ##def detect_iphone
+    ##if request.env['HTTP_USER_AGENT'].to_s.match(/iPhone/) and not session[:iphone_redirected_from]
+     ## session[:iphone_redirected_from] = request.url
+    ##  redirect_to page_url(:slug => "iphone")
+     ## false
+   ## end
+ ## end
 
   def require_ssl
     if request.ssl? or Rails.env == 'development' 

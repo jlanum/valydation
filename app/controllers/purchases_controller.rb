@@ -2,7 +2,8 @@ class PurchasesController < ApplicationController
   before_filter :handle_device
   before_filter :require_user, :except => "available"
   before_filter :require_ssl, :except => "available"
-  
+  before_filter :get_cart
+  before_filter :view_cart
 
 ### Cart stuff
 ### note from Max to Jesse - I recommend moving everything between here
@@ -53,10 +54,11 @@ class PurchasesController < ApplicationController
   def index
     @purchases = Purchase.where(:user_id => @user.id).
                   order("created_at DESC").all
+
   end
 
   def sold
-    @purchases = Purchase.
+    @purchased_sales = Purchased_sale.
       joins("LEFT JOIN sales on purchases.sale_id=sales.id").
       where(["sales.user_id=?",@user.id]).
       order("created_at DESC").all
@@ -93,7 +95,11 @@ class PurchasesController < ApplicationController
                            "tax_amount" => @purchase.tax,
                            "subtotal" => @purchase.subtotal},
         :type => "sale",
-        :amount => @purchase.total})
+        :amount => @purchase.total,
+        
+        :options => {
+                  :submit_for_settlement => true
+                }})
 
     @purchase.tr_data = @tr_data
     @purchase.post_url = Braintree::TransparentRedirect.url
@@ -102,8 +108,11 @@ class PurchasesController < ApplicationController
       wants.html { new_html }
     end
   end
-
-
+  
+  def products_email
+    @purchase = Purchase.where(:user_id => @user.id)
+  end
+  
   def new_json
     render :json => @purchase.to_json(:methods => [:previous_shipped_purchase, :tr_data, :post_url])
   end
@@ -159,10 +168,10 @@ class PurchasesController < ApplicationController
                                :total => transaction.amount,
                                :size => transaction.custom_fields[:size],
                                :ship_it => ship_it)
-
+      
       @purchase.save!
       clear_cart
-
+      
       respond_to do |wants|
         wants.json do 
           render :json =>  {"message" => "We're holding your item and are awaiting confirmation from the merchant. Your credit card will be charged once the sale is confirmed."}

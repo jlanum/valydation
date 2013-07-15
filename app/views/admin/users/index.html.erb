@@ -7,9 +7,6 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>City</th>
       <th>Joined</th>
       <th>Posts</th>
       <th>Actions</th>
@@ -23,7 +20,7 @@
                     admin_user_url(user) %>
       </td>
       <td><%= user.email %></td>
-      <td class="nowrap"><%= user.city.name if user.city %></td>
+     
       <td class="nowrap"><%= user.created_at.strftime("%d %b %Y") %>
       <td><%= user.sales.size %></td>
       <td class="nowrap">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130626185609) do
+ActiveRecord::Schema.define(:version => 20130709051202) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -156,6 +156,11 @@ ActiveRecord::Schema.define(:version => 20130626185609) do
     t.datetime     "updated_at",                                            :null => false
     t.text         "product_specifics"
     t.text         "product_condition"
+    t.string       "address"
+    t.string       "address_2"
+    t.string       "city"
+    t.string       "state"
+    t.string       "zip"
   end
 
   create_table "purchases", :force => true do |t|
@@ -178,8 +183,9 @@ ActiveRecord::Schema.define(:version => 20130626185609) do
     t.string   "state"
     t.string   "zip"
     t.string   "size"
-    t.boolean  "ship_it",                         :default => false
     t.string   "retailer_status"
+    t.boolean  "ship_it",                         :default => true
+    t.string   "products_email"
   end
 
   create_table "sale_groups", :force => true do |t|

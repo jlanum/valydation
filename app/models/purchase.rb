@@ -24,7 +24,8 @@ class Purchase < ActiveRecord::Base
                   :retailer_status,
                   :items,
                   :cart,
-                  :purchased_sales
+                  :purchased_sales,
+                  :products_string
 
   belongs_to :sale
   belongs_to :user
@@ -43,7 +44,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def available_key
-    Digest::MD5.hexdigest("#{self.id} #{self.user_id} #{self.sale_id} #{self.external_id}")
+    Digest::MD5.hexdigest("#{self.purchased_sales.id} #{self.purchased_sales.user_id} #{self.purchased_sales.sale_id} #{self.external_id}")
   end
 
   def previous_purchases
@@ -76,7 +77,7 @@ class Purchase < ActiveRecord::Base
       collect { |s| s.orig_price.to_f }.sum
     self.tax = self.purchased_sales.collect { |s| s.tax.to_f }.sum
 
-    self.total = self.subtotal
+    self.total = self.subtotal + self.tax + self.shipping
   end
 
 
@@ -86,9 +87,15 @@ class Purchase < ActiveRecord::Base
   end
 
   def send_customer_processing_email
+    products_string = ActionController::Base.new.
+      render_to_string("purchases/products_email", 
+                       :layout => false, 
+                       :locals => {:purchased_sales => self.purchased_sales,
+                                                          :purchase => self})
+
     md_temp_options = { 
-      :template_name => "customer-processing-your-sale", 
-      :template_content => [{:name => "sale_image", :content => ""}], 
+      :template_name => "valydation-processing-your-sale", 
+      :template_content => [{:name => "product_email_stuff", :content => products_string}], 
       :message => { 
         :subject => "Processing Your Sale", 
         :from_email => "hi@valydation.com", 
@@ -98,28 +105,37 @@ class Purchase < ActiveRecord::Base
                          :vars => common_merge_vars}]
       }
     }
-  
+    
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end
-
+  
+ 
   def send_merchant_confirm_email
+    products_string = ActionController::Base.new.
+      render_to_string("purchases/products_email", 
+                       :layout => false, 
+                       :locals => {:purchased_sales => self.purchased_sales,
+                                                          :purchase => self})
+                       
     md_temp_options = { 
-      :template_name => "merchant-confirm-sale", 
-      :template_content => [{:name => "sale_image", :content => ""}], 
+      :template_name => "merchant-customer-information", 
+      :template_content => [{:name => "product_email_stuff", :content => products_string}], 
       :message => { 
         :subject => "You have a customer", 
         :from_email => "hi@valydation.com", 
         :from_name => "/valydation", 
-        :to => [{:email => self.sale.user.email}], 
-        :merge_vars => [{:rcpt => self.sale.user.email, 
+        :to => [{:email => "patricia@valydation.com"}], 
+        :merge_vars => [{:rcpt => "patricia@valydation.com", 
                          :vars => common_merge_vars}]
       }
     }
-
+    
     m_api = Mandrill::API.new(ApplicationController.mandrill_api_key)
     m_api.messages(:sendtemplate, md_temp_options)
   end
+  
+
 
   def send_available_email
     md_temp_options = { 
@@ -158,25 +174,25 @@ class Purchase < ActiveRecord::Base
   end
 
   def common_merge_vars
-    base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
-
+   ## base_available_url = "http://www.valydation.com/purchase_available?id=#{self.id}&key=#{self.available_key}"
+    
+    
     merge_vars = {
-      "ORDER_ID" => self.id,
-      "IMAGE_URL" => self.sale.image_0.versions[:web_modal].to_s,
-      "AVAILABLE_URL" => base_available_url + "&available=1",
-      "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
-      "BRAND" => self.sale.brand,
-      "PRODUCT" => self.sale.product,
-      "SIZE" => self.sale.size,
-      "DELIVER" => ((self.shipping.to_f > 0) ? "Yes" : "No"),
-      "SUBTOTAL" => humanized_money_with_symbol(self.subtotal),
-      "SHIPPING" => humanized_money_with_symbol(self.shipping),
-      "TAX" => humanized_money_with_symbol(self.tax),
-      "TOTAL" => humanized_money_with_symbol(self.total)
+     ## "ORDER_ID" => self.id,
+     ## "IMAGE_URL" => self.purchased_sales.image_0.versions[:web_index].to_s,
+      ##"AVAILABLE_URL" => base_available_url + "&available=1",
+     ## "NOT_AVAILABLE_URL" => base_available_url + "&available=0",
+     ##  "BRAND" => self.purchased_sales.collect { |s| s.brand }.flatten,
+     ##  "PRODUCT" => self.purchased_sales.collect { |s| s.product }.second,
+     ##  "SIZE" => self.purchased_sales.collect { |s| s.sizes }.flatten,
+      ##"DELIVER" => ((p.shipping.to_f > 0) ? "Yes" : "No"),
+    ##"SUBTOTAL" => humanized_money_with_symbol (self.subtotal),
+    ##"TAX" => humanized_money_with_symbol(self.tax),
+    ## "TOTAL" => humanized_money_with_symbol(self.total)
     }
-
+   
     merge_vars.inject([]) do |array, pair|
-      array << {:name => pair.first, :content => pair.last}
+      array << {:name => pair.first, :content => self.purchased_sales.collect { |s| s.brand }.flatten}
     end
   end
 

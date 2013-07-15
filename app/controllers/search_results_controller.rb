@@ -1,6 +1,6 @@
 class SearchResultsController < ApplicationController
   before_filter :handle_device
-  before_filter :require_user
+  before_filter :require_user, :except => :index
   before_filter :get_cart
   before_filter :view_cart
   #before_filter :use_search_results
@@ -34,10 +34,10 @@ class SearchResultsController < ApplicationController
       @brands.collect(&:id),
       @stores.collect(&:id)]).
       where(:visible => true).
-      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+#      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+#      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+#               AND "faves"."user_id"=#{@user.id}}).
+#      includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       page(params[:page]).
       per(8)

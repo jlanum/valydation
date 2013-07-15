@@ -39,11 +39,11 @@ function toggleAddress() {
     <div class="" style="">
       <hr>
       <p>
-      <%= check_box_tag "ship", '1', (params[:ship].to_i == 1), :onchange => "toggleAddress()" %>
-      Add shipping within the continental U.S. for free
+      
+     Shipping within the Continental U.S. is free
       </p>
 
-      <% if params[:ship].to_i == 1 %>
+     
         <div id="address-container">
         <%= hidden_field_tag "transaction[shipping][first_name]", @user.first_name %>
         <%= hidden_field_tag "transaction[shipping][last_name]", @user.last_name %>
@@ -59,15 +59,15 @@ function toggleAddress() {
 
         <input type="text" class="input-small" name="transaction[shipping][postal_code]" placeholder="Zip Code" value="<%= params[:zip] %>">
       </div>
-    <% end %>
+    
 
     </div>
 
 
-
+<br>
 
     <div class="row-fluid">
-      <div class="pull-right">
+      <div class="pull-left" style="width: 300px;">
 
         <% if false #disabled for now %> 
         <% unless @sale.sizes.empty? or @sale.size == "N/A" or @sale.sizes.length == 1 %>
@@ -110,7 +110,7 @@ function toggleAddress() {
               <%= humanized_money_with_symbol @purchase.tax %>
             </td>
           </tr>
-          <% if params[:ship].to_i == 1 %>
+          <% if params[:ship].to_i == 0 %>
             <tr id="shipping_row">
             <td>
               <font size="3" class="muted">Shipping</font>
@@ -157,7 +157,7 @@ function justSubmit() {
 }
 </script>
 
-<button id="submitButton" onclick="validateAndSubmit(); return false;" type="submit" class="btn btn-success pull-right">Submit Payment</button>
+<button id="submitButton" onclick="validateAndSubmit(); return false;" type="submit" class="btn btn-success">Submit Payment</button>
 
 <% if false %>
 <% if @sale.allow_returns %>

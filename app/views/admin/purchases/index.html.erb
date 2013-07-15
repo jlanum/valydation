@@ -18,11 +18,10 @@
   <% @purchases.each do |purchase| %>
     <tr>
       <td class="nowrap">
-        <%= link_to purchase.user.display_name,
-                    admin_user_url(purchase.user) %>
+       
       </td>
-      <td class="nowrap"><%= purchase.sale.user.display_name %></td>
-      <td><%= purchase.sale.product %></td>
+      <td class="nowrap"></td>
+      <td><%= purchase.user_id %></td>
       <td class="nowrap"><%= purchase.created_at.strftime("%d %b %Y") %></td>
       <td><%= humanized_money_with_symbol purchase.total %></td>
       <td><%= purchase.retailer_status %></td>

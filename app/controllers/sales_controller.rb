@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   before_filter :handle_device
-  before_filter :require_user
+  before_filter :require_user, :except => [:show, :index, :group]
   before_filter :admin_auth, :except => [:show, :index, :group]
   before_filter :get_cart
   before_filter :view_cart
@@ -30,10 +30,10 @@ class SalesController < ApplicationController
 
   def show
     @sale = Sale.where(:id => params[:id], :visible => true).
-      select(%Q{"sales".*, "faves"."id" as my_fave_id}).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+    #  select(%Q{"sales".*, "faves"."id" as my_fave_id}).
+    #  joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+    #          AND "faves"."user_id"=#{@user.id}}).
+    #  includes(:user).
       first
 
     respond_to do |wants|
@@ -268,21 +268,21 @@ class SalesController < ApplicationController
 
 
   def index_html
-    @cities = City.order("name ASC").all
-    if params[:my_feed]
-      index_html_mine
-    else
+    
+#    if params[:my_feed]
+#      index_html_mine
+#    else
       index_html_all
-    end    
+ #   end    
   end
 
-  def index_html_all
+ def index_html_all
     params[:category_id] ||= 0
 
-    if @user.is_merchant and (Time.now - @user.created_at) < 1.day 
-      @merchant_modal = true
-      session[:merchant_modal] = true
-    end
+#    if @user.is_merchant and (Time.now - @user.created_at) < 1.day 
+#      @merchant_modal = true
+#      session[:merchant_modal] = true
+#    end
 
     @sales = all_sales.
       page(params[:page]).
@@ -341,13 +341,13 @@ class SalesController < ApplicationController
   end
   
   def index_mine
-    @sales = Sale.select(%Q{"sales".*, 
-                            "faves"."id" as my_fave_id}).
+   @sales = Sale.select(%Q{"sales".*, 
+                           "faves"."id" as my_fave_id}).
       where(%Q{"sales"."visible"=true AND 
-               "faves"."id" IS NOT NULL}).
+              "faves"."id" IS NOT NULL}).
       joins(%Q{LEFT OUTER JOIN "faves" ON 
                "faves"."sale_id"="sales"."id" AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+     includes(:user).
       order(%Q{"sales"."created_at" DESC}).
       limit(10).
       offset(params[:offset]).all
@@ -449,20 +449,20 @@ class SalesController < ApplicationController
       order(%Q{"sales"."created_at" DESC}).
       limit(15)
 
-    curated_select = ["sales.*", "faves.id as my_fave_id"]
+    curated_select = ["sales.*"]
     curated_order = "sales.created_at DESC"
     
-    unless curated_sales.empty?
+   unless curated_sales.empty?
       curated_select << "sales.id IN (#{curated_sales.collect(&:id).join(',')}) as curated"
-      curated_order = "curated DESC, #{curated_order}"
+     curated_order = "curated DESC, #{curated_order}"
     end
 
     @sales = Sale.where(where_conditions).
       where(where_frag).
       select(curated_select).
-      joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
-               AND "faves"."user_id"=#{@user.id}}).
-      includes(:user).
+   #   joins(%Q{LEFT OUTER JOIN "faves" ON "faves"."sale_id"="sales"."id" 
+   #            AND "faves"."user_id"=#{@user.id}}).
+    #  includes(:user).
       order(curated_order)
   end
 

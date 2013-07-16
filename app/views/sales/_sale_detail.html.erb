@@ -5,17 +5,17 @@
 	    <div class="back-button ">
 
 	   
-			<a href="/sales">HOME</a>&#160;/
+			<a href="/sales">Home</a>&#160;/
 		        <% if sale.category_id == 0 %>
-				<a href="/sales">APPAREL</a>
+				<a href="/sales">Apparel</a>
 						<% else %> 
 						<% if sale.category_id == 1 %>
-						<a href="/sales?category_id=1">CERAMICS & GLASS</a>
+						<a href="/sales?category_id=1">Ceramics & Glass</a>
 						<% else %> 
 						 <% if sale.category_id == 2 %>
-						<a href="/sales?category_id=2">PROMOTIONAL</a>
+						<a href="/sales?category_id=2">Promotional</a>
 						<% end %>	<% end %>	<% end %>	
-		        / <%= sale.product.upcase %>
+		        / <%= sale.product %>
 		    
 	  </div>
 

@@ -574,6 +574,13 @@ width: 62px;
 	top: 14px;
 }
 
+.search-results-left {
+	
+	position: absolute;
+	left: 20px;
+	top: 17px;
+}
+
 .back-button-color a {
 	color:white !important;
 }

@@ -550,10 +550,10 @@ width: 62px;
 }
 
 .faves-script {
-	position:absolute; 
-	top:20px; 
-	right:20px;
-}
+	position: absolute;
+	top: 14px;
+	right: 20px;
+	}
 
 .faves-script-detail {
 	position:absolute; 

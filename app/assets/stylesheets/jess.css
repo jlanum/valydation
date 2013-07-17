@@ -571,7 +571,7 @@ width: 62px;
 .back-button {
 	position: absolute;
 	left: 20px;
-	top: 14px;
+	top: 19px;
 }
 
 .search-results-left {
@@ -1290,11 +1290,11 @@ width: 44px;
 .email-sign {
 	position: absolute;
 	margin-left: 10px;
-	margin-top: 9px !important;
-	padding: 5px;
+	margin-top: 11px !important;
+	padding: 3px;
 	}
 
 #footer .form-search {
-margin-top: -14px !important;
-left: 500px;
-}
+	margin-top: -25px !important;
+	left: 500px;
+	}

@@ -76,7 +76,7 @@
 		<div id="footer">
 		    <medium>
 	       <font color="#ffffff"> 
-		<p style="margin-top:-18px;">Join our email list</p>
+
 		<p>			<%= form_tag(register_lead_url,
 												                 {:class => "form-search"}) do %>
 																				<% if @error_message %>
@@ -84,7 +84,7 @@
 																		      <%= @error_message %>
 																		    </div>
 																		    <% end %>
-											<input type="text" value="<%= params[:email] %>" id="email" name="email" class="input-block-level" placeholder="ENTER EMAIL"><button class="btn btn-small email-sign" type="submit" onclick="alert(document.getElementById('HiddenHear').innerHTML);">Submit</button>
+											<input type="text" value="<%= params[:email] %>" id="email" name="email" class="input-block-level" placeholder="Join our mailing list!"><button class="btn btn-small email-sign" type="submit" onclick="alert(document.getElementById('HiddenHear').innerHTML);">Join</button>
 												<% end %><div id="HiddenHear" style="display:none">You're on the email list!</div></p><p style="margin-top:46px;">&copy;<%= link_to "Valydation 2013, All rights reserved.", "http://valydation.com" %> <u><a href="/page/tos">Terms of Service</a></u> and <u><a href="/page/privacy">Privacy Policy</a></u>			
 		</p>
 	     </font> </medium>

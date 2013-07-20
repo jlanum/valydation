@@ -22,68 +22,119 @@ function fave(sale_id) {
 }
 
 
-  yayo = null;
-
-  var loading = false;
-  var currentPage = 1;
-  var lastPage = false;
-
-  var more_base_url = "<%= request.path  %>.html";
-  var more_base_data = {category_id: <%= params[:category_id].to_i %>}
-
-  if ($('#city_id').length > 0) {
-    more_base_data.city_id = $('#city_id').val()
-  }
-
-  if ($('#size').length > 0) {
-    more_base_data.size = $('#size').val()
-  }
-
-
-  function addPage() {
-    $.get(more_base_url, 
-      $.extend(more_base_data, {page: currentPage+1}), 
-      function(d){
-        yayo = d;
-        if (d.length == 0) {
-          lastPage = true;
-        } else {
-          $('#sales-container').append(d);
-          currentPage++;        
-          loading = false;
-        }
-      });
-  };
-
-  $(window).scroll(function(){
-
-    if (loading || lastPage) {
-      return;
-    }
-
-    if  ($(window).scrollTop() > $(document).height() - $(window).height() - 200)
-    {
-      loading = true;
-
-      setTimeout(function(){
-        addPage();
-      }, 250);
-    }
-
-  });
-
-
-$(document).ready(function() {
-  if (isMobile()) {
-    $('.hover-group').each(function(i,el) { el.className = el.className.replace('hover-group', 'hover-group-nope') })
-  }
-});
-
+ //  yayo = null;
+ // 
+ //   var loading = false;
+ //   var currentPage = 1;
+ //   var lastPage = false;
+ // 
+ //   var more_base_url = "<%= request.path  %>.html";
+ //   var more_base_data = {category_id: <%= params[:category_id].to_i %>}
+ // 
+ //   if ($('#city_id').length > 0) {
+ //     more_base_data.city_id = $('#city_id').val()
+ //   }
+ // 
+ //   if ($('#size').length > 0) {
+ //     more_base_data.size = $('#size').val()
+ //   }
+ // 
+ // 
+ //   function addPage() {
+ //     $.get(more_base_url, 
+ //       $.extend(more_base_data, {page: currentPage+1}), 
+ //       function(d){
+ //         yayo = d;
+ //         if (d.length == 0) {
+ //           lastPage = true;
+ //         } else {
+ //           $('#sales-container').append(d);
+ //           currentPage++;        
+ //           loading = false;
+ //         }
+ //       });
+ //   };
+ // 
+ //   $(window).scroll(function(){
+ // 
+ //     if (loading || lastPage) {
+ //       return;
+ //     }
+ // 
+ //     if  ($(window).scrollTop() > $(document).height() - $(window).height() - 200)
+ //     {
+ //       loading = true;
+ // 
+ //       setTimeout(function(){
+ //         addPage();
+ //       }, 250);
+ //     }
+ // 
+ //   });
+ // 
+ // 
+ // $(document).ready(function() {
+ //   if (isMobile()) {
+ //     $('.hover-group').each(function(i,el) { el.className = el.className.replace('hover-group', 'hover-group-nope') })
+ //   }
+ // });
+ 
 
 </script>
 
+<% 
+        @sale_rows = [[]]
+        @sales.each_with_index do |sale, i|
+          if i>0 && i%3 == 0
+            @sale_rows << []
+          end
+          @sale_rows.last << sale
+        end
+    %>
+ 
+    <% @sale_rows.each do |row| %>
+      <div class="row-fluid">
+		    <div class="container">
+          <ul class="thumbnails">
 
 
-<div id="sales-container">
-  <%= render :partial => "sales/sale_rows" %>
+<% row.each do |sale| %>
+
+<li class="span4">
+<div class="hover-group">
+  <div class="image-wrapper">
+    <span class="thisInfo">
+      <p class="lanvin"><%= sale.brand %></p>      
+    </span>
+    <a href="<%= sale_url(sale.id) if sale.id %>">
+      <img class="product-pic" src="<%= sale.image_0.versions[:web_index] %>" alt="">
+    </a>
+    <% if sale.sold_out %>    
+    <span class="sold-tag sold">
+      <center>Sold</center>
+    </span>
+    <% end %>
+    <span class="thisInfo">
+    </span>
+    <div class="hover-toggle">
+      <center><span class="percentoff"><%= humanized_money_with_symbol sale.orig_price %></span></center>
+    </div>
+  </div>
 </div>
+</li>
+<% end %>
+</ul>
+        </div>
+     </div>
+    <% end %>
+
+
+<% @sales.each do |sale| %>
+      <%= render :partial => "sales/sale_modal", :locals => {:sale => sale} %>
+    <% end %>
+
+
+
+<!-- <div id="sales-container">
+  <%= render :partial => "sales/sale_rows" %>
+</div> -->

@@ -254,13 +254,13 @@ class SalesController < ApplicationController
     @group = SaleGroup.where(:slug => params[:slug]).first
     @sales = all_sales.where(:sale_group_id => @group.id).
       page(params[:page]).
-      per(15)
+      per(3)
 
-    if request.xhr?
-      render_lazy_rows
-    else
+    # if request.xhr?
+    #      render_lazy_rows
+    #    else
       render :template => "sales/group"
-    end
+    # end
   end
 
 
@@ -286,11 +286,11 @@ class SalesController < ApplicationController
 
     @sales = all_sales.
       page(params[:page]).
-      per(15)
+      per(3)
 
-    if request.xhr?
-      render_lazy_rows
-    end
+#    if request.xhr?
+#      render_lazy_rows
+#    end
   end
 
   def index_html_mine

@@ -75,14 +75,11 @@ function submitFilter() {
 		
 
   </div>
-<!-- <% if @sales.empty? %>
-<h2>Want to see something from this company? Please let us know on the <u><a href="/contact">Contact</a></u> page.</h2></div>
-<% else %> -->
-<%= render "sales" %>
-<!-- <% end %> -->
-<center>
-      <%= paginate @sales %> 
-    </center>
+<% if @sales.empty? %>
+<h2>Want to see something from this company? Please let us know on the <u><a href="/contact">Contact</a></u> page.</h2>
+<% else %>
+<%= render "sales" %>Test this</div>
+<% end %> 
 
 
 

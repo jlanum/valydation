@@ -127,11 +127,12 @@ function fave(sale_id) {
         </div>
      </div>
     <% end %>
-
-
-<% @sales.each do |sale| %>
+<center>
+<%= paginate @sales %> 
+</center>
+<!-- <% @sales.each do |sale| %>
       <%= render :partial => "sales/sale_modal", :locals => {:sale => sale} %>
-    <% end %>
+    <% end %> -->
 
 
 

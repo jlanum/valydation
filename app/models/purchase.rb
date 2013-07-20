@@ -61,9 +61,9 @@ class Purchase < ActiveRecord::Base
     raise "Can't calculate total without a sale!" if self.purchased_sales.empty?
 
     if self.ship_it
-      self.shipping = 0.0
+      self.shipping = 5.99
     else
-      self.shipping = 0.0
+      self.shipping = 5.99
     end
 
     self.purchased_sales.each do |p|

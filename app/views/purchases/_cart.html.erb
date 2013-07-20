@@ -74,10 +74,7 @@ Your cart is empty!
 <div class="summary-totals-container" style=""><dl>
 	
   
-  <dt>	Shipping:</dt>
-  <dd class="free">FREE</dd>
-</dl>
-
+  
 <dl class="total">
   <dt>Subtotal:</dt>
   <dd><%= humanized_money_with_symbol @cart.items.sum(&:orig_price) %></dd>

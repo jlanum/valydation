@@ -254,7 +254,7 @@ class SalesController < ApplicationController
     @group = SaleGroup.where(:slug => params[:slug]).first
     @sales = all_sales.where(:sale_group_id => @group.id).
       page(params[:page]).
-      per(3)
+      per(15)
 
     # if request.xhr?
     #      render_lazy_rows
@@ -286,7 +286,7 @@ class SalesController < ApplicationController
 
     @sales = all_sales.
       page(params[:page]).
-      per(3)
+      per(15)
 
 #    if request.xhr?
 #      render_lazy_rows

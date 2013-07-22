@@ -1,4 +1,4 @@
-load "#{File.dirname(__FILE__)}/create_notifications.rb"
+# load "#{File.dirname(__FILE__)}/create_notifications.rb"
 load "#{File.dirname(__FILE__)}/process_images.rb"
 load "#{File.dirname(__FILE__)}/send_emails.rb"
 

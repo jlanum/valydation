@@ -336,8 +336,7 @@ class SalesController < ApplicationController
     end
 
     render :json => @sales.
-      to_json(:include => {:user => User.public_json},
-              :methods => [:my_fave])
+      to_json(:include => {:user => User.public_json})
   end
   
   def index_mine

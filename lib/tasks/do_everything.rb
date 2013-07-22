@@ -11,9 +11,9 @@ def do_errthing
     #puts "creating notifications" 
     # create_notifications
     #puts "sending notifications"
-    push
+    # push
     #puts "feedback"
-    feedback
+    # feedback
   
     send_emails
 

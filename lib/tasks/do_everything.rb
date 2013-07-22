@@ -9,7 +9,7 @@ def do_errthing
     process_sales
 
     #puts "creating notifications" 
-    create_notifications
+    # create_notifications
     #puts "sending notifications"
     push
     #puts "feedback"

@@ -7,10 +7,10 @@ Order ID: <%= p.purchase_id %><br>
  Size: <%= h(p.size) %><br>
 
 <% end %>
-Subtotal: <%= purchase.subtotal_cents if purchase.subtotal_cents %><br>
-Shipping: <%= humanized_money_with_symbol purchase.shipping_cents if purchase.shipping_cents %><br>
-Tax: <%= purchase.tax_cents if purchase.tax_cents %><br>
-Total: <%= purchase.total_cents if purchase.total_cents %><br>
+Subtotal: <%= (humanized_money_with_symbol purchase.subtotal_cents / 100) if purchase.subtotal_cents %><br>
+Shipping: <%= (humanized_money_with_symbol purchase.shipping_cents  % 100) if purchase.shipping_cents %><br>
+Tax: <%= (humanized_money_with_symbol purchase.tax_cents  / 100) if purchase.tax_cents %><br>
+Total: <%= (humanized_money_with_symbol purchase.total_cents  / 100) if purchase.total_cents %><br>
 Shipping Address: <%= purchase.address if purchase.address %> <%= purchase.address_2 if purchase.address_2 %><br>
 <%= purchase.city if purchase.city %>, <%= purchase.state if purchase.state %><br>
 <%= purchase.zip if purchase.zip %><br>

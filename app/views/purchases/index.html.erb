@@ -37,6 +37,74 @@ body {
       </tbody>
     </table>
 
+		 <% @purchased_sales.each do |p| %>
+
+		     <div id="shippingModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		              <div class="modal-header">
+		                <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button><br>
+		                <p id="myModalLabel"></p>
+		              </div>
+		              <div class="modal-body">
+		                <div class="row-fluid">
+		                  
+		                  <div class="span2">
+		                    
+		                                    <img class="img-polaroid" src="<%= p.image_0 %> />
+		                                    <br>
+		                                   
+		                                 
+		                  </div>
+		                  <div class="span6">	
+		                    <span class="time-banner">
+		                      <span class="image-banner">
+		                         
+		                      </span>
+		                    </span>
+		                    <br>
+		                  </div>
+		                 	Company: <%= h(p.brand) %><br>
+											 Product: <%= h(p.product) %><br>
+											
+<% end %>
+<% @purchases.each do |purchase| %>
+		                  <div class="span4 pull-right">
+		                    <br>
+		                    <table class="table table-bordered table-striped">
+		                      <tr>  
+		                        <td>
+		                          <font size="1" class="muted table-modaltwo">Subtotal</font><%= humanized_money_with_symbol purchase.subtotal %></td>
+		                      </tr>
+		                      <tr> 
+		                        <td>
+		                          <font size="1" class="muted table-modaltwo">Tax</font><%= humanized_money_with_symbol purchase.tax %></td>
+		                      </tr>
+		                      <% if purchase.shipping.to_f > 0 %>
+		                      <tr>  
+		                        <td>
+		                          <font size="1" class="muted table-modaltwo">Shipping</font><%= humanized_money_with_symbol purchase.shipping %>
+		                        </td>
+		                      </tr>
+		                      <% end %>
+		                      <tr>  
+		                        <td>
+		                          <font size="1" class="muted table-modaltwo">Total</font><%= humanized_money_with_symbol purchase.total %>
+		                        </td>
+		                      </tr>
+		                      <tr>  
+		                        <td>
+		                          <font size="1" class="muted table-modaltwo">Card</font>XXXX XXXX XXXX <%= purchase.card_last_4 %>
+		                        </td>
+		                      </tr>
+		                    </table>
+		                  </div>
+		                </div>
+		              </div>
+		              <div class="modal-footer">
+		                <button class="btn btn-success" data-dismiss="modal">Ok</button>
+		              </div>
+		            </div>
+
+		          <% end %> 
     
     
     <br><br><br><br><br><br><br><br><br><br>

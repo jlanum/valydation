@@ -46,14 +46,21 @@ body {
       </div>
       <div class="modal-body">
         <div class="row-fluid">
-          <% if purchase.sale %>
+          <% if purchase.purchased_sales %>
           <div class="span2">
-           
+             <% [:image_0, :image_1, :image_2, :image_3, :image_4, :image_5, :image_6, :image_7].each do |image_sym|
+                            if (img = purchased.purchased_sales.send(image_sym)) and not img.versions[:web_index].to_s.empty? 
+                              img_version = :web_index
+                            %>
+                            <img class="img-polaroid" src="<%= img.versions[:web_index] %> />
+                            <br>
+                            <%   end
+                          end %> 
           </div>
           <div class="span6">	
             <span class="time-banner">
               <span class="image-banner">
-                 <img src="<%= purchase.sale.image_0.versions[:web_index] if purchase.sale.image_0 %>" alt="" />
+                 <img id="sale_image_<%= purchase.sale.id %>" src="<%= purchase.sale.image_0.versions[:web_index] if purchase.sale.image_0 %>" alt="" />
               </span>
             </span>
             <br>

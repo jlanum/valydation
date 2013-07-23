@@ -22,9 +22,9 @@ body {
       <% @purchases.each do |purchase| %>
         <tr>
         <td>
-          <!-- <a href="#shippingModal" data-toggle="modal"> -->
+           <a href="#shippingModal" data-toggle="modal"> 
             <%= purchase.id %>
-          <!-- </a> -->
+         </a> 
         </td>
         <td>
           <%= purchase.created_at.strftime("%d %b %Y") %>

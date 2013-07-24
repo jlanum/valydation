@@ -39,7 +39,7 @@ body {
 
 		 <% @purchased_sales.each do |p| %>
 
-		     <div id="shippingModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		     <div id="shippingModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		              <div class="modal-header">
 		                <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button><br>
 		                <p id="myModalLabel"></p>
@@ -61,41 +61,23 @@ body {
 		                      </span>
 		                    </span>
 		                    <br>
-												Company: <%= h(p.brand) %><br>
-												 Product: <%= h(p.product) %><br>
+											
 		                  </div>
 		                 	
 											
-<% end %>
-<% @purchases.each do |purchase| %>
+
 		                  <div class="span4 pull-right">
 		                    <br>
 		                    <table class="table table-bordered table-striped">
 		                      <tr>  
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Subtotal</font><%= humanized_money_with_symbol purchase.subtotal %></td>
+		                          <font size="1" class="muted table-modaltwo">Company</font><%= p.brand %></td>
 		                      </tr>
 		                      <tr> 
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Tax</font><%= humanized_money_with_symbol purchase.tax %></td>
+		                          <font size="1" class="muted table-modaltwo">Product</font><%= p.product %></td>
 		                      </tr>
-		                      <% if purchase.shipping.to_f > 0 %>
-		                      <tr>  
-		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Shipping</font><%= humanized_money_with_symbol purchase.shipping %>
-		                        </td>
-		                      </tr>
-		                      <% end %>
-		                      <tr>  
-		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Total</font><%= humanized_money_with_symbol purchase.total %>
-		                        </td>
-		                      </tr>
-		                      <tr>  
-		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Card</font>XXXX XXXX XXXX <%= purchase.card_last_4 %>
-		                        </td>
-		                      </tr>
+
 		                    </table>
 		                  </div>
 		                </div>

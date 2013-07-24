@@ -57,8 +57,12 @@ body {
 		                  <div class="span6">	
 		                    <span class="time-banner">
 		                      <span class="image-banner">
-		                         <img class="img-polaroid" src="<%= p.image_0.versions[:feed_2x] %>" />
-		                      </span>
+		                         <% [:image_0, :image_1, :image_2].each do |image_sym|
+								                if (img = p.send(image_sym)) and not img.versions[:web_index].to_s.empty? 
+								                  img_version = :web_index
+								                %>
+		                      </span>			<%   end
+								              end %>
 		                    </span>
 		                    <br>
 											

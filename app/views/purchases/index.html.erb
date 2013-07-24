@@ -39,7 +39,7 @@ body {
 
 		 <% @purchased_sales.each do |p| %>
 
-		     <div id="shippingModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		     <div id="shippingModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		              <div class="modal-header">
 		                <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button><br>
 		                <p id="myModalLabel"></p>
@@ -61,9 +61,10 @@ body {
 		                      </span>
 		                    </span>
 		                    <br>
+												Company: <%= h(p.brand) %><br>
+												 Product: <%= h(p.product) %><br>
 		                  </div>
-		                 	Company: <%= h(p.brand) %><br>
-											 Product: <%= h(p.product) %><br>
+		                 	
 											
 <% end %>
 <% @purchases.each do |purchase| %>

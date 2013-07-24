@@ -22,9 +22,9 @@ body {
       <% @purchases.each do |purchase| %>
         <tr>
         <td>
-           <a href="#shippingModal" data-toggle="modal"> 
+           <!-- <a href="#shippingModal" data-toggle="modal">  -->
             <%= purchase.id %>
-         </a> 
+         <!-- </a>  -->
         </td>
         <td>
           <%= purchase.created_at.strftime("%d %b %Y") %>
@@ -57,12 +57,8 @@ body {
 		                  <div class="span6">	
 		                    <span class="time-banner">
 		                      <span class="image-banner">
-		                         <% [:image_0, :image_1, :image_2].each do |image_sym|
-								                if (img = p.send(image_sym)) and not img.versions[:web_index].to_s.empty? 
-								                  img_version = :web_index
-								                %>
-		                      </span>			<%   end
-								              end %>
+		                         
+		                      </span>		
 		                    </span>
 		                    <br>
 											

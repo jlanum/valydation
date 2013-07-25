@@ -320,7 +320,7 @@ class UsersController < ApplicationController
       @user.save!
       ShopMailer.create_and_deliver_passwd_change(@user).deliver
       flash[:message] = "Your new password has been emailed to you."
-      redirect_to :back
+      redirect_to forgot_my_pwd_url
     
  end
   def render_error

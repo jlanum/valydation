@@ -318,7 +318,7 @@ class UsersController < ApplicationController
       random_password = Array.new(10).map { (65 + rand(58)).chr }.join
       @user.passwd_clear = random_password
       @user.save!
-      ShopMailer.create_and_deliver_passwd_change(@user).deliver
+      ShopMailer.create_and_deliver_passwd_change(@user, random_password).deliver
       flash[:message] = "Your new password has been emailed to you."
       redirect_to forgot_my_pwd_url
     

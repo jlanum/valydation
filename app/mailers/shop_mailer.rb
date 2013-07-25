@@ -5,8 +5,9 @@ class ShopMailer < ActionMailer::Base
     mail(:to => recip, :subject => "Your /valydation purchase is complete!")
   end
   
-  def create_and_deliver_passwd_change(user)
+  def create_and_deliver_passwd_change(user, random_password)
     @user = user
+    @random_password = random_password
     mail(:to => user.email, 
          :subject => 'Here is your new /valydation password')
   end

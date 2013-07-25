@@ -3,7 +3,7 @@ ActionMailer::Base.smtp_settings = {
   :port  => 587,
   #:domain => "valydation.com",
   :user_name  => "kelly@valydation.com",
-  :password  => "Green1994",
+  :password  => "cold*567!",
   :authentication       => :login,
   :enable_starttls_auto => true
 }

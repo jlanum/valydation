@@ -7,14 +7,17 @@
 	   
 			<a href="/sales">Home</a>&#160;/
 		        <% if sale.category_id == 0 %>
-				<a href="/sales">T-Shirts</a>
+				<a href="/sales">Icon T-Shirts</a>
 						<% else %> 
 						<% if sale.category_id == 1 %>
-						<a href="/sales?category_id=1">Ceramics & Glass</a>
+						<a href="/sales?category_id=1">Event T-Shirts</a>
 						<% else %> 
 						 <% if sale.category_id == 2 %>
+						<a href="/sales?category_id=2">Startup T-Shirts</a>
+						<% else %> 
+						 <% if sale.category_id == 3 %>
 						<a href="/sales?category_id=2">Promotional</a>
-						<% end %>	<% end %>	<% end %>	
+						<% end %>	<% end %>	<% end %><% end %>	
 		        / <%= sale.product %>
 		    
 	  </div>

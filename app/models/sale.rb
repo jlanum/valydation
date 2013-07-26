@@ -72,8 +72,9 @@ class Sale < ActiveRecord::Base
   
 
   def self.categories
-    ["T-Shirts",
-     "Ceramics & Glass",
+    ["Icon T-Shirts",
+     "Event T-Shirts",
+     "Startup T-Shirts",
      "Promotional"]
   end
 

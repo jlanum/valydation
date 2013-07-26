@@ -47,7 +47,7 @@ function submitFilter() {
         <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
         <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
         <% if category_id == params[:category_id].to_i %></strong><% end %>
-      <% end %>&#160;|&#160;<a href="/page/photography">PHOTOGRAPHY</a>&#160;|&#160;<a href="/page/siliconlegends">SILICON LEGENDS</a>
+      <% end %>&#160;|&#160;<a href="/page/siliconlegends">SILICON LEGENDS</a>
     </span>
 
     <a href="/featured/tech-connects-us-07-01-2013" class="faves-script btn btn-success">

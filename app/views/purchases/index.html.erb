@@ -25,9 +25,9 @@ body {
 		
         <tr>
         <td>
-           <!-- <a href="#shippingModal" data-toggle="modal">  -->
+           <a href="#shippingModal" data-toggle="modal"> 
             <%= purchase.id %>
-         <!-- </a>  -->
+         </a> 
         </td>
         <td>
           <%= purchase.created_at.strftime("%d %b %Y") %>
@@ -65,7 +65,7 @@ body {
 		                      </span>		
 		                    </span>
 		                    <br>
-											<% end %>
+											
 		                  </div>
 		                 	
 											
@@ -75,11 +75,11 @@ body {
 		                    <table class="table table-bordered table-striped">
 		                      <tr>  
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Company</font></td>
+		                          <font size="1" class="muted table-modaltwo">Company</font><%= purchased_sale.sale.brand %></td>
 		                      </tr>
 		                      <tr> 
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Product</font></td>
+		                          <font size="1" class="muted table-modaltwo">Product</font><%= purchased_sale.sale.product %></td>
 		                      </tr>
 
 		                    </table>
@@ -90,7 +90,7 @@ body {
 		                <button class="btn btn-success" data-dismiss="modal">Ok</button>
 		              </div>
 		            </div>
-
+									<% end %>
 		          <% end %> 
     <% end %>
     

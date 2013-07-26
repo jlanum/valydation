@@ -32,12 +32,13 @@ body {
         <td>
                          <%= humanized_money_with_symbol purchase.total %>
                        </td>
+											
       </tr>
     <% end %>
       </tbody>
     </table>
 
-		 <% @purchased_sales.each do |p| %>
+		  <% @purchases.each do |purchase| %>
 
 		     <div id="shippingModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		              <div class="modal-header">
@@ -57,7 +58,7 @@ body {
 		                  <div class="span6">	
 		                    <span class="time-banner">
 		                      <span class="image-banner">
-		                         
+		                         <%= purchase.purchased_sales.sale.image_0.versions[:web_index] %>
 		                      </span>		
 		                    </span>
 		                    <br>
@@ -71,11 +72,11 @@ body {
 		                    <table class="table table-bordered table-striped">
 		                      <tr>  
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Company</font><%= p.brand %></td>
+		                          <font size="1" class="muted table-modaltwo">Company</font><%= purchase.purchased_sales.sale.brand %></td>
 		                      </tr>
 		                      <tr> 
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Product</font><%= p.product %></td>
+		                          <font size="1" class="muted table-modaltwo">Product</font><%= purchase.purchased_sales.sales.product %></td>
 		                      </tr>
 
 		                    </table>

@@ -54,7 +54,7 @@ class PurchasesController < ApplicationController
   def index
     @purchases = Purchase.where(:user_id => @user.id).
                   order("created_at DESC").all
-    
+    @purchased_sales = PurchasedSale.all
   end
 
   def sold

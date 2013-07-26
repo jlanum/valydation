@@ -28,7 +28,8 @@ class PurchasedSale < ActiveRecord::Base
                   :address_2, 
                   :city, 
                   :state, 
-                  :zip
+                  :zip,
+                  :user_id
 
   belongs_to :purchase
   belongs_to :sale

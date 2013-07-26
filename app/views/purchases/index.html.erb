@@ -58,7 +58,7 @@ body {
 		                  <div class="span6">	
 		                    <span class="time-banner">
 		                      <span class="image-banner">
-		                         <img src="">
+		                         <%= image_tag purchased_sale.sale.image_0.versions[:web_index] %>
 		                      </span>		
 		                    </span>
 		                    <br>
@@ -72,11 +72,11 @@ body {
 		                    <table class="table table-bordered table-striped">
 		                      <tr>  
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Company</font></td>
+		                          <font size="1" class="muted table-modaltwo">Company</font><%= purchased_sale.sale.brand %></td>
 		                      </tr>
 		                      <tr> 
 		                        <td>
-		                          <font size="1" class="muted table-modaltwo">Product</font></td>
+		                          <font size="1" class="muted table-modaltwo">Product</font><%= purchased_sale.sale.product %></td>
 		                      </tr>
 
 		                    </table>

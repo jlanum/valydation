@@ -1301,6 +1301,12 @@ padding: 3px;
 	
 }
 
+#mce-success-response {
+    position: relative; 
+    left: -13px; 
+    top: 332px;
+}
+
 #footer .form-search {
 	margin-top: -25px !important;
 	left: 500px;

@@ -4,13 +4,17 @@
 </div>
 <% end %>
 
-<% purchased_sales.each do |p| %>
+<% @purchases.each do |purchase | %>
+<% purchase.purchased_sales.each do |purchased_sale| %>
   <div style="float:right; padding: 24px;">
   <div style="padding:8px;">
-    <img src="<%= p.image_0.versions[:web_index] %>">
+	<%if purchased_sale.sale %>
+    <%= image_tag purchased_sale.sale.image_0.versions[:web_index] %>
   </div>
   
 </div>
+<% end %>
+<% end %>
 <% end %>
 <div class="page-header">
   <h1>Edit Purchase</h1>
@@ -21,7 +25,7 @@
 
 
 
-  <br>
+  <br><% @purchases.each do |purchase | %>
     <p>
 Sold <%= @purchase.created_at.strftime("%b %d, %Y") %>.
 </p>

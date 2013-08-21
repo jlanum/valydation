@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   before_filter :handle_device
-  before_filter :require_user
+  before_filter :require_user, :except => [:show, :index, :group]
   before_filter :admin_auth, :except => [:show, :index, :group]
   before_filter :get_cart
   before_filter :view_cart

@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def fb_share_url(sale)
-    "http://www.facebook.com/sharer.php?s=100&p[title]=MySaleTable&p[summary]=#{CGI.escape(sale.share_message)}&p[url]=#{CGI.escape(sale_url(sale))}"
+    "http://www.facebook.com/sharer.php?s=100&p[title]=Valydation&p[summary]=#{CGI.escape(sale.share_message)}&p[url]=#{CGI.escape(sale_url(sale))}"
   end
 
 end

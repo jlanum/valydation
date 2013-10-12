@@ -174,6 +174,7 @@ class SalesController < ApplicationController
                      :city_id => @user.city_id,
                      :source => params[:source],
                      :product_history => params[:product_history],
+                     :product_priority => params[:product_priority],
                      :product_specifics => params[:product_specifics],
                      :product_condition => params[:product_condition],
                      :allow_returns => params[:allow_returns],
@@ -445,11 +446,11 @@ class SalesController < ApplicationController
        :editors_pick => true})).
       where(where_frag).
       select(%Q{sales.id}).
-      order(%Q{"sales"."created_at" DESC}).
+      order(%Q{"sales"."product_priority" ASC}).
       limit(15)
 
     curated_select = ["sales.*"]
-    curated_order = "sales.created_at DESC"
+    curated_order = "sales.product_priority ASC"
     
    unless curated_sales.empty?
       curated_select << "sales.id IN (#{curated_sales.collect(&:id).join(',')}) as curated"

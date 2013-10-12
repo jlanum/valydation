@@ -34,6 +34,7 @@ class Sale < ActiveRecord::Base
                   :shipping_price,
                   :condition,
                   :product_history,
+                  :product_priority,
                   :cart,
                   :items,
                   :validated,

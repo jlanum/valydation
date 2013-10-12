@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709051202) do
+ActiveRecord::Schema.define(:version => 20131012165234) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",                   :null => false
@@ -269,6 +269,8 @@ ActiveRecord::Schema.define(:version => 20130709051202) do
     t.text         "product_history"
     t.text         "product_specifics"
     t.text         "product_condition"
+    t.integer      "priority",                                :default => 5
+    t.integer      "product_priority",                        :default => 5
   end
 
   add_index "sales", ["brand_id"], :name => "index_sales_on_brand_id"

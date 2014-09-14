@@ -54,7 +54,7 @@ gem "honeybadger"
 gem 'newrelic_rpm'
 gem 'carrierwave_direct'
 gem 'braintree'
-gem 'debugger'
+gem 'debugger', group: [:development, :test]
 gem 'carmen', :git => 'git://github.com/jim/carmen.git'
 gem 'mandrill', :git => 'git://github.com/cyu/mandrill.git'
 gem "asset_sync"

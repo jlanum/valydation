@@ -12,7 +12,7 @@ development:
   encoding: unicode
   database: valydation
   pool: 5
-  username: testuser
+  username: valydation
   password: 4544jsnl
 
 # Warning: The database defined as "test" will be erased and

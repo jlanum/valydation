@@ -185,7 +185,6 @@ ActiveRecord::Schema.define(:version => 20131012165234) do
     t.string   "size"
     t.string   "retailer_status"
     t.boolean  "ship_it",                         :default => true
-    t.string   "products_email"
   end
 
   create_table "sale_groups", :force => true do |t|
@@ -269,7 +268,6 @@ ActiveRecord::Schema.define(:version => 20131012165234) do
     t.text         "product_history"
     t.text         "product_specifics"
     t.text         "product_condition"
-    t.integer      "priority",                                :default => 5
     t.integer      "product_priority",                        :default => 5
   end
 

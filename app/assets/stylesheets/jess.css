@@ -306,7 +306,6 @@ hr {
    ================================================== */
 .bg-intro {
     color: #FFF;
-    background-image: url(../images/bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     /*background-size*/
@@ -315,8 +314,8 @@ hr {
 }
 
 .bg-intro .row {
-    padding-top: 242px;
-    padding-bottom: 150px;
+    padding-top: 80px;
+	padding-bottom: 54px;
 }
 
 .layer-intro {

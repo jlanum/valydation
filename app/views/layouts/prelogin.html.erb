@@ -59,7 +59,7 @@
             <% unless @no_header_links %>
               <li><a href="http://valydation.tumblr.com/" target="blank" >Blog</a></li>
               <li><%= link_to "About Us", "/page/about" %></li>
-              <li><%= link_to "Account", new_session_url %></li>
+              
               <% end %></li>
           </ul>
         </div>
@@ -70,7 +70,19 @@
 	
     
     <%= yield %>
-
+    <!-- FOOTER-->
+    <!--===============================================================-->
+    <div class="bg-footer">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-sm-12">
+            <a href="http://www.facebook.com/valydation"><img src="/assets/facebook_icon_32.png"></a>
+            <a href="http://www.twitter.com/valydation"><img src="/assets/twitter_32_icon.png"></a>
+            <a href="http://www.instagram.com/valydation"><img src="/assets/instagram_32.png"></a>
+          </div>
+        </div>
+      </div>
+    </div>
 	  
 		<!-- FOOTER-BOTTOM-->
     <!--===============================================================-->

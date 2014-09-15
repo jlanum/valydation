@@ -39,13 +39,13 @@ function submitFilter() {
 
   <div class="category-feed well">
     <div id="filter-button" class="filter-button">Filter</div>
-    <span class="category-feed-align">
+    <ul class="category-feed-align">
       <% Sale.categories.each_with_index do |category, category_id| %>
         <% if category_id == params[:category_id].to_i %><strong><% end %>
-        <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
-        <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
+        <li><%= link_to category.upcase, sales_url(:category_id => category_id) %>
+        <% unless category_id == Sale.categories.size-1 %></li><% end %>
         <% if category_id == params[:category_id].to_i %></strong><% end %>
-      <% end %>&#160;|&#160;<a href="/page/siliconlegends">SILICON LEGENDS</a>
+      <% end %><li><a href="/page/siliconlegends">SILICON LEGENDS</a></li>
     </span>
 
     

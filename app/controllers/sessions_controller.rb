@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   layout "prelogin"
   before_filter :handle_user, :only => [:new]
-  before_filter :require_ssl, :only => [:new, :create]
+  #before_filter :require_ssl, :only => [:new, :create]
   before_filter :get_cart
   before_filter :view_cart
 

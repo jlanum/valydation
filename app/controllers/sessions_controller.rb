@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
   before_filter :view_cart
 
   def new
-    if @user
-      redirect_to sales_url
-    else
+    #if @user
+      #redirect_to sales_url
+    #else
       render
-    end
+    #end
   end
 
   def create

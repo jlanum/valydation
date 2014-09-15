@@ -20,8 +20,10 @@ function fave(sale_id) {
     });
   }
 }
-
-
+$(function (){
+  $('.pagination ul').addClass('pagination');
+});
+  
  //  yayo = null;
  // 
  //   var loading = false;
@@ -94,7 +96,7 @@ function fave(sale_id) {
  
     <% @sale_rows.each do |row| %>
       <div class="row-fluid">
-		    <div class="container">
+		    <div class="">
           <ul class="thumbnails">
 
 

@@ -1276,3 +1276,15 @@ img.mfp-img {
   top: 0;
   right: 0;
   padding-top: 0; }
+
+ul.thumbnails {
+    margin-top: 0;
+    margin-bottom: 10px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 0px;
+    -moz-column-count: 3;
+    -moz-column-gap: 0px;
+    column-count: 3;
+    column-gap: 0px;
+    text-align: center;
+}

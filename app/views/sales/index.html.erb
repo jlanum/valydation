@@ -1,6 +1,9 @@
+<style>
+body {
+  padding-top:100px;
+}
 
-
-
+</style>
 <script type="text/javascript">
 $(document).on('click','#filter-button', function(){
   if($(this).siblings('#filter-section').is(':visible')){
@@ -33,10 +36,9 @@ function submitFilter() {
 </div>
     <% end %>
 
-<div class="container">
+
   <div class="category-feed well">
     <div id="filter-button" class="filter-button">Filter</div>
-
     <span class="category-feed-align">
       <% Sale.categories.each_with_index do |category, category_id| %>
         <% if category_id == params[:category_id].to_i %><strong><% end %>
@@ -46,10 +48,7 @@ function submitFilter() {
       <% end %>&#160;|&#160;<a href="/page/siliconlegends">SILICON LEGENDS</a>
     </span>
 
-    <a href="/featured/tech-connects-us-07-01-2013" class="faves-script btn btn-success">
-      What's New
-    </a>
-
+    
     <div id="filter-section" class="filter-section">	
       <%= form_tag sales_url, :method => "get", :id => "filter_form" do %>
       <%= hidden_field_tag "category_id", params[:category_id] %>
@@ -71,13 +70,15 @@ function submitFilter() {
 		
 
   </div>
+<div class="container">
 <% if @sales.empty? %>
 <h2>Want to see something from this company? Please let us know on the <u><a href="/contact">Contact</a></u> page.</h2>
 <% else %>
-<%= render "sales" %>Test this</div>
+<%= render "sales" %>
+</div>
 <% end %> 
 
-
+</div>
 
 
 

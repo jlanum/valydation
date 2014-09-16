@@ -1,7 +1,18 @@
 class PagesController < ApplicationController
   before_filter :handle_user
-  before_filter :get_cart
-  before_filter :view_cart
+  #before_filter :get_cart
+  #before_filter :view_cart
+
+  def root
+    if @user
+      redirect_to sales_url
+      return
+    else
+      params[:slug] = "curated-landing"
+    end
+
+    show
+  end
 
   def css
     @page = Page.where(:slug => params[:slug]).first

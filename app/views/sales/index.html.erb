@@ -6,10 +6,10 @@ body {
 </style>
 <script type="text/javascript">
 $(document).on('click','#filter-button', function(){
-  if($(this).siblings('#filter-section').is(':visible')){
-    $(this).siblings('#filter-section').slideUp()
+  if($('#filter-section').is(':visible')){
+    $('#filter-section').slideUp()
   }else{
-    $(this).siblings('#filter-section').hide().slideDown()
+    $('#filter-section').hide().slideDown()
   }
 });
 
@@ -38,8 +38,9 @@ function submitFilter() {
 
 
   <div class="category-feed well">
-    <div id="filter-button" class="filter-button">Filter</div>
+    
     <ul class="category-feed-align">
+      <li id="filter-button" class="filter-button">Filter</li>
       <% Sale.categories.each_with_index do |category, category_id| %>
         <% if category_id == params[:category_id].to_i %><strong><% end %>
         <li><%= link_to category.upcase, sales_url(:category_id => category_id) %>
@@ -49,28 +50,29 @@ function submitFilter() {
     </span>
 
     
-    <div id="filter-section" class="filter-section">	
-      <%= form_tag sales_url, :method => "get", :id => "filter_form" do %>
-      <%= hidden_field_tag "category_id", params[:category_id] %>
-      <span class="pull-left">	
-        <select id="brand_id" name="brand_id" onchange="submitFilter()">
-          <%= options_for_select([["By company",nil]]+Brand.all.collect {|p| [ p.name, p.id ] }.sort,
-                                 params[:brand_id]) %>
-        </select>
-      </span>
-      <span class="pull-left filter-city">	
-        <select id="size" name="size" onchange="submitFilter()">
-          <%= options_for_select([["By size",nil]]+Sale.sizes.flatten, params[:size]) %>
-        </select>
-      </span>
-			
-
-      <% end %> <!-- form -->
-    </div>
+    
 		
 
   </div>
 <div class="container">
+  <div id="filter-section" class="filter-section">  
+      <%= form_tag sales_url, :method => "get", :id => "filter_form" do %>
+      <%= hidden_field_tag "category_id", params[:category_id] %>
+      <span class="filter-co">  
+        <select class="form-control" id="brand_id" name="brand_id" onchange="submitFilter()">
+          <%= options_for_select([["By company",nil]]+Brand.all.collect {|p| [ p.name, p.id ] }.sort,
+                                 params[:brand_id]) %>
+        </select>
+      </span>
+      <span class="filter-size">  
+        <select class="form-control"  id="size" name="size" onchange="submitFilter()">
+          <%= options_for_select([["By size",nil]]+Sale.sizes.flatten, params[:size]) %>
+        </select>
+      </span>
+      
+
+      <% end %> <!-- form -->
+    </div>
 <% if @sales.empty? %>
 <h2>Want to see something from this company? Please let us know on the <u><a href="/contact">Contact</a></u> page.</h2>
 <% else %>

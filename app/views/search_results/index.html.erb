@@ -3,25 +3,60 @@ body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
 </style>
+<script type="text/javascript">
+$(document).on('click','#filter-button', function(){
+  if($('#filter-section').is(':visible')){
+    $('#filter-section').slideUp()
+  }else{
+    $('#filter-section').hide().slideDown()
+  }
+});
 
-<div class="container">
+<% if params[:size] || params[:brand] %>
+$(function() {
+  $('#filter-section').show();
+});
+<% end %>
+</script>
+
+<script>
+function submitFilter() {
+  $('#filter_form')[0].submit()
+}
+</script>
+
   <div class="category-feed well">
    <div class="search-results-left">
       Results for '<%= params[:q] %>'
   </div>
-	 	<span class="category-feed-align">
-     <% Sale.categories.each_with_index do |category, category_id| %>
-       <% if category_id == params[:category_id].to_i %><strong><% end %>
-       <%= link_to category.upcase, sales_url(:category_id => category_id) %>&#160;
-       <% unless category_id == Sale.categories.size-1 %>|&#160;<% end %>
-       <% if category_id == params[:category_id].to_i %></strong><% end %>
-     <% end %>&#160;|&#160;<a href="/page/siliconlegends">SILICON LEGENDS</a>
-   </span>
+	 	<ul class="category-feed-align">
+      <li id="filter-button" class="filter-button">Filter</li>
+      <% Sale.categories.each_with_index do |category, category_id| %>
+        <% if category_id == params[:category_id].to_i %><strong><% end %>
+        <li><%= link_to category.upcase, sales_url(:category_id => category_id) %>
+        <% unless category_id == Sale.categories.size-1 %></li><% end %>
+        <% if category_id == params[:category_id].to_i %></strong><% end %>
+      <% end %><li><a href="/page/siliconlegends">SILICON LEGENDS</a></li>
+    </span>
+<div class="container">
+  <div id="filter-section" class="filter-section">  
+      <%= form_tag sales_url, :method => "get", :id => "filter_form" do %>
+      <%= hidden_field_tag "category_id", params[:category_id] %>
+      <span class="filter-co">  
+        <select class="form-control" id="brand_id" name="brand_id" onchange="submitFilter()">
+          <%= options_for_select([["By company",nil]]+Brand.all.collect {|p| [ p.name, p.id ] }.sort,
+                                 params[:brand_id]) %>
+        </select>
+      </span>
+      <span class="filter-size">  
+        <select class="form-control"  id="size" name="size" onchange="submitFilter()">
+          <%= options_for_select([["By size",nil]]+Sale.sizes.flatten, params[:size]) %>
+        </select>
+      </span>
+      
 
-    <a href="/featured/tech-connects-us-07-01-2013" class="faves-script btn btn-success">
-      What's New
-    </a>
-  </div>
+      <% end %> <!-- form -->
+    </div>
 
 
 <% if @sales.empty? %>

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_filter :handle_user
-  #before_filter :get_cart
-  #before_filter :view_cart
+  before_filter :get_cart
+  before_filter :view_cart
 
   
 

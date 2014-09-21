@@ -101,7 +101,7 @@
 	                        <h3><%= sale.product %></h3>
 
 	                        <p class="price">
-	                                                        <%= humanized_money_with_symbol sale.orig_price %>                        </p>
+	                                                                            </p>
 <br>
 	                        <p class="savings">
 
@@ -118,7 +118,7 @@
 					        <a href="#" class="btn btn-success btn-large disabled">ON LOAN</a>          
 					      <% else %> 
 					        <% if sale.user or sale.user.is_merchant %>      
-					          <a href="<%= add_to_cart_url(:sale_id => sale.id) %>" class="btn btn-success btn-large ">Add To Cart</a>
+					          <a href="mailto:hi@valydation.com" class="btn btn-success btn-large ">Inquire</a>
 					        <% else %>
 					          <a href="#" class="btn btn-success btn-large disabled">Add To Bag</a>
 					        <% end %>

@@ -45,11 +45,10 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <% unless @no_header_links %>
-              <li><form class="form-search" action="/search_results">
-              <input type="text" name="q" value="<%= params[:q] %>" data-provide="typeahead" class="input-medium search-query" placeholder="Search by Company">
+            <form class="navbar-form navbar-right searc-q" action="/search_results">
+              <input type="text" name="q" value="<%= params[:q] %>" data-provide="typeahead" class="form-control" placeholder="Search by Company">
             </form>
-          </li>
+            <% unless @no_header_links %>
               <li><a href="http://valydation.tumblr.com/" target="blank" >Blog</a></li>
               <li><%= link_to "About Us", "/page/about" %></li>
               

@@ -26,9 +26,6 @@ function submitFilter() {
 </script>
 
   <div class="category-feed well">
-   <div class="search-results-left">
-      Results for '<%= params[:q] %>'
-  </div>
 	 	<ul class="category-feed-align">
       <li id="filter-button" class="filter-button">Filter</li>
       <% Sale.categories.each_with_index do |category, category_id| %>
@@ -57,7 +54,9 @@ function submitFilter() {
 
       <% end %> <!-- form -->
     </div>
-
+<div class="search-results-left">
+      <h1>Results for '<%= params[:q] %>'</h1>
+  </div>
 
 <% if @sales.empty? %>
 <h2>Want to see something from this company? Please let us know on the <u><a href="/contact">Contact</a></u> page.</h2><br><br><br><br><br><br><br><br><br><br></div>

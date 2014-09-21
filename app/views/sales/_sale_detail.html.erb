@@ -1,10 +1,6 @@
 <% detail ||= false %>
-<div class="row">
-	<div class="container">
 	  <div class="category-feed-detail well">
 	    <div class="back-button ">
-
-	   
 			<a href="/sales">Home</a>&#160;/
 		        <% if sale.category_id == 0 %>
 				<a href="/sales">Icon T-Shirts</a>
@@ -20,52 +16,18 @@
 						<% end %>	<% end %>	<% end %><% end %>	
 		        / <%= sale.product %>
 		    
-	  </div>
+	    </div> 
 
-	    <a href="/featured/tech-connects-us-07-01-2013" class="faves-script-detail btn btn-success">
-	      What's New
-	    </a>
-
-	    
-
-	  </div> </div> </div>
-	
-     
-    
-
-  
-
-<div class="row">
-  <div class="container">
-    
-  <br>
+	</div>
+   
+<div class="container">
   <div class="content-blog-bg-top">
-	        <div class="content-blog-bg-bot">
-	            <style>
-
-	                .content-blog-bg-bot {
-	                    background: none !important;
-	                    padding: 0px 0px 0px 0px
-	                }
-
-	                .content-blog-bg-top {
-	                    margin: 0 auto;
-	                }
-
-	            </style>
-	            <div class="product-detail-wrap top30 clearfix" id="mc_wrap">
+	    <div class="content-blog-bg-bot">
+	        <div class="product-detail-wrap top30 clearfix" id="mc_wrap">
 	                <!-- left container for images -->
 	                <div class="product-imgs-box left">
 	                    <!-- large image container -->
-
-
-
-
-											<img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
-	
-
-
-
+						<img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
 	
 									<br>
 										<div class="more-views">
@@ -92,7 +54,7 @@
 	                <!--  end images block -->
 
 	                <!-- shopping container -->
-	                <div class="product-shop left clearfix">
+	                <div class="product-shop pull-right">
 
 	                    <!-- add to bag area -->
 	                                        <div class="product-name">
@@ -134,8 +96,8 @@
 	                 Share this item
 											                     </span> 
 											 <ul style="padding-top: 8px;">
-	                 <li>																								<a href="<%= twitter_share_url(sale) %>">
-																			      <%= image_tag "twitter_32_icon.png", :height => 32, :width => 32 %>
+	                 <li>																		<a href="<%= twitter_share_url(sale) %>">
+						 <%= image_tag "twitter_32_icon.png", :height => 32, :width => 32 %>
 																			  &#160;&#160;  </a>
 									</li>
 	                 <li><a href="<%= fb_share_url(sale) %>">
@@ -166,10 +128,7 @@
 															<p><%= raw sale.product_specifics if sale.product_specifics %></p>
 															
 															<h3 class="menu_head">Product Condition</h3>
-																													<p><%= raw sale.product_condition if sale.product_condition %></p>
-															
-
-	                            <p>
+									<p>
 	                               
 	                                As with all /valydation pieces, this item is guaranteed by 
 	                                our promise of authenticity.
@@ -200,11 +159,6 @@
   </div> <!-- thumbnails -->
   
 
-    
-  
-    
-    
-    <br>
    
 
    

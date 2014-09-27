@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="sale_modal_<%= sale.id %>" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- <div id="sale_modal_<%= sale.id %>" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
 
     <button type="button" class="close modal-brand" data-dismiss="modal" aria-hidden="true">×</button>
@@ -8,7 +8,7 @@
   </div>
 
   <div class="modal-body">
-    <%= render :partial => "sales/sale_detail", :locals => {:sale => sale} %>
+    <%= render #:partial => "sales/sale_detail", :locals => {:sale => sale} %>
   </div>
 
   <div class="modal-footer">
@@ -17,16 +17,16 @@
       <a href="<%= edit_sale_url(sale) %>" class="btn btn-success span4 pull-left">Edit Sale</a>
       <% #end %>
 
-      <% if sale.sold_out %>
+      <% #if sale.sold_out %>
         <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">SOLD</a>
-      <% else %>
-        <% if sale.user and sale.user.is_merchant %>
-          <a href="<%= new_sale_purchase_url(:sale_id => sale.id) %>" class="btn btn-success span4 pull-right">Buy</a>
-        <% else %>
+      <% #else %>
+        <% #if sale.user and sale.user.is_merchant %>
+          <a href="<%= new_sale_purchase_url(#:sale_id => sale.id) %>" class="btn btn-success span4 pull-right">Buy</a>
+        <% #else %>
           <a href="#" onclick="return false;" class="btn btn-success span4 pull-right disabled">Buy</a>
-        <% end %>
-      <% end %>
+        <% #end %>
+      <% #end %>
     </span>
   </div>
-</div>
+</div> -->
 

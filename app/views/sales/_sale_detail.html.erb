@@ -1,4 +1,5 @@
 <% detail ||= false %>
+</div>
 	  <div class="category-feed-detail well">
 	    <div class="back-button ">
 			<a href="/sales">Home</a>&#160;/
@@ -25,7 +26,7 @@
 	    <div class="content-blog-bg-bot">
 	        <div class="product-detail-wrap top30 clearfix" id="mc_wrap">
 	                <!-- left container for images -->
-	                <div class="product-imgs-box left">
+	                <div class="col-sm-6">
 	                    <!-- large image container -->
 						<img id="sale_image_<%= sale.id %>" src="<%= sale.image_0.versions[:feed_large_2x] if sale.image_0 %>" alt="" />
 	
@@ -36,7 +37,7 @@
 								      if (img = sale.send(image_sym)) and not img.versions[:web_thumbnail].to_s.empty? 
 								        img_version = (detail ? :feed_large_2x : :web_modal)
 								      %>
-										    <ul>
+										   
 
 										        	    <li>
 							      <img src="<%= img.versions[:web_thumbnail] %>" height="69px" width="69px" onmouseover="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" onclick="$('#sale_image_<%= sale.id %>')[0].src='<%= img.versions[img_version] %>'" /></li>
@@ -54,7 +55,7 @@
 	                <!--  end images block -->
 
 	                <!-- shopping container -->
-	                <div class="product-shop pull-right">
+	                <div class="col-sm-6">
 
 	                    <!-- add to bag area -->
 	                                        <div class="product-name">
